@@ -1,17 +1,30 @@
 import React, { Component } from 'react';
 import './App.css';
 import DailyLift from './components/dailyLift';
+import { dailySplits } from './accessoryPlans';
 
 class App extends Component {
+  state = {
+    benchMax: 185,
+    deadliftMax: 210,
+    squatMax: 190,
+    ohpMax: 100,
+  };
+
   render() {
     return (
       <div className="App">
         <header className="App-header">Weight entry goes here</header>
-        <DailyLift day="Monday" t1="Bench" t2="OHP" />
-        <DailyLift day="Tuesday" t1="Squat" t2="Sumo Dead" />
-        <DailyLift day="Wednesday" t1="OHP" t2="Incline Bench" />
-        <DailyLift day="Thursday" t1="Deadlift" t2="Front Squat" />
-        <DailyLift day="Friday" t1="Bench" t2="Close Grip Bench" />
+        <DailyLift
+          day="Monday"
+          data={dailySplits.monday}
+          max1={this.state.benchMax}
+          max2={this.state.ohpMax}
+        />
+        <DailyLift day="Tuesday" data={dailySplits.tuesday} />
+        <DailyLift day="Wednesday" data={dailySplits.wednesday} />
+        <DailyLift day="Thursday" data={dailySplits.thursday} />
+        <DailyLift day="Friday" data={dailySplits.friday} />
       </div>
     );
   }
