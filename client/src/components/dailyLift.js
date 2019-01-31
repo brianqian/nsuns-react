@@ -14,8 +14,6 @@ class dailyLift extends Component {
     } else {
       this.setState({ [box]: false });
     }
-    // const { classList } = e.target;
-    // if (classList.length && classList[0].includes('workouts')) classList.toggle('marked');
   };
 
   render() {
