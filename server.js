@@ -11,13 +11,15 @@ app.use(bodyParser.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  port: 3306,
-  user: 'root',
-  password: 'password',
-  database: 'nsuns_db',
-});
+const connection = mysql.createConnection(
+  process.env.JAWSDB_URL || {
+    host: 'localhost',
+    port: 3306,
+    user: 'root',
+    password: 'password',
+    database: 'nsuns_db',
+  }
+);
 
 connection.connect(err => {
   if (err) throw err;
