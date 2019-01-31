@@ -1,0 +1,12 @@
+.daily-lift-t1,
+.daily-lift-t2 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+  justify-content: center;
+}
+
+.lift-title {
+  grid-column: 1/3;
+  width: 100%;
+}

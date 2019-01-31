@@ -2,29 +2,35 @@ import React, { Component } from 'react';
 import './App.css';
 import DailyLift from './components/dailyLift';
 import { dailySplits } from './accessoryPlans';
+import WeightEntry from './components/weightEntry';
 
 class App extends Component {
   state = {
-    benchMax: 185,
-    deadliftMax: 210,
-    squatMax: 190,
-    ohpMax: 100,
+    currentSplit: '5day',
   };
 
   render() {
+    const currentSplit = dailySplits[this.state.currentSplit];
+    console.log(currentSplit);
+    const dailyLifts = currentSplit.map(day => {
+      return (
+        <DailyLift
+          day={day.day}
+          t1Lift={day.lifts[0]}
+          t2Lift={day.lifts[1]}
+          t1Base={day.baseLift[0]}
+          t2Base={day.baseLift[1]}
+          t1Weights={day.t1Weights}
+          t1Reps={day.t1Reps}
+          t2Weights={day.t2Weights}
+          t2Reps={day.t2Reps}
+        />
+      );
+    });
+
     return (
       <div className="App">
-        <header className="App-header">Weight entry goes here</header>
-        <DailyLift
-          day="Monday"
-          data={dailySplits.monday}
-          max1={this.state.benchMax}
-          max2={this.state.ohpMax}
-        />
-        <DailyLift day="Tuesday" data={dailySplits.tuesday} />
-        <DailyLift day="Wednesday" data={dailySplits.wednesday} />
-        <DailyLift day="Thursday" data={dailySplits.thursday} />
-        <DailyLift day="Friday" data={dailySplits.friday} />
+        <WeightEntry>{dailyLifts}</WeightEntry>
       </div>
     );
   }
