@@ -8,6 +8,18 @@ export default class weightEntry extends Component {
     deadliftMax: '',
     squatMax: '',
     ohpMax: '',
+    userId: '1',
+  };
+
+  componentDidMount = async () => {
+    const stateObj = await API.getMainLifts(this.state.userId);
+    const { benchRM, deadliftRM, squatRM, ohpRM } = stateObj[0];
+    await this.setState({
+      benchMax: benchRM,
+      deadliftMax: deadliftRM,
+      squatMax: squatRM,
+      ohpMax: ohpRM,
+    });
   };
 
   onChange = e => {
@@ -19,20 +31,19 @@ export default class weightEntry extends Component {
     const { benchMax, deadliftMax, squatMax, ohpMax } = this.state;
     const userId = this.props.userId;
     const data = { benchMax, deadliftMax, squatMax, ohpMax, userId };
-    API.saveData(data);
+    API.saveMainLifts(data);
   };
+
   render() {
     const { children } = this.props;
     const displaySplits = React.Children.map(children, child => {
-      let max1 = child.props.t1Base;
-      let max2 = child.props.t2Base;
-      console.log(max1);
+      const max1 = child.props.t1Base;
+      const max2 = child.props.t2Base;
       return React.cloneElement(child, {
         max1: this.state[max1],
         max2: this.state[max2],
       });
     });
-    console.log(displaySplits);
 
     return (
       <div>

@@ -1,34 +1,47 @@
 import React, { Component } from 'react';
 import './dailyLift.css';
+import helper from '../utils/helper';
 
 class dailyLift extends Component {
   state = {
     accessoriesHidden: true,
   };
 
+  handleClick = e => {
+    const box = e.target.id;
+    if (!this.state[box]) {
+      this.setState({ [box]: true });
+    } else {
+      this.setState({ [box]: false });
+    }
+    // const { classList } = e.target;
+    // if (classList.length && classList[0].includes('workouts')) classList.toggle('marked');
+  };
+
   render() {
     const { day, t1Lift, t2Lift, t1Reps, t1Weights, t2Reps, t2Weights, max1, max2 } = this.props;
-
-    function repWeightCalculator(percentage, tm) {
-      const repWeight = tm * percentage;
-      return Math.round(repWeight / 5) * 5;
-    }
     const t1Workouts = [];
     const t2Workouts = [];
     for (let i = 0; i < t1Reps.length; i++) {
       t1Workouts.push(
-        <p className="t1-workouts">{`${t1Reps[i]} x ${repWeightCalculator(t1Weights[i], max1)}`}</p>
+        <p
+          onClick={this.handleClick}
+          id={`box-${day}-${i}-t1`}
+          className={`workouts ${this.state[`box-${day}-${i}-t1`] ? 'marked' : ''}`}
+        >
+          {`${t1Reps[i]}x${helper.calcDailyLift(t1Weights[i], max1)} ${this.props.standard}`}
+        </p>
       );
     }
     for (let i = 0; i < t2Reps.length; i++) {
       t2Workouts.push(
-        <p className="t2-workouts">{`${t2Reps[i]} x ${repWeightCalculator(t2Weights[i], max2)}`}</p>
+        <p
+          onClick={this.handleClick}
+          id={`box-${day}-${i}-t2`}
+          className={`workouts ${this.state[`box-${day}-${i}-t2`] ? 'marked' : ''}`}
+        >{`${t2Reps[i]}x${helper.calcDailyLift(t2Weights[i], max2)} ${this.props.standard}`}</p>
       );
     }
-
-    // const t1Workouts = data.t1Reps.map(rep => {
-    //   return <p>{`${rep} x test`}</p>;
-    // });
 
     return (
       <div className={`${day}-daily-lift daily-lift`}>

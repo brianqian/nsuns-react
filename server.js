@@ -25,16 +25,18 @@ connection.connect(err => {
   if (err) throw err;
 });
 
-app.get('/api', (req, res) => {
-  connection.query(`SELECT * FROM workouts WHERE id = ${req.query.user}`, (err, data) => {
+app.get('/api/getMain', (req, res) => {
+  console.log('gettingMain, userid:', req.query.user);
+  connection.query(`SELECT * FROM userInfo WHERE id = ${req.query.user}`, (err, data) => {
     if (err) throw err;
+    console.log(data);
     res.json(data);
   });
 });
 
 app.get('/api/create', (req, res) => {
   connection.query(
-    'INSERT INTO workouts (squatRM, benchRM, deadliftRM, ohpRM) VALUES (100, 100 ,100, 100)',
+    'INSERT INTO userInfo (squatRM, benchRM, deadliftRM, ohpRM) VALUES (100, 100 ,100, 100)',
     (err, data) => {
       if (err) throw err;
       res.json(data.insertId);
@@ -42,7 +44,7 @@ app.get('/api/create', (req, res) => {
   );
 });
 
-app.post('/api/save', (req, res) => {
+app.post('/api/saveMain', (req, res) => {
   console.log('inside post', req.body);
   const data = req.body;
   connection.query(`UPDATE userInfo

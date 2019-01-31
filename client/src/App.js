@@ -8,6 +8,7 @@ class App extends Component {
   state = {
     nsunsVariation: '5day',
     userId: '1',
+    standard: 'lbs',
   };
 
   componentDidMount = () => {};
@@ -36,6 +37,7 @@ class App extends Component {
           t1Reps={day.t1Reps}
           t2Weights={day.t2Weights}
           t2Reps={day.t2Reps}
+          standard={this.state.standard}
         />
       );
     });
