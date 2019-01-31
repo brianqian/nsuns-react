@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './weightEntry.css';
+import API from '../utils/api';
 
 export default class weightEntry extends Component {
   state = {
@@ -13,6 +14,13 @@ export default class weightEntry extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  handleSubmit = async e => {
+    e.preventDefault();
+    const { benchMax, deadliftMax, squatMax, ohpMax } = this.state;
+    const userId = this.props.userId;
+    const data = { benchMax, deadliftMax, squatMax, ohpMax, userId };
+    API.saveData(data);
+  };
   render() {
     const { children } = this.props;
     const displaySplits = React.Children.map(children, child => {
@@ -62,7 +70,9 @@ export default class weightEntry extends Component {
               id="deadliftInput"
               type="number"
             />
-            <button type="submit">Save new values</button>
+            <button onClick={this.handleSubmit} type="submit">
+              Save new values
+            </button>
           </form>
         </div>
         <div className="weight-display">{displaySplits}</div>

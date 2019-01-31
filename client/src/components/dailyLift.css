@@ -1,3 +1,8 @@
+.daily-lift {
+  width: 95%;
+  margin: auto;
+}
+
 .daily-lift-t1,
 .daily-lift-t2 {
   display: grid;

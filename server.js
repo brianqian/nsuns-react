@@ -24,7 +24,6 @@ connection.connect(err => {
 });
 
 app.get('/api', (req, res) => {
-  console.log(req.query.user);
   connection.query(`SELECT * FROM workouts WHERE id = ${req.query.user}`, (err, data) => {
     if (err) throw err;
     res.json(data);
@@ -42,15 +41,14 @@ app.get('/api/create', (req, res) => {
 });
 
 app.post('/api/save', (req, res) => {
-  console.log(req.query.user);
-  console.log(req.body);
+  console.log('inside post', req.body);
   const data = req.body;
-  connection.query(`UPDATE workouts 
-  SET squatRM = ${data.squatRM},
-  benchRM = ${data.benchRM},
-  ohpRM = ${data.ohpRM},
-  deadliftRM = ${data.deadliftRM}
-  WHERE id = ${req.query.user}`);
+  connection.query(`UPDATE userInfo
+    SET squatRM = ${data.squatMax},
+    benchRM = ${data.benchMax},
+    ohpRM = ${data.ohpMax},
+    deadliftRM = ${data.deadliftMax}
+    WHERE id = ${data.userId}`);
 });
 
 if (process.env.NODE_ENV === 'production') {

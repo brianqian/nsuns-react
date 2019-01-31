@@ -6,13 +6,25 @@ import WeightEntry from './components/weightEntry';
 
 class App extends Component {
   state = {
-    currentSplit: '5day',
+    nsunsVariation: '5day',
+    userId: '1',
+  };
+
+  componentDidMount = () => {};
+
+  //toggle split will eventually be its own component, most likely with a dropdown.
+  //value will be passed back up with React.createRef
+  toggleSplit = () => {
+    if (this.state.nsunsVariation === '4day') {
+      this.setState({ nsunsVariation: '5day' });
+    } else if (this.state.nsunsVariation === '5day') {
+      this.setState({ nsunsVariation: '4day' });
+    }
   };
 
   render() {
-    const currentSplit = dailySplits[this.state.currentSplit];
-    console.log(currentSplit);
-    const dailyLifts = currentSplit.map(day => {
+    const currentVariation = this.state.nsunsVariation;
+    const dailyLifts = dailySplits[currentVariation].map(day => {
       return (
         <DailyLift
           day={day.day}
@@ -30,7 +42,11 @@ class App extends Component {
 
     return (
       <div className="App">
-        <WeightEntry>{dailyLifts}</WeightEntry>
+        <header>
+          <h3>Current Variation: {this.state.nsunsVariation}</h3>
+          <button onClick={this.toggleSplit}>Toggle Variation</button>
+        </header>
+        <WeightEntry userId={this.state.userId}>{dailyLifts}</WeightEntry>
       </div>
     );
   }
