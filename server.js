@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const PORT = process.env.PORT || 3001;
 const mysql = require('mysql');
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
@@ -52,6 +52,7 @@ app.post('/api/save', (req, res) => {
 });
 
 if (process.env.NODE_ENV === 'production') {
+  console.log('Production build...');
   app.use(express.static('client/build'));
   app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
