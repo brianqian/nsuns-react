@@ -13,13 +13,14 @@ export default class weightEntry extends Component {
     deadliftTM: '',
     squatTM: '',
     ohpTM: '',
-    userId: '1',
+    id: '1',
   };
 
   componentDidMount = async () => {
-    const stateObj = await API.getMainLifts(this.state.userId);
-    const { benchRM, deadliftRM, squatRM, ohpRM } = stateObj[0];
-    await this.setState({ benchRM, deadliftRM, squatRM, ohpRM });
+    const liftMaxs = await API.getMainLifts(this.props.id);
+    console.log('WEIGHT ENTRY -cdm - liftMaxs: ', liftMaxs);
+    const { benchTM, deadliftTM, squatTM, ohpTM } = liftMaxs[0];
+    await this.setState({ benchTM, deadliftTM, squatTM, ohpTM });
   };
 
   onChange = e => {
@@ -38,9 +39,9 @@ export default class weightEntry extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    const { benchRM, deadliftRM, squatRM, ohpRM } = this.state;
+    const { benchTM, deadliftTM, squatTM, ohpTM } = this.state;
     const userId = this.props.userId;
-    const data = { benchRM, deadliftRM, squatRM, ohpRM, userId };
+    const data = { benchTM, deadliftTM, squatTM, ohpTM, userId };
     API.saveMainLifts(data);
   };
 

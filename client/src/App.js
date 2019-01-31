@@ -7,7 +7,7 @@ import WeightEntry from './components/weightEntry';
 class App extends Component {
   state = {
     nsunsVariation: '5day',
-    userId: '1',
+    userId: '',
     standard: 'lbs',
   };
 

@@ -35,28 +35,28 @@ app.get('/api/getMain', (req, res) => {
 });
 
 app.get('/api/create', (req, res) => {
+  console.log('creating new user...');
   connection.query(
-    'INSERT INTO userInfo (squatRM, benchRM, deadliftRM, ohpRM) VALUES (100, 100 ,100, 100)',
+    'INSERT INTO userInfo (squatTM, benchTM, deadliftTM, ohpTM) VALUES (100, 100 ,100, 100)',
     (err, data) => {
       if (err) throw err;
+      console.log('new user id: ', data.insertId);
       res.json(data.insertId);
     }
   );
 });
 
 app.post('/api/saveMain', (req, res) => {
-  console.log('inside post', req.body);
   const data = req.body;
   connection.query(`UPDATE userInfo
-    SET squatRM = ${data.squatMax},
-    benchRM = ${data.benchMax},
-    ohpRM = ${data.ohpMax},
-    deadliftRM = ${data.deadliftMax}
+    SET squatTM = ${data.squatMax},
+    benchTM = ${data.benchMax},
+    ohpTM = ${data.ohpMax},
+    deadliftTM = ${data.deadliftMax}
     WHERE id = ${data.userId}`);
 });
 
 if (process.env.NODE_ENV === 'production') {
-  console.log('Production build...');
   app.use(express.static('client/build'));
   app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));

@@ -73,7 +73,7 @@ const dailySplits = {
     {
       day: 'Monday',
       lifts: ['Bench', 'OHP'],
-      baseLift: ['benchMax', 'ohpMax'],
+      baseLift: ['bench', 'ohp'],
       t1Weights: [0.65, 0.75, 0.85, 0.85, 0.85, 0.8, 0.75, 0.7, 0.65],
       t1Reps: [8, 6, 4, 4, 4, 5, 6, 7, '8+'],
       t2Weights: [0.5, 0.6, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
@@ -82,7 +82,7 @@ const dailySplits = {
     {
       day: 'Tuesday',
       lifts: ['Squat', 'Sumo Dead'],
-      baseLift: ['squatMax', 'deadliftMax'],
+      baseLift: ['squat', 'deadlift'],
       t1Weights: [0.75, 0.85, 0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.65],
       t1Reps: [5, 3, '1+', 3, 3, 3, 5, 5, '5+'],
       t2Weights: [0.5, 0.6, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
@@ -91,7 +91,7 @@ const dailySplits = {
     {
       day: 'Thursday',
       lifts: ['Deadlift', 'Front Squat'],
-      baseLift: ['deadliftMax', 'squatMax'],
+      baseLift: ['deadlift', 'squat'],
       t1Weights: [0.75, 0.85, 0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.65],
       t1Reps: [5, 3, '1+', 3, 3, 3, 3, 3, '3+'],
       t2Weights: [0.35, 0.45, 0.55, 0.55, 0.55, 0.55, 0.55, 0.55],
@@ -100,7 +100,7 @@ const dailySplits = {
     {
       day: 'Friday',
       lifts: ['Bench', 'Close-Grip Bench'],
-      baseLift: ['benchMax', 'benchMax'],
+      baseLift: ['bench', 'bench'],
       t1Weights: [0.75, 0.85, 0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.65],
       t1Reps: [5, 3, '1+', 3, 5, 3, 5, 3, '5+'],
       t2Weights: [0.4, 0.5, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
