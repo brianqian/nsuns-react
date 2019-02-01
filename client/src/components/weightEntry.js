@@ -73,7 +73,7 @@ export default class weightEntry extends Component {
               id="benchRMInput"
               type="number"
             />
-            <label className="rm-input-label rm-input" hrmlFor="ohpRMInput">
+            <label className="rm-input-label rm-input" htmlFor="ohpRMInput">
               1RM OHP:{' '}
             </label>
             <input
@@ -84,7 +84,7 @@ export default class weightEntry extends Component {
               id="ohpRMInput"
               type="number"
             />
-            <label className="rm-input-label rm-input" hrmlFor="squatRMInput">
+            <label className="rm-input-label rm-input" htmlFor="squatRMInput">
               1RM Squat:{' '}
             </label>
             <input

@@ -45,13 +45,23 @@ app.get('/api/getMain', (req, res) => {
   });
 });
 
-app.post('/api/create', (req, res) => {
+app.post('/api/create', async (req, res) => {
   console.log('creating new user...');
   console.log(req.body);
-  connection.query('INSERT', (err, data) => {
+  connection.query(`SELECT username FROM userInfo WHERE username= 'brian'`, (err, data) => {
     if (err) throw err;
-    console.log('new user id: ', data.insertId);
-    res.json('');
+    if (data.length) {
+      res.json('username taken');
+    } else {
+      connection.query(
+        `INSERT INTO userInfo (username, password) 
+        VALUES ('${req.body.username}','${req.body.password}')`,
+        (err, data) => {
+          if (err) console.error(err);
+          res.json(data.insertId);
+        }
+      );
+    }
   });
 });
 

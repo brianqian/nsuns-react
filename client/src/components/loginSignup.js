@@ -49,7 +49,7 @@ export default class login extends Component {
                 onChange={this.onChange}
                 name="pwLogin"
                 id="pwLogin"
-                type="pwLogin"
+                type="password"
                 value={this.state.pwLogin}
               />
               <button onClick={this.logIn} type="submit">
@@ -76,7 +76,7 @@ export default class login extends Component {
                 onChange={this.onChange}
                 name="pwSignUp"
                 id="pwSignUp"
-                type="pwSignUp"
+                type="password"
                 value={this.state.pwSignUp}
               />
               <button onClick={this.signUp} type="submit">
