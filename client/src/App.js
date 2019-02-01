@@ -3,11 +3,12 @@ import './App.css';
 import DailyLift from './components/dailyLift';
 import { dailySplits } from './accessoryPlans';
 import WeightEntry from './components/weightEntry';
+import LoginSignup from './components/loginSignup';
 
 class App extends Component {
   state = {
     nsunsVariation: '5day',
-    userId: '',
+    userId: '15',
     standard: 'lbs',
   };
 
@@ -45,8 +46,9 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <h3>Current Variation: {this.state.nsunsVariation}</h3>
-          <button onClick={this.toggleSplit}>Toggle Variation</button>
+          {/* <h3>Current Variation: {this.state.nsunsVariation}</h3>
+          <button onClick={this.toggleSplit}>Toggle Variation</button> */}
+          <LoginSignup />
         </header>
         <WeightEntry userId={this.state.userId}>{dailyLifts}</WeightEntry>
       </div>

@@ -13,14 +13,16 @@ export default class weightEntry extends Component {
     deadliftTM: '',
     squatTM: '',
     ohpTM: '',
-    id: '1',
+    userId: '1',
   };
 
   componentDidMount = async () => {
-    const liftMaxs = await API.getMainLifts(this.props.id);
-    console.log('WEIGHT ENTRY -cdm - liftMaxs: ', liftMaxs);
-    const { benchTM, deadliftTM, squatTM, ohpTM } = liftMaxs[0];
-    await this.setState({ benchTM, deadliftTM, squatTM, ohpTM });
+    if (this.props.userId) {
+      const liftMaxs = await API.getMainLifts(this.props.userId);
+      const { benchTM, deadliftTM, squatTM, ohpTM } = liftMaxs[0];
+      await this.setState({ benchTM, deadliftTM, squatTM, ohpTM });
+    } else {
+    }
   };
 
   onChange = e => {
@@ -60,32 +62,44 @@ export default class weightEntry extends Component {
       <div>
         <div className="weight-entry">
           <form action="">
-            <label htmlFor="benchRMInput">1RM Bench: </label>
+            <label className="rm-input-label rm-input" htmlFor="benchRMInput">
+              1RM Bench:{' '}
+            </label>
             <input
+              className="rm-input"
               onChange={this.onChange}
               value={this.state.benchRM}
               name="benchRM"
               id="benchRMInput"
               type="number"
             />
-            <label htmlFor="ohpRMInput">1RM OHP: </label>
+            <label className="rm-input-label rm-input" hrmlFor="ohpRMInput">
+              1RM OHP:{' '}
+            </label>
             <input
+              className="rm-input"
               onChange={this.onChange}
               value={this.state.ohpRM}
               name="ohpRM"
               id="ohpRMInput"
               type="number"
             />
-            <label htmlFor="squatRMInput">1RM Squat: </label>
+            <label className="rm-input-label rm-input" hrmlFor="squatRMInput">
+              1RM Squat:{' '}
+            </label>
             <input
+              className="rm-input"
               onChange={this.onChange}
               value={this.state.squatRM}
               name="squatRM"
               id="squatRMInput"
               type="number"
             />
-            <label htmlFor="deadliftRMInput">1RM Deadlift: </label>
+            <label className="rm-input-label rm-input" htmlFor="deadliftRMInput">
+              1RM Deadlift:{' '}
+            </label>
             <input
+              className="tm-input"
               onChange={this.onChange}
               value={this.state.deadliftRM}
               name="deadliftRM"
@@ -94,32 +108,45 @@ export default class weightEntry extends Component {
             />
             <br />
 
-            <label htmlFor="benchTMInput"> TM Bench: </label>
+            <label className="tm-input-label tm-input" htmlFor="benchTMInput">
+              {' '}
+              TM Bench:{' '}
+            </label>
             <input
+              className="tm-input"
               onChange={this.onChange}
               value={this.state.benchTM}
               name="benchTM"
               id="benchTMInput"
               type="number"
             />
-            <label htmlFor="ohpTMInput">TM OHP: </label>
+            <label className="tm-input-label tm-input" htmlFor="ohpTMInput">
+              TM OHP:{' '}
+            </label>
             <input
+              className="tm-input"
               onChange={this.onChange}
               value={this.state.ohpTM}
               name="ohpTM"
               id="ohpTMInput"
               type="number"
             />
-            <label htmlFor="squatTMInput">TM Squat: </label>
+            <label className="tm-input-label tm-input" htmlFor="squatTMInput">
+              TM Squat:{' '}
+            </label>
             <input
+              className="tm-input"
               onChange={this.onChange}
               value={this.state.squatTM}
               name="squatTM"
               id="squatTMInput"
               type="number"
             />
-            <label htmlFor="deadliftTMInput">TM Deadlift: </label>
+            <label className="tm-input-label tm-input" htmlFor="deadliftTMInput">
+              TM Deadlift:{' '}
+            </label>
             <input
+              className="tm-input"
               onChange={this.onChange}
               value={this.state.deadliftTM}
               name="deadliftTM"

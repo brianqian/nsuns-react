@@ -2,14 +2,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const mysql = require('mysql');
-const PORT = process.env.PORT || 3001;
+const cookieParser = require('cookie-parser');
+const bcyrpt = require('bcrypt');
 
+const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 
 const connection = mysql.createConnection(
   process.env.JAWSDB_URL || {
@@ -23,6 +26,14 @@ const connection = mysql.createConnection(
 
 connection.connect(err => {
   if (err) throw err;
+});
+
+app.post('/auth/login', (req, res) => {
+  connection.query(`SELECT * FROM userInfo WHERE id = ${req.query.user}`, (err, data) => {
+    if (err) throw err;
+    console.log(data);
+    res.json(data);
+  });
 });
 
 app.get('/api/getMain', (req, res) => {
@@ -41,19 +52,22 @@ app.get('/api/create', (req, res) => {
     (err, data) => {
       if (err) throw err;
       console.log('new user id: ', data.insertId);
-      res.json(data.insertId);
+      res.cookie('userId', data.insertId).send('cookie set');
     }
   );
 });
 
 app.post('/api/saveMain', (req, res) => {
+  console.log('SAVING MAIN');
   const data = req.body;
-  connection.query(`UPDATE userInfo
-    SET squatTM = ${data.squatMax},
-    benchTM = ${data.benchMax},
-    ohpTM = ${data.ohpMax},
-    deadliftTM = ${data.deadliftMax}
-    WHERE id = ${data.userId}`);
+  console.log(data);
+  connection.query(
+    `UPDATE userInfo SET squatTM = ${data.squatTM},
+    benchTM = ${data.benchTM},
+    ohpTM = ${data.ohpTM},
+    deadliftTM = ${data.deadliftTM}
+    WHERE id = ${data.userId}`
+  );
 });
 
 if (process.env.NODE_ENV === 'production') {
