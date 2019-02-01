@@ -8,7 +8,7 @@ import LoginSignup from './components/loginSignup';
 class App extends Component {
   state = {
     nsunsVariation: '5day',
-    userId: '15',
+    userId: '',
     standard: 'lbs',
   };
 
@@ -22,6 +22,11 @@ class App extends Component {
     } else if (this.state.nsunsVariation === '5day') {
       this.setState({ nsunsVariation: '4day' });
     }
+  };
+
+  getId = userId => {
+    // this.setState({ userId });
+    console.log(userId);
   };
 
   render() {
@@ -48,7 +53,7 @@ class App extends Component {
         <header>
           {/* <h3>Current Variation: {this.state.nsunsVariation}</h3>
           <button onClick={this.toggleSplit}>Toggle Variation</button> */}
-          <LoginSignup />
+          <LoginSignup getId={this.getId} userId={this.state.userId} />
         </header>
         <WeightEntry userId={this.state.userId}>{dailyLifts}</WeightEntry>
       </div>

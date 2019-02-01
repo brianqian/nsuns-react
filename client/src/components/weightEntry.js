@@ -109,7 +109,6 @@ export default class weightEntry extends Component {
             <br />
 
             <label className="tm-input-label tm-input" htmlFor="benchTMInput">
-              {' '}
               TM Bench:{' '}
             </label>
             <input
@@ -153,9 +152,11 @@ export default class weightEntry extends Component {
               id="deadliftTMInput"
               type="number"
             />
-            <button onClick={this.handleSubmit} type="submit">
-              Save new values
-            </button>
+            {this.props.userId ? (
+              <button onClick={this.handleSubmit} type="submit">
+                Save new values
+              </button>
+            ) : null}
           </form>
         </div>
         <div className="weight-display">{displaySplits}</div>

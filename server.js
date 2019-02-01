@@ -45,16 +45,14 @@ app.get('/api/getMain', (req, res) => {
   });
 });
 
-app.get('/api/create', (req, res) => {
+app.post('/api/create', (req, res) => {
   console.log('creating new user...');
-  connection.query(
-    'INSERT INTO userInfo (squatTM, benchTM, deadliftTM, ohpTM) VALUES (100, 100 ,100, 100)',
-    (err, data) => {
-      if (err) throw err;
-      console.log('new user id: ', data.insertId);
-      res.cookie('userId', data.insertId).send('cookie set');
-    }
-  );
+  console.log(req.body);
+  connection.query('INSERT', (err, data) => {
+    if (err) throw err;
+    console.log('new user id: ', data.insertId);
+    res.json('');
+  });
 });
 
 app.post('/api/saveMain', (req, res) => {
