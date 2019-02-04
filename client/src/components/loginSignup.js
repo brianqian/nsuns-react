@@ -16,17 +16,29 @@ export default class login extends Component {
   };
 
   //can combine these two into one function
-  logIn = e => {
+  logIn = async e => {
     e.preventDefault();
-    let userId = Auth.login();
-    this.props.getId(userId);
+    const username = this.state.userLogin;
+    const password = this.state.pwLogin;
+    let userInfo = await Auth.logIn({ username, password });
+
+    if (userInfo.length) {
+      console.log(userInfo[0]);
+      // console.log(this.props);
+      this.props.getInfo(userInfo[0]);
+    }
   };
   signUp = async e => {
     e.preventDefault();
     const username = this.state.userSignUp;
     const password = this.state.pwSignUp;
-    let userId = await Auth.signUp({ username, password });
-    this.props.getId(userId);
+    let userInfo = await Auth.signUp({ username, password });
+    if (userInfo.length) this.props.getInfo(userInfo[0]);
+  };
+
+  logOut = e => {
+    e.preventDefault();
+    this.props.logOut();
   };
 
   render() {
@@ -86,7 +98,7 @@ export default class login extends Component {
           </div>
         )}
 
-        {this.props.userId && <button>Log Out</button>}
+        {this.props.userId && <button onClick={this.logOut}>Log Out</button>}
       </div>
     );
   }

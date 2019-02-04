@@ -24,9 +24,16 @@ class App extends Component {
     }
   };
 
-  getId = userId => {
+  getUserInfo = userObj => {
     // this.setState({ userId });
-    console.log(userId);
+    console.log('now in app:', userObj);
+    if (userObj) {
+      this.setState({ userId: userObj.id });
+    }
+  };
+
+  logOut = () => {
+    this.setState({ userId: '' });
   };
 
   render() {
@@ -53,9 +60,11 @@ class App extends Component {
         <header>
           {/* <h3>Current Variation: {this.state.nsunsVariation}</h3>
           <button onClick={this.toggleSplit}>Toggle Variation</button> */}
-          <LoginSignup getId={this.getId} userId={this.state.userId} />
+          <LoginSignup userId={this.state.userId} getInfo={this.getUserInfo} logOut={this.logOut} />
         </header>
-        <WeightEntry userId={this.state.userId}>{dailyLifts}</WeightEntry>
+        <WeightEntry userId={this.state.userId} getInfo={this.getUserInfo}>
+          {dailyLifts}
+        </WeightEntry>
       </div>
     );
   }

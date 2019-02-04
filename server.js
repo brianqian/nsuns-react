@@ -29,11 +29,21 @@ connection.connect(err => {
 });
 
 app.post('/auth/login', (req, res) => {
-  connection.query(`SELECT * FROM userInfo WHERE id = ${req.query.user}`, (err, data) => {
-    if (err) throw err;
-    console.log(data);
-    res.json(data);
-  });
+  console.log(req.body);
+  connection.query(
+    `SELECT * FROM userInfo 
+  WHERE username = '${req.body.username}' AND password = '${req.body.password}'`,
+    (err, data) => {
+      if (err) throw err;
+      if (!data.length) {
+        console.log('login error!');
+        res.json('Login Error');
+      } else if (data.length === 1) {
+        res.json(data);
+        // console.log('acct found!', data);
+      }
+    }
+  );
 });
 
 app.get('/api/getMain', (req, res) => {
@@ -48,21 +58,24 @@ app.get('/api/getMain', (req, res) => {
 app.post('/api/create', async (req, res) => {
   console.log('creating new user...');
   console.log(req.body);
-  connection.query(`SELECT username FROM userInfo WHERE username= 'brian'`, (err, data) => {
-    if (err) throw err;
-    if (data.length) {
-      res.json('username taken');
-    } else {
-      connection.query(
-        `INSERT INTO userInfo (username, password) 
+  connection.query(
+    `SELECT username FROM userInfo WHERE username= '${req.body.username}'`,
+    (err, data) => {
+      if (err) throw err;
+      if (data.length) {
+        res.json('username taken');
+      } else {
+        connection.query(
+          `INSERT INTO userInfo (username, password) 
         VALUES ('${req.body.username}','${req.body.password}')`,
-        (err, data) => {
-          if (err) console.error(err);
-          res.json(data.insertId);
-        }
-      );
+          (err, data) => {
+            if (err) console.error(err);
+            res.json(data.insertId);
+          }
+        );
+      }
     }
-  });
+  );
 });
 
 app.post('/api/saveMain', (req, res) => {

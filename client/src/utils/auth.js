@@ -15,7 +15,7 @@ export default {
       if (err) console.error(err);
     }
   },
-  login: async data => {
+  logIn: async data => {
     try {
       let resp = await fetch(`/auth/login`, {
         method: 'POST',
