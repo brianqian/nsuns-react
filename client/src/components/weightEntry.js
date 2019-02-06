@@ -16,38 +16,27 @@ export default class weightEntry extends Component {
     userId: '1',
   };
 
-  componentDidMount = async () => {
-    if (this.props.userId) {
-      const liftMaxs = await API.getMainLifts(this.props.userId);
-      const { benchTM, deadliftTM, squatTM, ohpTM } = liftMaxs[0];
-      await this.setState({ benchTM, deadliftTM, squatTM, ohpTM });
-    } else {
-    }
-  };
-
   onChange = e => {
     let { name, value } = e.target;
-    this.setState({ [name]: value });
+    this.props.changeWeights(name, value);
     if (e.target.id.includes('TM')) {
       name = name.split('TM')[0] + 'RM';
       const newWeight = helper.trainMaxToRM(value);
       this.props.changeWeights(name, newWeight);
-      // this.setState({ [name]: newWeight });
     } else if (e.target.id.includes('RM')) {
       name = name.split('RM')[0] + 'TM';
       const newWeight = helper.repMaxToTM(value);
       this.props.changeWeights(name, newWeight);
-
-      // this.setState({ [name]: newWeight });
     }
   };
 
   handleSubmit = async e => {
     e.preventDefault();
-    const { benchTM, deadliftTM, squatTM, ohpTM } = this.state;
+    const { benchTM, deadliftTM, squatTM, ohpTM } = this.props.userWeights;
     const userId = this.props.userId;
     const data = { benchTM, deadliftTM, squatTM, ohpTM, userId };
     API.saveMainLifts(data);
+    console.log('USER WEIGHTS', this.props.userWeights);
   };
 
   render() {

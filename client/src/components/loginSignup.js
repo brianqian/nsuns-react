@@ -8,6 +8,8 @@ export default class login extends Component {
     pwLogin: '',
     userSignUp: '',
     pwSignUp: '',
+    showStatus: false,
+    statusMessage: '',
   };
 
   onChange = e => {
@@ -18,11 +20,15 @@ export default class login extends Component {
   //can combine these two into one function
   logIn = async e => {
     e.preventDefault();
+    await this.setState({ showStatus: false, statusMessage: '' });
     const username = this.state.userLogin;
     const password = this.state.pwLogin;
     let userInfo = await Auth.logIn({ username, password });
 
-    if (userInfo.length) {
+    if (userInfo === 'Login Error') {
+      console.log('error!', userInfo);
+      this.setState({ showStatus: true, statusMessage: userInfo });
+    } else {
       console.log(userInfo[0]);
       // console.log(this.props);
       this.props.getInfo(userInfo[0]);
@@ -33,7 +39,10 @@ export default class login extends Component {
     const username = this.state.userSignUp;
     const password = this.state.pwSignUp;
     let userInfo = await Auth.signUp({ username, password });
-    if (userInfo.length) this.props.getInfo(userInfo[0]);
+    if (userInfo.length) {
+      console.log('new user created', userInfo[0]);
+      this.props.getInfo(userInfo[0]);
+    }
   };
 
   logOut = e => {
@@ -55,6 +64,7 @@ export default class login extends Component {
                 id="userLogin"
                 type="text"
                 value={this.state.userLogin}
+                autoComplete="username"
               />
               <label htmlFor="pwLogin">Password: </label>
               <input
@@ -63,6 +73,7 @@ export default class login extends Component {
                 id="pwLogin"
                 type="password"
                 value={this.state.pwLogin}
+                autoComplete="current-password"
               />
               <button onClick={this.logIn} type="submit">
                 Login
@@ -70,6 +81,7 @@ export default class login extends Component {
             </form>
           </div>
         )}
+        {this.state.showStatus && <p>{this.state.statusMessage}</p>}
         <br />
         {!this.props.userId && (
           <div className="signup-container">
@@ -82,6 +94,7 @@ export default class login extends Component {
                 id="userSignUp"
                 type="text"
                 value={this.state.userSignUp}
+                autoComplete="username"
               />
               <label htmlFor="pwSignUp">Password: </label>
               <input
@@ -90,6 +103,7 @@ export default class login extends Component {
                 id="pwSignUp"
                 type="password"
                 value={this.state.pwSignUp}
+                autoComplete="current-password"
               />
               <button onClick={this.signUp} type="submit">
                 Sign Up

@@ -32,7 +32,8 @@ class App extends Component {
     this.setState({ userId: '' });
   };
 
-  changeuserInfo = (name, value) => {
+  changeUserWeights = (name, value) => {
+    value = parseInt(value);
     const userInfo = this.state.userInfo;
     userInfo[name] = value;
     this.setState({ userInfo });

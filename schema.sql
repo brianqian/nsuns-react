@@ -7,10 +7,14 @@ CREATE TABLE userInfo (
   id INT NOT NULL AUTO_INCREMENT,
   username VARCHAR(40),
   password VARCHAR(40),
-  benchTM INTEGER(10),
-  ohpTM INTEGER(10),
-  deadliftTM INTEGER(10),
-  squatTM INTEGER(10),
+  benchTM INTEGER(10) DEFAULT 0,
+  ohpTM INTEGER(10) DEFAULT 0,
+  deadliftTM INTEGER(10) DEFAULT 0,
+  squatTM INTEGER(10) DEFAULT 0,
+  benchRM INTEGER(10) DEFAULT 0,
+  ohpRM INTEGER(10) DEFAULT 0,
+  deadliftRM INTEGER(10) DEFAULT 0,
+  squatRM INTEGER(10) DEFAULT 0,
   accessoryPlan INTEGER(10),
   PRIMARY KEY (id)
 
