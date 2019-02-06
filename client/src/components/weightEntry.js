@@ -31,11 +31,14 @@ export default class weightEntry extends Component {
     if (e.target.id.includes('TM')) {
       name = name.split('TM')[0] + 'RM';
       const newWeight = helper.trainMaxToRM(value);
-      this.setState({ [name]: newWeight });
+      this.props.changeWeights(name, newWeight);
+      // this.setState({ [name]: newWeight });
     } else if (e.target.id.includes('RM')) {
       name = name.split('RM')[0] + 'TM';
       const newWeight = helper.repMaxToTM(value);
-      this.setState({ [name]: newWeight });
+      this.props.changeWeights(name, newWeight);
+
+      // this.setState({ [name]: newWeight });
     }
   };
 
@@ -48,16 +51,6 @@ export default class weightEntry extends Component {
   };
 
   render() {
-    const { children } = this.props;
-    const displaySplits = React.Children.map(children, child => {
-      const max1 = child.props.t1Base + 'TM';
-      const max2 = child.props.t2Base + 'TM';
-      return React.cloneElement(child, {
-        max1: this.state[max1],
-        max2: this.state[max2],
-      });
-    });
-
     return (
       <div>
         <div className="weight-entry">
@@ -68,7 +61,7 @@ export default class weightEntry extends Component {
             <input
               className="rm-input"
               onChange={this.onChange}
-              value={this.state.benchRM}
+              value={this.props.userWeights.benchRM}
               name="benchRM"
               id="benchRMInput"
               type="number"
@@ -79,7 +72,7 @@ export default class weightEntry extends Component {
             <input
               className="rm-input"
               onChange={this.onChange}
-              value={this.state.ohpRM}
+              value={this.props.userWeights.ohpRM}
               name="ohpRM"
               id="ohpRMInput"
               type="number"
@@ -90,7 +83,7 @@ export default class weightEntry extends Component {
             <input
               className="rm-input"
               onChange={this.onChange}
-              value={this.state.squatRM}
+              value={this.props.userWeights.squatRM}
               name="squatRM"
               id="squatRMInput"
               type="number"
@@ -101,7 +94,7 @@ export default class weightEntry extends Component {
             <input
               className="tm-input"
               onChange={this.onChange}
-              value={this.state.deadliftRM}
+              value={this.props.userWeights.deadliftRM}
               name="deadliftRM"
               id="deadliftRMInput"
               type="number"
@@ -114,7 +107,7 @@ export default class weightEntry extends Component {
             <input
               className="tm-input"
               onChange={this.onChange}
-              value={this.state.benchTM}
+              value={this.props.userWeights.benchTM}
               name="benchTM"
               id="benchTMInput"
               type="number"
@@ -125,7 +118,7 @@ export default class weightEntry extends Component {
             <input
               className="tm-input"
               onChange={this.onChange}
-              value={this.state.ohpTM}
+              value={this.props.userWeights.ohpTM}
               name="ohpTM"
               id="ohpTMInput"
               type="number"
@@ -136,7 +129,7 @@ export default class weightEntry extends Component {
             <input
               className="tm-input"
               onChange={this.onChange}
-              value={this.state.squatTM}
+              value={this.props.userWeights.squatTM}
               name="squatTM"
               id="squatTMInput"
               type="number"
@@ -147,7 +140,7 @@ export default class weightEntry extends Component {
             <input
               className="tm-input"
               onChange={this.onChange}
-              value={this.state.deadliftTM}
+              value={this.props.userWeights.deadliftTM}
               name="deadliftTM"
               id="deadliftTMInput"
               type="number"
@@ -159,7 +152,7 @@ export default class weightEntry extends Component {
             ) : null}
           </form>
         </div>
-        <div className="weight-display">{displaySplits}</div>
+        <div className="weight-display">{this.props.children}</div>
       </div>
     );
   }
