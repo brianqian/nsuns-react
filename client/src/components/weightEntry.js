@@ -32,9 +32,28 @@ export default class weightEntry extends Component {
 
   handleSubmit = async e => {
     e.preventDefault();
-    const { benchTM, deadliftTM, squatTM, ohpTM } = this.props.userWeights;
+    const {
+      benchTM,
+      deadliftTM,
+      squatTM,
+      ohpTM,
+      benchRM,
+      deadliftRM,
+      squatRM,
+      ohpRM,
+    } = this.props.userWeights;
     const userId = this.props.userId;
-    const data = { benchTM, deadliftTM, squatTM, ohpTM, userId };
+    const data = {
+      benchTM,
+      deadliftTM,
+      squatTM,
+      ohpTM,
+      benchRM,
+      deadliftRM,
+      squatRM,
+      ohpRM,
+      userId,
+    };
     API.saveMainLifts(data);
     console.log('USER WEIGHTS', this.props.userWeights);
   };

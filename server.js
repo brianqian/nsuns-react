@@ -39,6 +39,7 @@ app.post('/auth/login', (req, res) => {
         console.log('login error!');
         res.json('Login Error');
       } else if (data.length === 1) {
+        console.log(data);
         res.json(data);
         // console.log('acct found!', data);
       }
@@ -86,7 +87,11 @@ app.post('/api/saveMain', (req, res) => {
     `UPDATE userInfo SET squatTM = ${data.squatTM},
     benchTM = ${data.benchTM},
     ohpTM = ${data.ohpTM},
-    deadliftTM = ${data.deadliftTM}
+    deadliftTM = ${data.deadliftTM},
+    squatRM = ${data.squatRM},
+    benchRM = ${data.benchRM},
+    ohpRM = ${data.ohpRM},
+    deadliftRM = ${data.deadliftRM}
     WHERE id = ${data.userId}`
   );
 });

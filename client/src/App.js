@@ -29,7 +29,7 @@ class App extends Component {
   };
 
   logOut = () => {
-    this.setState({ userId: '' });
+    this.setState({ userInfo: {} });
   };
 
   changeUserWeights = (name, value) => {

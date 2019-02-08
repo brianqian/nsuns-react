@@ -45,11 +45,6 @@ export default class login extends Component {
     }
   };
 
-  logOut = e => {
-    e.preventDefault();
-    this.props.logOut();
-  };
-
   render() {
     return (
       <div className="login-signup-container">
@@ -112,7 +107,7 @@ export default class login extends Component {
           </div>
         )}
 
-        {this.props.userId && <button onClick={this.logOut}>Log Out</button>}
+        {this.props.userId && <button onClick={this.props.logOut}>Log Out</button>}
       </div>
     );
   }
