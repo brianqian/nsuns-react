@@ -1,20 +1,21 @@
 const connection = require('../db');
+const bcrypt = require('bcrypt');
 
 module.exports = {
   login: (req, res) => {
-    console.log(req.body);
+    console.log('logging in', req.body);
+    let { username, password } = req.body;
+    password = password.toString();
     connection.query(
       `SELECT * FROM userInfo 
-  WHERE username = '${req.body.username}' AND password = '${req.body.password}'`,
-      (err, data) => {
+      WHERE username = '${username}'`,
+      async (err, data) => {
         if (err) throw err;
-        if (!data.length) {
-          console.log('login error!');
-          res.json('Login Error');
-        } else if (data.length === 1) {
-          console.log(data);
+        data = data[0];
+        const match = await bcrypt.compare(password, data.password);
+        if (match) {
+          delete data.password;
           res.json(data);
-          // console.log('acct found!', data);
         }
       }
     );
@@ -22,23 +23,27 @@ module.exports = {
   signUp: (req, res) => {
     console.log('creating new user...');
     console.log(req.body);
-    connection.query(
-      `SELECT username FROM userInfo WHERE username= '${req.body.username}'`,
-      (err, data) => {
-        if (err) throw err;
-        if (data.length) {
-          res.json('username taken');
-        } else {
-          connection.query(
-            `INSERT INTO userInfo (username, password) 
-          VALUES ('${req.body.username}','${req.body.password}')`,
-            (err, data) => {
-              if (err) console.error(err);
-              res.json(data.insertId);
-            }
-          );
+    bcrypt.hash(req.body.password, 10, function(err, hash) {
+      if (err) throw err;
+      connection.query(
+        `SELECT username 
+      FROM userInfo 
+      WHERE username= '${req.body.username}'`,
+        (err, data) => {
+          if (data.length) {
+            res.json('username taken');
+          } else {
+            connection.query(
+              `INSERT INTO userInfo (username, password) 
+          VALUES ('${req.body.username}','${hash}')`,
+              (err, data) => {
+                if (err) console.error(err);
+                res.json(data.insertId);
+              }
+            );
+          }
         }
-      }
-    );
+      );
+    });
   },
 };

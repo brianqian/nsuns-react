@@ -29,9 +29,9 @@ export default class login extends Component {
       console.log('error!', userInfo);
       this.setState({ showStatus: true, statusMessage: userInfo });
     } else {
-      console.log(userInfo[0]);
+      console.log(userInfo);
       // console.log(this.props);
-      this.props.getInfo(userInfo[0]);
+      this.props.getInfo(userInfo);
     }
   };
   signUp = async e => {
@@ -40,8 +40,8 @@ export default class login extends Component {
     const password = this.state.pwSignUp;
     let userInfo = await Auth.signUp({ username, password });
     if (userInfo.length) {
-      console.log('new user created', userInfo[0]);
-      this.props.getInfo(userInfo[0]);
+      console.log('new user created', userInfo);
+      this.props.getInfo(userInfo);
     }
   };
 

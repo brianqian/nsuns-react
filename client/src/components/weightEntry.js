@@ -54,7 +54,7 @@ export default class weightEntry extends Component {
       ohpRM,
       userId,
     };
-    API.saveMainLifts(data);
+    API.saveUserInfo(data);
     console.log('USER WEIGHTS', this.props.userWeights);
   };
 

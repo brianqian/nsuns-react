@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 // const path = require('path');
 // const mysql = require('mysql');
 // const cookieParser = require('cookie-parser');
-const bcyrpt = require('bcrypt');
+// const bcyrpt = require('bcrypt');
 const routes = require('./backend/routes');
 
 const PORT = process.env.PORT || 3001;

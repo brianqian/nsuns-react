@@ -3,7 +3,7 @@ const userController = require('../../controllers/userController');
 
 router
   .route('/userInfo')
-  .get(userController.getUserInfo)
+  // .get(userController.getUserInfo)
   .put(userController.saveUserInfo);
 
 module.exports = router;

@@ -6,7 +6,7 @@ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password
 CREATE TABLE userInfo (
   id INT NOT NULL AUTO_INCREMENT,
   username VARCHAR(40),
-  password VARCHAR(40),
+  password BINARY(60),
   benchTM INTEGER(10) DEFAULT 0,
   ohpTM INTEGER(10) DEFAULT 0,
   deadliftTM INTEGER(10) DEFAULT 0,

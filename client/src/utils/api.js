@@ -1,5 +1,5 @@
 export default {
-  saveMainLifts: async data => {
+  saveUserInfo: async data => {
     console.log('in save main lifts with data: ', data);
     try {
       let resp = await fetch('/api/userInfo', {
@@ -15,15 +15,15 @@ export default {
       if (err) console.error(err);
     }
   },
-  getMainLifts: async userId => {
-    try {
-      if (userId) {
-        let resp = await fetch(`/api/userInfo?user=${userId}`);
-        resp = await resp.json();
-        return resp;
-      }
-    } catch (err) {
-      if (err) console.error(err);
-    }
-  },
+  // getUserInfo: async userId => {
+  //   try {
+  //     if (userId) {
+  //       let resp = await fetch(`/api/userInfo?user=${userId}`);
+  //       resp = await resp.json();
+  //       return resp;
+  //     }
+  //   } catch (err) {
+  //     if (err) console.error(err);
+  //   }
+  // },
 };
