@@ -48,7 +48,7 @@ export default class login extends Component {
   render() {
     return (
       <div className="login-signup-container">
-        {!this.props.userId && (
+        {!this.props.userInfo.id && (
           <div className="login-container">
             <form action="">
               Login:
@@ -78,7 +78,7 @@ export default class login extends Component {
         )}
         {this.state.showStatus && <p>{this.state.statusMessage}</p>}
         <br />
-        {!this.props.userId && (
+        {!this.props.userInfo.id && (
           <div className="signup-container">
             <form action="">
               Sign Up:
@@ -107,7 +107,7 @@ export default class login extends Component {
           </div>
         )}
 
-        {this.props.userId && <button onClick={this.props.logOut}>Log Out</button>}
+        {this.props.userInfo.id && <button onClick={this.props.logOut}>Log Out</button>}
       </div>
     );
   }

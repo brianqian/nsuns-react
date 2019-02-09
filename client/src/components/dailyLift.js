@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './dailyLift.css';
-import helper from '../utils/helper';
+import WeightBox from './weightBox';
+import AccessoryBox from './accessoryBox'
 
 class dailyLift extends Component {
   state = {
@@ -22,22 +23,22 @@ class dailyLift extends Component {
     const t2Workouts = [];
     for (let i = 0; i < t1Reps.length; i++) {
       t1Workouts.push(
-        <p
-          onClick={this.handleClick}
-          id={`box-${day}-${i}-t1`}
-          className={`workouts ${this.state[`box-${day}-${i}-t1`] ? 'marked' : ''}`}
-        >
-          {`${t1Reps[i]}x${helper.calcDailyLift(t1Weights[i], max1)} ${this.props.standard}`}
-        </p>
+        <WeightBox
+          reps={t1Reps[i]}
+          weights={t1Weights[i]}
+          max={max1}
+          standard={this.props.standard}
+        />
       );
     }
     for (let i = 0; i < t2Reps.length; i++) {
       t2Workouts.push(
-        <p
-          onClick={this.handleClick}
-          id={`box-${day}-${i}-t2`}
-          className={`workouts ${this.state[`box-${day}-${i}-t2`] ? 'marked' : ''}`}
-        >{`${t2Reps[i]}x${helper.calcDailyLift(t2Weights[i], max2)} ${this.props.standard}`}</p>
+        <WeightBox
+          reps={t2Reps[i]}
+          weights={t2Weights[i]}
+          max={max2}
+          standard={this.props.standard}
+        />
       );
     }
 
@@ -51,7 +52,7 @@ class dailyLift extends Component {
         <div className="daily-lift-t2">
           <h3 className="t2-title lift-title">{t2Lift}</h3>
           {t2Workouts}
-          <p>Accessories</p>
+          <AccessoryBox></AccessoryBox>
         </div>
       </div>
     );

@@ -24,8 +24,6 @@ class App extends Component {
   getUserInfo = userInfo => {
     console.log('now in app:', userInfo);
     this.setState({ userInfo });
-    // const { benchTM, ohpTM, deadliftTM, squatTM, id } = userObj;
-    // this.setState({ benchTM, ohpTM, deadliftTM, squatTM, userId: id });
   };
 
   logOut = () => {
@@ -33,11 +31,11 @@ class App extends Component {
   };
 
   changeUserWeights = (name, value) => {
+    // if (!value) value = 0;
     value = parseInt(value);
     const userInfo = this.state.userInfo;
     userInfo[name] = value;
     this.setState({ userInfo });
-    console.log(this.state.userInfo);
   };
 
   render() {
@@ -45,16 +43,12 @@ class App extends Component {
       <div className="App">
         <header>
           <LoginSignup
-            userId={this.state.userInfo.id}
+            userInfo={this.state.userInfo || null}
             getInfo={this.getUserInfo}
             logOut={this.logOut}
           />
         </header>
-        <MainPage
-          userId={this.state.userInfo.id}
-          userWeights={this.state.userInfo}
-          changeWeights={this.changeUserWeights}
-        />
+        <MainPage userWeights={this.state.userInfo} changeWeights={this.changeUserWeights} />
       </div>
     );
   }

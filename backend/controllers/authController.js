@@ -23,12 +23,14 @@ module.exports = {
   signUp: (req, res) => {
     console.log('creating new user...');
     console.log(req.body);
-    bcrypt.hash(req.body.password, 10, function(err, hash) {
+    let { username, password } = req.body;
+    password = password.toString();
+    bcrypt.hash(password, 10, function(err, hash) {
       if (err) throw err;
       connection.query(
         `SELECT username 
       FROM userInfo 
-      WHERE username= '${req.body.username}'`,
+      WHERE username= '${username}'`,
         (err, data) => {
           if (data.length) {
             res.json('username taken');

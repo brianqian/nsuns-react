@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './weightEntry.css';
 import API from '../utils/api';
-import helper from '../utils/helper';
+import { trainMaxToRM, repMaxToTM } from '../utils/helper';
 
 export default class weightEntry extends Component {
   state = {
@@ -21,11 +21,11 @@ export default class weightEntry extends Component {
     this.props.changeWeights(name, value);
     if (e.target.id.includes('TM')) {
       name = name.split('TM')[0] + 'RM';
-      const newWeight = helper.trainMaxToRM(value);
+      const newWeight = trainMaxToRM(value);
       this.props.changeWeights(name, newWeight);
     } else if (e.target.id.includes('RM')) {
       name = name.split('RM')[0] + 'TM';
-      const newWeight = helper.repMaxToTM(value);
+      const newWeight = repMaxToTM(value);
       this.props.changeWeights(name, newWeight);
     }
   };
