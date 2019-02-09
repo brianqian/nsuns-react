@@ -153,11 +153,11 @@ export default class weightEntry extends Component {
               id="deadliftTMInput"
               type="number"
             />
-            {this.props.userId ? (
+            {this.props.userId && (
               <button onClick={this.handleSubmit} type="submit">
                 Save new values
               </button>
-            ) : null}
+            )}
           </form>
         </div>
         <div className="weight-display">{this.props.children}</div>

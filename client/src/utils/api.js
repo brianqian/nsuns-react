@@ -2,8 +2,8 @@ export default {
   saveMainLifts: async data => {
     console.log('in save main lifts with data: ', data);
     try {
-      let resp = await fetch('/api/saveMain', {
-        method: 'POST',
+      let resp = await fetch('/api/userInfo', {
+        method: 'PUT',
         headers: {
           'content-type': 'application/json',
         },
@@ -18,7 +18,7 @@ export default {
   getMainLifts: async userId => {
     try {
       if (userId) {
-        let resp = await fetch(`/api/getMain?user=${userId}`);
+        let resp = await fetch(`/api/userInfo?user=${userId}`);
         resp = await resp.json();
         return resp;
       }

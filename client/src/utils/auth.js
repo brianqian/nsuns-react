@@ -2,7 +2,7 @@ export default {
   signUp: async data => {
     // console.log('creating new user');
     try {
-      let resp = await fetch(`/api/create`, {
+      let resp = await fetch(`/auth/signUp`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
