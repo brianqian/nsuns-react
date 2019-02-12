@@ -26,8 +26,8 @@ export default class mainPage extends Component {
           t1Reps={day.t1Reps}
           t2Weights={day.t2Weights}
           t2Reps={day.t2Reps}
-          max1={this.props.userWeights[base1] || '0'}
-          max2={this.props.userWeights[base2] || '0'}
+          max1={this.props.userInfo[base1] || '0'}
+          max2={this.props.userInfo[base2] || '0'}
           standard={this.state.standard}
         />
       );
@@ -37,10 +37,9 @@ export default class mainPage extends Component {
         {/* <h3>Current Variation: {this.state.nsunsVariation}</h3>
           <button onClick={this.toggleSplit}>Toggle Variation</button> */}
         <WeightEntry
-          userId={this.props.userId}
           getInfo={this.getUserInfo}
           changeWeights={this.props.changeWeights}
-          userWeights={this.props.userWeights}
+          userInfo={this.props.userInfo}
         >
           {dailyLifts}
         </WeightEntry>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './weightEntry.css';
 import API from '../utils/api';
-import { trainMaxToRM, repMaxToTM } from '../utils/helper';
+import { swapTmRm } from '../utils/helper';
 
 export default class weightEntry extends Component {
   state = {
@@ -18,16 +18,8 @@ export default class weightEntry extends Component {
 
   onChange = e => {
     let { name, value } = e.target;
-    this.props.changeWeights(name, value);
-    if (e.target.id.includes('TM')) {
-      name = name.split('TM')[0] + 'RM';
-      const newWeight = trainMaxToRM(value);
-      this.props.changeWeights(name, newWeight);
-    } else if (e.target.id.includes('RM')) {
-      name = name.split('RM')[0] + 'TM';
-      const newWeight = repMaxToTM(value);
-      this.props.changeWeights(name, newWeight);
-    }
+    let nameValueArray = swapTmRm(name, value);
+    this.props.changeWeights(...nameValueArray);
   };
 
   handleSubmit = async e => {
@@ -41,8 +33,8 @@ export default class weightEntry extends Component {
       deadliftRM,
       squatRM,
       ohpRM,
-    } = this.props.userWeights;
-    const userId = this.props.userId;
+    } = this.props.userInfo;
+    const userId = this.props.userInfo.id;
     const data = {
       benchTM,
       deadliftTM,
@@ -55,7 +47,7 @@ export default class weightEntry extends Component {
       userId,
     };
     API.saveUserInfo(data);
-    console.log('USER WEIGHTS', this.props.userWeights);
+    console.log('USER WEIGHTS', this.props.userInfo);
   };
 
   render() {
@@ -69,7 +61,7 @@ export default class weightEntry extends Component {
             <input
               className="rm-input"
               onChange={this.onChange}
-              value={this.props.userWeights.benchRM}
+              value={this.props.userInfo.benchRM}
               name="benchRM"
               id="benchRMInput"
               type="number"
@@ -80,7 +72,7 @@ export default class weightEntry extends Component {
             <input
               className="rm-input"
               onChange={this.onChange}
-              value={this.props.userWeights.ohpRM}
+              value={this.props.userInfo.ohpRM}
               name="ohpRM"
               id="ohpRMInput"
               type="number"
@@ -91,7 +83,7 @@ export default class weightEntry extends Component {
             <input
               className="rm-input"
               onChange={this.onChange}
-              value={this.props.userWeights.squatRM}
+              value={this.props.userInfo.squatRM}
               name="squatRM"
               id="squatRMInput"
               type="number"
@@ -102,7 +94,7 @@ export default class weightEntry extends Component {
             <input
               className="tm-input"
               onChange={this.onChange}
-              value={this.props.userWeights.deadliftRM}
+              value={this.props.userInfo.deadliftRM}
               name="deadliftRM"
               id="deadliftRMInput"
               type="number"
@@ -115,7 +107,7 @@ export default class weightEntry extends Component {
             <input
               className="tm-input"
               onChange={this.onChange}
-              value={this.props.userWeights.benchTM}
+              value={this.props.userInfo.benchTM}
               name="benchTM"
               id="benchTMInput"
               type="number"
@@ -126,7 +118,7 @@ export default class weightEntry extends Component {
             <input
               className="tm-input"
               onChange={this.onChange}
-              value={this.props.userWeights.ohpTM}
+              value={this.props.userInfo.ohpTM}
               name="ohpTM"
               id="ohpTMInput"
               type="number"
@@ -137,7 +129,7 @@ export default class weightEntry extends Component {
             <input
               className="tm-input"
               onChange={this.onChange}
-              value={this.props.userWeights.squatTM}
+              value={this.props.userInfo.squatTM}
               name="squatTM"
               id="squatTMInput"
               type="number"
@@ -148,12 +140,12 @@ export default class weightEntry extends Component {
             <input
               className="tm-input"
               onChange={this.onChange}
-              value={this.props.userWeights.deadliftTM}
+              value={this.props.userInfo.deadliftTM}
               name="deadliftTM"
               id="deadliftTMInput"
               type="number"
             />
-            {this.props.userId && (
+            {this.props.userInfo.id && (
               <button onClick={this.handleSubmit} type="submit">
                 Save new values
               </button>

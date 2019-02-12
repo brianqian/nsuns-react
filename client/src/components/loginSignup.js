@@ -39,9 +39,11 @@ export default class login extends Component {
     const username = this.state.userSignUp;
     const password = this.state.pwSignUp;
     let userInfo = await Auth.signUp({ username, password });
+    console.log(userInfo);
     if (userInfo.length) {
       console.log('new user created', userInfo);
       this.props.getInfo(userInfo);
+      this.setState({ showStatus: true, statusMessage: 'User successfully created' });
     }
   };
 

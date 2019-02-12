@@ -15,6 +15,13 @@ module.exports = {
         const match = await bcrypt.compare(password, data.password);
         if (match) {
           delete data.password;
+          data.success = true;
+          res.json(data);
+        } else {
+          data = {
+            success: false,
+            message: 'Login error',
+          };
           res.json(data);
         }
       }
@@ -33,7 +40,11 @@ module.exports = {
       WHERE username= '${username}'`,
         (err, data) => {
           if (data.length) {
-            res.json('username taken');
+            data = {
+              success: false,
+              message: 'Username not available, please try again',
+            };
+            res.json(data);
           } else {
             connection.query(
               `INSERT INTO userInfo (username, password) 

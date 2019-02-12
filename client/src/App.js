@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import LoginSignup from './components/loginSignup';
 import MainPage from './pages/mainPage';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 class App extends Component {
   state = {
@@ -43,12 +44,26 @@ class App extends Component {
       <div className="App">
         <header>
           <LoginSignup
-            userInfo={this.state.userInfo || null}
+            userInfo={this.state.userInfo}
             getInfo={this.getUserInfo}
             logOut={this.logOut}
           />
         </header>
-        <MainPage userWeights={this.state.userInfo} changeWeights={this.changeUserWeights} />
+        <Router>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={props => (
+                <MainPage
+                  {...props}
+                  userInfo={this.state.userInfo}
+                  changeWeights={this.changeUserWeights}
+                />
+              )}
+            />
+          </Switch>
+        </Router>
       </div>
     );
   }
