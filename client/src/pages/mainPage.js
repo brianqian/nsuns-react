@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import DailyLift from '../components/dailyLift';
+import DailyLift from '../components/dailyLift/dailyLift';
 import { dailySplits } from '../accessoryPlans';
-import WeightEntry from '../components/weightEntry';
+import WeightEntry from '../components/weightEntry/weightEntry';
 
 export default class mainPage extends Component {
   state = {
@@ -10,7 +10,7 @@ export default class mainPage extends Component {
   };
   render() {
     const currentVariation = this.state.nsunsVariation;
-    const dailyLifts = dailySplits[currentVariation].map(day => {
+    const dailyLifts = dailySplits[currentVariation].map((day, index) => {
       let base1 = day.baseLift[0] + 'TM';
       let base2 = day.baseLift[1] + 'TM';
       // console.log(base1, base2);
@@ -29,6 +29,7 @@ export default class mainPage extends Component {
           max1={this.props.userInfo[base1] || '0'}
           max2={this.props.userInfo[base2] || '0'}
           standard={this.state.standard}
+          key={index}
         />
       );
     });

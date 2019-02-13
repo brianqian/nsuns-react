@@ -1,44 +1,36 @@
 import React, { Component } from 'react';
 import './dailyLift.css';
-import WeightBox from './weightBox';
-import AccessoryBox from './accessoryBox'
+import WeightBox from '../weightBox/weightBox';
+import AccessoryBox from '../accessoryBox';
 
 class dailyLift extends Component {
   state = {
     accessoriesHidden: true,
   };
 
-  handleClick = e => {
-    const box = e.target.id;
-    if (!this.state[box]) {
-      this.setState({ [box]: true });
-    } else {
-      this.setState({ [box]: false });
-    }
-  };
-
   render() {
-    const { day, t1Lift, t2Lift, t1Reps, t1Weights, t2Reps, t2Weights, max1, max2 } = this.props;
+    const {
+      day,
+      t1Lift,
+      t2Lift,
+      t1Reps,
+      t1Weights,
+      t2Reps,
+      t2Weights,
+      max1,
+      max2,
+      standard,
+    } = this.props;
     const t1Workouts = [];
     const t2Workouts = [];
     for (let i = 0; i < t1Reps.length; i++) {
       t1Workouts.push(
-        <WeightBox
-          reps={t1Reps[i]}
-          weights={t1Weights[i]}
-          max={max1}
-          standard={this.props.standard}
-        />
+        <WeightBox reps={t1Reps[i]} weights={t1Weights[i]} max={max1} standard={standard} />
       );
     }
     for (let i = 0; i < t2Reps.length; i++) {
       t2Workouts.push(
-        <WeightBox
-          reps={t2Reps[i]}
-          weights={t2Weights[i]}
-          max={max2}
-          standard={this.props.standard}
-        />
+        <WeightBox reps={t2Reps[i]} weights={t2Weights[i]} max={max2} standard={standard} />
       );
     }
 
@@ -52,7 +44,7 @@ class dailyLift extends Component {
         <div className="daily-lift-t2">
           <h3 className="t2-title lift-title">{t2Lift}</h3>
           {t2Workouts}
-          <AccessoryBox></AccessoryBox>
+          <AccessoryBox />
         </div>
       </div>
     );

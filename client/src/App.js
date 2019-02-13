@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import LoginSignup from './components/loginSignup';
+import LoginSignup from './components/loginSignup/loginSignup';
 import MainPage from './pages/mainPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { swapTmRm } from './utils/helper';
 
 class App extends Component {
   state = {
     nsunsVariation: '5day',
-    userId: '',
     standard: 'lbs',
     userInfo: {},
   };
@@ -31,11 +31,12 @@ class App extends Component {
     this.setState({ userInfo: {} });
   };
 
-  changeUserWeights = (name, value) => {
-    // if (!value) value = 0;
+  changeWeights = (name, value) => {
     value = parseInt(value);
     const userInfo = this.state.userInfo;
     userInfo[name] = value;
+    let [swappedName, swappedValue] = swapTmRm(name, value);
+    userInfo[swappedName] = swappedValue;
     this.setState({ userInfo });
   };
 
@@ -58,7 +59,7 @@ class App extends Component {
                 <MainPage
                   {...props}
                   userInfo={this.state.userInfo}
-                  changeWeights={this.changeUserWeights}
+                  changeWeights={this.changeWeights}
                 />
               )}
             />

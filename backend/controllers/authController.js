@@ -12,6 +12,7 @@ module.exports = {
       async (err, data) => {
         if (err) throw err;
         data = data[0];
+        //Bcrypt password compare
         const match = await bcrypt.compare(password, data.password);
         if (match) {
           delete data.password;
@@ -28,7 +29,7 @@ module.exports = {
     );
   },
   signUp: (req, res) => {
-    console.log('creating new user...');
+    console.log('starting creating new user...');
     console.log(req.body);
     let { username, password } = req.body;
     password = password.toString();
@@ -46,12 +47,14 @@ module.exports = {
             };
             res.json(data);
           } else {
+            console.log('user succesfully created');
             connection.query(
               `INSERT INTO userInfo (username, password) 
           VALUES ('${req.body.username}','${hash}')`,
               (err, data) => {
                 if (err) console.error(err);
-                res.json(data.insertId);
+                data.success = true;
+                res.json(data);
               }
             );
           }

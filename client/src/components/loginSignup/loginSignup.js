@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './loginSignup';
-import Auth from '../utils/auth';
+import Auth from '../../utils/auth';
 
 export default class login extends Component {
   state = {
@@ -25,9 +25,9 @@ export default class login extends Component {
     const password = this.state.pwLogin;
     let userInfo = await Auth.logIn({ username, password });
 
-    if (userInfo === 'Login Error') {
+    if (!userInfo.success) {
       console.log('error!', userInfo);
-      this.setState({ showStatus: true, statusMessage: userInfo });
+      this.setState({ showStatus: true, statusMessage: userInfo.message });
     } else {
       console.log(userInfo);
       // console.log(this.props);
@@ -40,11 +40,20 @@ export default class login extends Component {
     const password = this.state.pwSignUp;
     let userInfo = await Auth.signUp({ username, password });
     console.log(userInfo);
-    if (userInfo.length) {
-      console.log('new user created', userInfo);
-      this.props.getInfo(userInfo);
+    if (!userInfo.success) {
+      console.log('error!', userInfo);
+      this.setState({ showStatus: true, statusMessage: userInfo.message });
+    } else if (userInfo.success) {
       this.setState({ showStatus: true, statusMessage: 'User successfully created' });
+      userInfo = await Auth.logIn({ username, password });
+      console.log('AUTH LOGIN: ', userInfo);
+      this.props.getInfo(userInfo);
     }
+  };
+
+  logOut = () => {
+    this.setState({ showStatus: false, statusMessage: '' });
+    this.props.logOut();
   };
 
   render() {
@@ -109,7 +118,7 @@ export default class login extends Component {
           </div>
         )}
 
-        {this.props.userInfo.id && <button onClick={this.props.logOut}>Log Out</button>}
+        {this.props.userInfo.id && <button onClick={this.logOut}>Log Out</button>}
       </div>
     );
   }

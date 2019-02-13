@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './weightEntry.css';
-import API from '../utils/api';
-import { swapTmRm } from '../utils/helper';
+import API from '../../utils/api';
 
 export default class weightEntry extends Component {
   state = {
@@ -18,8 +17,7 @@ export default class weightEntry extends Component {
 
   onChange = e => {
     let { name, value } = e.target;
-    let nameValueArray = swapTmRm(name, value);
-    this.props.changeWeights(...nameValueArray);
+    this.props.changeWeights(name, value);
   };
 
   handleSubmit = async e => {
