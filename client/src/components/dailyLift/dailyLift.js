@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import './dailyLift.css';
 import WeightBox from '../weightBox/weightBox';
-import AccessoryBox from '../accessoryBox';
+import AccessoryBox from '../accessoryBox/accessoryBox';
 
 class dailyLift extends Component {
   state = {
-    accessoriesHidden: true,
+    showAccessories: false,
+  };
+
+  handleClick = () => {
+    this.setState({ showAccessories: this.state.showAccessories ? false : true });
   };
 
   render() {
@@ -44,8 +48,9 @@ class dailyLift extends Component {
         <div className="daily-lift-t2">
           <h3 className="t2-title lift-title">{t2Lift}</h3>
           {t2Workouts}
-          <AccessoryBox />
+          <p onClick={this.handleClick}>Accessories</p>
         </div>
+        <AccessoryBox showAccessories={this.state.showAccessories} />
       </div>
     );
   }

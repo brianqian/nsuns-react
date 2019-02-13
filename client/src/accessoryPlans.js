@@ -1,4 +1,4 @@
-const accessories = {
+export const accessories = {
   arms: {
     day1: [
       'Incline DB Press (Optional)',
@@ -14,14 +14,14 @@ const accessories = {
     ],
     day4: ['Rowing Variant', 'Pull-ups', 'Abs'],
     day5: [
-      'Incline DB Curls (Or preacher curls) 4 x 6-8',
+      'Incline DB Curls 4 x 6-8',
       'Facepulls SS OH Tricep Extension (Of your choice. DB/BB/Cable) 4 x 8-10',
       'DB Curls (Slow) 4 x 10 - 12',
     ],
   },
 };
 
-const dailySplits = {
+export const dailySplits = {
   '5day': [
     {
       day: 'Monday',
@@ -108,5 +108,3 @@ const dailySplits = {
     },
   ],
 };
-
-export { accessories, dailySplits };
