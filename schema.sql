@@ -22,7 +22,7 @@ CREATE TABLE userInfo (
 
 CREATE TABLE workouts (
 id INT NOT NULL AUTO_INCREMENT,
-userId VARCHAR(40),
+userId INTEGER(10),
 weekNum VARCHAR(10),
 weeklyBench INTEGER(10),
 weeklyDeadlift INTEGER(10),
@@ -32,8 +32,20 @@ benchAmrap INTEGER(10),
 deadliftAmrap INTEGER(10),
 ohpAmrap INTEGER(10),
 squatAmrap INTEGER(10),
-
 sets INTEGER(20),
+PRIMARY KEY (id)
+
+);
+
+CREATE TABLE accessories (
+id INT NOT NULL AUTO_INCREMENT,
+userId INTEGER(10),
+name VARCHAR(20),
+sets INTEGER(10),
+reps INTEGER(10),
+weight INTEGER(10),
+day VARCHAR(10),
+accNum VARCHAR(10),
 PRIMARY KEY (id)
 
 );

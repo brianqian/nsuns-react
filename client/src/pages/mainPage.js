@@ -14,7 +14,7 @@ export default class mainPage extends Component {
       const base1 = day.baseLift[0] + 'TM';
       const base2 = day.baseLift[1] + 'TM';
       const accessoryPlan = this.props.userInfo.accessoryPlan || 'arms';
-      const accessorySet = accessories[accessoryPlan];
+      const accessorySet = accessories[accessoryPlan][index];
       console.log(accessorySet, index);
       return (
         <DailyLift
@@ -31,6 +31,7 @@ export default class mainPage extends Component {
           max2={this.props.userInfo[base2] || '0'}
           standard={this.state.standard}
           key={index}
+          accessories={accessorySet}
         />
       );
     });

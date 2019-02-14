@@ -25,18 +25,13 @@ class dailyLift extends Component {
       max2,
       standard,
     } = this.props;
-    const t1Workouts = [];
-    const t2Workouts = [];
-    for (let i = 0; i < t1Reps.length; i++) {
-      t1Workouts.push(
-        <WeightBox reps={t1Reps[i]} weights={t1Weights[i]} max={max1} standard={standard} />
-      );
-    }
-    for (let i = 0; i < t2Reps.length; i++) {
-      t2Workouts.push(
-        <WeightBox reps={t2Reps[i]} weights={t2Weights[i]} max={max2} standard={standard} />
-      );
-    }
+
+    const t1Workouts = t1Reps.map((rep, i) => {
+      return <WeightBox reps={rep} weights={t1Weights[i]} max={max1} standard={standard} />;
+    });
+    const t2Workouts = t2Reps.map((rep, i) => {
+      return <WeightBox reps={rep} weights={t2Weights[i]} max={max2} standard={standard} />;
+    });
 
     return (
       <div className={`${day}-daily-lift daily-lift`}>
@@ -50,7 +45,10 @@ class dailyLift extends Component {
           {t2Workouts}
           <p onClick={this.handleClick}>Accessories</p>
         </div>
-        <AccessoryBox showAccessories={this.state.showAccessories} />
+        <AccessoryBox
+          accessories={this.props.accessories}
+          showAccessories={this.state.showAccessories}
+        />
       </div>
     );
   }

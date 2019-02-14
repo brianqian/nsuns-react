@@ -1,24 +1,56 @@
 export const accessories = {
-  arms: {
-    day1: [
-      'Incline DB Press (Optional)',
-      'Rowing Variant',
-      'Pull-ups SS Tricep push down (Triceps 4 x 15)',
-      'DB Bicep Curls 4 x 10-12',
-    ],
-    day2: ['Hamstring/Quad Accessory based on weakness', 'Abs'],
-    day3: [
-      'Cable Crossovers (optional)',
-      'Facepulls SS Hammer Curls 3 x 12 - 15',
-      'Lateral raises',
-    ],
-    day4: ['Rowing Variant', 'Pull-ups', 'Abs'],
-    day5: [
-      'Incline DB Curls 4 x 6-8',
-      'Facepulls SS OH Tricep Extension (Of your choice. DB/BB/Cable) 4 x 8-10',
-      'DB Curls (Slow) 4 x 10 - 12',
-    ],
-  },
+  arms: [
+    {
+      plan: 1,
+      day: 1,
+      exercises: [
+        { title: 'Incline DB Press (Optional)', set: 4, rep: 10, weight: 45 },
+        { title: 'Barbell Row', set: 4, rep: 10, weight: 45 },
+        { title: 'Pullups SS Tricep Pushdown', set: 4, rep: 10, weight: 0 },
+        { title: 'Bicep Curls', set: 4, rep: 10, weight: 45 },
+      ],
+    },
+    {
+      plan: 1,
+      day: 2,
+      exercises: [
+        { title: 'Calf Raises', set: 4, rep: 10, weight: 45 },
+        { title: 'Leg Curls', set: 4, rep: 10, weight: 45 },
+        { title: 'Leg Lifts', set: 4, rep: 10, weight: 0 },
+        { title: 'Bicep Curls', set: 4, rep: 10, weight: 45 },
+      ],
+    },
+    {
+      plan: 1,
+      day: 3,
+      exercises: [
+        { title: 'Facepulls', set: 4, rep: 10, weight: 45 },
+        { title: 'Hammer Curls', set: 4, rep: 10, weight: 45 },
+        { title: 'Pullups', set: 4, rep: 10, weight: 0 },
+        { title: 'Lateral Raises', set: 4, rep: 10, weight: 45 },
+      ],
+    },
+    {
+      plan: 1,
+      day: 4,
+      exercises: [
+        { title: 'Cable Crunches', set: 4, rep: 10, weight: 45 },
+        { title: 'Dumbell Row', set: 4, rep: 10, weight: 45 },
+        { title: 'Pullups', set: 4, rep: 10, weight: 0 },
+        { title: 'Bicep Curls', set: 4, rep: 10, weight: 45 },
+      ],
+    },
+    {
+      plan: 1,
+      day: 5,
+      exercises: [
+        { title: 'Incline DB Curls', set: 4, rep: 10, weight: 45 },
+        { title: 'Facepulls', set: 4, rep: 10, weight: 45 },
+        { title: 'Tricep Extension', set: 4, rep: 10, weight: 0 },
+        { title: 'DB Extension', set: 4, rep: 10, weight: 45 },
+      ],
+    },
+  ],
 };
 
 export const dailySplits = {

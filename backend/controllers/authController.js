@@ -12,6 +12,10 @@ module.exports = {
       async (err, data) => {
         if (err) throw err;
         data = data[0];
+        if (!data) {
+          res.json({ success: false, message: 'Login Error' });
+          return;
+        }
         //Bcrypt password compare
         const match = await bcrypt.compare(password, data.password);
         if (match) {
@@ -19,11 +23,7 @@ module.exports = {
           data.success = true;
           res.json(data);
         } else {
-          data = {
-            success: false,
-            message: 'Login error',
-          };
-          res.json(data);
+          res.json({ success: false, message: 'Login error' });
         }
       }
     );
@@ -55,6 +55,12 @@ module.exports = {
                 if (err) console.error(err);
                 data.success = true;
                 res.json(data);
+                connection.query(
+                  `INSERT INTO accessories (userId) VALUES (${data.insertId})`,
+                  (err, data) => {
+                    if (err) throw err;
+                  }
+                );
               }
             );
           }
