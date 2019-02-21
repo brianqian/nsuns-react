@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DailyLift from '../components/dailyLift/dailyLift';
-import { dailySplits, accessories } from '../accessoryPlans';
+import accessories from '../data/accessoryPlans';
+import dailySplits from '../data/dailySplits';
 import WeightEntry from '../components/weightEntry/weightEntry';
 
 export default class mainPage extends Component {
