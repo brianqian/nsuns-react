@@ -1,4 +1,6 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunkMiddleware from 'redux-thunk';
 import rootReducer from './reducers';
 
 import accessories from './data/accessoryPlans';
@@ -9,6 +11,10 @@ const defaultState = {
   dailySplits,
 };
 
-const store = createStore(rootReducer, defaultState);
+const store = createStore(
+  rootReducer,
+  defaultState,
+  composeWithDevTools(applyMiddleware(thunkMiddleware))
+);
 
 export default store;

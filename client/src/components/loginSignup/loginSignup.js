@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './loginSignup';
 import Auth from '../../utils/auth';
+import { userLogin } from '../../actions/actionCreators';
+import { connect } from 'react-redux';
 
-export default class login extends Component {
+class Login extends Component {
   state = {
     userLogin: '',
     pwLogin: '',
@@ -23,16 +25,16 @@ export default class login extends Component {
     await this.setState({ showStatus: false, statusMessage: '' });
     const username = this.state.userLogin;
     const password = this.state.pwLogin;
-    let userInfo = await Auth.logIn({ username, password });
-
-    if (!userInfo.success) {
-      console.log('error!', userInfo);
-      this.setState({ showStatus: true, statusMessage: userInfo.message });
-    } else {
-      console.log(userInfo);
-      // console.log(this.props);
-      this.props.getInfo(userInfo);
-    }
+    // let userInfo = await Auth.logIn({ username, password });
+    userLogin({ username, password });
+    // if (!userInfo.success) {
+    //   console.log('error!', userInfo);
+    //   this.setState({ showStatus: true, statusMessage: userInfo.message });
+    // } else {
+    //   console.log(userInfo);
+    //   // console.log(this.props);
+    //   this.props.getInfo(userInfo);
+    // }
   };
   signUp = async e => {
     e.preventDefault();
@@ -56,11 +58,16 @@ export default class login extends Component {
     this.props.logOut();
   };
 
+  testing = () => {
+    console.log(this.props);
+  };
+
   render() {
     return (
       <div className="login-signup-container">
         {!this.props.userInfo.id && (
           <div className="login-container">
+            <button onClick={this.testing}>TEST</button>
             <form action="">
               Login:
               <label htmlFor="userLogin">Username: </label>
@@ -123,3 +130,5 @@ export default class login extends Component {
     );
   }
 }
+
+export default connect()(Login);
