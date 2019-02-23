@@ -1,8 +1,12 @@
 function userLifts(state = {}, action) {
   switch (action.type) {
-    case '':
-      console.log(state);
-      return state;
+    case 'GET_USER_LIFTS':
+      // if (action.userLifts) return
+      console.log('GET USER LIFTS', action.userLifts);
+
+      return action.userLifts;
+    case 'LOG_OUT':
+      return {};
     default:
       return state;
   }

@@ -1,10 +1,8 @@
 import Auth from '../utils/auth';
 
-export const loginSuccess = (userInfo, message) => {
+export const loginSuccess = () => {
   return {
     type: 'LOGIN_SUCCESS',
-    userInfo,
-    message,
   };
 };
 export const loginFail = message => {
@@ -13,7 +11,6 @@ export const loginFail = message => {
     message,
   };
 };
-
 export const loginPending = () => {
   return {
     type: 'LOGIN_PENDING',
@@ -31,13 +28,11 @@ export const signupFail = message => {
     message,
   };
 };
-
 export const signupPending = () => {
   return {
     type: 'SIGNUP_PENDING',
   };
 };
-
 export const logOut = () => {
   return {
     type: 'LOG_OUT',
@@ -45,18 +40,21 @@ export const logOut = () => {
 };
 
 export const userLogin = loginInfo => async (dispatch, getState) => {
-  dispatch(loginPending());
-  const result = await Auth.logIn(loginInfo);
-  if (result.success) {
-    return dispatch(loginSuccess(result));
-  } else {
-    return dispatch(loginFail(result.message));
+  if (!getState().userAuth.pending) {
+    dispatch(loginPending());
+    const result = await Auth.logIn(loginInfo);
+    console.log(result);
+    if (result.success) {
+      dispatch({ type: 'GET_USER_LIFTS', userLifts: result });
+      return dispatch(loginSuccess(1));
+    } else {
+      return dispatch(loginFail(result.message));
+    }
   }
 };
 
 export const createNewUser = loginInfo => async (dispatch, getState) => {
-  console.log(getState().pending);
-  if (!getState().pending) {
+  if (!getState().userAuth.pending) {
     dispatch(signupPending());
     const result = await Auth.signUp(loginInfo);
     if (result.success) {

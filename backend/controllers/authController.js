@@ -5,6 +5,7 @@ module.exports = {
   login: (req, res) => {
     console.log('logging in', req.body);
     let { username, password } = req.body;
+    console.log(username, password);
     password = password.toString();
     connection.query(
       `SELECT * FROM userInfo 
@@ -40,12 +41,13 @@ module.exports = {
       FROM userInfo 
       WHERE username= '${username}'`,
         (err, data) => {
+          if (err) throw err;
           if (data.length) {
-            data = {
+            //If a username with same name is found return error
+            res.json({
               success: false,
               message: 'Username not available, please try again',
-            };
-            res.json(data);
+            });
           } else {
             console.log('user succesfully created');
             connection.query(
@@ -53,8 +55,7 @@ module.exports = {
           VALUES ('${req.body.username}','${hash}')`,
               (err, data) => {
                 if (err) console.error(err);
-                data.success = true;
-                res.json(data);
+                res.json({ success: true });
                 connection.query(
                   `INSERT INTO accessories (userId) VALUES (${data.insertId})`,
                   (err, data) => {

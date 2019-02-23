@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './loginSignup';
 import Auth from '../../utils/auth';
-import { userLogin } from '../../actions/actionCreators';
 import { connect } from 'react-redux';
+import { userLogin, logOut, createNewUser } from '../../actions/userAuthActions';
 
 class Login extends Component {
   state = {
-    userLogin: '',
+    username: '',
     pwLogin: '',
     userSignUp: '',
     pwSignUp: '',
@@ -19,43 +19,34 @@ class Login extends Component {
     this.setState({ [name]: value });
   };
 
-  //can combine these two into one function
   logIn = async e => {
     e.preventDefault();
-    await this.setState({ showStatus: false, statusMessage: '' });
     const username = this.state.userLogin;
     const password = this.state.pwLogin;
     this.props.dispatch(userLogin({ username, password }));
-    // let userInfo = await Auth.logIn({ username, password });
-    // if (!userInfo.success) {
-    //   console.log('error!', userInfo);
-    //   this.setState({ showStatus: true, statusMessage: userInfo.message });
-    // } else {
-    //   console.log(userInfo);
-    //   // console.log(this.props);
-    //   this.props.getInfo(userInfo);
-    // }
   };
   signUp = async e => {
     e.preventDefault();
     const username = this.state.userSignUp;
     const password = this.state.pwSignUp;
-    let userInfo = await Auth.signUp({ username, password });
-    console.log(userInfo);
-    if (!userInfo.success) {
-      console.log('error!', userInfo);
-      this.setState({ showStatus: true, statusMessage: userInfo.message });
-    } else if (userInfo.success) {
-      this.setState({ showStatus: true, statusMessage: 'User successfully created' });
-      userInfo = await Auth.logIn({ username, password });
-      console.log('AUTH LOGIN: ', userInfo);
-      // this.props.getInfo(userInfo);
-    }
+    await this.props.dispatch(createNewUser({ username, password }));
+    console.log(this.props.userAuth);
+    //   let userInfo = await Auth.signUp({ username, password });
+    //   console.log(userInfo);
+    //   if (!userInfo.success) {
+    //     console.log('error!', userInfo);
+    //     this.setState({ showStatus: true, statusMessage: userInfo.message });
+    //   } else if (userInfo.success) {
+    //     this.setState({ showStatus: true, statusMessage: 'User successfully created' });
+    //     userInfo = await Auth.logIn({ username, password });
+    //     console.log('AUTH LOGIN: ', userInfo);
+    //     // this.props.getInfo(userInfo);
+    //   }
+    // };
   };
 
   logOut = () => {
-    this.setState({ showStatus: false, statusMessage: '' });
-    this.props.logOut();
+    this.props.dispatch(logOut());
   };
 
   testing = () => {
@@ -63,7 +54,8 @@ class Login extends Component {
   };
 
   render() {
-    console.log(this.props);
+    console.log('rerendering component', this.props);
+    const { userAuth } = this.props;
     return (
       <div className="login-signup-container">
         <div className="login-container">
@@ -76,7 +68,7 @@ class Login extends Component {
               name="userLogin"
               id="userLogin"
               type="text"
-              value={this.state.userLogin}
+              value={this.state.username}
               autoComplete="username"
             />
             <label htmlFor="pwLogin">Password: </label>
@@ -93,7 +85,7 @@ class Login extends Component {
             </button>
           </form>
         </div>
-        {this.state.showStatus && <p>{this.state.statusMessage}</p>}
+        {userAuth.showStatus && <p>{userAuth.message}</p>}
         <br />
 
         <div className="signup-container">

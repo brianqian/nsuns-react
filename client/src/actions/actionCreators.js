@@ -1,4 +1,4 @@
-export * from './userAuth';
+export * from './userAuthActions';
 
 export const addAccessories = (name, set, rep, weight) => {
   return {
@@ -10,9 +10,16 @@ export const addAccessories = (name, set, rep, weight) => {
   };
 };
 
-export const changeMax = (lift, max) => {
+export const getUserLifts = userLifts => {
   return {
-    type: 'CHANGE_MAX',
+    type: 'GET_USER_LIFTS',
+    userLifts,
+  };
+};
+
+export const changeUserLifts = (lift, max) => {
+  return {
+    type: 'UPDATE_USER_LIFTS',
     lift,
     max,
   };
