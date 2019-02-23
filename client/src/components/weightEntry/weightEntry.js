@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './weightEntry.css';
-import API from '../../utils/api';
 import { connect } from 'react-redux';
 import { swapTmRm } from '../../utils/helper';
+import { saveUserLifts } from '../../actions';
 
 class weightEntry extends Component {
   state = {
@@ -40,21 +40,24 @@ class weightEntry extends Component {
       deadliftRM,
       squatRM,
       ohpRM,
-    } = this.state.userLifts;
-    const userId = this.props.userAuth.id;
-    const data = {
-      benchTM,
-      deadliftTM,
-      squatTM,
-      ohpTM,
-      benchRM,
-      deadliftRM,
-      squatRM,
-      ohpRM,
-      userId,
-    };
-    API.saveUserInfo(data);
-    console.log('USER WEIGHTS', this.state.userLifts);
+    } = this.props.userLifts;
+    const userId = this.props.userAuth.userId;
+    this.props.dispatch(
+      saveUserLifts({
+        benchTM,
+        deadliftTM,
+        squatTM,
+        ohpTM,
+        benchRM,
+        deadliftRM,
+        squatRM,
+        ohpRM,
+        userId,
+      })
+    );
+    //action to save userinfo instead
+    // API.saveUserInfo();
+    // console.log('USER WEIGHTS', this.state.userLifts);
   };
 
   render() {

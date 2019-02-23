@@ -1,6 +1,7 @@
 import Auth from '../utils/auth';
 
 export const loginSuccess = userId => {
+  console.log('LOGIN_SUCCESS ID', userId);
   return {
     type: 'LOGIN_SUCCESS',
     userId,
@@ -46,7 +47,7 @@ export const userLogin = loginInfo => async (dispatch, getState) => {
     dispatch(loginPending());
     const result = await Auth.logIn(loginInfo);
     console.log(result);
-    if (result.success) {
+    if (result.ok) {
       dispatch({ type: 'GET_USER_LIFTS', userLifts: result });
       return dispatch(loginSuccess(result.id));
     } else {
@@ -59,7 +60,7 @@ export const createNewUser = signUpInfo => async (dispatch, getState) => {
   if (!getState().userAuth.pending) {
     dispatch(signupPending());
     const result = await Auth.signUp(signUpInfo);
-    if (result.success) {
+    if (result.ok) {
       await dispatch(userLogin(signUpInfo));
       return dispatch(signupSuccess(result));
     } else {

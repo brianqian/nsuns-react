@@ -4,6 +4,7 @@ function userAuth(
 ) {
   switch (action.type) {
     case 'LOGIN_SUCCESS':
+      console.log('ACTION', action);
       return {
         ...state,
         message: 'Logged in!',

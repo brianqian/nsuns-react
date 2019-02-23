@@ -14,17 +14,17 @@ module.exports = {
         if (err) throw err;
         data = data[0];
         if (!data) {
-          res.json({ success: false, message: 'Login Error' });
+          res.json({ ok: false, message: 'Login Error' });
           return;
         }
         //Bcrypt password compare
         const match = await bcrypt.compare(password, data.password);
         if (match) {
           delete data.password;
-          data.success = true;
+          data.ok = true;
           res.json(data);
         } else {
-          res.json({ success: false, message: 'Login error' });
+          res.json({ ok: false, message: 'Login error' });
         }
       }
     );
@@ -45,7 +45,7 @@ module.exports = {
           if (data.length) {
             //If a username with same name is found return error
             res.json({
-              success: false,
+              ok: false,
               message: 'Username not available, please try again',
             });
           } else {
@@ -55,7 +55,7 @@ module.exports = {
           VALUES ('${req.body.username}','${hash}')`,
               (err, data) => {
                 if (err) console.error(err);
-                res.json({ success: true });
+                res.json({ ok: true });
                 connection.query(
                   `INSERT INTO accessories (userId) VALUES (${data.insertId})`,
                   (err, data) => {

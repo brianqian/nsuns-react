@@ -3,7 +3,6 @@ import './App.css';
 import LoginSignup from './components/loginSignup/loginSignup';
 import MainPage from './pages/mainPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { swapTmRm } from './utils/helper';
 
 class App extends Component {
   state = {
@@ -29,15 +28,6 @@ class App extends Component {
 
   logOut = () => {
     this.setState({ userInfo: {} });
-  };
-
-  changeWeights = (name, value) => {
-    value = parseInt(value);
-    const userInfo = this.state.userInfo;
-    userInfo[name] = value;
-    let [swappedName, swappedValue] = swapTmRm(name, value);
-    userInfo[swappedName] = swappedValue;
-    this.setState({ userInfo });
   };
 
   logProps = () => {

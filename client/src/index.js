@@ -5,7 +5,7 @@ import App from './App';
 import { Provider, connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import store from './store';
-import * as actionCreators from './actions/actionCreators';
+import * as actionCreators from './actions';
 
 const mapStateToProps = state => ({
   accessories: state.accessories,
