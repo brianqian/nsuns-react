@@ -40,6 +40,7 @@ export const logOut = () => {
 };
 
 export const userLogin = loginInfo => async (dispatch, getState) => {
+  console.log('logging in user in user auth actions');
   if (!getState().userAuth.pending) {
     dispatch(loginPending());
     const result = await Auth.logIn(loginInfo);
@@ -53,11 +54,12 @@ export const userLogin = loginInfo => async (dispatch, getState) => {
   }
 };
 
-export const createNewUser = loginInfo => async (dispatch, getState) => {
+export const createNewUser = signUpInfo => async (dispatch, getState) => {
   if (!getState().userAuth.pending) {
     dispatch(signupPending());
-    const result = await Auth.signUp(loginInfo);
+    const result = await Auth.signUp(signUpInfo);
     if (result.success) {
+      await dispatch(userLogin(signUpInfo));
       return dispatch(signupSuccess(result));
     } else {
       return dispatch(signupFail(result.message));

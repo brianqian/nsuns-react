@@ -10,7 +10,13 @@ function userAuth(
     case 'LOGIN_PENDING':
       return { ...state, message: 'Logging in...', showStatus: true, pending: true };
     case 'SIGNUP_SUCCESS':
-      return { ...state, message: 'Account created!', showStatus: true, pending: false };
+      return {
+        ...state,
+        message: 'Account created!',
+        showStatus: true,
+        pending: false,
+        loggedIn: true,
+      };
     case 'SIGNUP_FAIL':
       return { ...state, message: action.message, showStatus: true, pending: false };
     case 'SIGNUP_PENDING':

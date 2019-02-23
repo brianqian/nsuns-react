@@ -50,11 +50,7 @@ class App extends Component {
       <div className="App">
         <button onClick={this.logProps}>console.log app props</button>
         <header>
-          <LoginSignup
-            userInfo={this.state.userInfo}
-            getInfo={this.getUserInfo}
-            logOut={this.logOut}
-          />
+          <LoginSignup />
         </header>
         <Router>
           <Switch>
