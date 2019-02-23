@@ -41,7 +41,7 @@ class weightEntry extends Component {
       squatRM,
       ohpRM,
     } = this.state.userLifts;
-    const userId = this.props.userLifts.id;
+    const userId = this.props.userAuth.id;
     const data = {
       benchTM,
       deadliftTM,

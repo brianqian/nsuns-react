@@ -1,8 +1,9 @@
 import Auth from '../utils/auth';
 
-export const loginSuccess = () => {
+export const loginSuccess = userId => {
   return {
     type: 'LOGIN_SUCCESS',
+    userId,
   };
 };
 export const loginFail = message => {
@@ -47,7 +48,7 @@ export const userLogin = loginInfo => async (dispatch, getState) => {
     console.log(result);
     if (result.success) {
       dispatch({ type: 'GET_USER_LIFTS', userLifts: result });
-      return dispatch(loginSuccess(1));
+      return dispatch(loginSuccess(result.id));
     } else {
       return dispatch(loginFail(result.message));
     }

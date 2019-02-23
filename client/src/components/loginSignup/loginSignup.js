@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './loginSignup';
-import Auth from '../../utils/auth';
 import { connect } from 'react-redux';
 import { userLogin, logOut, createNewUser } from '../../actions/userAuthActions';
 

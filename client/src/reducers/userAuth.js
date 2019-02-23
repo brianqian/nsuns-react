@@ -4,7 +4,13 @@ function userAuth(
 ) {
   switch (action.type) {
     case 'LOGIN_SUCCESS':
-      return { ...state, message: 'Logged in!', pending: false, loggedIn: true };
+      return {
+        ...state,
+        message: 'Logged in!',
+        pending: false,
+        loggedIn: true,
+        userId: action.userId,
+      };
     case 'LOGIN_FAIL':
       return { ...state, message: action.message, showStatus: true, pending: false };
     case 'LOGIN_PENDING':
