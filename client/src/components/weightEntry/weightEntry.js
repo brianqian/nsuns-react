@@ -20,14 +20,7 @@ class weightEntry extends Component {
     let { name, value } = e.target;
     this.props.dispatch(userLiftOnChange(name, value));
   };
-  // changeWeights = (name, value) => {
-  //   value = parseInt(value);
-  //   const userInfo = this.state.userInfo;
-  //   userInfo[name] = value;
-  //   let [swappedName, swappedValue] = swapTmRm(name, value);
-  //   userInfo[swappedName] = swappedValue;
-  //   this.setState({ userInfo });
-  // };
+
   handleSubmit = async e => {
     e.preventDefault();
     const {
@@ -54,12 +47,10 @@ class weightEntry extends Component {
         userId,
       })
     );
-    //action to save userinfo instead
-    // API.saveUserInfo();
-    // console.log('USER WEIGHTS', this.state.userLifts);
   };
 
   render() {
+    console.log('rerender weight entry');
     const { userLifts, userAuth } = this.props;
     return (
       <div>
