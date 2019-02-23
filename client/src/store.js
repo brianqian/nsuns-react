@@ -9,6 +9,7 @@ import dailySplits from './data/dailySplits';
 const defaultState = {
   accessories,
   dailySplits,
+  userLifts: {},
 };
 
 const store = createStore(

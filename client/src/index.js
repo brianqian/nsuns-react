@@ -10,6 +10,7 @@ import * as actionCreators from './actions/actionCreators';
 const mapStateToProps = state => ({
   accessories: state.accessories,
   dailySplits: state.dailySplits,
+  userLifts: state.userLifts,
 });
 
 const mapDispatchToProps = dispatch => {

@@ -4,8 +4,6 @@ import LoginSignup from './components/loginSignup/loginSignup';
 import MainPage from './pages/mainPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { swapTmRm } from './utils/helper';
-import { Provider } from 'react-redux';
-import store from './store';
 
 class App extends Component {
   state = {
@@ -42,34 +40,28 @@ class App extends Component {
     this.setState({ userInfo });
   };
 
+  logProps = () => {
+    console.log(this.props);
+  };
+
   render() {
+    console.log(this.props);
     return (
-      <Provider store={store}>
-        <div className="App">
-          <header>
-            <LoginSignup
-              userInfo={this.state.userInfo}
-              getInfo={this.getUserInfo}
-              logOut={this.logOut}
-            />
-          </header>
-          <Router>
-            <Switch>
-              <Route
-                exact
-                path="/"
-                render={props => (
-                  <MainPage
-                    {...props}
-                    userInfo={this.state.userInfo}
-                    changeWeights={this.changeWeights}
-                  />
-                )}
-              />
-            </Switch>
-          </Router>
-        </div>
-      </Provider>
+      <div className="App">
+        <button onClick={this.logProps}>console.log app props</button>
+        <header>
+          <LoginSignup
+            userInfo={this.state.userInfo}
+            getInfo={this.getUserInfo}
+            logOut={this.logOut}
+          />
+        </header>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={MainPage} />
+          </Switch>
+        </Router>
+      </div>
     );
   }
 }

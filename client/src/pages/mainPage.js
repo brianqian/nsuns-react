@@ -3,8 +3,9 @@ import DailyLift from '../components/dailyLift/dailyLift';
 import accessories from '../data/accessoryPlans';
 import dailySplits from '../data/dailySplits';
 import WeightEntry from '../components/weightEntry/weightEntry';
+import { connect } from 'react-redux';
 
-export default class mainPage extends Component {
+class mainPage extends Component {
   state = {
     nsunsVariation: '5day',
     standard: 'lbs',
@@ -14,9 +15,8 @@ export default class mainPage extends Component {
     const dailyLifts = dailySplits[currentVariation].map((day, index) => {
       const base1 = day.baseLift[0] + 'TM';
       const base2 = day.baseLift[1] + 'TM';
-      const accessoryPlan = this.props.userInfo.accessoryPlan || 'arms';
+      const accessoryPlan = this.props.userLifts.accessoryPlan || 'arms';
       const accessorySet = accessories[accessoryPlan][index];
-      console.log(accessorySet, index);
       return (
         <DailyLift
           day={day.day}
@@ -28,8 +28,8 @@ export default class mainPage extends Component {
           t1Reps={day.t1Reps}
           t2Weights={day.t2Weights}
           t2Reps={day.t2Reps}
-          max1={this.props.userInfo[base1] || '0'}
-          max2={this.props.userInfo[base2] || '0'}
+          max1={this.props.userLifts[base1] || '0'}
+          max2={this.props.userLifts[base2] || '0'}
           standard={this.state.standard}
           key={index}
           accessories={accessorySet}
@@ -43,7 +43,7 @@ export default class mainPage extends Component {
         <WeightEntry
           getInfo={this.getUserInfo}
           changeWeights={this.props.changeWeights}
-          userInfo={this.props.userInfo}
+          userInfo={this.props.userLifts}
         >
           {dailyLifts}
         </WeightEntry>
@@ -51,3 +51,9 @@ export default class mainPage extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  userLifts: state.userLifts,
+});
+
+export default connect(mapStateToProps)(mainPage);

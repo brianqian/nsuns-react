@@ -1,4 +1,4 @@
-import Auth from '../utils/auth';
+export * from './userAuth';
 
 export const addAccessories = (name, set, rep, weight) => {
   return {
@@ -16,17 +16,4 @@ export const changeMax = (lift, max) => {
     lift,
     max,
   };
-};
-
-export const getUserInfo = liftData => {
-  return {
-    type: 'GET_USER_INFO',
-    liftData,
-  };
-};
-
-export const userLogin = loginInfo => async (dispatch, getState) => {
-  console.log('in userlogin');
-  const result = await Auth.logIn(loginInfo);
-  return dispatch(getUserInfo(result));
 };

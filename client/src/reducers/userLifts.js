@@ -1,6 +1,6 @@
-function dailySplits(state = {}, action) {
+function userLifts(state = {}, action) {
   switch (action.type) {
-    case 'CHANGE_MAX':
+    case '':
       console.log(state);
       return state;
     default:
@@ -8,4 +8,4 @@ function dailySplits(state = {}, action) {
   }
 }
 
-export default dailySplits;
+export default userLifts;
