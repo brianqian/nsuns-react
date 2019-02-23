@@ -11,6 +11,7 @@ class mainPage extends Component {
     standard: 'lbs',
   };
   render() {
+    //this page ultiately needs to draw state from the store to allow user editing
     const currentVariation = this.state.nsunsVariation;
     const dailyLifts = dailySplits[currentVariation].map((day, index) => {
       const base1 = day.baseLift[0] + 'TM';

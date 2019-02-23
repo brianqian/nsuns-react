@@ -29,7 +29,7 @@ module.exports = {
     WHERE id = ${data.userId}`,
       (err, data) => {
         if (err) throw err;
-        // res.send();
+        res.send();
       }
     );
   },
