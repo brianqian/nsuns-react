@@ -38,9 +38,7 @@ class mainPage extends Component {
       );
     });
     return (
-      <div>
-        {/* <h3>Current Variation: {this.state.nsunsVariation}</h3>
-          <button onClick={this.toggleSplit}>Toggle Variation</button> */}
+      <main>
         <WeightEntry
           getInfo={this.getUserInfo}
           changeWeights={this.props.changeWeights}
@@ -48,7 +46,7 @@ class mainPage extends Component {
         >
           {dailyLifts}
         </WeightEntry>
-      </div>
+      </main>
     );
   }
 }

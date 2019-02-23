@@ -9,8 +9,6 @@ class Login extends Component {
     pwLogin: '',
     userSignUp: '',
     pwSignUp: '',
-    showStatus: false,
-    statusMessage: '',
   };
 
   onChange = e => {
@@ -28,7 +26,7 @@ class Login extends Component {
     e.preventDefault();
     const username = this.state.userSignUp;
     const password = this.state.pwSignUp;
-    await this.props.dispatch(createNewUser({ username, password }));
+    this.props.dispatch(createNewUser({ username, password }));
   };
 
   logOut = () => {
