@@ -11,3 +11,11 @@ export const saveUserLifts = liftObj => {
     liftObj,
   };
 };
+
+export const userLiftOnChange = (name, value) => {
+  return {
+    type: 'USER_LIFT_ON_CHANGE',
+    name,
+    value,
+  };
+};

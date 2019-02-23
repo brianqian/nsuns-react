@@ -1,4 +1,5 @@
 import Api from '../utils/api';
+import { swapTmRm } from '../utils/helper';
 
 function userLifts(state = {}, action) {
   switch (action.type) {
@@ -13,6 +14,10 @@ function userLifts(state = {}, action) {
       let success = Api.saveUserLifts(action.liftObj);
       console.log(success ? 'new values saved' : `error: ${success}`);
       return state;
+    case 'USER_LIFT_ON_CHANGE':
+      const { name, value } = action;
+      const updatedValues = swapTmRm(name, value);
+      return { ...state, ...updatedValues };
     default:
       return state;
   }

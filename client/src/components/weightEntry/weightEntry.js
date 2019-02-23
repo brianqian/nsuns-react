@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './weightEntry.css';
 import { connect } from 'react-redux';
-import { swapTmRm } from '../../utils/helper';
-import { saveUserLifts } from '../../actions';
+import { saveUserLifts, userLiftOnChange } from '../../actions';
 
 class weightEntry extends Component {
   state = {
@@ -19,16 +18,16 @@ class weightEntry extends Component {
 
   onChange = e => {
     let { name, value } = e.target;
-    this.changeWeights(name, value);
+    this.props.dispatch(userLiftOnChange(name, value));
   };
-  changeWeights = (name, value) => {
-    value = parseInt(value);
-    const userInfo = this.state.userInfo;
-    userInfo[name] = value;
-    let [swappedName, swappedValue] = swapTmRm(name, value);
-    userInfo[swappedName] = swappedValue;
-    this.setState({ userInfo });
-  };
+  // changeWeights = (name, value) => {
+  //   value = parseInt(value);
+  //   const userInfo = this.state.userInfo;
+  //   userInfo[name] = value;
+  //   let [swappedName, swappedValue] = swapTmRm(name, value);
+  //   userInfo[swappedName] = swappedValue;
+  //   this.setState({ userInfo });
+  // };
   handleSubmit = async e => {
     e.preventDefault();
     const {
