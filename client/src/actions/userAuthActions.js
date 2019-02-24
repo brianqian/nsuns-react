@@ -61,8 +61,8 @@ export const createNewUser = signUpInfo => async (dispatch, getState) => {
     dispatch(signupPending());
     const result = await Auth.signUp(signUpInfo);
     if (result.ok) {
-      await dispatch(userLogin(signUpInfo));
-      return dispatch(signupSuccess(result));
+      await dispatch(signupSuccess(result));
+      return dispatch(userLogin(signUpInfo));
     } else {
       return dispatch(signupFail(result.message));
     }

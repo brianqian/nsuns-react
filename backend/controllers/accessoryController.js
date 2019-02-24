@@ -1,12 +1,25 @@
 const connection = require('../db');
 
 module.exports = {
-  createCustom: (req, res) => {
-    console.log(req.body);
+  createAccessoryPlan: (req, res) => {
     const { userId, basePlan } = req.body;
-    const values = basePlan.map();
+
+    const values = [];
+    basePlan.forEach((day, dayIndex) => {
+      day.forEach((exercise, accIndex) => {
+        const { title, sets, reps, weight } = exercise;
+        values.push([userId, title, sets, reps, weight, dayIndex, accIndex]);
+      });
+    });
+    console.log(values);
+
     connection.query(
-      'INSERT INTO accessories (userId, name, sets, reps, weight, dayIndex, accIndex) VALUES ?'
+      'INSERT INTO accessories (userId, title, sets, reps, weight, dayIndex, accIndex) VALUES ?',
+      [values],
+      (err, data) => {
+        if (err) throw err;
+        console.log(data);
+      }
     );
   },
 };

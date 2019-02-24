@@ -5,5 +5,5 @@ const accessoryController = require('../../controllers/accessoryController');
 router.route('/userInfo').put(userController.saveUserInfo);
 // .get(userController.getUserInfo)
 
-router.route('/accessory').post(accessoryController.createCustom);
+router.route('/accessory').post(accessoryController.createAccessoryPlan);
 module.exports = router;

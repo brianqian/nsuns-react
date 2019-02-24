@@ -1,4 +1,4 @@
-export default {
+const auth = {
   signUp: async data => {
     // console.log('creating new user');
     try {
@@ -31,3 +31,5 @@ export default {
     }
   },
 };
+
+export default auth;
