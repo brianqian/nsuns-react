@@ -16,12 +16,12 @@ export const trainMaxToRM = function(tm) {
 export const swapTmRm = function(name, weight) {
   weight = parseInt(weight);
   if (name.includes('TM')) {
-    const returnObj = { name, weight };
+    const returnObj = { [name]: weight };
     name = name.split('TM')[0] + 'RM';
     const rmWeight = trainMaxToRM(weight);
     return { ...returnObj, [name]: rmWeight };
   } else if (name.includes('RM')) {
-    const returnObj = { name, weight };
+    const returnObj = { [name]: weight };
     name = name.split('RM')[0] + 'TM';
     const tmWeight = repMaxToTM(weight);
     return { ...returnObj, [name]: tmWeight };
