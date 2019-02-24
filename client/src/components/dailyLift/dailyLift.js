@@ -62,10 +62,7 @@ class dailyLift extends Component {
           {t2Workouts}
           <p onClick={this.handleClick}>Accessories</p>
         </div>
-        <AccessoryBox
-          accessories={this.props.accessories}
-          showAccessories={this.state.showAccessories}
-        />
+        {this.state.showAccessories && <AccessoryBox index={this.props.index} />}
       </div>
     );
   }

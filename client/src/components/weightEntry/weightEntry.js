@@ -152,7 +152,6 @@ class weightEntry extends Component {
             )}
           </form>
         </div>
-        {this.props.children}
       </div>
     );
   }

@@ -4,6 +4,7 @@ import accessories from '../data/accessoryPlans';
 import dailySplits from '../data/dailySplits';
 import WeightEntry from '../components/weightEntry/weightEntry';
 import { connect } from 'react-redux';
+import uuidv1 from 'uuid';
 
 class mainPage extends Component {
   state = {
@@ -32,14 +33,16 @@ class mainPage extends Component {
           max1={this.props.userLifts[base1] || '0'}
           max2={this.props.userLifts[base2] || '0'}
           standard={this.state.standard}
-          key={index}
+          key={uuidv1()}
+          index={index}
           accessories={accessorySet}
         />
       );
     });
     return (
       <main>
-        <WeightEntry>{dailyLifts}</WeightEntry>
+        <WeightEntry />
+        {dailyLifts}
       </main>
     );
   }
@@ -47,6 +50,7 @@ class mainPage extends Component {
 
 const mapStateToProps = state => ({
   userLifts: state.userLifts,
+  accessories: state.accessories,
 });
 
 export default connect(mapStateToProps)(mainPage);
