@@ -12,7 +12,11 @@ class App extends Component {
         <header>
           <LoginSignup />
         </header>
-        <MainPage />
+        <Router>
+          <Switch>
+            <Route exact path="/" component={MainPage} />
+          </Switch>
+        </Router>
       </div>
     );
   }

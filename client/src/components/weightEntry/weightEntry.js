@@ -50,7 +50,6 @@ class weightEntry extends Component {
   };
 
   render() {
-    console.log('rerender weight entry');
     const { userLifts, userAuth } = this.props;
     return (
       <div>

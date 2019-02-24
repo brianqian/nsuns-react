@@ -10,12 +10,12 @@ router.use('/auth', authRoutes);
 if (process.env.NODE_ENV === 'production') {
   router.use(express.static('client/build'));
   router.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
   });
 } else {
   router.use(express.static(__dirname + 'client/public'));
   router.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, '../client/public/index.html'));
+    res.sendFile(path.join(__dirname, '../../client/public/index.html'));
   });
 }
 

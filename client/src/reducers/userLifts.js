@@ -16,8 +16,10 @@ function userLifts(state = {}, action) {
       return state;
     case 'USER_LIFT_ON_CHANGE':
       const { name, value } = action;
-      const updatedValues = swapTmRm(name, value);
-      return { ...state, ...updatedValues };
+      console.log('name, value', name, value);
+      const swappedNameValue = swapTmRm(name, value);
+      console.log(swappedNameValue);
+      return { ...state, ...swappedNameValue };
     default:
       return state;
   }

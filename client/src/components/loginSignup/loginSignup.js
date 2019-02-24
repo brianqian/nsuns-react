@@ -38,7 +38,6 @@ class Login extends Component {
   };
 
   render() {
-    console.log('rerendering login/signup', this.props);
     const { userAuth } = this.props;
     return (
       <div className="login-signup-container">
