@@ -6,7 +6,14 @@ export const addAccessoryAction = (userId, dayIndex) => {
   };
 };
 
+export const createCustomAccessoryPlan = (userId, basePlan) => {
+  return {
+    type: 'CREATE_CUSTOM_ACCESSORY_PLAN',
+    userId,
+    basePlan,
+  };
+};
+
 export const addAccessory = (userId, dayIndex) => (dispatch, getState) => {
-  dispatch();
   return dispatch(addAccessoryAction(userId, dayIndex));
 };

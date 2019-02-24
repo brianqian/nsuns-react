@@ -33,6 +33,7 @@ class mainPage extends Component {
           max2={this.props.userLifts[base2] || '0'}
           standard={this.state.standard}
           key={uuidv1()}
+          index={index}
           accessories={accessorySet}
         />
       );
