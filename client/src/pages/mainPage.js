@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import DailyLift from '../components/dailyLift/dailyLift';
-import { dailySplits, accessories } from '../accessoryPlans';
 import WeightEntry from '../components/weightEntry/weightEntry';
+import { connect } from 'react-redux';
+import uuidv1 from 'uuid';
 
-export default class mainPage extends Component {
+class mainPage extends Component {
   state = {
     nsunsVariation: '5day',
     standard: 'lbs',
   };
   render() {
-    const currentVariation = this.state.nsunsVariation;
-    const dailyLifts = dailySplits[currentVariation].map((day, index) => {
+    //this page eventually needs to draw state from the store to allow user editing
+    const { nsunsVariation, accessoryPlan } = this.props.userLifts;
+    const { dailySplits, accessories } = this.props;
+    console.log(dailySplits, nsunsVariation);
+    const dailyLifts = dailySplits[nsunsVariation].map((day, index) => {
       const base1 = day.baseLift[0] + 'TM';
       const base2 = day.baseLift[1] + 'TM';
-      const accessoryPlan = this.props.userInfo.accessoryPlan || 'arms';
       const accessorySet = accessories[accessoryPlan][index];
-      console.log(accessorySet, index);
       return (
         <DailyLift
           day={day.day}
@@ -27,26 +29,27 @@ export default class mainPage extends Component {
           t1Reps={day.t1Reps}
           t2Weights={day.t2Weights}
           t2Reps={day.t2Reps}
-          max1={this.props.userInfo[base1] || '0'}
-          max2={this.props.userInfo[base2] || '0'}
+          max1={this.props.userLifts[base1] || '0'}
+          max2={this.props.userLifts[base2] || '0'}
           standard={this.state.standard}
-          key={index}
+          key={uuidv1()}
           accessories={accessorySet}
         />
       );
     });
     return (
-      <div>
-        {/* <h3>Current Variation: {this.state.nsunsVariation}</h3>
-          <button onClick={this.toggleSplit}>Toggle Variation</button> */}
-        <WeightEntry
-          getInfo={this.getUserInfo}
-          changeWeights={this.props.changeWeights}
-          userInfo={this.props.userInfo}
-        >
-          {dailyLifts}
-        </WeightEntry>
-      </div>
+      <main>
+        <WeightEntry />
+        {dailyLifts}
+      </main>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  userLifts: state.userLifts,
+  accessories: state.accessories,
+  dailySplits: state.dailySplits,
+});
+
+export default connect(mapStateToProps)(mainPage);

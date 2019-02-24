@@ -2,7 +2,7 @@ const connection = require('../db');
 
 module.exports = {
   getUserInfo: (req, res) => {
-    console.log('gettingMain, userid:', req.query.user);
+    console.log('getUserInfo userid:', req.query.user);
     connection.query(
       `SELECT * FROM userInfo INNER JOIN accessories ON userInfo.id=accessories.userId WHERE id = ${
         req.query.user
@@ -15,9 +15,8 @@ module.exports = {
     );
   },
   saveUserInfo: (req, res) => {
-    console.log('SAVING MAIN');
+    console.log('saveUserInfo');
     const data = req.body;
-    console.log(data);
     connection.query(
       `UPDATE userInfo SET squatTM = ${data.squatTM},
     benchTM = ${data.benchTM},
@@ -27,7 +26,11 @@ module.exports = {
     benchRM = ${data.benchRM},
     ohpRM = ${data.ohpRM},
     deadliftRM = ${data.deadliftRM}
-    WHERE id = ${data.userId}`
+    WHERE id = ${data.userId}`,
+      (err, data) => {
+        if (err) throw err;
+        res.send();
+      }
     );
   },
 };

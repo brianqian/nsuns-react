@@ -5,6 +5,7 @@ module.exports = {
   login: (req, res) => {
     console.log('logging in', req.body);
     let { username, password } = req.body;
+    console.log(username, password);
     password = password.toString();
     connection.query(
       `SELECT * FROM userInfo 
@@ -13,17 +14,17 @@ module.exports = {
         if (err) throw err;
         data = data[0];
         if (!data) {
-          res.json({ success: false, message: 'Login Error' });
+          res.json({ ok: false, message: 'Login Error' });
           return;
         }
         //Bcrypt password compare
         const match = await bcrypt.compare(password, data.password);
         if (match) {
           delete data.password;
-          data.success = true;
+          data.ok = true;
           res.json(data);
         } else {
-          res.json({ success: false, message: 'Login error' });
+          res.json({ ok: false, message: 'Login error' });
         }
       }
     );
@@ -40,12 +41,13 @@ module.exports = {
       FROM userInfo 
       WHERE username= '${username}'`,
         (err, data) => {
+          if (err) throw err;
           if (data.length) {
-            data = {
-              success: false,
+            //If a username with same name is found return error
+            res.json({
+              ok: false,
               message: 'Username not available, please try again',
-            };
-            res.json(data);
+            });
           } else {
             console.log('user succesfully created');
             connection.query(
@@ -53,8 +55,7 @@ module.exports = {
           VALUES ('${req.body.username}','${hash}')`,
               (err, data) => {
                 if (err) console.error(err);
-                data.success = true;
-                res.json(data);
+                res.json({ ok: true });
                 connection.query(
                   `INSERT INTO accessories (userId) VALUES (${data.insertId})`,
                   (err, data) => {

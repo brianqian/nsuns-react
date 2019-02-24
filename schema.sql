@@ -15,7 +15,7 @@ CREATE TABLE userInfo (
   ohpRM INTEGER(10) DEFAULT 100,
   deadliftRM INTEGER(10) DEFAULT 100,
   squatRM INTEGER(10) DEFAULT 100,
-  accessoryPlan INTEGER(10),
+  accessoryPlan VARCHAR(15) DEFAULT 'arms',
   PRIMARY KEY (id)
 
 );

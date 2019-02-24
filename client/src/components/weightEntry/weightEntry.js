@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './weightEntry.css';
-import API from '../../utils/api';
+import { connect } from 'react-redux';
+import { saveUserLifts, userLiftOnChange } from '../../actions';
 
-export default class weightEntry extends Component {
+class weightEntry extends Component {
   state = {
     benchRM: '',
     deadliftRM: '',
@@ -17,7 +18,7 @@ export default class weightEntry extends Component {
 
   onChange = e => {
     let { name, value } = e.target;
-    this.props.changeWeights(name, value);
+    this.props.dispatch(userLiftOnChange(name, value));
   };
 
   handleSubmit = async e => {
@@ -31,68 +32,69 @@ export default class weightEntry extends Component {
       deadliftRM,
       squatRM,
       ohpRM,
-    } = this.props.userInfo;
-    const userId = this.props.userInfo.id;
-    const data = {
-      benchTM,
-      deadliftTM,
-      squatTM,
-      ohpTM,
-      benchRM,
-      deadliftRM,
-      squatRM,
-      ohpRM,
-      userId,
-    };
-    API.saveUserInfo(data);
-    console.log('USER WEIGHTS', this.props.userInfo);
+    } = this.props.userLifts;
+    const userId = this.props.userAuth.userId;
+    this.props.dispatch(
+      saveUserLifts({
+        benchTM,
+        deadliftTM,
+        squatTM,
+        ohpTM,
+        benchRM,
+        deadliftRM,
+        squatRM,
+        ohpRM,
+        userId,
+      })
+    );
   };
 
   render() {
+    const { userLifts, userAuth } = this.props;
     return (
       <div>
         <div className="weight-entry">
           <form action="">
             <label className="rm-input-label rm-input" htmlFor="benchRMInput">
-              1RM Bench:{' '}
+              1RM Bench:
             </label>
             <input
               className="rm-input"
               onChange={this.onChange}
-              value={this.props.userInfo.benchRM}
+              value={userLifts.benchRM}
               name="benchRM"
               id="benchRMInput"
               type="number"
             />
             <label className="rm-input-label rm-input" htmlFor="ohpRMInput">
-              1RM OHP:{' '}
+              1RM OHP:
             </label>
             <input
               className="rm-input"
               onChange={this.onChange}
-              value={this.props.userInfo.ohpRM}
+              value={userLifts.ohpRM}
               name="ohpRM"
               id="ohpRMInput"
               type="number"
             />
             <label className="rm-input-label rm-input" htmlFor="squatRMInput">
-              1RM Squat:{' '}
+              1RM Squat:
             </label>
             <input
               className="rm-input"
               onChange={this.onChange}
-              value={this.props.userInfo.squatRM}
+              value={userLifts.squatRM}
               name="squatRM"
               id="squatRMInput"
               type="number"
             />
             <label className="rm-input-label rm-input" htmlFor="deadliftRMInput">
-              1RM Deadlift:{' '}
+              1RM Deadlift:
             </label>
             <input
               className="tm-input"
               onChange={this.onChange}
-              value={this.props.userInfo.deadliftRM}
+              value={userLifts.deadliftRM}
               name="deadliftRM"
               id="deadliftRMInput"
               type="number"
@@ -100,58 +102,63 @@ export default class weightEntry extends Component {
             <br />
 
             <label className="tm-input-label tm-input" htmlFor="benchTMInput">
-              TM Bench:{' '}
+              TM Bench:
             </label>
             <input
               className="tm-input"
               onChange={this.onChange}
-              value={this.props.userInfo.benchTM}
+              value={userLifts.benchTM}
               name="benchTM"
               id="benchTMInput"
               type="number"
             />
             <label className="tm-input-label tm-input" htmlFor="ohpTMInput">
-              TM OHP:{' '}
+              TM OHP:
             </label>
             <input
               className="tm-input"
               onChange={this.onChange}
-              value={this.props.userInfo.ohpTM}
+              value={userLifts.ohpTM}
               name="ohpTM"
               id="ohpTMInput"
               type="number"
             />
             <label className="tm-input-label tm-input" htmlFor="squatTMInput">
-              TM Squat:{' '}
+              TM Squat:
             </label>
             <input
               className="tm-input"
               onChange={this.onChange}
-              value={this.props.userInfo.squatTM}
+              value={userLifts.squatTM}
               name="squatTM"
               id="squatTMInput"
               type="number"
             />
             <label className="tm-input-label tm-input" htmlFor="deadliftTMInput">
-              TM Deadlift:{' '}
+              TM Deadlift:
             </label>
             <input
               className="tm-input"
               onChange={this.onChange}
-              value={this.props.userInfo.deadliftTM}
+              value={userLifts.deadliftTM}
               name="deadliftTM"
               id="deadliftTMInput"
               type="number"
             />
-            {this.props.userInfo.id && (
+            {userAuth.loggedIn && (
               <button onClick={this.handleSubmit} type="submit">
                 Save new values
               </button>
             )}
           </form>
         </div>
-        <div className="weight-display">{this.props.children}</div>
       </div>
     );
   }
 }
+const mapStateToProps = state => ({
+  userLifts: state.userLifts,
+  userAuth: state.userAuth,
+});
+
+export default connect(mapStateToProps)(weightEntry);

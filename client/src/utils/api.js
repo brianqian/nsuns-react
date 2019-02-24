@@ -1,5 +1,5 @@
 export default {
-  saveUserInfo: async data => {
+  saveUserLifts: async data => {
     console.log('in save main lifts with data: ', data);
     try {
       let resp = await fetch('/api/userInfo', {
@@ -9,21 +9,11 @@ export default {
         },
         body: JSON.stringify(data),
       });
-      resp = await resp.json();
-      return resp;
+      console.log('RESPONSE', resp);
+      // resp = await resp.json();
+      return resp.ok ? true : resp.status;
     } catch (err) {
       if (err) console.error(err);
     }
   },
-  // getUserInfo: async userId => {
-  //   try {
-  //     if (userId) {
-  //       let resp = await fetch(`/api/userInfo?user=${userId}`);
-  //       resp = await resp.json();
-  //       return resp;
-  //     }
-  //   } catch (err) {
-  //     if (err) console.error(err);
-  //   }
-  // },
 };

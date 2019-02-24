@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './dailyLift.css';
 import WeightBox from '../weightBox/weightBox';
 import AccessoryBox from '../accessoryBox/accessoryBox';
+import uuidv1 from 'uuid';
 
 class dailyLift extends Component {
   state = {
@@ -27,10 +28,26 @@ class dailyLift extends Component {
     } = this.props;
 
     const t1Workouts = t1Reps.map((rep, i) => {
-      return <WeightBox reps={rep} weights={t1Weights[i]} max={max1} standard={standard} />;
+      return (
+        <WeightBox
+          key={uuidv1()}
+          reps={rep}
+          weights={t1Weights[i]}
+          max={max1}
+          standard={standard}
+        />
+      );
     });
     const t2Workouts = t2Reps.map((rep, i) => {
-      return <WeightBox reps={rep} weights={t2Weights[i]} max={max2} standard={standard} />;
+      return (
+        <WeightBox
+          key={uuidv1()}
+          reps={rep}
+          weights={t2Weights[i]}
+          max={max2}
+          standard={standard}
+        />
+      );
     });
 
     return (
@@ -45,10 +62,7 @@ class dailyLift extends Component {
           {t2Workouts}
           <p onClick={this.handleClick}>Accessories</p>
         </div>
-        <AccessoryBox
-          accessories={this.props.accessories}
-          showAccessories={this.state.showAccessories}
-        />
+        {this.state.showAccessories && <AccessoryBox accessories={this.props.accessories} />}
       </div>
     );
   }

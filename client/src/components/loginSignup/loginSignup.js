@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import './loginSignup';
-import Auth from '../../utils/auth';
+import { connect } from 'react-redux';
+import { userLogin, logOut, createNewUser } from '../../actions/userAuthActions';
 
-export default class login extends Component {
+class Login extends Component {
   state = {
     userLogin: '',
     pwLogin: '',
     userSignUp: '',
     pwSignUp: '',
-    showStatus: false,
-    statusMessage: '',
   };
 
   onChange = e => {
@@ -17,50 +16,35 @@ export default class login extends Component {
     this.setState({ [name]: value });
   };
 
-  //can combine these two into one function
   logIn = async e => {
     e.preventDefault();
-    await this.setState({ showStatus: false, statusMessage: '' });
     const username = this.state.userLogin;
     const password = this.state.pwLogin;
-    let userInfo = await Auth.logIn({ username, password });
-
-    if (!userInfo.success) {
-      console.log('error!', userInfo);
-      this.setState({ showStatus: true, statusMessage: userInfo.message });
-    } else {
-      console.log(userInfo);
-      // console.log(this.props);
-      this.props.getInfo(userInfo);
-    }
+    this.props.dispatch(userLogin({ username, password }));
   };
   signUp = async e => {
     e.preventDefault();
     const username = this.state.userSignUp;
     const password = this.state.pwSignUp;
-    let userInfo = await Auth.signUp({ username, password });
-    console.log(userInfo);
-    if (!userInfo.success) {
-      console.log('error!', userInfo);
-      this.setState({ showStatus: true, statusMessage: userInfo.message });
-    } else if (userInfo.success) {
-      this.setState({ showStatus: true, statusMessage: 'User successfully created' });
-      userInfo = await Auth.logIn({ username, password });
-      console.log('AUTH LOGIN: ', userInfo);
-      this.props.getInfo(userInfo);
-    }
+    this.props.dispatch(createNewUser({ username, password }));
   };
 
   logOut = () => {
-    this.setState({ showStatus: false, statusMessage: '' });
-    this.props.logOut();
+    this.props.dispatch(logOut());
+  };
+
+  testing = () => {
+    console.log(this.props);
   };
 
   render() {
+    const { userAuth } = this.props;
     return (
       <div className="login-signup-container">
-        {!this.props.userInfo.id && (
+        {!userAuth.loggedIn && (
           <div className="login-container">
+            <button onClick={this.testing}>console.log userSignup Props</button>
+
             <form action="">
               Login:
               <label htmlFor="userLogin">Username: </label>
@@ -69,7 +53,7 @@ export default class login extends Component {
                 name="userLogin"
                 id="userLogin"
                 type="text"
-                value={this.state.userLogin}
+                value={this.state.username}
                 autoComplete="username"
               />
               <label htmlFor="pwLogin">Password: </label>
@@ -87,9 +71,10 @@ export default class login extends Component {
             </form>
           </div>
         )}
-        {this.state.showStatus && <p>{this.state.statusMessage}</p>}
+        {userAuth.showStatus && <p>{userAuth.message}</p>}
         <br />
-        {!this.props.userInfo.id && (
+
+        {!userAuth.loggedIn && (
           <div className="signup-container">
             <form action="">
               Sign Up:
@@ -118,8 +103,13 @@ export default class login extends Component {
           </div>
         )}
 
-        {this.props.userInfo.id && <button onClick={this.logOut}>Log Out</button>}
+        <button onClick={this.logOut}>Log Out</button>
       </div>
     );
   }
 }
+const mapStateToProps = state => ({
+  userLifts: state.userLifts,
+  userAuth: state.userAuth,
+});
+export default connect(mapStateToProps)(Login);

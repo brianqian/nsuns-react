@@ -1,22 +1,32 @@
 import React, { Component } from 'react';
 import './accessoryBox.css';
+import uuidv1 from 'uuid';
+import { connect } from 'react-redux';
+import { addAccessory } from '../../actions';
 
-export default class accessoryBox extends Component {
+class accessoryBox extends Component {
+  addAccessory = () => {
+    this.props.dispatch(addAccessory());
+  };
   render() {
-    //component is called in dailyLifts; in app.js, pass in the daily accessory to dailyLift
-
-    const accessories = this.props.accessories.exercises.map(exercise => {
+    const { accessories } = this.props;
+    const accessoryItems = accessories.exercises.map(exercise => {
       return (
-        <div className="accessory">
-          {this.props.showAccessories && (
-            <p>
-              {exercise.title} {exercise.set} x {exercise.rep} @ {exercise.weight}
-            </p>
-          )}
+        <div key={uuidv1()} className="accessory">
+          <p>
+            {exercise.title} {exercise.set} x {exercise.rep} @ {exercise.weight}
+          </p>
         </div>
       );
     });
 
-    return <div className="accessory-container">{accessories}</div>;
+    return (
+      <div className="accessory-container">
+        {accessoryItems}
+        <button onClick={this.addAccessory}>Add Accessory</button>
+      </div>
+    );
   }
 }
+
+export default connect()(accessoryBox);
