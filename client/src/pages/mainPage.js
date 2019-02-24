@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import DailyLift from '../components/dailyLift/dailyLift';
-import accessories from '../data/accessoryPlans';
-import dailySplits from '../data/dailySplits';
 import WeightEntry from '../components/weightEntry/weightEntry';
 import { connect } from 'react-redux';
 import uuidv1 from 'uuid';
@@ -13,11 +11,12 @@ class mainPage extends Component {
   };
   render() {
     //this page eventually needs to draw state from the store to allow user editing
-    const currentVariation = this.state.nsunsVariation;
-    const dailyLifts = dailySplits[currentVariation].map((day, index) => {
+    const { nsunsVariation, accessoryPlan } = this.props.userLifts;
+    const { dailySplits, accessories } = this.props;
+    console.log(dailySplits, nsunsVariation);
+    const dailyLifts = dailySplits[nsunsVariation].map((day, index) => {
       const base1 = day.baseLift[0] + 'TM';
       const base2 = day.baseLift[1] + 'TM';
-      const accessoryPlan = this.props.userLifts.accessoryPlan || 'arms';
       const accessorySet = accessories[accessoryPlan][index];
       return (
         <DailyLift
@@ -34,7 +33,6 @@ class mainPage extends Component {
           max2={this.props.userLifts[base2] || '0'}
           standard={this.state.standard}
           key={uuidv1()}
-          index={index}
           accessories={accessorySet}
         />
       );
@@ -51,6 +49,7 @@ class mainPage extends Component {
 const mapStateToProps = state => ({
   userLifts: state.userLifts,
   accessories: state.accessories,
+  dailySplits: state.dailySplits,
 });
 
 export default connect(mapStateToProps)(mainPage);
