@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './dailyLift.css';
 import WeightBox from '../weightBox/weightBox';
-import AccessoryBox from '../accessoryBox/AccessoryBox';
+import AccessoryBox from '../AccessoryBox/AccessoryBox';
 import uuidv1 from 'uuid';
 
 class dailyLift extends Component {

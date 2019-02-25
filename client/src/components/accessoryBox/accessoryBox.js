@@ -8,10 +8,11 @@ class AccessoryBox extends Component {
   addAccessory = async () => {
     const { dispatch, userAuth, dayIndex, accessoryState } = this.props;
     const { userId } = userAuth;
-    console.log('accessoryState:', accessoryState);
+    const { accessoryPlan } = accessoryState;
+    console.log('accessoryState:', accessoryState, accessoryPlan, accessoryState[accessoryPlan]);
     if (!Object.keys(accessoryState).includes('custom')) {
       console.log('1st. creating plan');
-      dispatch(createAccessoryPlan(userId, accessoryState.accessoryPlan));
+      dispatch(createAccessoryPlan(userId, accessoryState[accessoryPlan]));
     }
     // addAccessory(userId, dayIndex);
   };
@@ -41,7 +42,6 @@ class AccessoryBox extends Component {
 const mapStateToProps = state => ({
   userAuth: state.userAuth,
   accessoryState: state.accessories,
-  accPlan: state.userLifts.accessoryPlan,
 });
 
 export default connect(mapStateToProps)(AccessoryBox);

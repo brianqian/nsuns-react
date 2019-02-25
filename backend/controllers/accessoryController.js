@@ -5,6 +5,7 @@ module.exports = {
     const { userId, basePlan } = req.body;
 
     const values = [];
+    console.log('baseplan', basePlan);
     basePlan.forEach((day, dayIndex) => {
       day.forEach((exercise, accIndex) => {
         const { title, sets, reps, weight } = exercise;
@@ -23,7 +24,13 @@ module.exports = {
     );
   },
   getAccessoryPlan: (req, res) => {
-    console.log(req.body);
-    //TODO: add resp.ok if plan exists, else, !resp.ok
+    connection.query(
+      `SELECT * FROM accessories WHERE userId = ?`,
+      [req.params.userId],
+      (err, data) => {
+        if (err) throw err;
+        res.json(data);
+      }
+    );
   },
 };

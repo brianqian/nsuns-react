@@ -14,10 +14,11 @@ export const createAccessoryPlanAction = basePlan => {
   };
 };
 
-export const getAccessoryPlan = userId => {
+export const getAccessoryPlan = (userId, accessoryPlan) => {
   return {
-    type: 'UPDATE_ACCESSORY_PLAN',
+    type: 'GET_ACCESSORY_PLAN',
     userId,
+    accessoryPlan,
   };
 };
 

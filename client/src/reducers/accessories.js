@@ -12,7 +12,9 @@ function accessories(state = {}, action) {
     case 'CHANGE_ACCESSORY_PLAN':
       console.log('hello???', state, action.plan);
       return { ...state, accessoryPlan: action.plan };
-    case 'GET_ACCESSORY PLAN':
+    case 'GET_ACCESSORY_PLAN':
+      console.log('getaccsoryplan', { ...state, custom: action.accessoryPlan });
+      return { ...state, custom: action.accessoryPlan };
       //TODO: update state with accessory plan
       console.log('got accessory plan');
     default:

@@ -1,5 +1,6 @@
 import Auth from '../utils/auth';
 import Api from '../utils/api';
+import { getAccessoryPlan, getUserLifts } from './index';
 
 export const loginSuccess = userId => {
   console.log('LOGIN_SUCCESS ID', userId);
@@ -49,9 +50,11 @@ export const userLogin = loginInfo => async (dispatch, getState) => {
     const result = await Auth.logIn(loginInfo);
     console.log(result);
     if (result.ok) {
-      let resp = Api.getAccessoryPlan(result.id);
-      if (resp.ok) await dispatch({ type: 'UPDATE_ACCESSORY_PLAN', userId: result.id });
-      await dispatch({ type: 'GET_USER_LIFTS', userLifts: result });
+      //check if accessoryplan exists and update state if it does
+      const resp = await Api.getAccessoryPlan(result.id);
+      console.log(resp);
+      if (resp.length) await dispatch(getAccessoryPlan(result.id, resp));
+      await dispatch(getUserLifts(result));
       return dispatch(loginSuccess(result.id));
     } else {
       return dispatch(loginFail(result.message));

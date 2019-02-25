@@ -28,7 +28,7 @@ export const swapTmRm = function(name, weight) {
   }
 };
 
-export const fetchRequest = async (route, data, method = 'GET') => {
+export const fetchRequest = async (route, method, data) => {
   let resp = await fetch(route, {
     method,
     headers: { 'content-type': 'application/json' },

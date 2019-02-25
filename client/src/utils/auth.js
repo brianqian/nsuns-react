@@ -3,7 +3,7 @@ const auth = {
   signUp: async data => {
     // console.log('creating new user');
     try {
-      let resp = await fetchRequest('/auth/signUp', data, 'POST');
+      let resp = await fetchRequest('/auth/signUp', 'POST', data);
       return resp;
     } catch (err) {
       if (err) console.error(err);
@@ -11,7 +11,7 @@ const auth = {
   },
   logIn: async data => {
     try {
-      let resp = await fetchRequest('/auth/login', data, 'POST');
+      let resp = await fetchRequest('/auth/login', 'POST', data);
       if (resp.ok) return resp;
     } catch (err) {
       if (err) console.error(err);
