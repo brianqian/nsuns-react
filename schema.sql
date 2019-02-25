@@ -45,7 +45,6 @@ sets INTEGER(10),
 reps INTEGER(10),
 weight INTEGER(10),
 dayIndex INTEGER(10),
-accIndex INTEGER(10),
 PRIMARY KEY (id)
 
 );

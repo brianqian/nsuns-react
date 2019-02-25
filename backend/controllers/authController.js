@@ -5,11 +5,12 @@ module.exports = {
   login: (req, res) => {
     console.log('logging in', req.body);
     let { username, password } = req.body;
-    console.log(username, password);
     password = password.toString();
+    username = username.toString();
     connection.query(
       `SELECT * FROM userInfo 
-      WHERE username = '${username}'`,
+      WHERE username = ?`,
+      [username],
       async (err, data) => {
         if (err) throw err;
         data = data[0];
@@ -34,12 +35,15 @@ module.exports = {
     console.log(req.body);
     let { username, password } = req.body;
     password = password.toString();
+    username = username.toString();
+    console.log('creating username with ', username, password);
     bcrypt.hash(password, 10, function(err, hash) {
       if (err) throw err;
       connection.query(
         `SELECT username 
       FROM userInfo 
-      WHERE username= '${username}'`,
+      WHERE username= ?`,
+        [username],
         (err, data) => {
           if (err) throw err;
           if (data.length) {
@@ -49,10 +53,10 @@ module.exports = {
               message: 'Username not available, please try again',
             });
           } else {
-            console.log('user succesfully created');
             connection.query(
               `INSERT INTO userInfo (username, password) 
-          VALUES ('${req.body.username}','${hash}')`,
+          VALUES (?,?)`,
+              [username, hash],
               (err, data) => {
                 if (err) console.error(err);
                 res.json({ ok: true });

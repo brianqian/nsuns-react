@@ -12,8 +12,6 @@ module.exports = {
         values.push([userId, title, sets, reps, weight, dayIndex]);
       });
     });
-    console.log(values);
-
     connection.query(
       'INSERT INTO accessories (userId, title, sets, reps, weight, dayIndex) VALUES ?',
       [values],

@@ -12,26 +12,26 @@ class weightEntry extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     const {
-      benchTM,
-      deadliftTM,
-      squatTM,
-      ohpTM,
       benchRM,
+      benchTM,
       deadliftRM,
-      squatRM,
+      deadliftTM,
       ohpRM,
+      ohpTM,
+      squatRM,
+      squatTM,
     } = this.props.userLifts;
-    const userId = this.props.userAuth;
+    const { userId } = this.props.userAuth;
     this.props.dispatch(
       saveUserLifts({
-        benchTM,
-        deadliftTM,
-        squatTM,
-        ohpTM,
         benchRM,
+        benchTM,
         deadliftRM,
-        squatRM,
+        deadliftTM,
         ohpRM,
+        ohpTM,
+        squatRM,
+        squatTM,
         userId,
       })
     );
