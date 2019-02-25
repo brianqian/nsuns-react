@@ -5,10 +5,11 @@ import AccessorySelector from '../components/AccessorySelector/AccessorySelector
 import { connect } from 'react-redux';
 
 function MainPage(props) {
+  console.log(props.accessories.custom !== undefined);
   return (
     <main>
-      <AccessorySelector />
-      <WeightEntry customOption={props.accessories.custom && true} />
+      <AccessorySelector customOption={props.accessories.custom !== undefined} />
+      <WeightEntry />
       <DailyLiftWrapper />
     </main>
   );

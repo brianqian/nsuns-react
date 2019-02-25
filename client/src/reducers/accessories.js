@@ -13,10 +13,7 @@ function accessories(state = {}, action) {
       console.log('hello???', state, action.plan);
       return { ...state, accessoryPlan: action.plan };
     case 'GET_ACCESSORY_PLAN':
-      console.log('getaccsoryplan', { ...state, custom: action.accessoryPlan });
-      return { ...state, custom: action.accessoryPlan };
-      //TODO: update state with accessory plan
-      console.log('got accessory plan');
+      return { ...state, custom: action.accessoryPlan, accessoryPlan: 'custom' };
     default:
       return state;
   }

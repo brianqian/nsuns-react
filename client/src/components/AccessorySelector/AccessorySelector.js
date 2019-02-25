@@ -12,8 +12,14 @@ function AccessorySelector(props) {
       <p>Accessory: </p>
       <select onChange={handleChange}>
         <option value="arms">Arms</option>
-        {/* {props.customOption && <option value="custom">Custom</option>} */}
-        <option value="custom">Custom</option>
+        {props.customOption && (
+          <option selected value="custom">
+            Custom
+          </option>
+        )}
+        {/* <option autofocus value="custom">
+          Custom
+        </option> */}
       </select>
     </div>
   );
