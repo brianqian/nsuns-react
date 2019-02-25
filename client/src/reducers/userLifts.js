@@ -20,6 +20,9 @@ function userLifts(state = { accessoryPlan: 'arms', nsunsVariation: '5day' }, ac
       const swappedNameValue = swapTmRm(name, value);
       console.log(swappedNameValue);
       return { ...state, ...swappedNameValue };
+    case 'CHANGE_ACCESSORY_PLAN':
+      console.log('hello???', state, action.plan);
+      return { ...state, accessoryPlan: action.plan };
     default:
       return state;
   }

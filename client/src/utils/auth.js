@@ -1,15 +1,9 @@
+import { fetchRequest } from './helper';
 const auth = {
   signUp: async data => {
     // console.log('creating new user');
     try {
-      let resp = await fetch(`/auth/signUp`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      resp = await resp.json();
+      let resp = await fetchRequest('/auth/signUp', data, 'POST');
       return resp;
     } catch (err) {
       if (err) console.error(err);
@@ -17,15 +11,8 @@ const auth = {
   },
   logIn: async data => {
     try {
-      let resp = await fetch(`/auth/login`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      resp = await resp.json();
-      return resp;
+      let resp = await fetchRequest('/auth/login', data, 'POST');
+      if (resp.ok) return resp;
     } catch (err) {
       if (err) console.error(err);
     }

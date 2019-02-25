@@ -14,12 +14,23 @@ export const createAccessoryPlanAction = basePlan => {
   };
 };
 
+export const getAccessoryPlan = userId => {
+  return {
+    type: 'UPDATE_ACCESSORY_PLAN',
+    userId,
+  };
+};
+
 export const addAccessory = (userId, dayIndex) => async (dispatch, getState) => {
+  //TODO: needs a function which inserts accessory into database
+
+  //updates state with added accessory
   return dispatch(addAccessoryAction(userId, dayIndex));
 };
 
 export const createAccessoryPlan = (userId, basePlan) => async (dispatch, getState) => {
-  console.log('accessory thunk hit');
-  const resp = await Api.createAccessoryPlan(userId, basePlan);
+  //inserts accessoryPlan into database
+  await Api.createAccessoryPlan(userId, basePlan);
+  //updates state using basePlan as a template
   return dispatch(createAccessoryPlanAction(basePlan));
 };

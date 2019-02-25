@@ -22,4 +22,8 @@ module.exports = {
       }
     );
   },
+  getAccessoryPlan: (req, res) => {
+    console.log(req.body);
+    //TODO: add resp.ok if plan exists, else, !resp.ok
+  },
 };

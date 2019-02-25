@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import './accessoryBox.css';
+import './AccessoryBox.css';
 import uuidv1 from 'uuid';
 import { connect } from 'react-redux';
 import { addAccessory, createAccessoryPlan } from '../../actions';
 
-class accessoryBox extends Component {
+class AccessoryBox extends Component {
   addAccessory = async () => {
-    const { dispatch, userAuth, dayIndex, accessoryState, variation } = this.props;
+    const { dispatch, userAuth, dayIndex, accessoryState, accPlan } = this.props;
     const { userId } = userAuth;
     console.log('accessoryState:', accessoryState);
     if (!Object.keys(accessoryState).includes('custom')) {
       console.log('1st. creating plan');
-      dispatch(createAccessoryPlan(userId, accessoryState[variation]));
+      dispatch(createAccessoryPlan(userId, accessoryState[accPlan]));
     }
     // addAccessory(userId, dayIndex);
   };
@@ -40,7 +40,7 @@ class accessoryBox extends Component {
 const mapStateToProps = state => ({
   userAuth: state.userAuth,
   accessoryState: state.accessories,
-  variation: state.userLifts.accessoryPlan,
+  accPlan: state.userLifts.accessoryPlan,
 });
 
-export default connect(mapStateToProps)(accessoryBox);
+export default connect(mapStateToProps)(AccessoryBox);

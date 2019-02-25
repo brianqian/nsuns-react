@@ -1,56 +1,22 @@
-import React, { Component } from 'react';
-import DailyLift from '../components/dailyLift/dailyLift';
+import React from 'react';
 import WeightEntry from '../components/weightEntry/weightEntry';
+import DailyLiftWrapper from '../components/dailyLift/dailyLiftWrapper';
+import AccessorySelector from '../components/AccessorySelector/AccessorySelector';
 import { connect } from 'react-redux';
-import uuidv1 from 'uuid';
 
-class mainPage extends Component {
-  state = {
-    nsunsVariation: '5day',
-    standard: 'lbs',
-  };
-  render() {
-    //this page eventually needs to draw state from the store to allow user editing
-    const { nsunsVariation, accessoryPlan } = this.props.userLifts;
-    const { dailySplits, accessories } = this.props;
-    console.log(dailySplits, nsunsVariation);
-    const dailyLifts = dailySplits[nsunsVariation].map((day, index) => {
-      const base1 = day.baseLift[0] + 'TM';
-      const base2 = day.baseLift[1] + 'TM';
-      const accessorySet = accessories[accessoryPlan][index];
-      return (
-        <DailyLift
-          day={day.day}
-          t1Lift={day.lifts[0]}
-          t2Lift={day.lifts[1]}
-          t1Base={day.baseLift[0]}
-          t2Base={day.baseLift[1]}
-          t1Weights={day.t1Weights}
-          t1Reps={day.t1Reps}
-          t2Weights={day.t2Weights}
-          t2Reps={day.t2Reps}
-          max1={this.props.userLifts[base1] || '0'}
-          max2={this.props.userLifts[base2] || '0'}
-          standard={this.state.standard}
-          key={uuidv1()}
-          index={index}
-          accessories={accessorySet}
-        />
-      );
-    });
-    return (
-      <main>
-        <WeightEntry />
-        {dailyLifts}
-      </main>
-    );
-  }
+function MainPage(props) {
+  return (
+    <main>
+      <AccessorySelector />
+      <WeightEntry customOption={props.accessories.custom && true} />
+      <DailyLiftWrapper />
+    </main>
+  );
 }
-
 const mapStateToProps = state => ({
+  userAuth: state.userAuth,
   userLifts: state.userLifts,
   accessories: state.accessories,
-  dailySplits: state.dailySplits,
 });
 
-export default connect(mapStateToProps)(mainPage);
+export default connect(mapStateToProps)(MainPage);

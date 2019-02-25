@@ -11,6 +11,9 @@ function accessories(state = {}, action) {
       return state;
     case 'EDIT_ACCESSORY':
       return state;
+    case 'GET_ACCESSORY PLAN':
+      //TODO: update state with accessory plan
+      console.log('got accessory plan');
     default:
       return state;
   }

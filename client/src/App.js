@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 class App extends Component {
   render() {
-    console.log('rerendering app');
     return (
       <div className="App">
         <header>
