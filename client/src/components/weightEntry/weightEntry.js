@@ -4,18 +4,6 @@ import { connect } from 'react-redux';
 import { saveUserLifts, userLiftOnChange } from '../../actions';
 
 class weightEntry extends Component {
-  state = {
-    benchRM: '',
-    deadliftRM: '',
-    squatRM: '',
-    ohpRM: '',
-    benchTM: '',
-    deadliftTM: '',
-    squatTM: '',
-    ohpTM: '',
-    userId: '1',
-  };
-
   onChange = e => {
     let { name, value } = e.target;
     this.props.dispatch(userLiftOnChange(name, value));
@@ -33,7 +21,7 @@ class weightEntry extends Component {
       squatRM,
       ohpRM,
     } = this.props.userLifts;
-    const userId = this.props.userAuth.userId;
+    const userId = this.props.userAuth;
     this.props.dispatch(
       saveUserLifts({
         benchTM,

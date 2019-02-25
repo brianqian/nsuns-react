@@ -1,4 +1,5 @@
 import Auth from '../utils/auth';
+import Api from '../utils/api';
 
 export const loginSuccess = userId => {
   console.log('LOGIN_SUCCESS ID', userId);
@@ -48,7 +49,9 @@ export const userLogin = loginInfo => async (dispatch, getState) => {
     const result = await Auth.logIn(loginInfo);
     console.log(result);
     if (result.ok) {
-      dispatch({ type: 'GET_USER_LIFTS', userLifts: result });
+      let resp = Api.getAccessoryPlan(result.id);
+      if (resp.ok) await dispatch({ type: 'UPDATE_ACCESSORY_PLAN', userId: result.id });
+      await dispatch({ type: 'GET_USER_LIFTS', userLifts: result });
       return dispatch(loginSuccess(result.id));
     } else {
       return dispatch(loginFail(result.message));
@@ -61,8 +64,8 @@ export const createNewUser = signUpInfo => async (dispatch, getState) => {
     dispatch(signupPending());
     const result = await Auth.signUp(signUpInfo);
     if (result.ok) {
-      await dispatch(userLogin(signUpInfo));
-      return dispatch(signupSuccess(result));
+      await dispatch(signupSuccess(result));
+      return dispatch(userLogin(signUpInfo));
     } else {
       return dispatch(signupFail(result.message));
     }

@@ -27,3 +27,13 @@ export const swapTmRm = function(name, weight) {
     return { ...returnObj, [name]: tmWeight };
   }
 };
+
+export const fetchRequest = async (route, data, method = 'GET') => {
+  let resp = await fetch(route, {
+    method,
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  resp = resp.json();
+  return resp;
+};

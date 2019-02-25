@@ -5,16 +5,12 @@
   "dependencies": {
     "bcrypt": "^3.0.3",
     "concurrently": "^4.1.0",
-    "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
     "if-env": "^1.0.4",
     "moment": "^2.24.0",
     "mysql": "^2.16.0",
     "nodemon": "^1.18.9",
-    "path": "^0.12.7",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1"
+    "path": "^0.12.7"
   },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -23,7 +19,8 @@
     "client": "cd client && npm run start",
     "server": "nodemon server.js",
     "build": "cd client && npm install && npm run build",
-    "install": "cd client && npm install && npm run build"
+    "install": "cd client && npm install",
+    "heroku-postbuild": "npm build"
   },
   "eslintConfig": {
     "extends": "react-app"

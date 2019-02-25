@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './dailyLift.css';
 import WeightBox from '../weightBox/weightBox';
-import AccessoryBox from '../accessoryBox/accessoryBox';
+import AccessoryBox from '../accessoryBox/AccessoryBox';
 import uuidv1 from 'uuid';
 
 class dailyLift extends Component {
@@ -25,6 +25,8 @@ class dailyLift extends Component {
       max1,
       max2,
       standard,
+      index,
+      accessories,
     } = this.props;
 
     const t1Workouts = t1Reps.map((rep, i) => {
@@ -49,7 +51,6 @@ class dailyLift extends Component {
         />
       );
     });
-
     return (
       <div className={`${day}-daily-lift daily-lift`}>
         <h2 className="day-title">{day}</h2>
@@ -62,7 +63,7 @@ class dailyLift extends Component {
           {t2Workouts}
           <p onClick={this.handleClick}>Accessories</p>
         </div>
-        {this.state.showAccessories && <AccessoryBox accessories={this.props.accessories} />}
+        {this.state.showAccessories && <AccessoryBox dayIndex={index} accessories={accessories} />}
       </div>
     );
   }

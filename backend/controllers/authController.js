@@ -56,12 +56,6 @@ module.exports = {
               (err, data) => {
                 if (err) console.error(err);
                 res.json({ ok: true });
-                connection.query(
-                  `INSERT INTO accessories (userId) VALUES (${data.insertId})`,
-                  (err, data) => {
-                    if (err) throw err;
-                  }
-                );
               }
             );
           }

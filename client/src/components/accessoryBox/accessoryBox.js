@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
-import './accessoryBox.css';
+import './AccessoryBox.css';
 import uuidv1 from 'uuid';
 import { connect } from 'react-redux';
-import { addAccessory } from '../../actions';
+import { addAccessory, createAccessoryPlan } from '../../actions';
 
-class accessoryBox extends Component {
-  addAccessory = () => {
-    this.props.dispatch(addAccessory());
+class AccessoryBox extends Component {
+  addAccessory = async () => {
+    const { dispatch, userAuth, dayIndex, accessoryState } = this.props;
+    const { userId } = userAuth;
+    console.log('accessoryState:', accessoryState);
+    if (!Object.keys(accessoryState).includes('custom')) {
+      console.log('1st. creating plan');
+      dispatch(createAccessoryPlan(userId, accessoryState.accessoryPlan));
+    }
+    // addAccessory(userId, dayIndex);
   };
+
   render() {
-    const { accessories } = this.props;
-    const accessoryItems = accessories.exercises.map(exercise => {
+    const { accessories, userAuth } = this.props;
+    console.log('accessories', accessories);
+    const accessoryItems = accessories.map((exercise, index) => {
       return (
         <div key={uuidv1()} className="accessory">
+          {userAuth.loggedIn && <button>X</button>}
           <p>
-            {exercise.title} {exercise.set} x {exercise.rep} @ {exercise.weight}
+            {exercise.title} {exercise.sets} x {exercise.reps} @ {exercise.weight}
           </p>
         </div>
       );
@@ -23,10 +33,15 @@ class accessoryBox extends Component {
     return (
       <div className="accessory-container">
         {accessoryItems}
-        <button onClick={this.addAccessory}>Add Accessory</button>
+        {userAuth.loggedIn && <button onClick={this.addAccessory}>Add Accessory</button>}
       </div>
     );
   }
 }
+const mapStateToProps = state => ({
+  userAuth: state.userAuth,
+  accessoryState: state.accessories,
+  accPlan: state.userLifts.accessoryPlan,
+});
 
-export default connect()(accessoryBox);
+export default connect(mapStateToProps)(AccessoryBox);

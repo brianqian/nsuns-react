@@ -1,9 +1,12 @@
 const router = require('express').Router();
 const userController = require('../../controllers/userController');
+const accessoryController = require('../../controllers/accessoryController');
+
+router.route('/userInfo').put(userController.saveUserInfo);
+// .get(userController.getUserInfo)
 
 router
-  .route('/userInfo')
-  // .get(userController.getUserInfo)
-  .put(userController.saveUserInfo);
-
+  .route('/accessory')
+  .post(accessoryController.createAccessoryPlan)
+  .get(accessoryController.getAccessoryPlan);
 module.exports = router;

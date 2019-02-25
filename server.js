@@ -1,9 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const path = require('path');
-// const mysql = require('mysql');
-// const cookieParser = require('cookie-parser');
-// const bcyrpt = require('bcrypt');
 const routes = require('./backend/routes');
 
 const PORT = process.env.PORT || 3001;
@@ -13,7 +9,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use(cookieParser());
 
 app.use(routes);
 

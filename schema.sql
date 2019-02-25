@@ -40,12 +40,12 @@ PRIMARY KEY (id)
 CREATE TABLE accessories (
 id INT NOT NULL AUTO_INCREMENT,
 userId INTEGER(10),
-name VARCHAR(20),
+title VARCHAR(50),
 sets INTEGER(10),
 reps INTEGER(10),
 weight INTEGER(10),
-day VARCHAR(10),
-accNum VARCHAR(10),
+dayIndex VARCHAR(10),
+accIndex VARCHAR(10),
 PRIMARY KEY (id)
 
 );

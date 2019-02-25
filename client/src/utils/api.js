@@ -1,14 +1,9 @@
-export default {
+import { fetchRequest } from './helper';
+const api = {
   saveUserLifts: async data => {
     console.log('in save main lifts with data: ', data);
     try {
-      let resp = await fetch('/api/userInfo', {
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+      const resp = await fetchRequest('/api/userInfo', data, 'PUT');
       console.log('RESPONSE', resp);
       // resp = await resp.json();
       return resp.ok ? true : resp.status;
@@ -16,4 +11,21 @@ export default {
       if (err) console.error(err);
     }
   },
+  createAccessoryPlan: async (userId, basePlan) => {
+    try {
+      let resp = await fetchRequest('/api/accessory', { userId, basePlan }, 'POST');
+      console.log(resp);
+    } catch (err) {
+      if (err) console.error(err);
+    }
+  },
+  getAccessoryPlan: async userId => {
+    try {
+      let resp = await fetchRequest('/api/accessory', userId, 'GET');
+    } catch (err) {
+      if (err) console.error(err);
+    }
+  },
 };
+
+export default api;
