@@ -7,15 +7,15 @@ module.exports = {
     const values = [];
     console.log('baseplan', basePlan);
     basePlan.forEach((day, dayIndex) => {
-      day.forEach((exercise, accIndex) => {
+      day.forEach(exercise => {
         const { title, sets, reps, weight } = exercise;
-        values.push([userId, title, sets, reps, weight, dayIndex, accIndex]);
+        values.push([userId, title, sets, reps, weight, dayIndex]);
       });
     });
     console.log(values);
 
     connection.query(
-      'INSERT INTO accessories (userId, title, sets, reps, weight, dayIndex, accIndex) VALUES ?',
+      'INSERT INTO accessories (userId, title, sets, reps, weight, dayIndex) VALUES ?',
       [values],
       (err, data) => {
         if (err) throw err;

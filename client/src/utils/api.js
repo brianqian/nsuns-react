@@ -5,7 +5,6 @@ const api = {
     try {
       const resp = await fetchRequest('/api/userInfo', 'PUT', data);
       console.log('RESPONSE', resp);
-      // resp = await resp.json();
       return resp.ok ? true : resp.status;
     } catch (err) {
       if (err) console.error(err);
@@ -29,6 +28,9 @@ const api = {
         const weekLength = resp[resp.length - 1].dayIndex;
         for (let i = 0; i < weekLength; i++) {
           respArray.push(resp.filter(item => item.dayIndex === i));
+          //Reduces the amount of work filter does but only works if array order is retained
+          const sliceIndex = respArray[i].length;
+          resp = resp.slice(sliceIndex);
         }
       }
       console.log(respArray);
