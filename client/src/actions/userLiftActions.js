@@ -19,11 +19,3 @@ export const userLiftOnChange = (name, value) => {
     value,
   };
 };
-
-export const changeAccessoryPlan = plan => {
-  console.log('changevaration hit', plan);
-  return {
-    type: 'CHANGE_ACCESSORY_PLAN',
-    plan,
-  };
-};

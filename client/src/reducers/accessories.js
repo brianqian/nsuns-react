@@ -9,8 +9,9 @@ function accessories(state = {}, action) {
       const returnObj = { ...state.custom };
       console.log(userId, returnObj[dayIndex]);
       return state;
-    case 'EDIT_ACCESSORY':
-      return state;
+    case 'CHANGE_ACCESSORY_PLAN':
+      console.log('hello???', state, action.plan);
+      return { ...state, accessoryPlan: action.plan };
     case 'GET_ACCESSORY PLAN':
       //TODO: update state with accessory plan
       console.log('got accessory plan');

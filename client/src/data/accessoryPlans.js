@@ -1,4 +1,5 @@
 const accessories = {
+  accessoryPlan: 'arms',
   arms: [
     [
       { title: 'Incline DB Press (Optional)', sets: 4, reps: 10, weight: 45 },

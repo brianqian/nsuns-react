@@ -49,7 +49,7 @@ export const userLogin = loginInfo => async (dispatch, getState) => {
     const result = await Auth.logIn(loginInfo);
     console.log(result);
     if (result.ok) {
-      let resp = Api.getAccessoryPlan(action.userId);
+      let resp = Api.getAccessoryPlan(result.id);
       if (resp.ok) await dispatch({ type: 'UPDATE_ACCESSORY_PLAN', userId: result.id });
       await dispatch({ type: 'GET_USER_LIFTS', userLifts: result });
       return dispatch(loginSuccess(result.id));

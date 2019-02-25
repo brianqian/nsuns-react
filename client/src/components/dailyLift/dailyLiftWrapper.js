@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import uuidv1 from 'uuid';
 
 function dailyLiftWrapper(props) {
-  const { nsunsVariation, accessoryPlan } = props.userLifts;
+  console.log('dailyliftwrapper:', props.accessories);
+  const { nsunsVariation } = props.userLifts;
   const { dailySplits, accessories } = props;
+  const { accessoryPlan } = accessories;
   const dailyLifts = dailySplits[nsunsVariation].map((day, index) => {
     const base1 = day.baseLift[0] + 'TM';
     const base2 = day.baseLift[1] + 'TM';

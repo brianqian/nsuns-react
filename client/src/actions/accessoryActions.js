@@ -21,6 +21,14 @@ export const getAccessoryPlan = userId => {
   };
 };
 
+export const changeAccessoryPlan = plan => {
+  console.log('changevaration hit', plan);
+  return {
+    type: 'CHANGE_ACCESSORY_PLAN',
+    plan,
+  };
+};
+
 export const addAccessory = (userId, dayIndex) => async (dispatch, getState) => {
   //TODO: needs a function which inserts accessory into database
 

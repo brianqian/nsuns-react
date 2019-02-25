@@ -6,18 +6,19 @@ import { addAccessory, createAccessoryPlan } from '../../actions';
 
 class AccessoryBox extends Component {
   addAccessory = async () => {
-    const { dispatch, userAuth, dayIndex, accessoryState, accPlan } = this.props;
+    const { dispatch, userAuth, dayIndex, accessoryState } = this.props;
     const { userId } = userAuth;
     console.log('accessoryState:', accessoryState);
     if (!Object.keys(accessoryState).includes('custom')) {
       console.log('1st. creating plan');
-      dispatch(createAccessoryPlan(userId, accessoryState[accPlan]));
+      dispatch(createAccessoryPlan(userId, accessoryState.accessoryPlan));
     }
     // addAccessory(userId, dayIndex);
   };
 
   render() {
     const { accessories, userAuth } = this.props;
+    console.log('accessories', accessories);
     const accessoryItems = accessories.map((exercise, index) => {
       return (
         <div key={uuidv1()} className="accessory">
