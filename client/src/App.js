@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import './App.css';
-import LoginSignup from './components/loginSignup/loginSignup';
-
 import MainPage from './views/mainPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import AccessorySelector from './components/AccessorySelector/AccessorySelector';
+import UserSettings from './components/UserSettings/UserSettings';
 
 class App extends Component {
+  state = {
+    showSettings: false,
+  };
+  toggleSettings = () => {
+    this.setState({ showSettings: this.state.showSettings ? false : true });
+  };
   render() {
     return (
       <div className="App">
-        <div className="user-settings">
-          <LoginSignup />
-          <AccessorySelector customOption={this.props.accessories.custom !== undefined} />
-          <button>Close Settings</button>
-        </div>
+        {this.state.showSettings && <UserSettings />}
+        <button onClick={this.toggleSettings}>Login/Settings</button>
         <main>
           <Router>
             <Switch>
@@ -27,7 +28,5 @@ class App extends Component {
     );
   }
 }
-const mapStateToProps = state => ({
-  accessories: state.accessories,
-});
-export default connect(mapStateToProps)(App);
+
+export default App;

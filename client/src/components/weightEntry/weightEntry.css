@@ -1,18 +1,19 @@
-/* form {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-}
-
-.tm-input-label {
-
-} */
-
-input {
-  margin: 0 1rem;
-}
-
+/* removes up/down buttons for input type=number*/
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.weightEntry__container > form {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 0.25rem 2rem;
+}
+
+.weightEntry__input-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-end;
 }

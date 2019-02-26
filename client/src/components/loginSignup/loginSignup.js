@@ -9,6 +9,7 @@ class Login extends Component {
     pwLogin: '',
     userSignUp: '',
     pwSignUp: '',
+    selectSignUp: false,
   };
 
   onChange = e => {
@@ -33,18 +34,12 @@ class Login extends Component {
     this.props.dispatch(logOut());
   };
 
-  testing = () => {
-    console.log(this.props);
-  };
-
   render() {
-    const { userAuth } = this.props;
+    const { loggedIn, message, showStatus } = this.props.userAuth;
     return (
-      <div className="login-signup-container">
-        {!userAuth.loggedIn && (
-          <div className="login-container">
-            <button onClick={this.testing}>console.log userSignup Props</button>
-
+      <div className="loginSignup__container">
+        {!loggedIn && (
+          <div className="loginSignup__login-container">
             <form action="">
               Login:
               <label htmlFor="userLogin">Username: </label>
@@ -71,13 +66,23 @@ class Login extends Component {
             </form>
           </div>
         )}
-        {userAuth.showStatus && <p>{userAuth.message}</p>}
+        {showStatus && <p>{message}</p>}
         <br />
+        {!loggedIn && (
+          <p>
+            New User?
+            <span
+              className="loginSignUp__open-signup"
+              onClick={() => this.setState({ selectSignUp: true })}
+            >
+              Sign up
+            </span>
+          </p>
+        )}
 
-        {!userAuth.loggedIn && (
-          <div className="signup-container">
+        {this.state.selectSignUp && !loggedIn && (
+          <div className="loginSignup__signup-container">
             <form action="">
-              Sign Up:
               <label htmlFor="userSignUp">Username: </label>
               <input
                 onChange={this.onChange}
@@ -103,7 +108,7 @@ class Login extends Component {
           </div>
         )}
 
-        <button onClick={this.logOut}>Log Out</button>
+        {loggedIn && <button onClick={this.logOut}>Log Out</button>}
       </div>
     );
   }

@@ -1,17 +1,17 @@
 .App {
-  display: flex;
+  display: grid;
+  grid-template-columns: 3% 1fr 3%;
+  grid-template-rows: 3% 1fr 3%;
+  overflow: auto;
 }
-
-.user-settings {
-  display: flex;
-  flex-direction: column;
-  flex: 2;
-  background-color: #eaeaea;
+.App > button {
+  grid-row: 1;
+  grid-column: 2;
+  justify-self: right;
+  max-width: 100px;
 }
-
-.user-settings > button {
-}
-
 main {
-  flex: 8;
+  grid-row: 2;
+  grid-column: 2;
+  max-height: 100vh;
 }
