@@ -25,7 +25,11 @@ class AccessoryBox extends Component {
         <div key={uuidv1()} className="accessory">
           {userAuth.loggedIn && <button>X</button>}
           <p>
-            {exercise.title} {exercise.sets} x {exercise.reps} @ {exercise.weight}
+            <span>{exercise.title}</span>
+            <span>
+              {exercise.sets} x {exercise.reps}
+            </span>
+            <span>{exercise.weight} lbs</span>
           </p>
         </div>
       );
