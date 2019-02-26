@@ -20,7 +20,7 @@
     "server": "nodemon server.js",
     "build": "cd client && npm install && npm run build",
     "install": "cd client && npm install",
-    "heroku-postbuild": "npm build"
+    "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
