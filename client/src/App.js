@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import MainPage from './views/mainPage';
+import GraphPage from './views/graphPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
 import UserSettings from './components/UserSettings/UserSettings';
+import { connect } from 'react-redux';
+import { jwtLogin } from './actions/';
 
 class App extends Component {
   state = {
@@ -12,6 +14,13 @@ class App extends Component {
   toggleSettings = () => {
     this.setState({ showSettings: this.state.showSettings ? false : true });
   };
+
+  componentDidMount = () => {
+    const userToken = localStorage.getItem('userId');
+    console.log(userToken);
+    if (userToken) this.props.dispatch(jwtLogin(userToken));
+  };
+
   render() {
     return (
       <div className="App">
@@ -21,6 +30,7 @@ class App extends Component {
           <Router>
             <Switch>
               <Route exact path="/" component={MainPage} />
+              {/* <Route exact path="/graph" component={GraphPage} /> */}
             </Switch>
           </Router>
         </main>
@@ -29,4 +39,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect()(App);

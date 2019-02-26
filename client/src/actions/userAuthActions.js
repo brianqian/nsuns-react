@@ -20,6 +20,7 @@ export const loginPending = () => {
     type: 'LOGIN_PENDING',
   };
 };
+
 export const signupSuccess = message => {
   return {
     type: 'SIGNUP_SUCCESS',
@@ -43,25 +44,33 @@ export const logOut = () => {
   };
 };
 
+export const jwtLogin = token => async (dispatch, getState) => {
+  const userInfo = await Auth.jwtLogin(token);
+  console.log('JWT', userInfo);
+  if (userInfo.ok) return dispatch(getAllUserData(userInfo));
+};
+
 export const userLogin = loginInfo => async (dispatch, getState) => {
-  console.log('logging in user in user auth actions');
   if (!getState().userAuth.pending) {
     dispatch(loginPending());
-    const result = await Auth.logIn(loginInfo);
-    console.log(result);
-    if (result.ok) {
+    const userInfo = await Auth.logIn(loginInfo);
+    console.log(userInfo);
+    if (userInfo.ok) {
+      await localStorage.setItem('userId', userInfo.token);
       //check if accessoryplan exists and update state if it does
-      const resp = await Api.getAccessoryPlan(result.id);
-      console.log(resp);
-      if (resp.length) await dispatch(getAccessoryPlan(result.id, resp));
-      await dispatch(getUserLifts(result));
-      return dispatch(loginSuccess(result.id));
+      dispatch(getAllUserData(userInfo));
     } else {
-      return dispatch(loginFail(result.message));
+      return dispatch(loginFail(userInfo.message));
     }
   }
 };
-
+export const getAllUserData = userInfo => async (dispatch, getState) => {
+  console.log('getalluserdata');
+  const accessoryData = await Api.getAccessoryPlan(userInfo.id);
+  if (accessoryData.length) await dispatch(getAccessoryPlan(userInfo.id, accessoryData));
+  await dispatch(getUserLifts(userInfo));
+  return dispatch(loginSuccess(userInfo.id));
+};
 export const createNewUser = signUpInfo => async (dispatch, getState) => {
   if (!getState().userAuth.pending) {
     dispatch(signupPending());

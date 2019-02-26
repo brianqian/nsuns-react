@@ -32,6 +32,7 @@ class Login extends Component {
 
   logOut = () => {
     this.props.dispatch(logOut());
+    localStorage.removeItem('userId');
   };
 
   render() {

@@ -1,5 +1,6 @@
 const connection = require('../db');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
   login: (req, res) => {
@@ -15,7 +16,7 @@ module.exports = {
         if (err) throw err;
         data = data[0];
         if (!data) {
-          res.json({ ok: false, message: 'Login Error' });
+          res.json({ ok: false, message: 'Username not found' });
           return;
         }
         //Bcrypt password compare
@@ -23,12 +24,33 @@ module.exports = {
         if (match) {
           delete data.password;
           data.ok = true;
+          data.token = jwt.sign({ userId: data.id }, process.env.SECRET_KEY, {
+            expiresIn: '60d',
+          });
           res.json(data);
         } else {
-          res.json({ ok: false, message: 'Login error' });
+          res.json({ ok: false, message: 'Incorrect password' });
         }
       }
     );
+  },
+  jwtLogin: (req, res) => {
+    const { token } = req.body;
+    console.log(token);
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    console.log(decoded, decoded.userId);
+    connection.query('SELECT * FROM userInfo WHERE id = ?', [decoded.userId], (err, data) => {
+      if (err) throw err;
+      data = data[0];
+
+      if (!data) {
+        res.json({ ok: false, message: '' });
+      } else {
+        delete data.password;
+        data.ok = true;
+        res.json(data);
+      }
+    });
   },
   signUp: (req, res) => {
     console.log('starting creating new user...');

@@ -11,10 +11,19 @@ const auth = {
   },
   logIn: async data => {
     try {
-      let resp = await fetchRequest('/auth/login', 'POST', data);
-      if (resp.ok) return resp;
+      let userInfo = await fetchRequest('/auth/login', 'POST', data);
+      return userInfo;
     } catch (err) {
       if (err) console.error(err);
+    }
+  },
+  jwtLogin: async token => {
+    try {
+      console.log('JWTLOGIN', token);
+      let resp = await fetchRequest('/auth/jwtLogin', 'POST', { token });
+      return resp;
+    } catch (err) {
+      if (err) throw err;
     }
   },
 };

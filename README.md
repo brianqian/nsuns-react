@@ -2,7 +2,7 @@
 
 This tool is meant to act as a tracker for the nSuns program, more info found [here](http://www.reddit.com/r/nsuns).
 
-At a base level, the front page will calculate your Training Max or 1 Rep Max depending on what value you enter. By creating an account, the user can then save these values to come back at another time. By clicking the Accessories button, the user can then see a pre-defined list of accessories.
+This is a full-stack CRUD application built with a React/Redux frontend and Node/Express backend writing to a SQL database. The front page will calculate your Training Max or 1 Rep Max depending on which value you enter. By creating an account, the user has access to persisted login via JWT, custom accessory plans, and saved lift values. Currently the editing and adding accessories function is being built.
 
 ## Features to be built
 
@@ -22,6 +22,7 @@ At a base level, the front page will calculate your Training Max or 1 Rep Max de
 - SQL
 - Node/Express
 - Jest/Enzyme
+- Authentication with JWT and bcrypt
 
 ## Status
 

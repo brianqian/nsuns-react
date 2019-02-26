@@ -16,7 +16,7 @@ export default class weightBox extends Component {
     const weight = calcDailyLift(weights, max);
     return (
       <p onClick={this.handleClick} className={`workouts ${this.state.selected ? 'selected' : ''}`}>
-        {reps} x {weight} {standard}
+        {reps}x{weight} {standard}
       </p>
     );
   }
