@@ -32,6 +32,38 @@ const accessories = {
       { title: 'DB Extension', sets: 4, reps: 10, weight: 45 },
     ],
   ],
+  legs: [
+    [
+      { title: 'Incline DB Press', sets: 4, reps: 10, weight: 45 },
+      { title: 'Incline Cable Fly', sets: 4, reps: 10, weight: 45 },
+      { title: 'Bicep Curl', sets: 4, reps: 10, weight: 45 },
+      { title: 'Preacher Curl', sets: 4, reps: 10, weight: 45 },
+    ],
+    [
+      { title: 'Lunges', sets: 4, reps: 10, weight: 45 },
+      { title: 'Hack Squat', sets: 4, reps: 10, weight: 45 },
+      { title: 'Leg Extensions', sets: 4, reps: 10, weight: 45 },
+      { title: 'Leg Curls', sets: 4, reps: 10, weight: 45 },
+    ],
+    [
+      { title: 'DB Row', sets: 4, reps: 10, weight: 45 },
+      { title: 'Weighted Chinups', sets: 4, reps: 10, weight: 45 },
+      { title: 'Seated Row', sets: 4, reps: 10, weight: 45 },
+      { title: 'Incline Row', sets: 4, reps: 10, weight: 45 },
+    ],
+    [
+      { title: 'Calf Raises', sets: 4, reps: 10, weight: 45 },
+      { title: 'Leg Curls', sets: 4, reps: 10, weight: 45 },
+      { title: 'Leg Lifts', sets: 4, reps: 10, weight: 0 },
+      { title: 'Bicep Curls', sets: 4, reps: 10, weight: 45 },
+    ],
+    [
+      { title: 'Weighted Dips', sets: 4, reps: 10, weight: 45 },
+      { title: 'Lat Raises', sets: 4, reps: 10, weight: 45 },
+      { title: 'Facepulls', sets: 4, reps: 10, weight: 45 },
+      { title: 'DB Row', sets: 4, reps: 10, weight: 45 },
+    ],
+  ],
 };
 
 export default accessories;

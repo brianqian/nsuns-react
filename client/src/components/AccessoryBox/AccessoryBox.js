@@ -27,7 +27,7 @@ class AccessoryBox extends Component {
           <p>
             <span>{exercise.title}</span>
             <span>
-              {exercise.sets}x{exercise.reps}
+              {exercise.sets} x {exercise.reps}
             </span>
             <span>{exercise.weight} lbs</span>
           </p>

@@ -1,4 +1,4 @@
-import { fetchRequest } from './helper';
+import { fetchRequest } from './';
 const auth = {
   signUp: async data => {
     // console.log('creating new user');

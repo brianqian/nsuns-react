@@ -1,5 +1,5 @@
 import Api from '../utils/api';
-import { swapTmRm } from '../utils/helper';
+import { swapTmRm } from '../utils/';
 
 function userLifts(state = { nsunsVariation: '5day' }, action) {
   switch (action.type) {

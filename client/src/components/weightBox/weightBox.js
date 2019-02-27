@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { calcDailyLift } from '../../utils/helper';
+import { calcDailyLift } from '../../utils/';
 import './weightBox.css';
 
 export default class weightBox extends Component {

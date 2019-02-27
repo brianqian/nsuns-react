@@ -1,7 +1,6 @@
-import { fetchRequest } from './helper';
+import { fetchRequest } from './';
 const api = {
   saveUserLifts: async data => {
-    console.log('in save main lifts with data: ', data);
     try {
       const resp = await fetchRequest('/api/userInfo', 'PUT', data);
       console.log('RESPONSE', resp);

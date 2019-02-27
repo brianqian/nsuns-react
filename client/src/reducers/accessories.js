@@ -4,13 +4,10 @@ function accessories(state = {}, action) {
       console.log('in customACTION: ', action.basePlan);
       return { ...state, custom: action.basePlan };
     case 'ADD_ACCESSORY':
-      console.log(state);
       const { userId, dayIndex } = action;
       const returnObj = { ...state.custom };
-      console.log(userId, returnObj[dayIndex]);
       return state;
     case 'CHANGE_ACCESSORY_PLAN':
-      console.log('hello???', state, action.plan);
       return { ...state, accessoryPlan: action.plan };
     case 'GET_ACCESSORY_PLAN':
       return { ...state, custom: action.accessoryPlan, accessoryPlan: 'custom' };

@@ -35,5 +35,6 @@ export const fetchRequest = async (route, method, data) => {
     body: JSON.stringify(data),
   });
   resp = resp.json();
+  console.log(resp);
   return resp;
 };

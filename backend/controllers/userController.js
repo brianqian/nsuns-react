@@ -17,7 +17,8 @@ module.exports = {
       Object.values(data),
       (err, data) => {
         if (err) throw err;
-        res.send();
+        data.ok = true;
+        res.json(data);
       }
     );
   },
