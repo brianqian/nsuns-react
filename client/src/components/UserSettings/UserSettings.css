@@ -1,7 +1,7 @@
 .userSettings {
   display: flex;
   flex-direction: column;
-  max-width: 200px;
+  width: 200px;
   background-color: #596d83;
   z-index: 10;
   position: absolute;

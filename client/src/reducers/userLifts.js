@@ -1,5 +1,3 @@
-import { swapTmRm } from '../utils/';
-
 function userLifts(state = { nsunsVariation: '5day' }, action) {
   switch (action.type) {
     case 'GET_USER_LIFTS':

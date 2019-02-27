@@ -1,25 +1,45 @@
-.accessory-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.accessory {
-  border-top: 1px gray solid;
-  border-bottom: 1px gray solid;
-  display: flex;
-}
-.accessory > p {
-  flex: 9;
+.accessory__container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 50px repeat(3, 1fr);
 }
-
-.accessory > p > span {
+.accessory__container > h4 {
   display: flex;
   justify-content: center;
 }
-
-.accessory > button {
+.accessory__item {
+  grid-column: 1/-1;
+  border-top: 1px gray solid;
+  border-bottom: 1px gray solid;
+  display: flex;
+  align-items: center;
+}
+.accessory__item-icons {
+  display: flex;
   flex: 1;
-  max-width: 25px;
+}
+.accessory__item-icons > img {
+  /* flex: 1; */
+  height: 15px;
+  width: 15px;
+}
+.accessory__item > div:nth-child(2) {
+  flex: 12;
+  display: flex;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.accessory__item > div:nth-child(2) > span {
+  display: flex;
+  flex: 3;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+.accessory__item > div:nth-child(2) > input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 100px;
+  max-width: 200px;
 }

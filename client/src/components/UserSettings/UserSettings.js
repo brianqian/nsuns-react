@@ -7,8 +7,9 @@ import './UserSettings.css';
 function UserSettings(props) {
   return (
     <div className={props.settingsOpen ? 'userSettings' : 'userSettings__closed'}>
-      <LoginSignup />
-      <AccessorySelector customOption={props.accessories.custom !== undefined} />
+      <LoginSignup>
+        <AccessorySelector customOption={props.accessories.custom !== undefined} />
+      </LoginSignup>
     </div>
   );
 }

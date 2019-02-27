@@ -43,5 +43,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { openSettings }
+  { openSettings, jwtLogin }
 )(App);

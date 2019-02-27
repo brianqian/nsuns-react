@@ -19,8 +19,13 @@
   user-select: none;
 }
 .App__settings-button:hover {
-  border: 1.5px #000 solid;
+  border: 1.2px #000 solid;
+  box-sizing: border-box;
   cursor: default;
+}
+.App__settings-button:active {
+  background-color: #ccc9dc;
+  color: #1b2a41;
 }
 main {
   grid-row: 2;

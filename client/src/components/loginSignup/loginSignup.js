@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './loginSignup';
 import { connect } from 'react-redux';
-import { userLogin, logOut, createNewUser } from '../../actions/userAuthActions';
+import { userLogin, logOut, createNewUser, openSettings } from '../../actions';
 
 class Login extends Component {
   state = {
@@ -21,18 +21,22 @@ class Login extends Component {
     e.preventDefault();
     const username = this.state.userLogin;
     const password = this.state.pwLogin;
-    this.props.dispatch(userLogin({ username, password }));
+    this.props.userLogin({ username, password });
   };
   signUp = async e => {
     e.preventDefault();
     const username = this.state.userSignUp;
     const password = this.state.pwSignUp;
-    this.props.dispatch(createNewUser({ username, password }));
+    this.props.createNewUser({ username, password });
   };
 
   logOut = () => {
-    this.props.dispatch(logOut());
+    this.props.logOut();
     localStorage.removeItem('userId');
+  };
+
+  closeSettings = () => {
+    this.props.openSettings(false);
   };
 
   render() {
@@ -114,6 +118,8 @@ class Login extends Component {
             Log Out
           </button>
         )}
+        {this.props.children}
+        <button onClick={this.closeSettings}>Close Settings</button>
       </div>
     );
   }
@@ -122,4 +128,7 @@ const mapStateToProps = state => ({
   userLifts: state.userLifts,
   userAuth: state.userAuth,
 });
-export default connect(mapStateToProps)(Login);
+export default connect(
+  mapStateToProps,
+  { userLogin, logOut, createNewUser, openSettings }
+)(Login);

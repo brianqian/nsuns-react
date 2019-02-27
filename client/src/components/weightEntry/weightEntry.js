@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './weightEntry.css';
 import { connect } from 'react-redux';
-import { saveUserLifts, userLiftOnChange } from '../../actions';
+import { userLiftOnChange } from '../../actions';
 import Api from '../../utils/api';
 
 class weightEntry extends Component {
