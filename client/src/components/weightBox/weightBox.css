@@ -2,3 +2,7 @@
   color: white;
   background-color: #000;
 }
+
+.workouts {
+  border: 0.5px solid gray;
+}

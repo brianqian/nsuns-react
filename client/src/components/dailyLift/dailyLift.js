@@ -61,7 +61,9 @@ class dailyLift extends Component {
         <div className="daily-lift-t2">
           <h3 className="t2-title lift-title">{t2Lift}</h3>
           {t2Workouts}
-          <p onClick={this.handleClick}>Accessories</p>
+          <p className="accessories__button" onClick={this.handleClick}>
+            Accessories
+          </p>
         </div>
         {this.state.showAccessories && <AccessoryBox dayIndex={index} accessories={accessories} />}
       </div>
