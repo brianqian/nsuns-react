@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import uuidv1 from 'uuid';
 
 function dailyLiftWrapper(props) {
-  console.log('dailyliftwrapper:', props.accessories);
   const { nsunsVariation } = props.userLifts;
   const { dailySplits, accessories } = props;
   const { accessoryPlan } = accessories;

@@ -6,7 +6,7 @@ import './UserSettings.css';
 
 function UserSettings(props) {
   return (
-    <div className="user-settings">
+    <div className={props.settingsOpen ? 'userSettings' : 'userSettings__closed'}>
       <LoginSignup />
       <AccessorySelector customOption={props.accessories.custom !== undefined} />
     </div>
@@ -15,6 +15,7 @@ function UserSettings(props) {
 
 const mapStateToProps = state => ({
   accessories: state.accessories,
+  settingsOpen: state.userSettings.settingsOpen,
 });
 
 export default connect(mapStateToProps)(UserSettings);

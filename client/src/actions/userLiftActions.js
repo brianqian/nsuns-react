@@ -1,3 +1,5 @@
+import { swapTmRm } from '../utils';
+
 export const getUserLifts = userLifts => {
   return {
     type: 'GET_USER_LIFTS',
@@ -5,17 +7,10 @@ export const getUserLifts = userLifts => {
   };
 };
 
-export const saveUserLifts = liftObj => {
-  return {
-    type: 'SAVE_USER_LIFTS',
-    liftObj,
-  };
-};
-
 export const userLiftOnChange = (name, value) => {
+  const newValues = swapTmRm(name, value);
   return {
     type: 'USER_LIFT_ON_CHANGE',
-    name,
-    value,
+    newValues,
   };
 };

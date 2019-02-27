@@ -1,14 +1,26 @@
 .App {
   display: grid;
   grid-template-columns: 3% 1fr 3%;
-  grid-template-rows: 3% 1fr 3%;
+  grid-template-rows: 35px 1fr 3%;
+  grid-row-gap: 1rem;
   overflow: auto;
+  background-color: #ccc9dc41;
+  height: 100vh;
 }
-.App > button {
+.App__settings-button {
   grid-row: 1;
   grid-column: 2;
   justify-self: right;
-  max-width: 100px;
+  max-width: 120px;
+  background-color: #1b2a41;
+  font-size: 1rem;
+  padding: 0.5rem;
+  color: #ccc9dc;
+  user-select: none;
+}
+.App__settings-button:hover {
+  border: 1.5px #000 solid;
+  cursor: default;
 }
 main {
   grid-row: 2;

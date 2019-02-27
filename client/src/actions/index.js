@@ -11,3 +11,10 @@ export const addAccessories = (name, set, rep, weight) => {
     weight,
   };
 };
+
+export const openSettings = settingsOpenBool => {
+  return {
+    type: 'OPEN_CLOSE_SETTINGS',
+    settingsOpenBool,
+  };
+};

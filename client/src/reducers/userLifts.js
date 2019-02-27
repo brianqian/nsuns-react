@@ -1,4 +1,3 @@
-import Api from '../utils/api';
 import { swapTmRm } from '../utils/';
 
 function userLifts(state = { nsunsVariation: '5day' }, action) {
@@ -9,17 +8,10 @@ function userLifts(state = { nsunsVariation: '5day' }, action) {
       delete newUserLifts.ok;
       return newUserLifts;
     case 'LOG_OUT':
-      return { nsunsVariation: '5day' };
-    case 'SAVE_USER_LIFTS':
-      let success = Api.saveUserLifts(action.liftObj);
-      console.log(success ? 'new values saved' : `error: ${success}`);
-      return state;
+      console.log(state);
+      return { ...state, nsunsVariation: '5day', accessoryPlan: 'arms' };
     case 'USER_LIFT_ON_CHANGE':
-      const { name, value } = action;
-      console.log('name, value', name, value);
-      const swappedNameValue = swapTmRm(name, value);
-      console.log(swappedNameValue);
-      return { ...state, ...swappedNameValue };
+      return { ...state, ...action.newValues };
     default:
       return state;
   }

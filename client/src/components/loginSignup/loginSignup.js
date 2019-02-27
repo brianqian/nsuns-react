@@ -109,7 +109,11 @@ class Login extends Component {
           </div>
         )}
 
-        {loggedIn && <button onClick={this.logOut}>Log Out</button>}
+        {loggedIn && (
+          <button className="loginSignup__logout" onClick={this.logOut}>
+            Log Out
+          </button>
+        )}
       </div>
     );
   }

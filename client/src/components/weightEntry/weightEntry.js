@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './weightEntry.css';
 import { connect } from 'react-redux';
 import { saveUserLifts, userLiftOnChange } from '../../actions';
+import Api from '../../utils/api';
 
 class weightEntry extends Component {
   onChange = e => {
@@ -22,19 +23,17 @@ class weightEntry extends Component {
       squatTM,
     } = this.props.userLifts;
     const { userId } = this.props.userAuth;
-    this.props.dispatch(
-      saveUserLifts({
-        benchRM,
-        benchTM,
-        deadliftRM,
-        deadliftTM,
-        ohpRM,
-        ohpTM,
-        squatRM,
-        squatTM,
-        userId,
-      })
-    );
+    Api.saveUserLifts({
+      benchRM,
+      benchTM,
+      deadliftRM,
+      deadliftTM,
+      ohpRM,
+      ohpTM,
+      squatRM,
+      squatTM,
+      userId,
+    });
   };
 
   render() {

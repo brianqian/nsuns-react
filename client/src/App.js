@@ -5,27 +5,26 @@ import GraphPage from './views/graphPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import UserSettings from './components/UserSettings/UserSettings';
 import { connect } from 'react-redux';
-import { jwtLogin } from './actions/';
+import { jwtLogin, openSettings } from './actions/';
 
 class App extends Component {
-  state = {
-    showSettings: false,
-  };
-  toggleSettings = () => {
-    this.setState({ showSettings: this.state.showSettings ? false : true });
-  };
-
   componentDidMount = () => {
     const userToken = localStorage.getItem('userId');
-    console.log(userToken);
-    if (userToken) this.props.dispatch(jwtLogin(userToken));
+    if (userToken) this.props.jwtLogin(userToken);
+  };
+
+  toggleSettings = () => {
+    this.props.openSettings(this.props.settingsOpen ? false : true);
   };
 
   render() {
+    console.log(this.props.settingsOpen);
     return (
       <div className="App">
-        {this.state.showSettings && <UserSettings />}
-        <button onClick={this.toggleSettings}>Login/Settings</button>
+        <UserSettings />
+        <div className="App__settings-button" onClick={this.toggleSettings}>
+          Login/Settings
+        </div>
         <main>
           <Router>
             <Switch>
@@ -38,5 +37,11 @@ class App extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  settingsOpen: state.userSettings.settingsOpen,
+});
 
-export default connect()(App);
+export default connect(
+  mapStateToProps,
+  { openSettings }
+)(App);
