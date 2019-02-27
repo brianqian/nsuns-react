@@ -1,10 +1,12 @@
 .accessory__container {
-  display: grid;
-  grid-template-columns: 50px repeat(3, 1fr);
-}
-.accessory__container > h4 {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  /* grid-template-columns: 50px repeat(3, 1fr); */
+}
+.accessory__container-titles {
+  display: grid;
+  grid-template-columns: 1fr repeat(3, 5fr);
+  justify-items: center;
 }
 .accessory__item {
   grid-column: 1/-1;
@@ -18,14 +20,15 @@
   flex: 1;
 }
 .accessory__item-icons > img {
-  /* flex: 1; */
   height: 15px;
   width: 15px;
 }
 .accessory__item > div:nth-child(2) {
-  flex: 12;
+  flex: 15;
   display: flex;
   grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  justify-content: space-around;
 }
 
 .accessory__item > div:nth-child(2) > span {
@@ -36,10 +39,13 @@
   height: 50px;
 }
 .accessory__item > div:nth-child(2) > input {
+  flex: 3;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 20px;
   width: 100px;
   max-width: 200px;
+  text-align: center;
+  font-size: 1.1rem;
 }

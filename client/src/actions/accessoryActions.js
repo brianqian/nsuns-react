@@ -30,6 +30,8 @@ export const changeAccessoryPlan = plan => {
   };
 };
 
+// export const editAccessory = ()
+
 export const addAccessory = (userId, dayIndex) => async (dispatch, getState) => {
   //TODO: needs a function which inserts accessory into database
 

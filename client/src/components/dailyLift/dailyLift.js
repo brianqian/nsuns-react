@@ -9,6 +9,7 @@ class dailyLift extends Component {
     showAccessories: false,
   };
 
+  //TODO: should be handled be redux so accessories stay open on accessoryPlan change
   handleClick = () => {
     this.setState({ showAccessories: this.state.showAccessories ? false : true });
   };
