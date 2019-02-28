@@ -40,6 +40,15 @@ module.exports = {
   },
   editAccessory: (req, res) => {
     console.log(req.body);
-    // connection.query('UPDATE accessories SET title = ?, sets = ?, reps = ?, weight = ? WHERE userId = ? AND dayIndex = ? AND accIndex = ?', )
+    const { title, sets, reps, weight, dayIndex, accIndex, userId } = req.body;
+    const info = [title, sets, reps, weight, userId, dayIndex, accIndex];
+    connection.query(
+      'UPDATE accessories SET title = ?, sets = ?, reps = ?, weight = ? WHERE userId = ? AND dayIndex = ? AND accIndex = ?',
+      info,
+      (err, data) => {
+        if (err) throw err;
+        res.json({ ok: true });
+      }
+    );
   },
 };

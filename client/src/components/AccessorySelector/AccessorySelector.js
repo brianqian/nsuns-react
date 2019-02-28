@@ -10,7 +10,7 @@ function AccessorySelector(props) {
   return (
     <div className="accessory-selector">
       <p>Accessory: </p>
-      <select value={props.customOption && 'custom'} onChange={handleChange}>
+      <select value={props.accessories.accessoryPlan} onChange={handleChange}>
         <option value="arms">Arms</option>
         <option value="legs">Legs</option>
         {props.customOption && <option value="custom">Custom</option>}
@@ -22,4 +22,8 @@ function AccessorySelector(props) {
   );
 }
 
-export default connect()(AccessorySelector);
+const mapStateToProps = state => ({
+  accessories: state.accessories,
+});
+
+export default connect(mapStateToProps)(AccessorySelector);

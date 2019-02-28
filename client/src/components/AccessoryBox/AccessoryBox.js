@@ -19,9 +19,7 @@ class AccessoryBox extends Component {
     const { accessoryPlan } = accessoryState;
     // console.log('accessoryState:', accessoryState, accessoryPlan, accessoryState[accessoryPlan]);
 
-    //TODO: this logic needs to be handled by the server
     if (!Object.keys(accessoryState).includes('custom')) {
-      console.log('1st. creating plan');
       dispatch(createAccessoryPlan(userId, accessoryState[accessoryPlan]));
     }
     // addAccessory(userId, dayIndex);
@@ -36,7 +34,8 @@ class AccessoryBox extends Component {
     if (currentlyEditing) {
       this.setState({ currentlyEditing: false });
       //send dispatch to save current values
-      this.props.dispatch(editAccessory({ dayIndex, accIndex, title, sets, reps, weight, userId }));
+      const { title, sets, reps, weight } = this.state;
+      this.props.dispatch(editAccessory({ title, sets, reps, weight, dayIndex, accIndex, userId }));
       //then
       this.setState({ accIndex: null });
     } else {
@@ -52,7 +51,6 @@ class AccessoryBox extends Component {
 
   render() {
     const { accessories, userAuth, dayIndex } = this.props;
-    console.log('accessories', accessories);
     const accessoryItems = accessories.map((exercise, accIndex) => {
       const { title, sets, reps, weight } = exercise;
       return (

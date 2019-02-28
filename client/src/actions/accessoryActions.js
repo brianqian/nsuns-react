@@ -29,25 +29,35 @@ export const selectAccessoryPlan = plan => {
   };
 };
 
-export const editAccessoryAction = () => {
+export const editAccessorySuccess = accessoryInfo => {
   return {
-    type: 'EDIT_ACCESSORY',
+    type: 'EDIT_ACCESSORY_SUCCESS',
+    accessoryInfo,
   };
 };
 
-export const editAccessory = accessoryInfo => async (dispatch, getState) => {
-  await Util.editAccessory(accessoryInfo);
-  return;
+export const openAccessoryBox = bool => {
+  return {
+    type: 'TOGGLE_ACCESSORY_BOX',
+    bool,
+  };
 };
 
-export const addAccessory = (userId, dayIndex) => async (dispatch, getState) => {
+export const editAccessory = accessoryInfo => async dispatch => {
+  console.log(accessoryInfo);
+  //TODO: add connection to createAccessoryPlan
+  const resp = await Util.editAccessory(accessoryInfo);
+  if (resp.ok) return dispatch(editAccessorySuccess(accessoryInfo));
+};
+
+export const addAccessory = (userId, dayIndex) => async dispatch => {
   //TODO: needs a function which inserts accessory into database
 
   //updates state with added accessory
   return dispatch(addAccessoryAction(userId, dayIndex));
 };
 
-export const createAccessoryPlan = (userId, basePlan) => async (dispatch, getState) => {
+export const createAccessoryPlan = (userId, basePlan) => async dispatch => {
   //TODO: all async actions need pending/success/fail actions
   //inserts accessoryPlan into database
   await Util.createAccessoryPlan(userId, basePlan);

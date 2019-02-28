@@ -3,15 +3,14 @@ import './dailyLift.css';
 import WeightBox from '../weightBox/weightBox';
 import AccessoryBox from '../AccessoryBox/AccessoryBox';
 import uuidv1 from 'uuid';
+import { openAccessoryBox } from '../../actions';
+import { connect } from 'react-redux';
 
 class dailyLift extends Component {
-  state = {
-    showAccessories: false,
-  };
-
   //TODO: should be handled be redux so accessories stay open on accessoryPlan change
   handleClick = () => {
-    this.setState({ showAccessories: this.state.showAccessories ? false : true });
+    const { dispatch, accessoryState } = this.props;
+    dispatch(openAccessoryBox(accessoryState.openAccessoryBox ? false : true));
   };
 
   render() {
@@ -28,6 +27,7 @@ class dailyLift extends Component {
       standard,
       index,
       accessories,
+      accessoryState,
     } = this.props;
 
     const t1Workouts = t1Reps.map((rep, i) => {
@@ -52,6 +52,7 @@ class dailyLift extends Component {
         />
       );
     });
+    console.log(accessories);
     return (
       <div className={`${day}-daily-lift daily-lift`}>
         <h2 className="day-title">{day}</h2>
@@ -66,10 +67,15 @@ class dailyLift extends Component {
             Accessories
           </p>
         </div>
-        {this.state.showAccessories && <AccessoryBox dayIndex={index} accessories={accessories} />}
+        {accessoryState.openAccessoryBox && (
+          <AccessoryBox dayIndex={index} accessories={accessories} />
+        )}
       </div>
     );
   }
 }
+const mapStateToProps = state => ({
+  accessoryState: state.accessories,
+});
 
-export default dailyLift;
+export default connect(mapStateToProps)(dailyLift);
