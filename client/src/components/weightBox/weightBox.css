@@ -2,11 +2,3 @@
   color: white;
   background-color: #000;
 }
-
-.workouts {
-  border: 0.5px solid gray;
-}
-
-.workouts:hover {
-  font-size: 1.1rem;
-}

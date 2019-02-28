@@ -1,23 +1,25 @@
 .accessory__container {
   display: grid;
-  grid-template-columns: repeat(11, 1fr);
+  grid-template-columns: 1fr repeat(3, 3fr);
+  font-family: 'Roboto';
+  grid-column: 1/5;
 }
 .accessory__container-titles {
   grid-column: 1/12;
   display: grid;
-  grid-template-columns: 1fr repeat(3, 5fr);
+  grid-template-columns: 1fr repeat(3, 3fr);
   justify-items: center;
 }
 
 .accessory__container > button {
-  grid-column: 6/9;
+  grid-column: 3;
 }
 .accessory__item {
-  grid-column: 1/12;
+  grid-column: 1/5;
   border-top: 1px gray solid;
   border-bottom: 1px gray solid;
   display: grid;
-  grid-template-columns: 1fr repeat(3, 5fr);
+  grid-template-columns: 1fr repeat(3, 3fr);
   align-items: center;
 }
 .accessory__item-icons {
@@ -30,28 +32,44 @@
 }
 .accessory__item-content {
   grid-column: 2/5;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   width: 100%;
   min-height: 50px;
-  justify-content: space-around;
+  justify-items: center;
+  align-items: center;
+}
+.accessory__item-content-setrep {
+  grid-column: 2;
+  display: flex;
+  flex: 1;
+  min-height: 50px;
+  justify-content: space-evenly;
   align-items: center;
 }
 
-.accessory__item-content > span {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-}
-.accessory__item-content > input {
+.accessory__item-content-setrep > input {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 20px;
+  width: 20px;
+  max-width: 100px;
+  text-align: center;
+  /* font-size: 1.1rem; */
+}
+
+.accessory__item-content > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+.accessory__item-content > input {
+  height: 20px;
   width: 100px;
   max-width: 200px;
   text-align: center;
-  font-size: 1.1rem;
+  /* font-size: 1.1rem; */
 }

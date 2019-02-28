@@ -71,7 +71,7 @@ class AccessoryBox extends Component {
           {this.state.accIndex === accIndex ? (
             <div className="accessory__item-content">
               <input onChange={this.onChange} type="text" name={'title'} value={this.state.title} />
-              <div>
+              <div className="accessory__item-content-setrep">
                 <input
                   onChange={this.onChange}
                   type="number"

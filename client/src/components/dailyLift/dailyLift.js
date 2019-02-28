@@ -53,8 +53,8 @@ class dailyLift extends Component {
       );
     });
     return (
-      <div className={`${day}-daily-lift daily-lift`}>
-        <h2 className="day-title">{day}</h2>
+      <div className={`dailyLift__container`}>
+        <h2 className="dailyLift__day-title">{day}</h2>
         <div className="daily-lift-t1">
           <h3 className="t1-title lift-title">{t1Lift}</h3>
           {t1Workouts}
@@ -64,6 +64,7 @@ class dailyLift extends Component {
           {t2Workouts}
           <p className="accessories__button" onClick={this.handleClick}>
             Accessories
+            <img src="./expand-button.svg" alt="" height="15px" />
           </p>
         </div>
         {accessoryState.openAccessoryBox[dayIndex] && (

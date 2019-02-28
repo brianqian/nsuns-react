@@ -1,6 +1,8 @@
-.daily-lift {
+.dailyLift__container {
   width: 95%;
   margin: auto;
+  display: grid;
+  grid-template-columns: 1fr repeat(3, 3fr);
 }
 
 .daily-lift-t1,
@@ -9,6 +11,7 @@
   grid-template-columns: repeat(20, 1fr);
   align-items: center;
   justify-content: center;
+  grid-column: 1/5;
 }
 
 .daily-lift-t1 > p,
@@ -16,8 +19,10 @@
   grid-column: span 2;
 }
 
-.day-title {
+.dailyLift__day-title {
+  font-family: 'Noto Serif', Georgia, 'Times New Roman', Times, serif;
   text-align: center;
+  grid-column: 3;
 }
 
 .accessories__button {
@@ -27,6 +32,7 @@
   border: 0.5px gray solid;
   height: 100%;
   width: 100%;
+  font-family: 'Roboto';
 }
 
 .lift-title {
@@ -35,6 +41,7 @@
 }
 
 .workouts {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
