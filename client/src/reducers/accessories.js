@@ -7,10 +7,12 @@ function accessories(state = {}, action) {
     //   const { userId, dayIndex } = action;
     //   const returnObj = { ...state.custom };
     //   return state;
-    case 'CHANGE_ACCESSORY_PLAN':
+    case 'SELECT_ACCESSORY_PLAN':
       return { ...state, accessoryPlan: action.plan };
     case 'GET_ACCESSORY_PLAN':
       return { ...state, custom: action.accessoryPlan, accessoryPlan: 'custom' };
+    case 'EDIT_ACCESSORY':
+
     default:
       return state;
   }

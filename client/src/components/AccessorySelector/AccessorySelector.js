@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './AccessorySelector.css';
-import { changeAccessoryPlan } from '../../actions/';
+import { selectAccessoryPlan } from '../../actions/';
 
 function AccessorySelector(props) {
   const handleChange = e => {
-    props.dispatch(changeAccessoryPlan(e.target.value));
+    props.dispatch(selectAccessoryPlan(e.target.value));
   };
   return (
     <div className="accessory-selector">

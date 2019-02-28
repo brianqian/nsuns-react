@@ -1,4 +1,4 @@
-import Api from '../utils/api';
+import * as Util from '../utils/accessories';
 export const addAccessoryAction = (userId, dayIndex) => {
   return {
     type: 'ADD_ACCESSORY',
@@ -22,15 +22,23 @@ export const getAccessoryPlan = (userId, accessoryPlan) => {
   };
 };
 
-export const changeAccessoryPlan = plan => {
-  console.log('changevaration hit', plan);
+export const selectAccessoryPlan = plan => {
   return {
-    type: 'CHANGE_ACCESSORY_PLAN',
+    type: 'SELECT_ACCESSORY_PLAN',
     plan,
   };
 };
 
-// export const editAccessory = ()
+export const editAccessoryAction = () => {
+  return {
+    type: 'EDIT_ACCESSORY',
+  };
+};
+
+export const editAccessory = accessoryInfo => async (dispatch, getState) => {
+  await Util.editAccessory(accessoryInfo);
+  return;
+};
 
 export const addAccessory = (userId, dayIndex) => async (dispatch, getState) => {
   //TODO: needs a function which inserts accessory into database
@@ -40,8 +48,9 @@ export const addAccessory = (userId, dayIndex) => async (dispatch, getState) => 
 };
 
 export const createAccessoryPlan = (userId, basePlan) => async (dispatch, getState) => {
+  //TODO: all async actions need pending/success/fail actions
   //inserts accessoryPlan into database
-  await Api.createAccessoryPlan(userId, basePlan);
+  await Util.createAccessoryPlan(userId, basePlan);
   //updates state using basePlan as a template
   return dispatch(createAccessoryPlanAction(basePlan));
 };

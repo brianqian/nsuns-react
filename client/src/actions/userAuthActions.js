@@ -1,6 +1,5 @@
-import Auth from '../utils/auth';
-import Api from '../utils/api';
-import { getAccessoryPlan, getUserLifts } from './index';
+import * as Util from '../utils';
+import { getUserLifts, getAccessoryPlan } from './';
 
 export const loginSuccess = userId => {
   console.log('LOGIN_SUCCESS ID', userId);
@@ -45,7 +44,7 @@ export const logOut = () => {
 };
 
 export const jwtLogin = token => async (dispatch, getState) => {
-  const userInfo = await Auth.jwtLogin(token);
+  const userInfo = await Util.jwtLogin(token);
   console.log('JWT', userInfo);
   if (userInfo.ok) return dispatch(getAllUserData(userInfo));
 };
@@ -53,7 +52,7 @@ export const jwtLogin = token => async (dispatch, getState) => {
 export const userLogin = loginInfo => async (dispatch, getState) => {
   if (!getState().userAuth.pending) {
     dispatch(loginPending());
-    const userInfo = await Auth.logIn(loginInfo);
+    const userInfo = await Util.logIn(loginInfo);
     console.log(userInfo);
     if (userInfo.ok) {
       await localStorage.setItem('userId', userInfo.token);
@@ -66,7 +65,7 @@ export const userLogin = loginInfo => async (dispatch, getState) => {
 };
 export const getAllUserData = userInfo => async (dispatch, getState) => {
   console.log('getalluserdata');
-  const accessoryData = await Api.getAccessoryPlan(userInfo.id);
+  const accessoryData = await Util.getAccessoryPlan(userInfo.id);
   if (accessoryData.length) await dispatch(getAccessoryPlan(userInfo.id, accessoryData));
   await dispatch(getUserLifts(userInfo));
   return dispatch(loginSuccess(userInfo.id));
@@ -74,7 +73,7 @@ export const getAllUserData = userInfo => async (dispatch, getState) => {
 export const createNewUser = signUpInfo => async (dispatch, getState) => {
   if (!getState().userAuth.pending) {
     dispatch(signupPending());
-    const result = await Auth.signUp(signUpInfo);
+    const result = await Util.signUp(signUpInfo);
     if (result.ok) {
       await dispatch(signupSuccess(result));
       return dispatch(userLogin(signUpInfo));

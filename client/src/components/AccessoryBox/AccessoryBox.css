@@ -28,7 +28,9 @@
   display: flex;
   grid-template-columns: repeat(3, 1fr);
   width: 100%;
+  min-height: 50px;
   justify-content: space-around;
+  align-items: center;
 }
 
 .accessory__item > div:nth-child(2) > span {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './AccessoryBox.css';
 import { connect } from 'react-redux';
-import { addAccessory, createAccessoryPlan } from '../../actions';
+import { addAccessory, createAccessoryPlan, editAccessory } from '../../actions';
 
 class AccessoryBox extends Component {
   state = {
@@ -17,7 +17,7 @@ class AccessoryBox extends Component {
     const { dispatch, userAuth, dayIndex, accessoryState } = this.props;
     const { userId } = userAuth;
     const { accessoryPlan } = accessoryState;
-    console.log('accessoryState:', accessoryState, accessoryPlan, accessoryState[accessoryPlan]);
+    // console.log('accessoryState:', accessoryState, accessoryPlan, accessoryState[accessoryPlan]);
 
     //TODO: this logic needs to be handled by the server
     if (!Object.keys(accessoryState).includes('custom')) {
@@ -32,10 +32,11 @@ class AccessoryBox extends Component {
   };
   editAcc = async (dayIndex, accIndex, title, sets, reps, weight) => {
     const { currentlyEditing } = this.state;
+    const { userId } = this.props.userAuth;
     if (currentlyEditing) {
       this.setState({ currentlyEditing: false });
       //send dispatch to save current values
-
+      this.props.dispatch(editAccessory({ dayIndex, accIndex, title, sets, reps, weight, userId }));
       //then
       this.setState({ accIndex: null });
     } else {
