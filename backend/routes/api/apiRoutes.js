@@ -8,6 +8,7 @@ router.route('/userInfo').put(userController.saveUserInfo);
 router
   .route('/accessory/:userId')
   .get(accessoryController.getAccessoryPlan)
-  .put(accessoryController.editAccessory);
+  .put(accessoryController.editAccessory)
+  .delete(accessoryController.deleteAccessory);
 router.route('/accessory/').post(accessoryController.createAccessoryPlan);
 module.exports = router;

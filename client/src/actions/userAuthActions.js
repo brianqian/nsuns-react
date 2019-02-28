@@ -50,7 +50,6 @@ export const logOut = () => async dispatch => {
 
 export const jwtLogin = token => async dispatch => {
   const userInfo = await Util.jwtLogin(token);
-  console.log('JWTTOKEN', userInfo);
   return dispatch(getAllUserData(userInfo));
 };
 

@@ -19,7 +19,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.props.settingsOpen);
     return (
       <div className="App">
         <UserSettings />
@@ -40,6 +39,8 @@ class App extends Component {
 }
 const mapStateToProps = state => ({
   settingsOpen: state.userSettings.settingsOpen,
+  accessories: state.accessories,
+  userAuth: state.userAuth,
 });
 
 export default connect(mapStateToProps)(App);

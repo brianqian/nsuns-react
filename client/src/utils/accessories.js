@@ -2,16 +2,18 @@ import { fetchRequest } from './';
 
 export const createAccessoryPlan = async (userId, basePlan) => {
   try {
-    let resp = await fetchRequest('/api/accessory', 'POST', { userId, basePlan });
+    const resp = await fetchRequest('/api/accessory', 'POST', { userId, basePlan });
     console.log(resp);
+    return;
   } catch (err) {
-    if (err) console.error(err);
+    console.error(err);
   }
 };
 export const getAccessoryPlan = async userId => {
   try {
     let resp = await fetch(`/api/accessory/${userId}`);
     resp = await resp.json();
+    console.log('getting acc plan', resp);
     const respArray = [];
     if (resp.length) {
       const weekLength = resp[resp.length - 1].dayIndex;
@@ -24,18 +26,26 @@ export const getAccessoryPlan = async userId => {
 
     return respArray;
   } catch (err) {
-    if (err) console.error(err);
+    console.error(err);
   }
 };
 
 export const editAccessory = async accessoryInfo => {
   try {
     console.log('edit accessory', accessoryInfo);
-    let resp = await fetchRequest(`/api/accessory/${accessoryInfo.userId}`, 'PUT', accessoryInfo);
-    console.log(resp);
+    const resp = await fetchRequest(`/api/accessory/${accessoryInfo.userId}`, 'PUT', accessoryInfo);
     return resp;
   } catch (err) {
-    if (err) console.error(err);
+    console.error(err);
   }
   return;
+};
+
+export const deleteAccessory = async accessoryInfo => {
+  try {
+    const resp = fetchRequest(`/api/accessory/${accessoryInfo.userId}`, 'DELETE', accessoryInfo);
+    console.log(resp);
+  } catch (err) {
+    console.error(err);
+  }
 };

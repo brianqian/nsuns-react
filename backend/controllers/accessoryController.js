@@ -6,27 +6,25 @@ module.exports = {
     //Checks for an existing custom plan and doesn't create one if one exists.
     //Custom plans should only be created once.
     connection.query('SELECT * FROM accessories WHERE userId = ?', [userId], (err, data) => {
-      if (data.length) {
-        res.json({ ok: false });
-        return;
+      if (!data.length) {
+        const values = [];
+        console.log('baseplan', basePlan);
+        basePlan.forEach((day, dayIndex) => {
+          day.forEach(exercise => {
+            const { title, sets, reps, weight } = exercise;
+            values.push([userId, title, sets, reps, weight, dayIndex]);
+          });
+        });
+        connection.query(
+          'INSERT INTO accessories (userId, title, sets, reps, weight, dayIndex) VALUES ?',
+          [values],
+          (err, data) => {
+            if (err) throw err;
+            res.json(data);
+          }
+        );
       }
     });
-    const values = [];
-    console.log('baseplan', basePlan);
-    basePlan.forEach((day, dayIndex) => {
-      day.forEach(exercise => {
-        const { title, sets, reps, weight } = exercise;
-        values.push([userId, title, sets, reps, weight, dayIndex]);
-      });
-    });
-    connection.query(
-      'INSERT INTO accessories (userId, title, sets, reps, weight, dayIndex) VALUES ?',
-      [values],
-      (err, data) => {
-        if (err) throw err;
-        console.log(data);
-      }
-    );
   },
   getAccessoryPlan: (req, res) => {
     connection.query(
@@ -50,5 +48,8 @@ module.exports = {
         res.json({ ok: true });
       }
     );
+  },
+  deleteAccessory: (req, res) => {
+    console.log(req.body);
   },
 };

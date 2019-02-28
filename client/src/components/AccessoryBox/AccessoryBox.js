@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './AccessoryBox.css';
 import { connect } from 'react-redux';
-import { addAccessory, createAccessoryPlan, editAccessory } from '../../actions';
+import { addAccessory, createAccessoryPlan, editAccessory, deleteAccessory } from '../../actions';
 
 class AccessoryBox extends Component {
   state = {
@@ -13,35 +13,58 @@ class AccessoryBox extends Component {
     weight: 0,
     currentlyEditing: false,
   };
-  addAccessory = async () => {
+  // addAccessory = async () => {
+  //   const { dispatch, userAuth, dayIndex, accessoryState } = this.props;
+  //   const { userId } = userAuth;
+  //   const { accessoryPlan } = accessoryState;
+  //   console.log('accessoryState:', accessoryState, accessoryPlan, accessoryState[accessoryPlan]);
+
+  //   if (!Object.keys(accessoryState).includes('custom')) {
+  //     dispatch(createAccessoryPlan(userId, accessoryState[accessoryPlan]));
+  //   }
+  //   addAccessory(userId, dayIndex);
+  // };
+  componentWillUnmount = () => {
+    console.log('accbox unmounting');
+  };
+
+  crudAcc = async (payload, type) => {
     const { dispatch, userAuth, dayIndex, accessoryState } = this.props;
     const { userId } = userAuth;
     const { accessoryPlan } = accessoryState;
-    // console.log('accessoryState:', accessoryState, accessoryPlan, accessoryState[accessoryPlan]);
-
-    if (!Object.keys(accessoryState).includes('custom')) {
-      dispatch(createAccessoryPlan(userId, accessoryState[accessoryPlan]));
+    if (!accessoryState.custom) {
+      console.log(accessoryState);
+      await dispatch(createAccessoryPlan(userId, accessoryState[accessoryPlan]));
     }
-    // addAccessory(userId, dayIndex);
+    payload.userId = userId;
+    payload.dayIndex = dayIndex;
+    switch (type) {
+      case 'DELETE':
+        this.deleteAcc(payload);
+        break;
+      case 'EDIT':
+        this.editAcc(payload);
+        break;
+      default:
+        console.log('errror');
+    }
   };
 
   deleteAcc = (dayIndex, accIndex) => {
-    console.log(dayIndex, accIndex);
+    console.log('in delete acc', dayIndex, accIndex);
   };
-  editAcc = async (dayIndex, accIndex, title, sets, reps, weight) => {
-    const { accessoryState } = this.props;
-    const { accessoryPlan } = accessoryState;
+  editAcc = async payload => {
+    console.log('editAcc', payload);
     const { currentlyEditing } = this.state;
-    const { userId } = this.props.userAuth;
     if (currentlyEditing) {
-      this.setState({ currentlyEditing: false });
+      await this.setState({ currentlyEditing: false });
+      await this.setState({ accIndex: null });
       const { title, sets, reps, weight } = this.state;
-      const accessoryObject = { title, sets, reps, weight, dayIndex, accIndex, userId };
-      if (!accessoryState.custom) accessoryObject.basePlan = accessoryState[accessoryPlan];
-      this.props.dispatch(editAccessory(accessoryObject));
-      this.setState({ accIndex: null });
+      const accessoryObject = { ...payload, title, sets, reps, weight };
+      await this.props.dispatch(editAccessory(accessoryObject));
     } else {
-      this.setState({ currentlyEditing: true });
+      const { title, sets, reps, weight, dayIndex, accIndex } = payload;
+      await this.setState({ currentlyEditing: true });
       this.setState({ dayIndex, accIndex, title, sets, reps, weight });
     }
   };
@@ -59,9 +82,11 @@ class AccessoryBox extends Component {
         <div key={dayIndex + accIndex} className="accessory__item">
           {userAuth.loggedIn && (
             <div className="accessory__item-icons">
-              <button onClick={() => this.deleteAcc(dayIndex, accIndex)}>X</button>
+              <button onClick={() => this.crudAcc({ accIndex }, 'DELETE')}>X</button>
               <img
-                onClick={() => this.editAcc(dayIndex, accIndex, title, sets, reps, weight)}
+                onClick={() =>
+                  this.crudAcc({ dayIndex, accIndex, title, sets, reps, weight }, 'EDIT')
+                }
                 src={
                   this.state.accIndex === accIndex ? './save_icon.svg' : './pencil-edit-button.svg'
                 }

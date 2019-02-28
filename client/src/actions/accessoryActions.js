@@ -50,6 +50,10 @@ export const clearAccessories = () => {
   };
 };
 
+export const deleteAccessory = accessoryInfo => async dispatch => {
+  const resp = await Util.deleteAccessory(accessoryInfo);
+};
+
 export const editAccessory = accessoryInfo => async dispatch => {
   console.log(accessoryInfo);
   //TODO: add connection to createAccessoryPlan
@@ -69,5 +73,6 @@ export const createAccessoryPlan = (userId, basePlan) => async dispatch => {
   //inserts accessoryPlan into database
   await Util.createAccessoryPlan(userId, basePlan);
   //updates state using basePlan as a template
+  console.log('in create accessory plan thunk', userId, basePlan);
   return dispatch(createAccessoryPlanSuccess(basePlan));
 };
