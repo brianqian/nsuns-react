@@ -47,7 +47,6 @@ module.exports = {
       } else {
         delete data.password;
         data.ok = true;
-        console.log(data);
         res.json(data);
       }
     });

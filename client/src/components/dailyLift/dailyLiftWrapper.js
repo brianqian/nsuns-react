@@ -26,7 +26,7 @@ function dailyLiftWrapper(props) {
         max2={props.userLifts[base2] || '0'}
         standard={'lbs'}
         key={uuidv1()}
-        index={index}
+        dayIndex={index}
         accessories={accessorySet}
       />
     );

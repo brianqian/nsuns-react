@@ -9,8 +9,8 @@ import { connect } from 'react-redux';
 class dailyLift extends Component {
   //TODO: should be handled be redux so accessories stay open on accessoryPlan change
   handleClick = () => {
-    const { dispatch, accessoryState } = this.props;
-    dispatch(openAccessoryBox(accessoryState.openAccessoryBox ? false : true));
+    const { dispatch, accessoryState, dayIndex } = this.props;
+    dispatch(openAccessoryBox(accessoryState.openAccessoryBox[dayIndex] ? false : true, dayIndex));
   };
 
   render() {
@@ -25,7 +25,7 @@ class dailyLift extends Component {
       max1,
       max2,
       standard,
-      index,
+      dayIndex,
       accessories,
       accessoryState,
     } = this.props;
@@ -66,8 +66,8 @@ class dailyLift extends Component {
             Accessories
           </p>
         </div>
-        {accessoryState.openAccessoryBox && (
-          <AccessoryBox dayIndex={index} accessories={accessories} />
+        {accessoryState.openAccessoryBox[dayIndex] && (
+          <AccessoryBox dayIndex={dayIndex} accessories={accessories} />
         )}
       </div>
     );

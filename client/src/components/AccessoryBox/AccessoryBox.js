@@ -69,7 +69,7 @@ class AccessoryBox extends Component {
             </div>
           )}
           {this.state.accIndex === accIndex ? (
-            <div>
+            <div className="accessory__item-inputs">
               <input onChange={this.onChange} type="text" name={'title'} value={this.state.title} />
               <div>
                 <input
@@ -93,7 +93,7 @@ class AccessoryBox extends Component {
               />
             </div>
           ) : (
-            <div>
+            <div className="accessory_items-spans">
               <span>{exercise.title}</span>
               <span>
                 {exercise.sets} x {exercise.reps}

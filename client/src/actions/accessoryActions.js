@@ -36,10 +36,11 @@ export const editAccessorySuccess = accessoryInfo => {
   };
 };
 
-export const openAccessoryBox = bool => {
+export const openAccessoryBox = (bool, index) => {
   return {
     type: 'TOGGLE_ACCESSORY_BOX',
     bool,
+    index,
   };
 };
 

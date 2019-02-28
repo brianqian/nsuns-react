@@ -21,7 +21,6 @@ export const jwtLogin = async token => {
   try {
     console.log('JWTLOGIN', token);
     let resp = await fetchRequest('/auth/jwtLogin', 'POST', { token });
-
     return resp;
   } catch (err) {
     if (err) throw err;

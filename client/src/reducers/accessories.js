@@ -14,7 +14,9 @@ function accessories(state = {}, action) {
     case 'SELECT_ACCESSORY_PLAN':
       return { ...state, accessoryPlan: action.plan };
     case 'TOGGLE_ACCESSORY_BOX':
-      return { ...state, openAccessoryBox: action.bool };
+      let openAccessoryBox = { ...state.openAccessoryBox };
+      openAccessoryBox[action.index] = action.bool;
+      return { ...state, openAccessoryBox };
     case 'GET_ACCESSORY_PLAN':
       return { ...state, custom: action.accessoryPlan, accessoryPlan: 'custom' };
     case 'EDIT_ACCESSORY_SUCCESS':
