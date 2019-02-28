@@ -1,9 +1,23 @@
+.daily-lift {
+  width: 95%;
+  margin: auto;
+}
+
 .daily-lift-t1,
 .daily-lift-t2 {
   display: grid;
-  grid-template-columns: repeat(11, 1fr);
+  grid-template-columns: repeat(20, 1fr);
   align-items: center;
   justify-content: center;
+}
+
+.daily-lift-t1 > p,
+.daily-lift-t2 > p {
+  grid-column: span 2;
+}
+
+.day-title {
+  text-align: center;
 }
 
 .accessories__button {
@@ -12,6 +26,7 @@
   align-items: center;
   border: 0.5px gray solid;
   height: 100%;
+  width: 100%;
 }
 
 .lift-title {
@@ -26,4 +41,9 @@
   width: 100%;
   height: 100%;
   user-select: none;
+  border: 0.5px solid gray;
+}
+
+.workouts:hover {
+  font-size: 1.1rem;
 }

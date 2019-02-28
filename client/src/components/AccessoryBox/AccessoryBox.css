@@ -1,47 +1,51 @@
 .accessory__container {
-  display: flex;
-  flex-direction: column;
-  /* grid-template-columns: 50px repeat(3, 1fr); */
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
 }
 .accessory__container-titles {
+  grid-column: 1/12;
   display: grid;
   grid-template-columns: 1fr repeat(3, 5fr);
   justify-items: center;
 }
+
+.accessory__container > button {
+  grid-column: 6/9;
+}
 .accessory__item {
-  grid-column: 1/-1;
+  grid-column: 1/12;
   border-top: 1px gray solid;
   border-bottom: 1px gray solid;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr repeat(3, 5fr);
   align-items: center;
 }
 .accessory__item-icons {
   display: flex;
-  flex: 1;
+  grid-column: 1;
 }
 .accessory__item-icons > img {
   height: 15px;
   width: 15px;
 }
-.accessory__item > div:nth-child(2) {
-  flex: 15;
+.accessory__item-content {
+  grid-column: 2/5;
   display: flex;
-  grid-template-columns: repeat(3, 1fr);
   width: 100%;
   min-height: 50px;
   justify-content: space-around;
   align-items: center;
 }
 
-.accessory__item > div:nth-child(2) > span {
+.accessory__item-content > span {
   display: flex;
-  flex: 3;
+  flex: 1;
   justify-content: center;
   align-items: center;
   height: 50px;
 }
-.accessory__item > div:nth-child(2) > input {
-  flex: 3;
+.accessory__item-content > input {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
