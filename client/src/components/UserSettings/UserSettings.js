@@ -8,14 +8,13 @@ function UserSettings(props) {
   return (
     <div className={props.settingsOpen ? 'userSettings' : 'userSettings__closed'}>
       <LoginSignup>
-        <AccessorySelector customOption={props.accessories.custom !== undefined} />
+        <AccessorySelector />
       </LoginSignup>
     </div>
   );
 }
 
 const mapStateToProps = state => ({
-  accessories: state.accessories,
   settingsOpen: state.userSettings.settingsOpen,
 });
 

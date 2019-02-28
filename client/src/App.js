@@ -5,16 +5,17 @@ import GraphPage from './views/graphPage';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import UserSettings from './components/UserSettings/UserSettings';
 import { connect } from 'react-redux';
-import { jwtLogin, openSettings } from './actions/';
+import { jwtLogin, openSettings } from './actions';
 
 class App extends Component {
   componentDidMount = () => {
     const userToken = localStorage.getItem('userId');
-    if (userToken) this.props.jwtLogin(userToken);
+    if (userToken) this.props.dispatch(jwtLogin(userToken));
   };
 
   toggleSettings = () => {
-    this.props.openSettings(this.props.settingsOpen ? false : true);
+    const { dispatch, settingsOpen } = this.props;
+    dispatch(openSettings(settingsOpen ? false : true));
   };
 
   render() {
@@ -41,7 +42,4 @@ const mapStateToProps = state => ({
   settingsOpen: state.userSettings.settingsOpen,
 });
 
-export default connect(
-  mapStateToProps,
-  { openSettings, jwtLogin }
-)(App);
+export default connect(mapStateToProps)(App);

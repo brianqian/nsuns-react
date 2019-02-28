@@ -38,7 +38,7 @@ export const fetchRequest = async (route, method, data) => {
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(data),
   });
-  resp = resp.json();
-  console.log(resp);
+  resp = await resp.json();
+  // console.log(resp, route, method, data);
   return resp;
 };

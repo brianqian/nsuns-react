@@ -36,7 +36,6 @@ module.exports = {
   },
   jwtLogin: (req, res) => {
     const { token } = req.body;
-    console.log(token);
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     console.log(decoded, decoded.userId);
     connection.query('SELECT * FROM userInfo WHERE id = ?', [decoded.userId], (err, data) => {
@@ -48,6 +47,7 @@ module.exports = {
       } else {
         delete data.password;
         data.ok = true;
+        console.log(data);
         res.json(data);
       }
     });

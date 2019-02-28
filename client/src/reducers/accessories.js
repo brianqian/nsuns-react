@@ -1,11 +1,16 @@
 function accessories(state = {}, action) {
   switch (action.type) {
-    case 'CREATE_CUSTOM_ACCESSORY_PLAN':
+    case 'CREATE_ACCESSORY_PLAN_SUCCESS':
       return { ...state, custom: action.basePlan, accessoryPlan: 'custom' };
     // case 'ADD_ACCESSORY':
     //   const { userId, dayIndex } = action;
     //   const returnObj = { ...state.custom };
     //   return state;
+    case 'CLEAR_ACCESSORIES':
+      let baseAccessories = { ...state };
+      if (baseAccessories.custom) delete baseAccessories.custom;
+      baseAccessories.accessoryPlan = 'arms';
+      return baseAccessories;
     case 'SELECT_ACCESSORY_PLAN':
       return { ...state, accessoryPlan: action.plan };
     case 'TOGGLE_ACCESSORY_BOX':

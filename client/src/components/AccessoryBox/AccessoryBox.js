@@ -29,14 +29,16 @@ class AccessoryBox extends Component {
     console.log(dayIndex, accIndex);
   };
   editAcc = async (dayIndex, accIndex, title, sets, reps, weight) => {
+    const { accessoryState } = this.props;
+    const { accessoryPlan } = accessoryState;
     const { currentlyEditing } = this.state;
     const { userId } = this.props.userAuth;
     if (currentlyEditing) {
       this.setState({ currentlyEditing: false });
-      //send dispatch to save current values
       const { title, sets, reps, weight } = this.state;
-      this.props.dispatch(editAccessory({ title, sets, reps, weight, dayIndex, accIndex, userId }));
-      //then
+      const accessoryObject = { title, sets, reps, weight, dayIndex, accIndex, userId };
+      if (!accessoryState.custom) accessoryObject.basePlan = accessoryState[accessoryPlan];
+      this.props.dispatch(editAccessory(accessoryObject));
       this.setState({ accIndex: null });
     } else {
       this.setState({ currentlyEditing: true });

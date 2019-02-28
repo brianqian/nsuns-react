@@ -52,7 +52,6 @@ class dailyLift extends Component {
         />
       );
     });
-    console.log(accessories);
     return (
       <div className={`${day}-daily-lift daily-lift`}>
         <h2 className="day-title">{day}</h2>

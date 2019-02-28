@@ -7,9 +7,9 @@ export const addAccessoryAction = (userId, dayIndex) => {
   };
 };
 
-export const createAccessoryPlanAction = basePlan => {
+export const createAccessoryPlanSuccess = basePlan => {
   return {
-    type: 'CREATE_CUSTOM_ACCESSORY_PLAN',
+    type: 'CREATE_ACCESSORY_PLAN_SUCCESS',
     basePlan,
   };
 };
@@ -43,6 +43,12 @@ export const openAccessoryBox = bool => {
   };
 };
 
+export const clearAccessories = () => {
+  return {
+    type: 'CLEAR_ACCESSORIES',
+  };
+};
+
 export const editAccessory = accessoryInfo => async dispatch => {
   console.log(accessoryInfo);
   //TODO: add connection to createAccessoryPlan
@@ -62,5 +68,5 @@ export const createAccessoryPlan = (userId, basePlan) => async dispatch => {
   //inserts accessoryPlan into database
   await Util.createAccessoryPlan(userId, basePlan);
   //updates state using basePlan as a template
-  return dispatch(createAccessoryPlanAction(basePlan));
+  return dispatch(createAccessoryPlanSuccess(basePlan));
 };

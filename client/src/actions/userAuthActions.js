@@ -1,8 +1,7 @@
 import * as Util from '../utils';
-import { getUserLifts, getAccessoryPlan } from './';
+import { getUserLifts, getAccessoryPlan, clearAccessories } from './';
 
 export const loginSuccess = userId => {
-  console.log('LOGIN_SUCCESS ID', userId);
   return {
     type: 'LOGIN_SUCCESS',
     userId,
@@ -37,16 +36,22 @@ export const signupPending = () => {
     type: 'SIGNUP_PENDING',
   };
 };
-export const logOut = () => {
+export const logOutAction = () => {
   return {
     type: 'LOG_OUT',
   };
 };
 
-export const jwtLogin = token => async (dispatch, getState) => {
+//? switching the order of logOutAction and clearAccessories causes a bug
+export const logOut = () => async dispatch => {
+  await dispatch(logOutAction());
+  return dispatch(clearAccessories());
+};
+
+export const jwtLogin = token => async dispatch => {
   const userInfo = await Util.jwtLogin(token);
-  console.log('JWT', userInfo);
-  if (userInfo.ok) return dispatch(getAllUserData(userInfo));
+  console.log('JWTTOKEN', userInfo);
+  return dispatch(getAllUserData(userInfo));
 };
 
 export const userLogin = loginInfo => async (dispatch, getState) => {
@@ -64,13 +69,13 @@ export const userLogin = loginInfo => async (dispatch, getState) => {
   }
 };
 export const getAllUserData = userInfo => async (dispatch, getState) => {
-  console.log('getalluserdata');
   const accessoryData = await Util.getAccessoryPlan(userInfo.id);
   console.log(accessoryData);
   if (accessoryData.length) await dispatch(getAccessoryPlan(userInfo.id, accessoryData));
   await dispatch(getUserLifts(userInfo));
   return dispatch(loginSuccess(userInfo.id));
 };
+
 export const createNewUser = signUpInfo => async (dispatch, getState) => {
   if (!getState().userAuth.pending) {
     dispatch(signupPending());
