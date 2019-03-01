@@ -10,9 +10,11 @@ class AccessoryBox extends Component {
   addAccessory = () => {
     this.setState({ addNewAccessory: this.state.addNewAccessory ? false : true });
   };
+
   render() {
     const { accessories, userAuth, dayIndex } = this.props;
     const { accessoryPlan } = accessories;
+    console.log(accessories);
     const accessoryItems = accessories[accessoryPlan][dayIndex].map((accessory, accIndex) => {
       const { title, sets, reps, weight, id } = accessory;
       return (
@@ -24,6 +26,7 @@ class AccessoryBox extends Component {
           weight={weight}
           id={id}
           dayIndex={dayIndex}
+          accIndex={accIndex}
         />
       );
     });

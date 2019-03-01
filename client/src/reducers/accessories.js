@@ -4,10 +4,11 @@ function accessories(state = {}, action) {
       return { ...state, custom: action.basePlan, accessoryPlan: 'custom' };
     case 'ADD_ACCESSORY': {
       const { title, sets, reps, weight, id, dayIndex } = action;
-      const newState = { ...state.custom };
+      const newState = { ...state };
       console.log(newState, dayIndex);
-      newState[dayIndex].push({ title, sets, reps, weight, id });
-      return { ...state, custom: newState };
+      newState.custom[dayIndex].push({ title, sets, reps, weight, id });
+      console.log(newState);
+      return newState;
     }
     case 'CLEAR_ACCESSORIES': {
       const baseAccessories = { ...state };
@@ -28,17 +29,16 @@ function accessories(state = {}, action) {
     }
     case 'EDIT_ACCESSORY_SUCCESS': {
       const { dayIndex, title, sets, reps, weight, id } = action.payload;
-      const newAccessory = { ...state.custom };
-      const index = newAccessory[dayIndex].findIndex(item => item.id === id);
-      newAccessory[dayIndex][index] = { title, sets, reps, weight };
-      return { ...state, custom: newAccessory };
+      const newState = { ...state };
+      const index = newState.custom[dayIndex].findIndex(item => item.id === id);
+      newState.custom[dayIndex][index] = { id, title, sets, reps, weight };
+      return newState;
     }
     case 'DELETE_ACCESSORY': {
-      const newState = { ...state.custom };
-      console.log(newState, action);
-      const index = newState[action.dayIndex].findIndex(accessory => accessory.id === action.id);
-      newState[action.dayIndex].splice(index, 1);
-      return { ...state, custom: newState };
+      const newState = { ...state };
+      const { dayIndex, accIndex } = action;
+      newState.custom[dayIndex].splice(accIndex, 1);
+      return newState;
     }
     default:
       return state;

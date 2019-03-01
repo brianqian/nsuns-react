@@ -40,7 +40,7 @@ module.exports = {
     );
   },
   editAccessory: (req, res) => {
-    console.log(req.body);
+    console.log('EDIT ACCESSORY CONTROLLER', req.body);
     const { title, sets, reps, weight, userId, id } = req.body;
     const info = [title, sets, reps, weight, userId, id];
     connection.query(

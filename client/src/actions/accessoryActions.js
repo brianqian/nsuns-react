@@ -32,10 +32,10 @@ export const selectAccessoryPlan = plan => {
   };
 };
 
-export const editAccessorySuccess = accessoryInfo => {
+export const editAccessorySuccess = payload => {
   return {
     type: 'EDIT_ACCESSORY_SUCCESS',
-    accessoryInfo,
+    payload,
   };
 };
 
@@ -53,18 +53,19 @@ export const clearAccessories = () => {
   };
 };
 
-export const deleteAccessorySuccess = (id, dayIndex) => {
+export const deleteAccessorySuccess = (id, dayIndex, accIndex) => {
   return {
     type: 'DELETE_ACCESSORY',
     dayIndex,
     id,
+    accIndex,
   };
 };
 
 export const deleteAccessory = payload => async dispatch => {
-  const { id, dayIndex } = payload;
+  const { id, dayIndex, accIndex } = payload;
   await Util.deleteAccessory(payload);
-  return dispatch(deleteAccessorySuccess(id, dayIndex));
+  return dispatch(deleteAccessorySuccess(id, dayIndex, accIndex));
 };
 
 export const addAccessory = payload => async dispatch => {
@@ -84,6 +85,6 @@ export const createAccessoryPlan = (userId, basePlan) => async dispatch => {
   //inserts accessoryPlan into database
   const newBase = await Util.createAccessoryPlan(userId, basePlan);
   //updates state using basePlan as a template
-  console.log('in create accessory plan thunk', userId, newBase);
+
   return dispatch(createAccessoryPlanSuccess(basePlan));
 };
