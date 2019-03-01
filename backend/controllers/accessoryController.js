@@ -3,6 +3,7 @@ const connection = require('../db');
 module.exports = {
   createAccessoryPlan: (req, res) => {
     const { userId, basePlan } = req.body;
+    console.log(req.body.basePlan);
     //Checks for an existing custom plan and doesn't create one if one exists.
     //Custom plans should only be created once.
     connection.query('SELECT * FROM accessories WHERE userId = ?', [userId], (err, data) => {
@@ -20,7 +21,9 @@ module.exports = {
           [values],
           (err, data) => {
             if (err) throw err;
-            res.json(data);
+            console.log(data);
+            const { affectedRows, insertId } = data;
+            res.json({ affectedRows, insertId });
           }
         );
       }
@@ -38,10 +41,10 @@ module.exports = {
   },
   editAccessory: (req, res) => {
     console.log(req.body);
-    const { title, sets, reps, weight, dayIndex, accIndex, userId } = req.body;
-    const info = [title, sets, reps, weight, userId, dayIndex, accIndex];
+    const { title, sets, reps, weight, userId, id } = req.body;
+    const info = [title, sets, reps, weight, userId, id];
     connection.query(
-      'UPDATE accessories SET title = ?, sets = ?, reps = ?, weight = ? WHERE userId = ? AND dayIndex = ? AND accIndex = ?',
+      'UPDATE accessories SET title = ?, sets = ?, reps = ?, weight = ? WHERE userId = ? AND id = ?',
       info,
       (err, data) => {
         if (err) throw err;
@@ -51,5 +54,16 @@ module.exports = {
   },
   deleteAccessory: (req, res) => {
     console.log(req.body);
+    const { accIndex, userId, dayIndex, id } = req.body;
+    const info = [userId, dayIndex, id];
+    console.log(info);
+    connection.query(
+      'DELETE FROM accessories WHERE userId = ? AND dayIndex = ? AND id = ?',
+      info,
+      (err, data) => {
+        if (err) throw err;
+        console.log(data);
+      }
+    );
   },
 };

@@ -2,9 +2,19 @@ import { fetchRequest } from './';
 
 export const createAccessoryPlan = async (userId, basePlan) => {
   try {
+    console.log('CREATING ACCESSORY PLAN', basePlan);
     const resp = await fetchRequest('/api/accessory', 'POST', { userId, basePlan });
-    console.log(resp);
-    return;
+    let newBase = [...basePlan];
+    let { insertId } = resp;
+
+    newBase.forEach(dayArray => {
+      dayArray.forEach(accessory => {
+        accessory.id = insertId;
+        insertId++;
+      });
+    });
+    console.log(newBase);
+    return newBase;
   } catch (err) {
     console.error(err);
   }

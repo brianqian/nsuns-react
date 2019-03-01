@@ -48,3 +48,5 @@ dayIndex INTEGER(10),
 PRIMARY KEY (id)
 
 );
+
+ALTER TABLE accessories AUTO_INCREMENT=1000;

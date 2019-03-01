@@ -5,8 +5,7 @@ import { addAccessory, createAccessoryPlan, editAccessory, deleteAccessory } fro
 
 class AccessoryBox extends Component {
   state = {
-    accIndex: null,
-    dayIndex: null,
+    id: 0,
     title: '',
     sets: 0,
     reps: 0,
@@ -25,47 +24,45 @@ class AccessoryBox extends Component {
   //   addAccessory(userId, dayIndex);
   // };
   componentWillUnmount = () => {
-    console.log('accbox unmounting');
+    console.log('accbox unmounting', this.state);
   };
 
   crudAcc = async (payload, type) => {
     const { dispatch, userAuth, dayIndex, accessoryState } = this.props;
     const { userId } = userAuth;
     const { accessoryPlan } = accessoryState;
-    if (!accessoryState.custom) {
-      console.log(accessoryState);
-      await dispatch(createAccessoryPlan(userId, accessoryState[accessoryPlan]));
-    }
+    await dispatch(createAccessoryPlan(userId, accessoryState[accessoryPlan]));
+
     payload.userId = userId;
     payload.dayIndex = dayIndex;
+    console.log('before switch', payload);
     switch (type) {
       case 'DELETE':
-        this.deleteAcc(payload);
+        await this.deleteAcc(payload);
         break;
       case 'EDIT':
-        this.editAcc(payload);
+        await this.editAcc(payload);
         break;
       default:
         console.log('errror');
     }
   };
 
-  deleteAcc = (dayIndex, accIndex) => {
-    console.log('in delete acc', dayIndex, accIndex);
+  deleteAcc = payload => {
+    this.props.dispatch(deleteAccessory(payload));
   };
   editAcc = async payload => {
-    console.log('editAcc', payload);
+    this.setState({ id: payload.id });
+    console.log('editACc hit', payload.id);
     const { currentlyEditing } = this.state;
-    if (currentlyEditing) {
-      await this.setState({ currentlyEditing: false });
-      await this.setState({ accIndex: null });
-      const { title, sets, reps, weight } = this.state;
-      const accessoryObject = { ...payload, title, sets, reps, weight };
+    if (currentlyEditing && this.state.id === payload.id) {
+      const { title, sets, reps, weight, id } = this.state;
+      const accessoryObject = { ...payload, title, sets, reps, weight, id };
       await this.props.dispatch(editAccessory(accessoryObject));
+      this.setState({ currentlyEditing: false, id: null });
     } else {
-      const { title, sets, reps, weight, dayIndex, accIndex } = payload;
-      await this.setState({ currentlyEditing: true });
-      this.setState({ dayIndex, accIndex, title, sets, reps, weight });
+      const { title, sets, reps, weight, id } = payload;
+      this.setState({ currentlyEditing: true, id, title, sets, reps, weight });
     }
   };
 
@@ -76,24 +73,22 @@ class AccessoryBox extends Component {
 
   render() {
     const { accessories, userAuth, dayIndex } = this.props;
-    const accessoryItems = accessories.map((exercise, accIndex) => {
-      const { title, sets, reps, weight } = exercise;
+    const accessoryItems = accessories.map((accessory, accIndex) => {
+      const { title, sets, reps, weight, id } = accessory;
       return (
         <div key={dayIndex + accIndex} className="accessory__item">
           {userAuth.loggedIn && (
             <div className="accessory__item-icons">
-              <button onClick={() => this.crudAcc({ accIndex }, 'DELETE')}>X</button>
+              <button onClick={() => this.crudAcc({ id }, 'DELETE')}>X</button>
               <img
                 onClick={() =>
-                  this.crudAcc({ dayIndex, accIndex, title, sets, reps, weight }, 'EDIT')
+                  this.crudAcc({ dayIndex, accIndex, title, sets, reps, weight, id }, 'EDIT')
                 }
-                src={
-                  this.state.accIndex === accIndex ? './save_icon.svg' : './pencil-edit-button.svg'
-                }
+                src={this.state.id === id ? './save_icon.svg' : './pencil-edit-button.svg'}
               />
             </div>
           )}
-          {this.state.accIndex === accIndex ? (
+          {this.state.id === id ? (
             <div className="accessory__item-content">
               <input onChange={this.onChange} type="text" name={'title'} value={this.state.title} />
               <div className="accessory__item-content-setrep">
@@ -119,11 +114,11 @@ class AccessoryBox extends Component {
             </div>
           ) : (
             <div className="accessory__item-content">
-              <span>{exercise.title}</span>
+              <span>{accessory.title}</span>
               <span>
-                {exercise.sets} x {exercise.reps}
+                {accessory.sets} x {accessory.reps}
               </span>
-              <span>{exercise.weight}</span>
+              <span>{accessory.weight}</span>
             </div>
           )}
         </div>

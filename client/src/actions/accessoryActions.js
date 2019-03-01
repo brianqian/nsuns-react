@@ -14,10 +14,9 @@ export const createAccessoryPlanSuccess = basePlan => {
   };
 };
 
-export const getAccessoryPlan = (userId, accessoryPlan) => {
+export const getAccessoryPlan = accessoryPlan => {
   return {
     type: 'GET_ACCESSORY_PLAN',
-    userId,
     accessoryPlan,
   };
 };
@@ -50,29 +49,36 @@ export const clearAccessories = () => {
   };
 };
 
+export const deleteAccessorySuccess = (dayIndex, accIndex) => {
+  return {
+    type: 'DELETE_ACCESSORIES',
+    dayIndex,
+    accIndex,
+  };
+};
+
 export const deleteAccessory = accessoryInfo => async dispatch => {
-  const resp = await Util.deleteAccessory(accessoryInfo);
+  await Util.deleteAccessory(accessoryInfo);
+  dispatch(deleteAccessorySuccess(accessoryInfo.dayIndex, accessoryInfo.accIndex));
 };
 
 export const editAccessory = accessoryInfo => async dispatch => {
-  console.log(accessoryInfo);
-  //TODO: add connection to createAccessoryPlan
   const resp = await Util.editAccessory(accessoryInfo);
   if (resp.ok) return dispatch(editAccessorySuccess(accessoryInfo));
 };
 
-export const addAccessory = (userId, dayIndex) => async dispatch => {
+export const addAccessory = dayIndex => async dispatch => {
   //TODO: needs a function which inserts accessory into database
 
   //updates state with added accessory
-  return dispatch(addAccessoryAction(userId, dayIndex));
+  return dispatch(addAccessoryAction(dayIndex));
 };
 
 export const createAccessoryPlan = (userId, basePlan) => async dispatch => {
   //TODO: all async actions need pending/success/fail actions
   //inserts accessoryPlan into database
-  await Util.createAccessoryPlan(userId, basePlan);
+  const newBase = await Util.createAccessoryPlan(userId, basePlan);
   //updates state using basePlan as a template
-  console.log('in create accessory plan thunk', userId, basePlan);
+  console.log('in create accessory plan thunk', userId, newBase);
   return dispatch(createAccessoryPlanSuccess(basePlan));
 };
