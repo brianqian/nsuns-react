@@ -48,22 +48,17 @@ module.exports = {
       info,
       (err, data) => {
         if (err) throw err;
+        console.log(data);
         res.json({ ok: true });
       }
     );
   },
   deleteAccessory: (req, res) => {
     console.log(req.body);
-    const { accIndex, userId, dayIndex, id } = req.body;
-    const info = [userId, dayIndex, id];
-    console.log(info);
-    connection.query(
-      'DELETE FROM accessories WHERE userId = ? AND dayIndex = ? AND id = ?',
-      info,
-      (err, data) => {
-        if (err) throw err;
-        console.log(data);
-      }
-    );
+    const { id } = req.body;
+    connection.query('DELETE FROM accessories WHERE id = ?', [id], (err, data) => {
+      if (err) throw err;
+      console.log(data);
+    });
   },
 };

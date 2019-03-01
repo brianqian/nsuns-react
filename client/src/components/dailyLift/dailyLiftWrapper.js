@@ -5,12 +5,10 @@ import uuidv1 from 'uuid';
 
 function dailyLiftWrapper(props) {
   const { nsunsVariation } = props.userLifts;
-  const { dailySplits, accessories } = props;
-  const { accessoryPlan } = accessories;
+  const { dailySplits } = props;
   const dailyLifts = dailySplits[nsunsVariation].map((day, index) => {
     const base1 = day.baseLift[0] + 'TM';
     const base2 = day.baseLift[1] + 'TM';
-    const accessorySet = accessories[accessoryPlan][index];
     return (
       <DailyLift
         day={day.day}
@@ -27,7 +25,6 @@ function dailyLiftWrapper(props) {
         standard={'lbs'}
         key={uuidv1()}
         dayIndex={index}
-        accessories={accessorySet}
       />
     );
   });
@@ -36,7 +33,6 @@ function dailyLiftWrapper(props) {
 
 const mapStateToProps = state => ({
   userLifts: state.userLifts,
-  accessories: state.accessories,
   dailySplits: state.dailySplits,
 });
 

@@ -20,10 +20,17 @@ function accessories(state = {}, action) {
     case 'GET_ACCESSORY_PLAN':
       return { ...state, custom: action.accessoryPlan, accessoryPlan: 'custom' };
     case 'EDIT_ACCESSORY_SUCCESS':
+      let { dayIndex, title, sets, reps, weight, id } = action.accessoryInfo;
       const newAccessory = { ...state.custom };
-      const { dayIndex, accIndex, title, sets, reps, weight } = action.accessoryInfo;
-      newAccessory[dayIndex][accIndex] = { title, sets, reps, weight };
+      let index = newAccessory[dayIndex].findIndex(item => item.id === id);
+      newAccessory[dayIndex][index] = { title, sets, reps, weight };
       return { ...state, custom: newAccessory };
+    case 'DELETE_ACCESSORY':
+      const newState = { ...state.custom };
+      console.log(newState, action);
+      index = newState[action.dayIndex].findIndex(accessory => accessory.id === action.id);
+      newState[action.dayIndex].splice(index, 1);
+      return { ...state, custom: newState };
     default:
       return state;
   }

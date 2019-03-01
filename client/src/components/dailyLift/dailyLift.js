@@ -7,10 +7,9 @@ import { openAccessoryBox } from '../../actions';
 import { connect } from 'react-redux';
 
 class dailyLift extends Component {
-  //TODO: should be handled be redux so accessories stay open on accessoryPlan change
   handleClick = () => {
-    const { dispatch, accessoryState, dayIndex } = this.props;
-    dispatch(openAccessoryBox(accessoryState.openAccessoryBox[dayIndex] ? false : true, dayIndex));
+    const { dispatch, accessories, dayIndex } = this.props;
+    dispatch(openAccessoryBox(accessories.openAccessoryBox[dayIndex] ? false : true, dayIndex));
   };
 
   render() {
@@ -26,8 +25,7 @@ class dailyLift extends Component {
       max2,
       standard,
       dayIndex,
-      accessories,
-      accessoryState,
+      accessories
     } = this.props;
 
     const t1Workouts = t1Reps.map((rep, i) => {
@@ -67,15 +65,15 @@ class dailyLift extends Component {
             <img src="./expand-button.svg" alt="" height="15px" />
           </p>
         </div>
-        {accessoryState.openAccessoryBox[dayIndex] && (
-          <AccessoryBox dayIndex={dayIndex} accessories={accessories} />
+        {accessories.openAccessoryBox[dayIndex] && (
+          <AccessoryBox dayIndex={dayIndex} />
         )}
       </div>
     );
   }
 }
 const mapStateToProps = state => ({
-  accessoryState: state.accessories,
+  accessories: state.accessories,
 });
 
 export default connect(mapStateToProps)(dailyLift);

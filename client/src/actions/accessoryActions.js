@@ -49,17 +49,18 @@ export const clearAccessories = () => {
   };
 };
 
-export const deleteAccessorySuccess = (dayIndex, accIndex) => {
+export const deleteAccessorySuccess = (id, dayIndex) => {
   return {
-    type: 'DELETE_ACCESSORIES',
+    type: 'DELETE_ACCESSORY',
     dayIndex,
-    accIndex,
+    id,
   };
 };
 
 export const deleteAccessory = accessoryInfo => async dispatch => {
+  const { id, dayIndex } = accessoryInfo;
   await Util.deleteAccessory(accessoryInfo);
-  dispatch(deleteAccessorySuccess(accessoryInfo.dayIndex, accessoryInfo.accIndex));
+  dispatch(deleteAccessorySuccess(id, dayIndex));
 };
 
 export const editAccessory = accessoryInfo => async dispatch => {

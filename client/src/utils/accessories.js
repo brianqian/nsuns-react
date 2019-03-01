@@ -53,7 +53,7 @@ export const editAccessory = async accessoryInfo => {
 
 export const deleteAccessory = async accessoryInfo => {
   try {
-    const resp = fetchRequest(`/api/accessory/${accessoryInfo.userId}`, 'DELETE', accessoryInfo);
+    const resp = fetchRequest(`/api/accessory`, 'DELETE', accessoryInfo);
     console.log(resp);
   } catch (err) {
     console.error(err);
