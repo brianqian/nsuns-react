@@ -16,6 +16,7 @@ class AccessoryRow extends Component {
     reps: 0,
     weight: 0,
     currentlyEditing: false,
+    loaded: false,
   };
   // addAccessory = async () => {
   //   const { dispatch, userAuth, dayIndex, accessoryState } = this.props;
@@ -29,28 +30,43 @@ class AccessoryRow extends Component {
   //   addAccessory(userId, dayIndex);
   // };
 
+  componentDidMount = async () => {
+    console.log(this.props.id);
+    if (!this.props.id) await this.setState({ currentlyEditing: true });
+    this.setState({ loaded: true });
+    console.log(this.state);
+  };
+
   crudAccessory = async type => {
     const { dispatch, userAuth, accessories, id, dayIndex } = this.props;
     const { userId } = userAuth;
     const { accessoryPlan } = accessories;
-
+    if (!this.props.id) type = 'ADD';
     if (!accessories.hasOwnProperty('custom'))
       await dispatch(createAccessoryPlan(userId, accessories[accessoryPlan]));
 
     switch (type) {
       case 'DELETE':
-        await this.deleteAcc(id, dayIndex);
+        this.deleteAcc({ id, dayIndex });
         break;
       case 'EDIT':
-        await this.editAcc();
+        this.editAcc();
+      case 'ADD':
+        const { title, sets, reps, weight } = this.state;
+        this.addAcc({ title, sets, reps, weight, userId, dayIndex });
         break;
+
       default:
         console.log('errror');
     }
   };
+  addAcc = payload => {
+    console.log('inAddAcc');
+    this.props.dispatch(addAccessory(payload));
+  };
 
-  deleteAcc = (id, dayIndex) => {
-    this.props.dispatch(deleteAccessory({ id, dayIndex }));
+  deleteAcc = payload => {
+    this.props.dispatch(deleteAccessory(payload));
   };
   editAcc = async () => {
     const { dispatch, userAuth, dayIndex, title, sets, reps, weight, id } = this.props;
@@ -73,7 +89,9 @@ class AccessoryRow extends Component {
     const { userAuth, title, sets, reps, weight } = this.props;
     return (
       <div className="accessory__item">
-        {userAuth.loggedIn && <AccessoryButtons crudFunc={this.crudAccessory} />}
+        {userAuth.loggedIn && this.state.loaded && (
+          <AccessoryButtons crudFunc={this.crudAccessory} clicked={this.state.currentlyEditing} />
+        )}
 
         {this.state.currentlyEditing ? (
           <div className="accessory__item-content">

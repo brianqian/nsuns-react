@@ -8,7 +8,8 @@ router.route('/userInfo').put(userController.saveUserInfo);
 router
   .route('/accessory/:userId')
   .get(accessoryController.getAccessoryPlan)
-  .put(accessoryController.editAccessory);
+  .put(accessoryController.editAccessory)
+  .post(accessoryController.addAccessory);
 
 router
   .route('/accessory')

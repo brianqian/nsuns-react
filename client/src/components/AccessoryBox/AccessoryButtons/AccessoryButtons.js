@@ -5,7 +5,9 @@ class AccessoryButtons extends Component {
   state = {
     clicked: false,
   };
-
+  componentDidMount = () => {
+    if (this.props.clicked) this.setState({ clicked: true });
+  };
   toggleClicked = () => {
     const { clicked } = this.state;
     this.props.crudFunc('EDIT');

@@ -61,4 +61,18 @@ module.exports = {
       console.log(data);
     });
   },
+  addAccessory: (req, res) => {
+    console.log(req.body);
+    const { title, sets, reps, weight, dayIndex } = req.body;
+    const info = [title, sets, reps, weight, dayIndex, req.params.userId];
+    connection.query(
+      'INSERT INTO accessories (title, sets, reps, weight, dayIndex, userId) VALUES (?, ?, ?, ?, ?, ?)',
+      info,
+      (err, data) => {
+        if (err) throw err;
+        console.log(data);
+        res.json(data);
+      }
+    );
+  },
 };

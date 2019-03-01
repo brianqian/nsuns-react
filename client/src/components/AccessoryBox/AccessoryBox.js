@@ -4,6 +4,12 @@ import { connect } from 'react-redux';
 import AccessoryRow from './AccessoryRow/AccessoryRow';
 
 class AccessoryBox extends Component {
+  state = {
+    addNewAccessory: false,
+  };
+  addAccessory = () => {
+    this.setState({ addNewAccessory: this.state.addNewAccessory ? false : true });
+  };
   render() {
     const { accessories, userAuth, dayIndex } = this.props;
     const { accessoryPlan } = accessories;
@@ -22,6 +28,7 @@ class AccessoryBox extends Component {
       );
     });
 
+    const { addNewAccessory } = this.state;
     return (
       <div className="accessory__container">
         <div className="accessory__container-titles">
@@ -31,7 +38,12 @@ class AccessoryBox extends Component {
           <h4>Weight(lbs)</h4>
         </div>
         {accessoryItems}
-        {userAuth.loggedIn && <button onClick={this.addAccessory}>Add Accessory</button>}
+        {addNewAccessory && <AccessoryRow dayIndex={dayIndex} />}
+        {userAuth.loggedIn && (
+          <button onClick={this.addAccessory}>
+            {addNewAccessory ? 'Cancel' : 'Add Accessory'}
+          </button>
+        )}
       </div>
     );
   }

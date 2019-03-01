@@ -1,9 +1,13 @@
 import * as Util from '../utils/accessories';
-export const addAccessoryAction = (userId, dayIndex) => {
+export const addAccessorySuccess = (id, dayIndex, title, sets, reps, weight) => {
   return {
     type: 'ADD_ACCESSORY',
-    userId,
+    id,
     dayIndex,
+    title,
+    sets,
+    reps,
+    weight,
   };
 };
 
@@ -57,22 +61,22 @@ export const deleteAccessorySuccess = (id, dayIndex) => {
   };
 };
 
-export const deleteAccessory = accessoryInfo => async dispatch => {
-  const { id, dayIndex } = accessoryInfo;
-  await Util.deleteAccessory(accessoryInfo);
-  dispatch(deleteAccessorySuccess(id, dayIndex));
+export const deleteAccessory = payload => async dispatch => {
+  const { id, dayIndex } = payload;
+  await Util.deleteAccessory(payload);
+  return dispatch(deleteAccessorySuccess(id, dayIndex));
 };
 
-export const editAccessory = accessoryInfo => async dispatch => {
-  const resp = await Util.editAccessory(accessoryInfo);
-  if (resp.ok) return dispatch(editAccessorySuccess(accessoryInfo));
+export const addAccessory = payload => async dispatch => {
+  const { dayIndex, title, sets, reps, weight } = payload;
+  const id = await Util.addAccessory(payload);
+  console.log(dayIndex);
+  return dispatch(addAccessorySuccess(id, dayIndex, title, sets, reps, weight));
 };
 
-export const addAccessory = dayIndex => async dispatch => {
-  //TODO: needs a function which inserts accessory into database
-
-  //updates state with added accessory
-  return dispatch(addAccessoryAction(dayIndex));
+export const editAccessory = payload => async dispatch => {
+  const resp = await Util.editAccessory(payload);
+  if (resp.ok) return dispatch(editAccessorySuccess(payload));
 };
 
 export const createAccessoryPlan = (userId, basePlan) => async dispatch => {

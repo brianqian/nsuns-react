@@ -39,11 +39,15 @@ export const getAccessoryPlan = async userId => {
     console.error(err);
   }
 };
-
-export const editAccessory = async accessoryInfo => {
+export const addAccessory = async payload => {
+  const resp = await fetchRequest(`api/accessory/${payload.userId}`, 'POST', payload);
+  console.log(resp);
+  return resp;
+};
+export const editAccessory = async payload => {
   try {
-    console.log('edit accessory', accessoryInfo);
-    const resp = await fetchRequest(`/api/accessory/${accessoryInfo.userId}`, 'PUT', accessoryInfo);
+    console.log('edit accessory', payload);
+    const resp = await fetchRequest(`/api/accessory/${payload.userId}`, 'PUT', payload);
     return resp;
   } catch (err) {
     console.error(err);
@@ -51,9 +55,9 @@ export const editAccessory = async accessoryInfo => {
   return;
 };
 
-export const deleteAccessory = async accessoryInfo => {
+export const deleteAccessory = async payload => {
   try {
-    const resp = fetchRequest(`/api/accessory`, 'DELETE', accessoryInfo);
+    const resp = fetchRequest(`/api/accessory`, 'DELETE', payload);
     console.log(resp);
   } catch (err) {
     console.error(err);
