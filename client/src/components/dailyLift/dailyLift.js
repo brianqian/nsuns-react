@@ -25,9 +25,9 @@ class dailyLift extends Component {
       max2,
       standard,
       dayIndex,
-      accessories
+      accessories,
     } = this.props;
-
+    const accessoryBoxOpen = accessories.openAccessoryBox[dayIndex];
     const t1Workouts = t1Reps.map((rep, i) => {
       return (
         <WeightBox
@@ -62,12 +62,15 @@ class dailyLift extends Component {
           {t2Workouts}
           <p className="accessories__button" onClick={this.handleClick}>
             Accessories
-            <img src="./expand-button.svg" alt="" height="15px" />
+            <img
+              onClick={this.toggleExpand}
+              src={accessoryBoxOpen ? './collapse-button.svg' : './expand-button.svg'}
+              alt=""
+              height="15px"
+            />
           </p>
         </div>
-        {accessories.openAccessoryBox[dayIndex] && (
-          <AccessoryBox dayIndex={dayIndex} />
-        )}
+        {accessoryBoxOpen && <AccessoryBox dayIndex={dayIndex} />}
       </div>
     );
   }

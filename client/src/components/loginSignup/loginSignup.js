@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './loginSignup';
 import { connect } from 'react-redux';
 import { userLogin, logOut, createNewUser, openSettings } from '../../actions';
+import './loginSignup.css';
 
 class Login extends Component {
   state = {
@@ -46,7 +47,7 @@ class Login extends Component {
         {!loggedIn && (
           <div className="loginSignup__login-container">
             <form action="">
-              Login:
+              <h4>Login:</h4>
               <label htmlFor="userLogin">Username: </label>
               <input
                 onChange={this.onChange}
@@ -72,17 +73,14 @@ class Login extends Component {
           </div>
         )}
         {showStatus && <p>{message}</p>}
-        <br />
+
         {!loggedIn && (
-          <p>
-            New User?
-            <span
-              className="loginSignUp__open-signup"
-              onClick={() => this.setState({ selectSignUp: true })}
-            >
-              Sign up
-            </span>
-          </p>
+          <div
+            className="loginSignUp__open-signup"
+            onClick={() => this.setState({ selectSignUp: true })}
+          >
+            Sign up
+          </div>
         )}
 
         {this.state.selectSignUp && !loggedIn && (
