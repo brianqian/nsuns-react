@@ -59,6 +59,7 @@ module.exports = {
     connection.query('DELETE FROM accessories WHERE id = ?', [id], (err, data) => {
       if (err) throw err;
       data.ok = data.affectedRows ? true : false;
+      data.ok && console.log('Item id', id, 'successfully deleted');
       res.json(data);
     });
   },

@@ -3,12 +3,7 @@ function accessories(state = {}, action) {
     case 'CREATE_ACCESSORY_PLAN_SUCCESS':
       return { ...state, custom: action.basePlan, accessoryPlan: 'custom' };
     case 'ADD_ACCESSORY': {
-      const { title, sets, reps, weight, id, dayIndex } = action;
-      const newState = { ...state };
-      console.log(newState, dayIndex);
-      newState.custom[dayIndex].push({ title, sets, reps, weight, id });
-      console.log(newState);
-      return newState;
+      return { ...state, custom: action.basePlan };
     }
     case 'CLEAR_ACCESSORIES': {
       const baseAccessories = { ...state };
@@ -28,18 +23,12 @@ function accessories(state = {}, action) {
       return { ...state, custom: action.accessoryPlan, accessoryPlan: 'custom' };
     }
     case 'EDIT_ACCESSORY_SUCCESS': {
-      const { dayIndex, title, sets, reps, weight, id } = action.payload;
-      const newState = { ...state };
-      const index = newState.custom[dayIndex].findIndex(item => item.id === id);
-      newState.custom[dayIndex][index] = { id, title, sets, reps, weight };
-      return newState;
+      return { ...state, custom: action.basePlan };
     }
     case 'DELETE_ACCESSORY_SUCCESS': {
       console.log('DELETE ACCESSORY SUCCESS');
-      const newState = { ...state };
-      const { dayIndex, accIndex } = action;
-      newState.custom[dayIndex].splice(accIndex, 1);
-      return newState;
+
+      return { ...state, custom: action.basePlan };
     }
     case 'DELETE_ACCESSORY_FAIL': {
       console.error('DELETE ACC FAIL', action.error);

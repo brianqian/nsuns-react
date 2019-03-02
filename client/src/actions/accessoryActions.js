@@ -1,13 +1,8 @@
 import * as Util from '../utils/accessories';
-export const addAccessorySuccess = (id, dayIndex, title, sets, reps, weight) => {
+export const addAccessorySuccess = basePlan => {
   return {
     type: 'ADD_ACCESSORY',
-    id,
-    dayIndex,
-    title,
-    sets,
-    reps,
-    weight,
+    basePlan,
   };
 };
 
@@ -32,10 +27,10 @@ export const selectAccessoryPlan = plan => {
   };
 };
 
-export const editAccessorySuccess = payload => {
+export const editAccessorySuccess = basePlan => {
   return {
     type: 'EDIT_ACCESSORY_SUCCESS',
-    payload,
+    basePlan,
   };
 };
 
@@ -53,12 +48,10 @@ export const clearAccessories = () => {
   };
 };
 
-export const deleteAccessorySuccess = (id, dayIndex, accIndex) => {
+export const deleteAccessorySuccess = basePlan => {
   return {
     type: 'DELETE_ACCESSORY_SUCCESS',
-    dayIndex,
-    id,
-    accIndex,
+    basePlan,
   };
 };
 export const deleteAccessoryFail = error => {
@@ -68,26 +61,24 @@ export const deleteAccessoryFail = error => {
   };
 };
 
-export const deleteAccessory = payload => async dispatch => {
-  const { id, dayIndex, accIndex, accessoryPlan } = payload;
-  console.log('IN DELETE ACC ACTION', accessoryPlan);
+export const deleteAccessory = (payload, basePlan) => async dispatch => {
+  //payload={id, dayIndex, userId}
   const resp = await Util.deleteAccessory(payload);
 
-  return resp.ok
-    ? dispatch(deleteAccessorySuccess(id, dayIndex, accIndex))
-    : dispatch(deleteAccessoryFail(resp));
+  return resp.ok ? dispatch(deleteAccessorySuccess(basePlan)) : dispatch(deleteAccessoryFail(resp));
 };
 
-export const addAccessory = payload => async dispatch => {
-  const { dayIndex, title, sets, reps, weight } = payload;
+export const addAccessory = (payload, basePlan) => async dispatch => {
+  //payload={title, sets, reps, weight, userId, dayIndex, id}
+  const { dayIndex, accIndex } = payload;
   const id = await Util.addAccessory(payload);
-  console.log(dayIndex);
-  return dispatch(addAccessorySuccess(id, dayIndex, title, sets, reps, weight));
+  basePlan[dayIndex][accIndex].id = id;
+  return dispatch(addAccessorySuccess(basePlan));
 };
 
-export const editAccessory = payload => async dispatch => {
+export const editAccessory = (payload, basePlan) => async dispatch => {
   const resp = await Util.editAccessory(payload);
-  if (resp.ok) return dispatch(editAccessorySuccess(payload));
+  if (resp.ok) return dispatch(editAccessorySuccess(basePlan));
 };
 
 export const createAccessoryPlan = (userId, basePlan) => async dispatch => {
@@ -103,15 +94,20 @@ export const updateAccessoryDb = (payload, type, basePlan, accessoryPlan) => asy
   const { title, sets, reps, weight, userId, dayIndex, id } = payload;
   const currentDay = basePlan[dayIndex];
   const accessoryIndex = currentDay.findIndex(accessory => accessory.id === id);
-  console.log('BEFORE', currentDay);
+  const existingPlan = accessoryPlan === 'custom';
+  // console.log('BEFORE', currentDay);
   if (type === 'delete') {
     currentDay.splice(accessoryIndex, 1);
+    if (existingPlan) dispatch(deleteAccessory(payload, basePlan));
   } else if (type === 'add') {
-    currentDay.push(title, sets, reps, weight);
+    currentDay.push({ title, sets, reps, weight, dayIndex, id, userId });
+    payload.accIndex = currentDay.length - 1;
+    if (existingPlan) dispatch(addAccessory(payload, basePlan));
   } else if (type === 'edit') {
-    currentDay[dayIndex][accessoryIndex] = { title, sets, reps, weight };
+    currentDay[accessoryIndex] = { title, sets, reps, weight, id, dayIndex, userId };
+    if (existingPlan) dispatch(editAccessory(payload, basePlan));
   }
-  console.log('AFTER', basePlan);
+  // console.log('AFTER', basePlan);
   if (accessoryPlan !== 'custom') {
     const newBase = await Util.createAccessoryPlan(userId, basePlan);
     return dispatch(createAccessoryPlanSuccess(newBase));
