@@ -34,4 +34,4 @@ First thing to do is to calculate your 1 Rep Max using something like [this](htt
 
 ## Status
 
-Currently refactoring this project to use Redux and potentially Postgres in the future
+Redux refactor completed, all basic functions working. Currently styling and working on mobile responsiveness.
