@@ -1,15 +1,15 @@
-.loginSignup__login-container {
+.loginSignup__container {
   font-family: 'Noto Serif';
   color: #0c1821;
+  display: grid;
+  grid-auto-flow: row;
 }
 
 .loginSignUp__open-signup {
   padding: 0.5rem;
   background-color: #ccc9dc;
-  font-family: 'Noto Serif';
   width: 50%;
   display: flex;
   justify-content: center;
-  float: right;
-  z-index: 10;
+  justify-self: end;
 }

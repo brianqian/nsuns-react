@@ -32,3 +32,11 @@ main {
   grid-column: 2;
   max-height: 100vh;
 }
+
+@media only screen and (max-width: 1200px) {
+  .App {
+    grid-template-columns: 1fr;
+  }
+}
+@media only screen and (max-width: 800px) {
+}

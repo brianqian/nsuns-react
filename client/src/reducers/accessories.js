@@ -26,8 +26,6 @@ function accessories(state = {}, action) {
       return { ...state, custom: action.basePlan };
     }
     case 'DELETE_ACCESSORY_SUCCESS': {
-      console.log('DELETE ACCESSORY SUCCESS');
-
       return { ...state, custom: action.basePlan };
     }
     case 'DELETE_ACCESSORY_FAIL': {

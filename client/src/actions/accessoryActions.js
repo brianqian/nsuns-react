@@ -95,7 +95,6 @@ export const updateAccessoryDb = (payload, type, basePlan, accessoryPlan) => asy
   const currentDay = basePlan[dayIndex];
   const accessoryIndex = currentDay.findIndex(accessory => accessory.id === id);
   const existingPlan = accessoryPlan === 'custom';
-  // console.log('BEFORE', currentDay);
   if (type === 'delete') {
     currentDay.splice(accessoryIndex, 1);
     if (existingPlan) dispatch(deleteAccessory(payload, basePlan));
@@ -107,7 +106,6 @@ export const updateAccessoryDb = (payload, type, basePlan, accessoryPlan) => asy
     currentDay[accessoryIndex] = { title, sets, reps, weight, id, dayIndex, userId };
     if (existingPlan) dispatch(editAccessory(payload, basePlan));
   }
-  // console.log('AFTER', basePlan);
   if (accessoryPlan !== 'custom') {
     const newBase = await Util.createAccessoryPlan(userId, basePlan);
     return dispatch(createAccessoryPlanSuccess(newBase));

@@ -66,7 +66,8 @@ class dailyLift extends Component {
               onClick={this.toggleExpand}
               src={accessoryBoxOpen ? './collapse-button.svg' : './expand-button.svg'}
               alt=""
-              height="15px"
+              height="auto"
+              width="10%"
             />
           </p>
         </div>

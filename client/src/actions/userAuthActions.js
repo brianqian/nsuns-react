@@ -57,7 +57,6 @@ export const userLogin = loginInfo => async (dispatch, getState) => {
   if (!getState().userAuth.pending) {
     dispatch(loginPending());
     const userInfo = await Util.logIn(loginInfo);
-    console.log(userInfo);
     if (userInfo.ok) {
       await localStorage.setItem('userId', userInfo.token);
       //check if accessoryplan exists and update state if it does
@@ -69,7 +68,6 @@ export const userLogin = loginInfo => async (dispatch, getState) => {
 };
 export const getAllUserData = userInfo => async (dispatch, getState) => {
   const accessoryData = await Util.getAccessoryPlan(userInfo.id);
-  console.log(accessoryData);
   if (accessoryData.length) await dispatch(getAccessoryPlan(accessoryData));
   await dispatch(getUserLifts(userInfo));
   return dispatch(loginSuccess(userInfo.id));

@@ -14,10 +14,8 @@ class AccessoryBox extends Component {
   render() {
     const { accessories, userAuth, dayIndex } = this.props;
     const { accessoryPlan } = accessories;
-    console.log(accessories);
     const accessoryItems = accessories[accessoryPlan][dayIndex].map((accessory, accIndex) => {
       const { title, sets, reps, weight, id } = accessory;
-      console.log('FIND ID HERE', accessories[accessoryPlan][dayIndex]);
       return (
         <AccessoryRow
           key={dayIndex + accIndex}

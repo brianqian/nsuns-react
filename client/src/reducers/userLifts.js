@@ -6,7 +6,6 @@ function userLifts(state = { nsunsVariation: '5day' }, action) {
       delete newUserLifts.ok;
       return newUserLifts;
     case 'LOG_OUT':
-      console.log(state);
       return { ...state, nsunsVariation: '5day', accessoryPlan: 'arms' };
     case 'USER_LIFT_ON_CHANGE':
       return { ...state, ...action.newValues };
