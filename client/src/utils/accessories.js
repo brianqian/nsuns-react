@@ -59,6 +59,7 @@ export const deleteAccessory = async payload => {
   try {
     const resp = fetchRequest(`/api/accessory`, 'DELETE', payload);
     console.log(resp);
+    return resp;
   } catch (err) {
     console.error(err);
   }

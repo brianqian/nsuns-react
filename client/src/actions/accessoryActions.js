@@ -55,17 +55,27 @@ export const clearAccessories = () => {
 
 export const deleteAccessorySuccess = (id, dayIndex, accIndex) => {
   return {
-    type: 'DELETE_ACCESSORY',
+    type: 'DELETE_ACCESSORY_SUCCESS',
     dayIndex,
     id,
     accIndex,
   };
 };
+export const deleteAccessoryFail = error => {
+  return {
+    type: 'DELETE_ACCESSORY_FAIL',
+    error,
+  };
+};
 
 export const deleteAccessory = payload => async dispatch => {
-  const { id, dayIndex, accIndex } = payload;
-  await Util.deleteAccessory(payload);
-  return dispatch(deleteAccessorySuccess(id, dayIndex, accIndex));
+  const { id, dayIndex, accIndex, accessoryPlan } = payload;
+  console.log('IN DELETE ACC ACTION', accessoryPlan);
+  const resp = await Util.deleteAccessory(payload);
+
+  return resp.ok
+    ? dispatch(deleteAccessorySuccess(id, dayIndex, accIndex))
+    : dispatch(deleteAccessoryFail(resp));
 };
 
 export const addAccessory = payload => async dispatch => {
@@ -86,5 +96,24 @@ export const createAccessoryPlan = (userId, basePlan) => async dispatch => {
   const newBase = await Util.createAccessoryPlan(userId, basePlan);
   //updates state using basePlan as a template
 
-  return dispatch(createAccessoryPlanSuccess(basePlan));
+  return dispatch(createAccessoryPlanSuccess(newBase));
+};
+
+export const updateAccessoryDb = (payload, type, basePlan, accessoryPlan) => async dispatch => {
+  const { title, sets, reps, weight, userId, dayIndex, id } = payload;
+  const currentDay = basePlan[dayIndex];
+  const accessoryIndex = currentDay.findIndex(accessory => accessory.id === id);
+  console.log('BEFORE', currentDay);
+  if (type === 'delete') {
+    currentDay.splice(accessoryIndex, 1);
+  } else if (type === 'add') {
+    currentDay.push(title, sets, reps, weight);
+  } else if (type === 'edit') {
+    currentDay[dayIndex][accessoryIndex] = { title, sets, reps, weight };
+  }
+  console.log('AFTER', basePlan);
+  if (accessoryPlan !== 'custom') {
+    const newBase = await Util.createAccessoryPlan(userId, basePlan);
+    return dispatch(createAccessoryPlanSuccess(newBase));
+  }
 };

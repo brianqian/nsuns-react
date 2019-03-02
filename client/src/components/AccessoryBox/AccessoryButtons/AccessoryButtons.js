@@ -11,14 +11,14 @@ class AccessoryButtons extends Component {
 
   toggleClicked = async () => {
     const { clicked } = this.state;
-    this.props.crudFunc('EDIT');
+    this.props.editAcc();
     this.setState({ clicked: clicked ? false : true });
   };
 
   render() {
     return (
       <div className="accessory__item-icons">
-        <button onClick={() => this.props.crudFunc('DELETE')}>X</button>
+        <button onClick={() => this.props.deleteAcc()}>X</button>
         <img
           onClick={this.toggleClicked}
           src={this.state.clicked ? './save_icon.svg' : './pencil-edit-button.svg'}

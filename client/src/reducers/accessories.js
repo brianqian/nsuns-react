@@ -34,11 +34,16 @@ function accessories(state = {}, action) {
       newState.custom[dayIndex][index] = { id, title, sets, reps, weight };
       return newState;
     }
-    case 'DELETE_ACCESSORY': {
+    case 'DELETE_ACCESSORY_SUCCESS': {
+      console.log('DELETE ACCESSORY SUCCESS');
       const newState = { ...state };
       const { dayIndex, accIndex } = action;
       newState.custom[dayIndex].splice(accIndex, 1);
       return newState;
+    }
+    case 'DELETE_ACCESSORY_FAIL': {
+      console.error('DELETE ACC FAIL', action.error);
+      return state;
     }
     default:
       return state;

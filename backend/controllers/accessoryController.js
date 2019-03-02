@@ -58,7 +58,8 @@ module.exports = {
     const { id } = req.body;
     connection.query('DELETE FROM accessories WHERE id = ?', [id], (err, data) => {
       if (err) throw err;
-      console.log(data);
+      data.ok = data.affectedRows ? true : false;
+      res.json(data);
     });
   },
   addAccessory: (req, res) => {

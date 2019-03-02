@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import AccessoryButtons from '../AccessoryButtons/AccessoryButtons';
-import {
-  addAccessory,
-  createAccessoryPlan,
-  editAccessory,
-  deleteAccessory,
-} from '../../../actions';
+import { updateAccessoryDb } from '../../../actions';
 
 class AccessoryRow extends Component {
   state = {
@@ -24,51 +19,36 @@ class AccessoryRow extends Component {
     this.setState({ loaded: true });
   };
 
-  crudAccessory = async type => {
-    const { dispatch, userAuth, accessories, id, dayIndex, accIndex } = this.props;
+  addAcc = () => {
+    const { title, sets, reps, weight } = this.state;
+    const { dispatch, dayIndex, id, userAuth, accessories } = this.props;
     const { userId } = userAuth;
     const { accessoryPlan } = accessories;
-    if (this.props.id === undefined) {
-      console.log(this.props.id);
-      type = 'ADD';
-    }
-
-    if (!accessories.hasOwnProperty('custom'))
-      await dispatch(createAccessoryPlan(userId, accessories[accessoryPlan]));
-    switch (type) {
-      case 'DELETE':
-        this.deleteAcc({ id, dayIndex, accIndex });
-        break;
-      case 'EDIT':
-        this.editAcc();
-        break;
-      case 'ADD':
-        console.log('adding');
-        const { title, sets, reps, weight } = this.state;
-        this.addAcc({ title, sets, reps, weight, userId, dayIndex });
-        break;
-
-      default:
-        console.log('errror');
-    }
-  };
-  addAcc = payload => {
-    this.props.dispatch(addAccessory(payload));
+    const payload = { title, sets, reps, weight, userId, dayIndex, id };
+    dispatch(updateAccessoryDb(payload, 'add', accessories[accessoryPlan], accessoryPlan));
   };
 
-  deleteAcc = payload => {
-    this.props.dispatch(deleteAccessory(payload));
+  deleteAcc = () => {
+    const { dispatch, dayIndex, id, userAuth, accessories } = this.props;
+    const { userId } = userAuth;
+    const { accessoryPlan } = accessories;
+    const payload = { userId, id, dayIndex };
+    dispatch(updateAccessoryDb(payload, 'delete', accessories[accessoryPlan], accessoryPlan));
   };
+
   editAcc = async () => {
     console.log('in editAcc');
-    const { dispatch, userAuth, dayIndex, title, sets, reps, weight, id } = this.props;
-    const { userId } = userAuth;
     if (this.state.currentlyEditing) {
+      const { dispatch, userAuth, dayIndex, accessories } = this.props;
+      const { userId } = userAuth;
+      const { accessoryPlan } = accessories;
       const { title, sets, reps, weight, id } = this.state;
-      await this.setState({ currentlyEditing: false });
-      await dispatch(editAccessory({ title, sets, reps, weight, id, userId, dayIndex }));
+      const payload = { title, sets, reps, weight, id, userId, dayIndex };
+      await dispatch(updateAccessoryDb(payload, 'edit', accessories[accessoryPlan], accessoryPlan));
+      this.setState({ currentlyEditing: false });
     } else {
-      this.setState({ currentlyEditing: true, id, title, sets, reps, weight });
+      const { title, sets, reps, weight, id } = this.props;
+      this.setState({ currentlyEditing: true, title, sets, reps, weight, id });
     }
   };
 
@@ -78,11 +58,17 @@ class AccessoryRow extends Component {
   };
 
   render() {
-    const { userAuth, title, sets, reps, weight } = this.props;
+    const { userAuth, title, sets, reps, weight, id } = this.props;
     return (
       <div className="accessory__item">
         {userAuth.loggedIn && this.state.loaded && (
-          <AccessoryButtons crudFunc={this.crudAccessory} clicked={this.state.currentlyEditing} />
+          <AccessoryButtons
+            deleteAcc={this.deleteAcc}
+            addAcc={this.addAcc}
+            editAcc={this.editAcc}
+            id={id}
+            clicked={this.state.currentlyEditing}
+          />
         )}
 
         {this.state.currentlyEditing ? (
