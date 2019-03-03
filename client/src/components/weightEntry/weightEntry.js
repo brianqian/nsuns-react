@@ -41,8 +41,12 @@ class weightEntry extends Component {
     return (
       <div>
         <div className="weightEntry__container">
-          <form action="">
-            <div className="weightEntry__input-wrapper">
+          <form
+            onSubmit={e => {
+              this.handleSubmit(e);
+            }}
+          >
+            <div className="weightEntry__input-wrapper weightEntry__bench-input">
               <label htmlFor="benchRMInput">1RM Bench:</label>
               <input
                 className="rm-input"
@@ -53,7 +57,7 @@ class weightEntry extends Component {
                 type="number"
               />
             </div>
-            <div className="weightEntry__input-wrapper">
+            <div className="weightEntry__input-wrapper weightEntry__ohp-input">
               <label htmlFor="ohpRMInput">1RM OHP:</label>
               <input
                 className="rm-input"
@@ -64,7 +68,7 @@ class weightEntry extends Component {
                 type="number"
               />
             </div>
-            <div className="weightEntry__input-wrapper">
+            <div className="weightEntry__input-wrapper weightEntry__squat-input">
               <label htmlFor="squatRMInput">1RM Squat:</label>
               <input
                 className="rm-input"
@@ -75,7 +79,7 @@ class weightEntry extends Component {
                 type="number"
               />
             </div>
-            <div className="weightEntry__input-wrapper">
+            <div className="weightEntry__input-wrapper weightEntry__deadlift-input">
               <label htmlFor="deadliftRMInput">1RM Deadlift:</label>
               <input
                 className="tm-input"
@@ -86,7 +90,7 @@ class weightEntry extends Component {
                 type="number"
               />
             </div>
-            <div className="weightEntry__input-wrapper">
+            <div className="weightEntry__input-wrapper weightEntry__bench-input">
               <label htmlFor="benchTMInput">TM Bench:</label>
               <input
                 className="tm-input"
@@ -97,7 +101,7 @@ class weightEntry extends Component {
                 type="number"
               />
             </div>
-            <div className="weightEntry__input-wrapper">
+            <div className="weightEntry__input-wrapper weightEntry__ohp-input">
               <label htmlFor="ohpTMInput">TM OHP:</label>
               <input
                 className="tm-input"
@@ -108,7 +112,7 @@ class weightEntry extends Component {
                 type="number"
               />
             </div>
-            <div className="weightEntry__input-wrapper">
+            <div className="weightEntry__input-wrapper weightEntry__sqaut-input">
               <label htmlFor="squatTMInput">TM Squat:</label>
               <input
                 className="tm-input"
@@ -119,7 +123,7 @@ class weightEntry extends Component {
                 type="number"
               />
             </div>
-            <div className="weightEntry__input-wrapper">
+            <div className="weightEntry__input-wrapper weightEntry__deadlift-input">
               <label htmlFor="deadliftTMInput">TM Deadlift:</label>
               <input
                 className="tm-input"
@@ -130,11 +134,7 @@ class weightEntry extends Component {
                 type="number"
               />
             </div>
-            {userAuth.loggedIn && (
-              <button onClick={this.handleSubmit} type="submit">
-                Save new values
-              </button>
-            )}
+            {userAuth.loggedIn && <button type="submit">Save new values</button>}
           </form>
         </div>
       </div>

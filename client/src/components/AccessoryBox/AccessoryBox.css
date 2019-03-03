@@ -78,4 +78,14 @@
   .accessory__container {
     grid-column: 1/-1;
   }
+  .accessory__item {
+    grid-template-columns: 2fr repeat(3, 3fr);
+  }
+  .accessory__item-icons > * {
+    flex: 1;
+    align-self: center;
+  }
+  .accessory__item-icons {
+    height: 100%;
+  }
 }

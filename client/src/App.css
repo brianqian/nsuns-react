@@ -32,6 +32,11 @@ main {
   grid-column: 2;
   max-height: 100vh;
 }
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 @media only screen and (max-width: 1200px) {
   .App {
@@ -39,4 +44,7 @@ main {
   }
 }
 @media only screen and (max-width: 800px) {
+  /* .App {
+    max-width: 100vw;
+  } */
 }
