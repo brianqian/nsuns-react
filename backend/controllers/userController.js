@@ -1,7 +1,7 @@
 const connection = require('../db');
 
 module.exports = {
-  saveUserInfo: (req, res) => {
+  saveUserLifts: (req, res) => {
     console.log('saveUserInfo');
     const {
       benchRM,
@@ -32,5 +32,12 @@ module.exports = {
         res.json(data);
       }
     );
+  },
+  saveStandard: (req, res) => {
+    connection.query('UPDATE userInfo SET standard = ?', [req.params.standard], (err, data) => {
+      if (err) throw err;
+      data.ok = true;
+      res.json(data);
+    });
   },
 };

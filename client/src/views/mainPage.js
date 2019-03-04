@@ -1,9 +1,9 @@
 import React from 'react';
-import WeightEntry from '../components/weightEntry/weightEntry';
-import DailyLiftWrapper from '../components/dailyLift/dailyLiftWrapper';
+import WeightEntry from '../components/WeightEntry/WeightEntry';
+import DailyLiftWrapper from '../components/DailyLift/DailyLiftWrapper';
 import { connect } from 'react-redux';
 
-function MainPage(props) {
+function MainPage() {
   return (
     <div>
       <WeightEntry />

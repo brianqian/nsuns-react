@@ -5,7 +5,6 @@ export const createAccessoryPlan = async (userId, basePlan) => {
     const resp = await fetchRequest('/api/accessory', 'POST', { userId, basePlan });
     let newBase = [...basePlan];
     let { insertId } = resp;
-
     newBase.forEach(dayArray => {
       dayArray.forEach(accessory => {
         accessory.id = insertId;
@@ -24,9 +23,7 @@ export const getAccessoryPlan = async userId => {
     const respArray = [];
     if (resp.length) {
       // const weekLength = resp[resp.length - 1].dayIndex;
-      let weekLength = [];
-      resp.forEach(accessory => weekLength.push(accessory.dayIndex));
-      weekLength = Math.max(...weekLength);
+      const weekLength = Math.max(...resp.map(accessory => accessory.dayIndex));
       for (let i = 0; i <= weekLength; i++) {
         respArray.push(resp.filter(item => item.dayIndex === i));
       }
