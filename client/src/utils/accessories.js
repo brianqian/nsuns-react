@@ -23,7 +23,10 @@ export const getAccessoryPlan = async userId => {
     resp = await resp.json();
     const respArray = [];
     if (resp.length) {
-      const weekLength = resp[resp.length - 1].dayIndex;
+      // const weekLength = resp[resp.length - 1].dayIndex;
+      let weekLength = [];
+      resp.forEach(accessory => weekLength.push(accessory.dayIndex));
+      weekLength = Math.max(...weekLength);
       for (let i = 0; i <= weekLength; i++) {
         respArray.push(resp.filter(item => item.dayIndex === i));
       }

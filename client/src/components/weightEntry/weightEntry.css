@@ -32,4 +32,12 @@
   .weightEntry__input-wrapper > input {
     flex: 6;
   }
+  .weightEntry__bench-input,
+  .weightEntry__ohp-input {
+    grid-column: 1;
+  }
+  .weightEntry__deadlift-input,
+  .weightEntry__squat-input {
+    grid-column: 2;
+  }
 }
