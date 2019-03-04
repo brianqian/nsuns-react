@@ -51,7 +51,7 @@ export const logOut = () => async dispatch => {
 
 export const jwtLogin = token => async dispatch => {
   const userInfo = await Util.jwtLogin(token);
-  return dispatch(getAllUserData(userInfo));
+  if (userInfo.ok) return dispatch(getAllUserData(userInfo));
 };
 
 export const userLogin = loginInfo => async (dispatch, getState) => {
