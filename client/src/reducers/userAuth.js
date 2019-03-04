@@ -3,14 +3,17 @@ function userAuth(
   action
 ) {
   switch (action.type) {
-    case 'LOGIN_SUCCESS':
+    case 'LOGIN_SUCCESS': {
+      const { userId, username } = action;
       return {
         ...state,
         message: 'Logged in!',
         pending: false,
         loggedIn: true,
-        userId: action.userId,
+        userId,
+        username,
       };
+    }
     case 'LOGIN_FAIL':
       return { ...state, message: action.message, showStatus: true, pending: false };
     case 'LOGIN_PENDING':
@@ -28,7 +31,14 @@ function userAuth(
     case 'SIGNUP_PENDING':
       return { ...state, message: 'Creating Account...', showStatus: true, pending: true };
     case 'LOG_OUT':
-      return { ...state, message: '', showStatus: false, loggedIn: false };
+      return {
+        ...state,
+        message: '',
+        showStatus: false,
+        loggedIn: false,
+        userId: null,
+        username: '',
+      };
     default:
       return state;
   }

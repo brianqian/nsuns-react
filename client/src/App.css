@@ -13,6 +13,12 @@ input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+header {
+  display: flex;
+  grid-row: 1;
+  grid-column: 2;
+  justify-self: end;
+}
 
 .App {
   display: grid;
@@ -23,10 +29,13 @@ input[type='number']::-webkit-outer-spin-button {
   background-color: #ccc9dc41;
   height: 100vh;
 }
+header > p {
+  flex: 3;
+  margin: 0 2rem;
+  align-self: center;
+}
 .App__settings-button {
-  grid-row: 1;
-  grid-column: 2;
-  justify-self: right;
+  flex: 1;
   max-width: 120px;
   background-color: #1b2a41;
   font-size: 1rem;

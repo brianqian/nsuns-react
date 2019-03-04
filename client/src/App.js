@@ -19,12 +19,16 @@ class App extends Component {
   };
 
   render() {
+    const { username } = this.props.userAuth;
     return (
       <div className="App">
         <UserSettings />
-        <div className="App__settings-button" onClick={this.toggleSettings}>
-          Login/Settings
-        </div>
+        <header>
+          <p> {username && `Welcome ${username}`}</p>
+          <div className="App__settings-button" onClick={this.toggleSettings}>
+            Login/Settings
+          </div>
+        </header>
         <main>
           <Router>
             <Switch>

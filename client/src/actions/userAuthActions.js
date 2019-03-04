@@ -1,10 +1,11 @@
 import * as Util from '../utils';
 import { getUserLifts, getAccessoryPlan, clearAccessories } from './';
 
-export const loginSuccess = userId => {
+export const loginSuccess = (userId, username) => {
   return {
     type: 'LOGIN_SUCCESS',
     userId,
+    username,
   };
 };
 export const loginFail = message => {
@@ -70,7 +71,7 @@ export const getAllUserData = userInfo => async (dispatch, getState) => {
   const accessoryData = await Util.getAccessoryPlan(userInfo.id);
   if (accessoryData.length) await dispatch(getAccessoryPlan(accessoryData));
   await dispatch(getUserLifts(userInfo));
-  return dispatch(loginSuccess(userInfo.id));
+  return dispatch(loginSuccess(userInfo.id, userInfo.username));
 };
 
 export const createNewUser = signUpInfo => async (dispatch, getState) => {

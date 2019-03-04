@@ -1,0 +1,8 @@
+.standard-selector {
+  display: flex;
+  align-items: center;
+}
+
+.standard-selector > select {
+  margin-left: 1rem;
+}
