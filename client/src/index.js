@@ -4,10 +4,13 @@ import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import store from './store';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 const ReduxContainer = () => (
   <Provider store={store}>
-    <App />
+    <Router>
+      <Route exact path="/" component={App} />
+    </Router>
   </Provider>
 );
 
