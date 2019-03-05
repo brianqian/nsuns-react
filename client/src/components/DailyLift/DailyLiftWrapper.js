@@ -1,7 +1,6 @@
 import React from 'react';
 import DailyLift from './DailyLift';
 import { connect } from 'react-redux';
-import uuidv1 from 'uuid';
 
 // function DailyLiftWrapper(props) {
 function DailyLiftWrapper({ userLifts, dailySplits, dailySplits: { nsunsVariation } }) {
@@ -22,7 +21,7 @@ function DailyLiftWrapper({ userLifts, dailySplits, dailySplits: { nsunsVariatio
         max1={userLifts[base1] || '0'}
         max2={userLifts[base2] || '0'}
         standard={dailySplits.standard}
-        key={uuidv1()}
+        key={'dl' + index}
         dayIndex={index}
       />
     );

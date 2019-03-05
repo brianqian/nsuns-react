@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { calcDailyLift } from '../../utils';
 import './WeightBox.css';
+import { connect } from 'react-redux';
 
 class WeightBox extends Component {
   state = {
@@ -12,6 +13,7 @@ class WeightBox extends Component {
   };
 
   render() {
+    console.log('rerender');
     const { reps, weights, max, standard } = this.props;
     const weight = calcDailyLift(weights, max, standard);
     return (
@@ -22,4 +24,4 @@ class WeightBox extends Component {
   }
 }
 
-export default WeightBox;
+export default connect()(WeightBox);
