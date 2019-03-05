@@ -7,5 +7,5 @@ function dailySplits(state = {}, action) {
       return state;
   }
 }
-
+//variation, standard
 export default dailySplits;

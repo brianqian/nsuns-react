@@ -10,9 +10,7 @@ import MainPage from './views/mainPage';
 const ReduxContainer = () => (
   <Provider store={store}>
     <Router>
-      <App>
-        <Route path="/" component={MainPage} />
-      </App>
+      <App />
     </Router>
   </Provider>
 );
