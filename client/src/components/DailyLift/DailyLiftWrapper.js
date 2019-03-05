@@ -3,7 +3,7 @@ import DailyLift from './DailyLift';
 import { connect } from 'react-redux';
 
 // function DailyLiftWrapper(props) {
-function DailyLiftWrapper({ userLifts, dailySplits, dailySplits: { nsunsVariation } }) {
+function DailyLiftWrapper({ userLifts, dailySplits, userSettings: { nsunsVariation } }) {
   const dailyLifts = dailySplits[nsunsVariation].map((day, index) => {
     const base1 = day.baseLift[0] + 'TM';
     const base2 = day.baseLift[1] + 'TM';
@@ -32,6 +32,7 @@ function DailyLiftWrapper({ userLifts, dailySplits, dailySplits: { nsunsVariatio
 const mapStateToProps = state => ({
   userLifts: state.userLifts,
   dailySplits: state.dailySplits,
+  userSettings: state.userSettings,
 });
 
 export default connect(mapStateToProps)(DailyLiftWrapper);

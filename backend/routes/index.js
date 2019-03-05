@@ -1,11 +1,13 @@
 const router = require('express').Router();
-const apiRoutes = require('./api/apiRoutes');
-const authRoutes = require('./auth/authRoutes');
+const apiRoutes = require('./apiRoutes');
+const authRoutes = require('./authRoutes');
+const userRoutes = require('./userRoutes');
 const path = require('path');
 const express = require('express');
 
 router.use('/api', apiRoutes);
 router.use('/auth', authRoutes);
+router.use('/userInfo', userRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   router.use(express.static('client/build'));

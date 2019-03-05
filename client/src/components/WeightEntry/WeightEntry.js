@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './WeightEntry.css';
 import { connect } from 'react-redux';
 import { userLiftOnChange } from '../../actions';
-import { saveUserLifts } from '../../utils/api';
+import { saveUserLifts } from '../../utils/userInfo';
 
 class WeightEntry extends Component {
   onChange = e => {

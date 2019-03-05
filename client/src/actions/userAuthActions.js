@@ -70,7 +70,8 @@ export const userLogin = loginInfo => async (dispatch, getState) => {
 export const getAllUserData = userInfo => async (dispatch, getState) => {
   const accessoryData = await Util.getAccessoryPlan(userInfo.id);
   if (accessoryData.length) await dispatch(getAccessoryPlan(accessoryData));
-  await dispatch(getUserLifts(userInfo));
+  dispatch();
+  dispatch(getUserLifts(userInfo));
   return dispatch(loginSuccess(userInfo.id, userInfo.username));
 };
 

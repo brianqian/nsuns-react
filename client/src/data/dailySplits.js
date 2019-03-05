@@ -1,6 +1,4 @@
 const dailySplits = {
-  nsunsVariation: '5day',
-  standard: 'lbs',
   '5day': [
     {
       day: 'Monday',

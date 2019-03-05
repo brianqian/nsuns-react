@@ -17,6 +17,9 @@ CREATE TABLE userInfo (
   squatRM FLOAT(7,2) DEFAULT 100,
   accessoryPlan VARCHAR(15) DEFAULT 'arms',
   standard VARCHAR(5) DEFAULT 'lbs',
+  timerOption INTEGER(5) DEFAULT '30',
+  wbOption VARCHAR(10) DEFAULT 'mark',
+  variation VARCHAR(10) DEFAULT '5day',
   PRIMARY KEY (id)
 
 );

@@ -40,4 +40,25 @@ module.exports = {
       res.json(data);
     });
   },
+  saveWeightBoxOption: (req, res) => {
+    connection.query('UPDATE userInfo SET wbOption = ?', [req.body.option], (err, data) => {
+      if (err) throw err;
+      data.ok = true;
+      res.json(data);
+    });
+  },
+  saveTimerOption: (req, res) => {
+    connection.query('UPDATE userInfo SET timerOption = ?', [req.body.option], (err, data) => {
+      if (err) throw err;
+      data.ok = true;
+      res.json(data);
+    });
+  },
+  saveVariation: (req, res) => {
+    connection.query('UPDATE userInfo SET nsunsVariation = ?', [req.body.option], (err, data) => {
+      if (err) throw err;
+      data.ok = true;
+      res.json(data);
+    });
+  },
 };

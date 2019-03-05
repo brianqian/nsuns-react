@@ -1,5 +1,5 @@
 export * from './accessories';
-export * from './api';
+export * from './userInfo';
 export * from './auth';
 
 export const calcDailyLift = function(percentage, tm, standard = 'lbs') {

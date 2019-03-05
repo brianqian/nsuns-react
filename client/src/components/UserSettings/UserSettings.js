@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import LoginSignup from '../LoginSignup/LoginSignup';
 import AccessorySelector from './AccessorySelector/AccessorySelector';
 import StandardSelector from './StandardSelector/StandardSelector';
+import WeightBoxSelector from './WeightBoxSelector/WeightBoxSelector';
 import './UserSettings.css';
 
 function UserSettings(props) {
@@ -11,6 +12,7 @@ function UserSettings(props) {
       <LoginSignup>
         <AccessorySelector />
         <StandardSelector />
+        <WeightBoxSelector />
       </LoginSignup>
     </div>
   );

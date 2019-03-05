@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './DailyLift.css';
 import WeightBox from '../WeightBox/WeightBox';
 import AccessoryBox from '../AccessoryBox/AccessoryBox';
-import uuidv1 from 'uuid';
 import { openAccessoryBox } from '../../actions';
 import { connect } from 'react-redux';
 
@@ -14,10 +13,7 @@ class dailyLift extends Component {
   handleClick = () => {
     this.setState({ openAccessoryBox: this.state.openAccessoryBox ? false : true });
   };
-  // handleClick = () => {
-  //   const { dispatch, accessories, dayIndex } = this.props;
-  //   dispatch(openAccessoryBox(accessories.openAccessoryBox[dayIndex] ? false : true, dayIndex));
-  // };
+
   componentDidUpdate = () => {
     console.log('hello');
   };

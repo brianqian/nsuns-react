@@ -27,9 +27,7 @@ class App extends Component {
             Login/Settings
           </div>
         </header>
-        <main>
-          <MainPage />
-        </main>
+        <main>{this.props.children}</main>
       </div>
     );
   }
