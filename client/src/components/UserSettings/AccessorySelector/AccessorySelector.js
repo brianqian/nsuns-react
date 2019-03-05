@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './AccessorySelector.css';
-import { selectAccessoryPlan } from '../../actions/';
+import { selectAccessoryPlan } from '../../../actions/';
 
 function AccessorySelector(props) {
   const handleChange = e => {

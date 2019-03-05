@@ -7,12 +7,17 @@ import { openAccessoryBox } from '../../actions';
 import { connect } from 'react-redux';
 
 class dailyLift extends Component {
+  state = {
+    openAccessoryBox: false,
+  };
+
   handleClick = () => {
     const { dispatch, accessories, dayIndex } = this.props;
     dispatch(openAccessoryBox(accessories.openAccessoryBox[dayIndex] ? false : true, dayIndex));
   };
 
   render() {
+    console.log(this.props.accessories.openAccessoryBox);
     const {
       day,
       t1Lift,
@@ -50,6 +55,7 @@ class dailyLift extends Component {
         />
       );
     });
+    // const { openAccessoryBox } = this.state;
     return (
       <div className={`dailyLift__container`}>
         <h2 className="dailyLift__day-title">{day}</h2>

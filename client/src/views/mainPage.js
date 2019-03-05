@@ -11,10 +11,5 @@ function MainPage() {
     </div>
   );
 }
-// const mapStateToProps = state => ({
-//   userAuth: state.userAuth,
-//   userLifts: state.userLifts,
-//   accessories: state.accessories,
-// });
 
 export default connect()(MainPage);

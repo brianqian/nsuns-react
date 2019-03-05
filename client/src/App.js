@@ -3,6 +3,7 @@ import './App.css';
 import UserSettings from './components/UserSettings/UserSettings';
 import { connect } from 'react-redux';
 import { jwtLogin, openSettings } from './actions';
+import MainPage from './views/mainPage';
 
 class App extends Component {
   componentDidMount = () => {
@@ -16,7 +17,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { username } = this.props.userAuth;
     return (
       <div className="App">
@@ -27,7 +27,9 @@ class App extends Component {
             Login/Settings
           </div>
         </header>
-        <main>{this.props.children}</main>
+        <main>
+          <MainPage />
+        </main>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectStandard } from '../../actions/';
+import { selectStandard } from '../../../actions/';
 import './StandardSelector.css';
 
 function StandardSelector(props) {
@@ -10,7 +10,7 @@ function StandardSelector(props) {
   return (
     <div className="standard-selector">
       <p>Standard: </p>
-      <select value={props.userLifts.standard} onChange={handleChange}>
+      <select value={props.dailySplits.standard} onChange={handleChange}>
         <option value="lbs">Lbs</option>
         <option value="kg">Kg</option>
       </select>
@@ -19,7 +19,7 @@ function StandardSelector(props) {
 }
 
 const mapStateToProps = state => ({
-  userLifts: state.userLifts,
+  dailySplits: state.dailySplits,
 });
 
 export default connect(mapStateToProps)(StandardSelector);

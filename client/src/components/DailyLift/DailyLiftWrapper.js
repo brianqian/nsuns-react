@@ -3,9 +3,8 @@ import DailyLift from './DailyLift';
 import { connect } from 'react-redux';
 import uuidv1 from 'uuid';
 
-function DailyLiftWrapper(props) {
-  const { nsunsVariation } = props.userLifts;
-  const { dailySplits } = props;
+// function DailyLiftWrapper(props) {
+function DailyLiftWrapper({ userLifts, dailySplits, dailySplits: { nsunsVariation } }) {
   const dailyLifts = dailySplits[nsunsVariation].map((day, index) => {
     const base1 = day.baseLift[0] + 'TM';
     const base2 = day.baseLift[1] + 'TM';
@@ -20,9 +19,9 @@ function DailyLiftWrapper(props) {
         t1Reps={day.t1Reps}
         t2Weights={day.t2Weights}
         t2Reps={day.t2Reps}
-        max1={props.userLifts[base1] || '0'}
-        max2={props.userLifts[base2] || '0'}
-        standard={props.userLifts.standard}
+        max1={userLifts[base1] || '0'}
+        max2={userLifts[base2] || '0'}
+        standard={dailySplits.standard}
         key={uuidv1()}
         dayIndex={index}
       />
