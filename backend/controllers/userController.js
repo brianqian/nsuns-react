@@ -84,7 +84,7 @@ module.exports = {
   getUserSettings: (req, res) => {
     console.log(req.params);
     connection.query(
-      'SELECT standard, timerOption, wbOption, variation FROM userInfo WHERE id = ?',
+      'SELECT standard, timerOption, wbOption, variation, accessoryPlan FROM userInfo WHERE id = ?',
       [req.params.userId],
       (err, data) => {
         if (err) throw err;

@@ -12,15 +12,15 @@ function accessories(state = {}, action) {
       return baseAccessories;
     }
     case 'SELECT_ACCESSORY_PLAN_SUCCESS': {
-      return { ...state, accessoryPlan: action.plan };
+      return { ...state, accessoryPlan: action.accessoryPlan };
     }
     case 'TOGGLE_ACCESSORY_BOX': {
       const openAccessoryBox = { ...state.openAccessoryBox };
       openAccessoryBox[action.index] = action.bool;
       return { ...state, openAccessoryBox };
     }
-    case 'GET_ACCESSORY_PLAN': {
-      return { ...state, custom: action.accessoryPlan, accessoryPlan: 'custom' };
+    case 'LOAD_CUSTOM_ACCESSORY_SUCCESS': {
+      return { ...state, custom: action.accessoryPlan };
     }
     case 'EDIT_ACCESSORY_SUCCESS': {
       return { ...state, custom: action.basePlan };

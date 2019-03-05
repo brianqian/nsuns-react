@@ -1,5 +1,5 @@
 import * as Util from '../utils';
-import { getUserLifts, getAccessoryPlan, clearAccessories, getUserSettings } from './';
+import { getUserLifts, loadCustomAccessorySuccess, clearAccessories, getUserSettings } from './';
 
 export const loginSuccess = (userId, username) => {
   return {
@@ -61,7 +61,7 @@ export const userLogin = loginInfo => async (dispatch, getState) => {
     dispatch(loginPending());
     const userInfo = await Util.logIn(loginInfo);
     if (userInfo.ok) {
-      await localStorage.setItem('userId', userInfo.token);
+      localStorage.setItem('userId', userInfo.token);
       //check if accessoryplan exists and update state if it does
       dispatch(getAllUserData(userInfo));
     } else {
@@ -69,9 +69,9 @@ export const userLogin = loginInfo => async (dispatch, getState) => {
     }
   }
 };
-export const getAllUserData = userInfo => async (dispatch, getState) => {
+export const getAllUserData = userInfo => async dispatch => {
   const accessoryData = await Util.getAccessoryPlan(userInfo.id);
-  if (accessoryData.length) await dispatch(getAccessoryPlan(accessoryData));
+  if (accessoryData.length) dispatch(loadCustomAccessorySuccess(accessoryData));
   dispatch(getUserSettings(userInfo.id));
   dispatch(getUserLifts(userInfo));
   return dispatch(loginSuccess(userInfo.id, userInfo.username));

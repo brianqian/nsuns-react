@@ -1,4 +1,5 @@
 import * as Util from '../utils';
+import { getAccessoryPlanSuccess } from './accessoryActions';
 
 export const selectStandardSuccess = standard => {
   return {
@@ -74,8 +75,8 @@ export const setVariation = (option, userId) => async dispatch => {
 };
 export const getUserSettings = userId => async dispatch => {
   const userSettings = await Util.getUserSettings(userId);
-  console.log('USERSETTINGS', userSettings);
-  return userSettings.ok
-    ? dispatch(getUserSettingsSuccess(userSettings))
-    : dispatch(getUserSettingsFail());
+  if (userSettings.ok) {
+    dispatch(getAccessoryPlanSuccess(userSettings.accessoryPlan));
+    dispatch(getUserSettingsSuccess(userSettings));
+  }
 };

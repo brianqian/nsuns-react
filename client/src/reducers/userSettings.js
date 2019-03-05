@@ -19,6 +19,7 @@ function userSettings(
       return { ...state, nsunsVariation: action.option };
     case 'GET_USER_SETTINGS_SUCCESS':
       delete action.ok;
+      delete action.userSettings.accessoryPlan;
       return { ...state, ...action.userSettings };
     default:
       return state;
