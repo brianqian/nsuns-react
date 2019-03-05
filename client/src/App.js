@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import MainPage from './views/mainPage';
-import GraphPage from './views/graphPage';
-import { BrowserRouter as Route, Switch } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
 import UserSettings from './components/UserSettings/UserSettings';
 import { connect } from 'react-redux';
 import { jwtLogin, openSettings } from './actions';
@@ -31,9 +27,7 @@ class App extends Component {
             Login/Settings
           </div>
         </header>
-        <main>
-          <MainPage />
-        </main>
+        <main>{this.props.children}</main>
       </div>
     );
   }
@@ -44,4 +38,4 @@ const mapStateToProps = state => ({
   userAuth: state.userAuth,
 });
 
-export default withRouter(connect(mapStateToProps)(App));
+export default connect(mapStateToProps)(App);
