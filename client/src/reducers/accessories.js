@@ -11,7 +11,7 @@ function accessories(state = {}, action) {
       baseAccessories.accessoryPlan = 'arms';
       return baseAccessories;
     }
-    case 'SELECT_ACCESSORY_PLAN': {
+    case 'SELECT_ACCESSORY_PLAN_SUCCESS': {
       return { ...state, accessoryPlan: action.plan };
     }
     case 'TOGGLE_ACCESSORY_BOX': {

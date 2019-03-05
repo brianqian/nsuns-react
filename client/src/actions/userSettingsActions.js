@@ -40,24 +40,42 @@ export const variationFail = () => {
     type: 'VARIATION_FAIL',
   };
 };
+export const getUserSettingsSuccess = userSettings => {
+  return {
+    type: 'GET_USER_SETTINGS_SUCCESS',
+    userSettings,
+  };
+};
+export const getUserSettingsFail = () => {
+  return {
+    type: 'GET_USER_SETTINGS_FAIL',
+  };
+};
 
 export const selectStandardFail = () => {
   console.error('error');
 };
-export const selectStandard = standard => async dispatch => {
-  const resp = await Util.selectStandard(standard);
+export const selectStandard = (standard, userId) => async dispatch => {
+  const resp = await Util.selectStandard(standard, userId);
   return resp.ok ? dispatch(selectStandardSuccess(standard)) : dispatch(selectStandardFail());
 };
 
-export const setTimerOption = option => async dispatch => {
-  const resp = await Util.setTimerOption(option);
+export const setTimerOption = (option, userId) => async dispatch => {
+  const resp = await Util.setTimerOption(option, userId);
   return resp.ok ? dispatch(timerOptionSuccess(option)) : dispatch(timerOptionFail());
 };
-export const setWeightBoxOption = option => async dispatch => {
-  const resp = await Util.setWeightBoxOption(option);
+export const setWeightBoxOption = (option, userId) => async dispatch => {
+  const resp = await Util.setWeightBoxOption(option, userId);
   return resp.ok ? dispatch(weightBoxSuccess(option)) : dispatch(weightBoxFail());
 };
-export const setVariation = option => async dispatch => {
-  const resp = await Util.setVariation(option);
+export const setVariation = (option, userId) => async dispatch => {
+  const resp = await Util.setVariation(option, userId);
   return resp.ok ? dispatch(variationSuccess(option)) : dispatch(variationFail());
+};
+export const getUserSettings = userId => async dispatch => {
+  const userSettings = await Util.getUserSettings(userId);
+  console.log('USERSETTINGS', userSettings);
+  return userSettings.ok
+    ? dispatch(getUserSettingsSuccess(userSettings))
+    : dispatch(getUserSettingsFail());
 };

@@ -10,5 +10,6 @@ router
 router
   .route('/accessory')
   .post(accessoryController.createAccessoryPlan)
-  .delete(accessoryController.deleteAccessory);
+  .delete(accessoryController.deleteAccessory)
+  .put(accessoryController.saveAccessoryPlan);
 module.exports = router;

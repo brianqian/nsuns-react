@@ -34,31 +34,65 @@ module.exports = {
     );
   },
   saveStandard: (req, res) => {
-    connection.query('UPDATE userInfo SET standard = ?', [req.params.standard], (err, data) => {
-      if (err) throw err;
-      data.ok = true;
-      res.json(data);
-    });
+    const { userId } = req.body;
+    connection.query(
+      'UPDATE userInfo SET standard = ? WHERE id= ?',
+      [req.params.standard, userId],
+      (err, data) => {
+        if (err) throw err;
+        data.ok = true;
+        res.json(data);
+      }
+    );
   },
   saveWeightBoxOption: (req, res) => {
-    connection.query('UPDATE userInfo SET wbOption = ?', [req.body.option], (err, data) => {
-      if (err) throw err;
-      data.ok = true;
-      res.json(data);
-    });
+    const { userId, option } = req.body;
+    connection.query(
+      'UPDATE userInfo SET wbOption = ? WHERE id= ?',
+      [option, userId],
+      (err, data) => {
+        if (err) throw err;
+        data.ok = true;
+        res.json(data);
+      }
+    );
   },
   saveTimerOption: (req, res) => {
-    connection.query('UPDATE userInfo SET timerOption = ?', [req.body.option], (err, data) => {
-      if (err) throw err;
-      data.ok = true;
-      res.json(data);
-    });
+    const { userId, option } = req.body;
+    connection.query(
+      'UPDATE userInfo SET timerOption = ? WHERE id= ?',
+      [option, userId],
+      (err, data) => {
+        if (err) throw err;
+        data.ok = true;
+        res.json(data);
+      }
+    );
   },
   saveVariation: (req, res) => {
-    connection.query('UPDATE userInfo SET nsunsVariation = ?', [req.body.option], (err, data) => {
-      if (err) throw err;
-      data.ok = true;
-      res.json(data);
-    });
+    const { userId, option } = req.body;
+    connection.query(
+      'UPDATE userInfo SET nsunsVariation = ? WHERE id= ?',
+      [option, userId],
+      (err, data) => {
+        if (err) throw err;
+        data.ok = true;
+        res.json(data);
+      }
+    );
+  },
+  getUserSettings: (req, res) => {
+    console.log(req.params);
+    connection.query(
+      'SELECT standard, timerOption, wbOption, variation FROM userInfo WHERE id = ?',
+      [req.params.userId],
+      (err, data) => {
+        if (err) throw err;
+        data = data[0];
+        data.ok = true;
+        console.log(data);
+        res.json(data);
+      }
+    );
   },
 };

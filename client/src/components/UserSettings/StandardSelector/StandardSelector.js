@@ -5,12 +5,12 @@ import './StandardSelector.css';
 
 function StandardSelector(props) {
   const handleChange = e => {
-    props.dispatch(selectStandard(e.target.value));
+    props.dispatch(selectStandard(e.target.value, props.userAuth.userId));
   };
   return (
     <div className="standard-selector">
       <p>Standard: </p>
-      <select value={props.dailySplits.standard} onChange={handleChange}>
+      <select value={props.userSettings.standard} onChange={handleChange}>
         <option value="lbs">Lbs</option>
         <option value="kg">Kg</option>
       </select>
@@ -19,7 +19,8 @@ function StandardSelector(props) {
 }
 
 const mapStateToProps = state => ({
-  dailySplits: state.dailySplits,
+  userSettings: state.userSettings,
+  userAuth: state.userAuth,
 });
 
 export default connect(mapStateToProps)(StandardSelector);

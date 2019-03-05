@@ -5,7 +5,7 @@ import { selectAccessoryPlan } from '../../../actions/';
 
 function AccessorySelector(props) {
   const handleChange = e => {
-    props.dispatch(selectAccessoryPlan(e.target.value));
+    props.dispatch(selectAccessoryPlan(e.target.value, props.userAuth.userId));
   };
   const customExists = props.accessories.custom !== undefined;
   return (
@@ -22,6 +22,7 @@ function AccessorySelector(props) {
 
 const mapStateToProps = state => ({
   accessories: state.accessories,
+  userAuth: state.userAuth,
 });
 
 export default connect(mapStateToProps)(AccessorySelector);

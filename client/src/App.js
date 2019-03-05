@@ -36,6 +36,7 @@ const mapStateToProps = state => ({
   settingsOpen: state.userSettings.settingsOpen,
   accessories: state.accessories,
   userAuth: state.userAuth,
+  userSettings: state.userSettings,
 });
 
 export default connect(mapStateToProps)(App);

@@ -55,3 +55,11 @@ export const deleteAccessory = async payload => {
     console.error(err);
   }
 };
+
+export const saveAccessoryPlan = async (plan, id) => {
+  try {
+    return await fetchRequest(`/api/accessory`, 'PUT', { plan, id });
+  } catch (err) {
+    console.error(err);
+  }
+};

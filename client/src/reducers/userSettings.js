@@ -17,6 +17,9 @@ function userSettings(
       return { ...state, wbOption: action.option };
     case 'VARIATION_SUCCESS':
       return { ...state, nsunsVariation: action.option };
+    case 'GET_USER_SETTINGS_SUCCESS':
+      delete action.ok;
+      return { ...state, ...action.userSettings };
     default:
       return state;
   }

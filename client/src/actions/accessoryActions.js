@@ -13,6 +13,12 @@ export const createAccessoryPlanSuccess = basePlan => {
   };
 };
 
+export const getAccessoryPlanSuccess = accessoryPlan => {
+  return {
+    type: 'GET_ACCESSORY_PLAN_SUCCESS',
+    accessoryPlan,
+  };
+};
 export const getAccessoryPlan = accessoryPlan => {
   return {
     type: 'GET_ACCESSORY_PLAN',
@@ -20,11 +26,15 @@ export const getAccessoryPlan = accessoryPlan => {
   };
 };
 
-export const selectAccessoryPlan = plan => {
+export const selectAccessoryPlanSuccess = plan => {
   return {
-    type: 'SELECT_ACCESSORY_PLAN',
+    type: 'SELECT_ACCESSORY_PLAN_SUCCESS',
     plan,
   };
+};
+export const selectAccessoryPlan = (plan, userId) => async dispatch=>{
+  await Util.saveAccessoryPlan(plan, userId);
+  return dispatch(selectAccessoryPlanSuccess(plan))
 };
 
 export const editAccessorySuccess = basePlan => {

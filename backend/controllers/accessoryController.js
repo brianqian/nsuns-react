@@ -77,4 +77,15 @@ module.exports = {
       }
     );
   },
+  saveAccessoryPlan: (req, res) => {
+    const { plan, id } = req.body;
+    connection.query(
+      'UPDATE userInfo SET accessoryPlan = ? WHERE id = ?',
+      [plan, id],
+      (err, data) => {
+        if (err) throw err;
+        res.json(data);
+      }
+    );
+  },
 };

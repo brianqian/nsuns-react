@@ -1,5 +1,5 @@
 import * as Util from '../utils';
-import { getUserLifts, getAccessoryPlan, clearAccessories } from './';
+import { getUserLifts, getAccessoryPlan, clearAccessories, getUserSettings } from './';
 
 export const loginSuccess = (userId, username) => {
   return {
@@ -51,7 +51,9 @@ export const logOut = () => async dispatch => {
 
 export const jwtLogin = token => async dispatch => {
   const userInfo = await Util.jwtLogin(token);
-  if (userInfo.ok) return dispatch(getAllUserData(userInfo));
+  if (userInfo.ok) {
+    return dispatch(getAllUserData(userInfo));
+  }
 };
 
 export const userLogin = loginInfo => async (dispatch, getState) => {
@@ -70,7 +72,7 @@ export const userLogin = loginInfo => async (dispatch, getState) => {
 export const getAllUserData = userInfo => async (dispatch, getState) => {
   const accessoryData = await Util.getAccessoryPlan(userInfo.id);
   if (accessoryData.length) await dispatch(getAccessoryPlan(accessoryData));
-  dispatch();
+  dispatch(getUserSettings(userInfo.id));
   dispatch(getUserLifts(userInfo));
   return dispatch(loginSuccess(userInfo.id, userInfo.username));
 };
