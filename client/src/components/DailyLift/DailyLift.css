@@ -13,13 +13,7 @@
   align-items: center;
   justify-content: center;
   grid-column: 1/5;
-  /* max-height: 100vh; */
 }
-
-/* .daily-lift-t1 > p,
-.daily-lift-t2 > p {
-  grid-column: span 2;
-} */
 
 .dailyLift__day-title {
   font-family: 'Noto Serif', Georgia, 'Times New Roman', Times, serif;

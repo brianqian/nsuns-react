@@ -13,6 +13,7 @@
 
 .accessory__container > button {
   grid-column: 3;
+  height: 3rem;
 }
 .accessory__item {
   grid-column: 1/5;

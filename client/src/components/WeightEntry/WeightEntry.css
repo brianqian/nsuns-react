@@ -6,6 +6,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 0.25rem 2rem;
+  justify-content: center;
 }
 .weightEntry__container > form > button {
   grid-column: 4;
@@ -21,15 +22,16 @@
 @media only screen and (max-width: 800px) {
   .weightEntry__container > form {
     grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0.25rem 1rem;
   }
   .weightEntry__container > form > button {
     grid-column: 2;
   }
   .weightEntry__input-wrapper > label {
-    flex: 3;
+    flex: 2;
   }
   .weightEntry__input-wrapper > input {
-    flex: 6;
+    flex: 1;
   }
 
   #benchRMInput {
