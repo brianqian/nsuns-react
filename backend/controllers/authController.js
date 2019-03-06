@@ -14,7 +14,7 @@ module.exports = {
       [username],
       async (err, data) => {
         if (err) throw err;
-        data = data[0];
+        [data] = data;
         if (!data) {
           res.json({ ok: false, message: 'Username not found' });
           return;
@@ -40,7 +40,7 @@ module.exports = {
     console.log(decoded, decoded.userId);
     connection.query('SELECT * FROM userInfo WHERE id = ?', [decoded.userId], (err, data) => {
       if (err) throw err;
-      data = data[0];
+      [data] = data;
 
       if (!data) {
         res.json({ ok: false, message: '' });
@@ -80,7 +80,7 @@ module.exports = {
               [username, hash],
               (err, data) => {
                 if (err) console.error(err);
-                res.json({ ok: true });
+                res.json({ ...data, ok: true });
               }
             );
           }

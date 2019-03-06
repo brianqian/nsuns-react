@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './DailyLift.css';
 import WeightBox from '../WeightBox/WeightBox';
 import AccessoryBox from '../AccessoryBox/AccessoryBox';
-import { openAccessoryBox } from '../../actions';
 import { connect } from 'react-redux';
 
 class dailyLift extends Component {

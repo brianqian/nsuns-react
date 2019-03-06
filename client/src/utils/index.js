@@ -1,6 +1,7 @@
 export * from './accessories';
 export * from './userInfo';
 export * from './auth';
+export * from './userSettings';
 
 export const calcDailyLift = function(percentage, tm, standard = 'lbs') {
   standard = standard === 'kg' ? 2.5 : 5;

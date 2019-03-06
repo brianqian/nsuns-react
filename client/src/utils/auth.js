@@ -3,10 +3,12 @@ import { fetchRequest } from './';
 export const signUp = async data => {
   // console.log('creating new user');
   try {
-    let resp = await fetchRequest('/auth/signUp', 'POST', data);
+    const resp = await fetchRequest('/auth/signUp', 'POST', data);
+    const { insertId: userId } = resp;
+    await fetchRequest('/userInfo/accessories/seed', 'POST', { userId });
     return resp;
   } catch (err) {
-    if (err) console.error(err);
+    if (err) console.error('util/auth', err);
   }
 };
 export const logIn = async data => {

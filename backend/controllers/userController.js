@@ -36,7 +36,7 @@ module.exports = {
   saveStandard: (req, res) => {
     const { userId } = req.body;
     connection.query(
-      'UPDATE userInfo SET standard = ? WHERE id= ?',
+      'UPDATE userSettings SET standard = ? WHERE userId= ?',
       [req.params.standard, userId],
       (err, data) => {
         if (err) throw err;
@@ -48,7 +48,7 @@ module.exports = {
   saveWeightBoxOption: (req, res) => {
     const { userId, option } = req.body;
     connection.query(
-      'UPDATE userInfo SET wbOption = ? WHERE id= ?',
+      'UPDATE userSettings SET wbOption = ? WHERE userId= ?',
       [option, userId],
       (err, data) => {
         if (err) throw err;
@@ -60,7 +60,7 @@ module.exports = {
   saveTimerOption: (req, res) => {
     const { userId, option } = req.body;
     connection.query(
-      'UPDATE userInfo SET timerOption = ? WHERE id= ?',
+      'UPDATE userSettings SET timerOption = ? WHERE userId= ?',
       [option, userId],
       (err, data) => {
         if (err) throw err;
@@ -72,7 +72,7 @@ module.exports = {
   saveVariation: (req, res) => {
     const { userId, option } = req.body;
     connection.query(
-      'UPDATE userInfo SET nsunsVariation = ? WHERE id= ?',
+      'UPDATE userSettings SET nsunsVariation = ? WHERE userId= ?',
       [option, userId],
       (err, data) => {
         if (err) throw err;
@@ -84,15 +84,22 @@ module.exports = {
   getUserSettings: (req, res) => {
     console.log(req.params);
     connection.query(
-      'SELECT standard, timerOption, wbOption, variation, accessoryPlan FROM userInfo WHERE id = ?',
+      'SELECT * FROM userSettings WHERE userId = ?',
       [req.params.userId],
       (err, data) => {
         if (err) throw err;
-        data = data[0];
+        [data] = data;
         data.ok = true;
         console.log(data);
         res.json(data);
       }
     );
+  },
+  seedSettings: (req, res) => {
+    const { userId } = req.body;
+    connection.query('INSERT INTO userSettings (userId) VALUES (?)', [userId], (err, data) => {
+      console.log('USER SETTINGS', data);
+      res.json(data);
+    });
   },
 };

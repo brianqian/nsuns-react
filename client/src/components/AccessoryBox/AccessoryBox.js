@@ -23,7 +23,7 @@ class AccessoryBox extends Component {
       const { title, sets, reps, weight, id } = accessory;
       return (
         <AccessoryRow
-          key={dayIndex + accIndex}
+          key={id}
           title={title}
           sets={sets}
           reps={reps}

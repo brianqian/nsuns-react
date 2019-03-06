@@ -15,18 +15,22 @@ CREATE TABLE userInfo (
   ohpRM FLOAT(7,2) DEFAULT 100,
   deadliftRM FLOAT(7,2) DEFAULT 100,
   squatRM FLOAT(7,2) DEFAULT 100,
-  accessoryPlan VARCHAR(15) DEFAULT 'arms',
-  standard VARCHAR(5) DEFAULT 'lbs',
-  timerOption INTEGER(5) DEFAULT '30',
-  wbOption VARCHAR(10) DEFAULT 'mark',
-  variation VARCHAR(10) DEFAULT '5day',
   PRIMARY KEY (id)
 
 );
-
+CREATE TABLE userSettings(
+  id INT NOT NULL AUTO_INCREMENT,
+  userId INTEGER (100)
+  accessoryPlan VARCHAR(15) DEFAULT 'arms',
+  standard VARCHAR(5) DEFAULT 'lbs',
+  timerOption INTEGER(5) DEFAULT 30,
+  wbOption VARCHAR(10) DEFAULT 'mark',
+  nsunsVariation VARCHAR(10) DEFAULT '5day',
+  PRIMARY KEY (id)
+);
 CREATE TABLE workouts (
 id INT NOT NULL AUTO_INCREMENT,
-userId INTEGER(10),
+userId INTEGER(100),
 weekNum VARCHAR(10),
 weeklyBench FLOAT(7,2),
 weeklyDeadlift FLOAT(7,2),
@@ -43,7 +47,7 @@ PRIMARY KEY (id)
 
 CREATE TABLE accessories (
 id INT NOT NULL AUTO_INCREMENT,
-userId INTEGER(10),
+userId INTEGER(100),
 title VARCHAR(50),
 sets INTEGER(5),
 reps INTEGER(5),

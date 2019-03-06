@@ -3,13 +3,11 @@ const connection = require('../db');
 module.exports = {
   createAccessoryPlan: (req, res) => {
     const { userId, basePlan } = req.body;
-    console.log(req.body.basePlan);
     //Checks for an existing custom plan and doesn't create one if one exists.
     //Custom plans should only be created once.
     connection.query('SELECT * FROM accessories WHERE userId = ?', [userId], (err, data) => {
       if (!data.length) {
         const values = [];
-        console.log('baseplan', basePlan);
         basePlan.forEach((day, dayIndex) => {
           day.forEach(exercise => {
             const { title, sets, reps, weight } = exercise;
@@ -21,7 +19,6 @@ module.exports = {
           [values],
           (err, data) => {
             if (err) throw err;
-            console.log(data);
             const { affectedRows, insertId } = data;
             res.json({ affectedRows, insertId });
           }
@@ -80,7 +77,7 @@ module.exports = {
   saveAccessoryPlan: (req, res) => {
     const { plan, id } = req.body;
     connection.query(
-      'UPDATE userInfo SET accessoryPlan = ? WHERE id = ?',
+      'UPDATE userSettings SET accessoryPlan = ? WHERE userId = ?',
       [plan, id],
       (err, data) => {
         if (err) throw err;
