@@ -8,6 +8,7 @@ function AccessorySelector(props) {
     props.dispatch(selectAccessoryPlan(e.target.value, props.userAuth.userId));
   };
   const customExists = props.accessories.custom !== undefined;
+
   return (
     <div className="accessory-selector">
       <p>Accessory: </p>

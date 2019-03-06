@@ -73,7 +73,6 @@ module.exports = {
       info,
       (err, data) => {
         if (err) throw err;
-        console.log(data);
         res.json(data);
       }
     );
@@ -85,6 +84,7 @@ module.exports = {
       [plan, id],
       (err, data) => {
         if (err) throw err;
+        // console.log('SAVE ACC PLAN', data);
         res.json(data);
       }
     );

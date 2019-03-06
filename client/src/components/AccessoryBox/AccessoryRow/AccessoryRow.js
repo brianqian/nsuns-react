@@ -23,17 +23,27 @@ class AccessoryRow extends Component {
 
   addAcc = () => {
     const { title, sets, reps, weight } = this.state;
-    const { dispatch, dayIndex, id, userAuth, accessories } = this.props;
-    const { userId } = userAuth;
-    const { accessoryPlan } = accessories;
+    const {
+      dispatch,
+      dayIndex,
+      id,
+      userAuth: { userId },
+      accessories,
+      accessories: { accessoryPlan },
+    } = this.props;
     const payload = { title, sets, reps, weight, userId, dayIndex, id };
     dispatch(updateAccessoryDb(payload, 'add', accessories[accessoryPlan], accessoryPlan));
   };
 
   deleteAcc = () => {
-    const { dispatch, dayIndex, id, userAuth, accessories } = this.props;
-    const { userId } = userAuth;
-    const { accessoryPlan } = accessories;
+    const {
+      dispatch,
+      dayIndex,
+      id,
+      userAuth: { userId },
+      accessories,
+      accessories: { accessoryPlan },
+    } = this.props;
     const payload = { userId, id, dayIndex };
     dispatch(updateAccessoryDb(payload, 'delete', accessories[accessoryPlan], accessoryPlan));
   };
@@ -44,9 +54,13 @@ class AccessoryRow extends Component {
       return;
     }
     if (this.state.currentlyEditing) {
-      const { dispatch, userAuth, dayIndex, accessories } = this.props;
-      const { userId } = userAuth;
-      const { accessoryPlan } = accessories;
+      const {
+        dispatch,
+        userAuth: { userId },
+        dayIndex,
+        accessories,
+        accessories: { accessoryPlan },
+      } = this.props;
       const { title, sets, reps, weight, id } = this.state;
       const payload = { title, sets, reps, weight, id, userId, dayIndex };
       await dispatch(updateAccessoryDb(payload, 'edit', accessories[accessoryPlan], accessoryPlan));

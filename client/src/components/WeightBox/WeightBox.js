@@ -13,7 +13,6 @@ class WeightBox extends Component {
   };
 
   render() {
-    console.log('rerender');
     const { reps, weights, max, standard } = this.props;
     const weight = calcDailyLift(weights, max, standard);
     return (

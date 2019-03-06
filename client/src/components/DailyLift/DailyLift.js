@@ -14,9 +14,6 @@ class dailyLift extends Component {
     this.setState({ openAccessoryBox: this.state.openAccessoryBox ? false : true });
   };
 
-  componentDidUpdate = () => {
-    console.log('hello');
-  };
   render() {
     const {
       day,
@@ -30,10 +27,8 @@ class dailyLift extends Component {
       max2,
       standard,
       dayIndex,
-      accessories,
     } = this.props;
-    // const accessoryBoxOpen = accessories.openAccessoryBox[dayIndex];
-    const accessoryBoxOpen = this.state.openAccessoryBox;
+    const { openAccessoryBox } = this.state;
     const t1Workouts = t1Reps.map((rep, i) => {
       return (
         <WeightBox
@@ -56,7 +51,6 @@ class dailyLift extends Component {
         />
       );
     });
-    // const { openAccessoryBox } = this.state;
     return (
       <div className={`dailyLift__container`}>
         <h2 className="dailyLift__day-title">{day}</h2>
@@ -71,14 +65,14 @@ class dailyLift extends Component {
             Accessories
             <img
               onClick={this.toggleExpand}
-              src={accessoryBoxOpen ? './collapse-button.svg' : './expand-button.svg'}
+              src={openAccessoryBox ? './collapse-button.svg' : './expand-button.svg'}
               alt=""
               height="auto"
               width="10%"
             />
           </p>
         </div>
-        {accessoryBoxOpen && <AccessoryBox dayIndex={dayIndex} />}
+        {openAccessoryBox && <AccessoryBox dayIndex={dayIndex} />}
       </div>
     );
   }

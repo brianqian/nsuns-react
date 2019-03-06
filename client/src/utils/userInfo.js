@@ -3,7 +3,6 @@ import { fetchRequest } from '.';
 export const saveUserLifts = async data => {
   try {
     const resp = await fetchRequest('/userInfo/lifts', 'PUT', data);
-    console.log('RESPONSE', resp);
     return resp.ok ? true : resp.status;
   } catch (err) {
     console.error(err);
@@ -45,7 +44,6 @@ export const getUserSettings = async userId => {
     console.log(userId);
     let resp = await fetch(`/userInfo/${userId}`);
     resp = await resp.json();
-    console.log('resp', resp);
     return resp;
   } catch (err) {
     console.error(err);

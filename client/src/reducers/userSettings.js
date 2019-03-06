@@ -17,10 +17,12 @@ function userSettings(
       return { ...state, wbOption: action.option };
     case 'VARIATION_SUCCESS':
       return { ...state, nsunsVariation: action.option };
+    case 'SELECT_STANDARD_SUCCESS':
+      const { standard } = action;
+      return { ...state, standard };
     case 'GET_USER_SETTINGS_SUCCESS':
-      delete action.ok;
-      delete action.userSettings.accessoryPlan;
-      return { ...state, ...action.userSettings };
+      const { ok, ...userSettings } = action.userSettings;
+      return { ...state, ...userSettings };
     default:
       return state;
   }

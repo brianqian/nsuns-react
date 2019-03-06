@@ -13,14 +13,6 @@ export const createAccessoryPlanSuccess = basePlan => {
   };
 };
 
-export const getAccessoryPlanSuccess = accessoryPlan => {
-  console.log('SUCCESS', accessoryPlan);
-  return {
-    type: 'SELECT_ACCESSORY_PLAN_SUCCESS',
-    accessoryPlan,
-  };
-};
-
 export const loadCustomAccessorySuccess = accessoryPlan => {
   return {
     type: 'LOAD_CUSTOM_ACCESSORY_SUCCESS',
@@ -28,10 +20,10 @@ export const loadCustomAccessorySuccess = accessoryPlan => {
   };
 };
 
-export const selectAccessoryPlanSuccess = plan => {
+export const selectAccessoryPlanSuccess = accessoryPlan => {
   return {
     type: 'SELECT_ACCESSORY_PLAN_SUCCESS',
-    plan,
+    accessoryPlan,
   };
 };
 
@@ -76,6 +68,7 @@ export const deleteAccessory = (payload, basePlan) => async dispatch => {
   return resp.ok ? dispatch(deleteAccessorySuccess(basePlan)) : dispatch(deleteAccessoryFail(resp));
 };
 export const selectAccessoryPlan = (plan, userId) => async dispatch => {
+  console.log(plan, userId);
   await Util.saveAccessoryPlan(plan, userId);
   return dispatch(selectAccessoryPlanSuccess(plan));
 };

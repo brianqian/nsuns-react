@@ -12,8 +12,13 @@ class AccessoryBox extends Component {
   };
 
   render() {
-    const { accessories, userAuth, dayIndex, dailySplits } = this.props;
-    const { accessoryPlan } = accessories;
+    const {
+      accessories,
+      accessories: { accessoryPlan },
+      userAuth,
+      dayIndex,
+      userSettings,
+    } = this.props;
     const accessoryItems = accessories[accessoryPlan][dayIndex].map((accessory, accIndex) => {
       const { title, sets, reps, weight, id } = accessory;
       return (
@@ -37,7 +42,7 @@ class AccessoryBox extends Component {
           <h4 />
           <h4>Title</h4>
           <h4>SetsxReps</h4>
-          <h4>Weight({dailySplits.standard})</h4>
+          <h4>Weight({userSettings.standard})</h4>
         </div>
         {accessoryItems}
         {addNewAccessory && <AccessoryRow dayIndex={dayIndex} />}
@@ -53,7 +58,7 @@ class AccessoryBox extends Component {
 const mapStateToProps = state => ({
   userAuth: state.userAuth,
   accessories: state.accessories,
-  dailySplits: state.dailySplits,
+  userSettings: state.userSettings,
 });
 
 export default connect(mapStateToProps)(AccessoryBox);

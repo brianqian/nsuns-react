@@ -1,8 +1,12 @@
-/* .weightbox-selector {
+.weightboxSelector__container {
+  display: flex;
+  flex-direction: column;
+}
+.weightboxSelector__container > * {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
-
-.weightbox-selector > select {
+.weightboxSelector__container > * > select {
   margin-left: 1rem;
-} */
+}

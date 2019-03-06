@@ -7,13 +7,14 @@ function accessories(state = {}, action) {
     }
     case 'CLEAR_ACCESSORIES': {
       const baseAccessories = { ...state };
-      if (baseAccessories.custom) delete baseAccessories.custom;
-      baseAccessories.accessoryPlan = 'arms';
-      return baseAccessories;
+      const { custom, ...removedCustom } = baseAccessories;
+      removedCustom.accessoryPlan = 'arms';
+      return removedCustom;
     }
     case 'SELECT_ACCESSORY_PLAN_SUCCESS': {
       return { ...state, accessoryPlan: action.accessoryPlan };
     }
+
     case 'TOGGLE_ACCESSORY_BOX': {
       const openAccessoryBox = { ...state.openAccessoryBox };
       openAccessoryBox[action.index] = action.bool;

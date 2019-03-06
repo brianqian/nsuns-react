@@ -6,35 +6,21 @@ import { saveUserLifts } from '../../utils/userInfo';
 
 class WeightEntry extends Component {
   onChange = e => {
-    const { dispatch, userLifts } = this.props;
+    const {
+      dispatch,
+      userLifts: { standard },
+    } = this.props;
     const { name, value } = e.target;
-    dispatch(userLiftOnChange(name, value, userLifts.standard));
+    dispatch(userLiftOnChange(name, value, standard));
   };
 
   handleSubmit = async e => {
     e.preventDefault();
     const {
-      benchRM,
-      benchTM,
-      deadliftRM,
-      deadliftTM,
-      ohpRM,
-      ohpTM,
-      squatRM,
-      squatTM,
-    } = this.props.userLifts;
-    const { userId } = this.props.userAuth;
-    saveUserLifts({
-      benchRM,
-      benchTM,
-      deadliftRM,
-      deadliftTM,
-      ohpRM,
-      ohpTM,
-      squatRM,
-      squatTM,
-      userId,
-    });
+      userLifts,
+      userAuth: { userId },
+    } = this.props;
+    saveUserLifts({ ...userLifts, userId });
   };
 
   render() {
