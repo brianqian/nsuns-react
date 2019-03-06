@@ -14,14 +14,15 @@ First thing to do is to calculate your 1 Rep Max using something like [this](htt
 
 ## Features to be built
 
-- Responsive design
+- ~~Responsive design~~
+- ~~Rest Timers~~
+- ~~Metric measurements~~
+- Support for different variations of nSuns
+- Additional accessory presets
 - Saving 1+ values on AMRAP sets
 - A stats page that will record progress and visualize it
-- External sources on particular lifts
-- Additional accessory presets
-- Support for different variations of nSuns
 - Plate calculator
-- Metric measurements
+- External sources on particular lifts
 
 ## Technologies Used
 
@@ -35,3 +36,13 @@ First thing to do is to calculate your 1 Rep Max using something like [this](htt
 ## Status
 
 Redux refactor completed, all basic functions working. Currently styling and working on mobile responsiveness.
+
+## Issues
+
+- A major pain point in this project was caused by choosing to let the users choose their base accessory setting. I had the option to seed the database on account creation which would have made it much easier to update. With the current version, the accessory plan for each user gets seeded when the user makes their first CRUD action. This means when the user edits their accessories there needs to be a check if it's the first time they're doing so. If it is the first time, the database gets seeded and returns a starting ID and how many rows were added.
+
+  The first time I tried this I tried to break up this process into three steps: seed the database, execute the CRUD action, and update the store with the new data. I ran into a problem where my actions were getting executed with an accessory ID that didn't exist in the database. When entering multiple values into the database, mySQL only returns the starting value of the primary key and how many rows were affected. I had no way of identifying the specific accessory I wanted to change.
+
+  The solution to this was to pass along a copy of the accessory plan and edit it before seeding the database. Then I could also pass that edited plan to the reducers to update the store. This resulted in a monster of a thunk that needs to be broken down somehow in the future.
+
+- Another issue I ran into was a problem with understanding how React keys work. Every time I tried to interact with my website, everything that was generated using an array as a source would re-render. I thought at first that it was changes to the store that triggered this so I added specific actions/state to keep track of menus that should stay open or closed. It wasn't until later I found out that it was because I was using uuid to generate a unique key based on time within my render methods. Since React checks for changes in properties, it seemed like each item had something different about it and would trigger a re-render. Uuid was originally used because I had no database id's to assign to the default values so that was replaced by manually setting id's until a better solution.
