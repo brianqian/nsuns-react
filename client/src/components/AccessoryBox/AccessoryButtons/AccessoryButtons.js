@@ -11,6 +11,7 @@ class AccessoryButtons extends Component {
 
   toggleClicked = async () => {
     const { clicked } = this.state;
+    if (!this.props.id) this.props.toggleAddBox();
     this.props.editAcc();
     this.setState({ clicked: clicked ? false : true });
   };

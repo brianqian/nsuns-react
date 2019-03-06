@@ -45,7 +45,7 @@ class AccessoryBox extends Component {
           <h4>Weight({userSettings.standard})</h4>
         </div>
         {accessoryItems}
-        {addNewAccessory && <AccessoryRow dayIndex={dayIndex} />}
+        {addNewAccessory && <AccessoryRow toggleAddBox={this.addAccessory} dayIndex={dayIndex} />}
         {userAuth.loggedIn && (
           <button onClick={this.addAccessory}>
             {addNewAccessory ? 'Cancel' : 'Add Accessory'}

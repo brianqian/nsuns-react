@@ -38,7 +38,6 @@ module.exports = {
   },
 
   editAccessory: (req, res) => {
-    console.log('EDIT ACCESSORY CONTROLLER', req.body);
     const { title, sets, reps, weight, userId, id } = req.body;
     const info = [title, sets, reps, weight, userId, id];
     connection.query(
@@ -52,7 +51,7 @@ module.exports = {
     );
   },
   deleteAccessory: (req, res) => {
-    console.log(req.body);
+    console.log('IN DELETE ACC', req.body);
     const { id } = req.body;
     connection.query('DELETE FROM accessories WHERE id = ?', [id], (err, data) => {
       if (err) throw err;
@@ -70,7 +69,7 @@ module.exports = {
       info,
       (err, data) => {
         if (err) throw err;
-        res.json(data);
+        res.json(data.insertId);
       }
     );
   },
