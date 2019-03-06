@@ -14,10 +14,10 @@
   grid-column: 1/5;
 }
 
-.daily-lift-t1 > p,
+/* .daily-lift-t1 > p,
 .daily-lift-t2 > p {
   grid-column: span 2;
-}
+} */
 
 .dailyLift__day-title {
   font-family: 'Noto Serif', Georgia, 'Times New Roman', Times, serif;
@@ -26,6 +26,7 @@
 }
 
 .accessories__button {
+  grid-column: span 2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,14 +42,24 @@
 }
 
 .workouts {
+  grid-column: span 2;
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  min-width: 100%;
   height: 100%;
   user-select: none;
   border: 0.5px solid gray;
+}
+
+.workouts > * {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .workouts:hover {

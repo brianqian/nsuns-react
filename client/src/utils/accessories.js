@@ -8,7 +8,7 @@ export const createAccessoryPlan = async (userId, basePlan) => {
     newBase.forEach(dayArray => {
       dayArray.forEach(accessory => {
         accessory.id = insertId;
-        insertId++;
+        insertId += 1;
       });
     });
     return newBase;
