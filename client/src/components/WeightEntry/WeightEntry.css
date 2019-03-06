@@ -21,7 +21,6 @@
 @media only screen and (max-width: 800px) {
   .weightEntry__container > form {
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 0;
   }
   .weightEntry__container > form > button {
     grid-column: 2;
@@ -32,12 +31,17 @@
   .weightEntry__input-wrapper > input {
     flex: 6;
   }
-  .weightEntry__bench-input,
-  .weightEntry__ohp-input {
-    grid-column: 1;
+
+  #benchRMInput {
+    grid-row: 1;
   }
-  .weightEntry__deadlift-input,
-  .weightEntry__squat-input {
-    grid-column: 2;
+  #benchTMInput {
+    grid-row: 2;
+  }
+  #ohpRMInput {
+    grid-row: 3;
+  }
+  #squatTMInput {
+    grid-row: 2;
   }
 }

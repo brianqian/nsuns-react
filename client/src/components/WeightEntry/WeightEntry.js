@@ -33,91 +33,89 @@ class WeightEntry extends Component {
               this.handleSubmit(e);
             }}
           >
-            <div className="weightEntry__input-wrapper weightEntry__bench-input">
+            <div className="weightEntry__input-wrapper weightEntry__bench-input" id="benchRMInput">
               <label htmlFor="benchRMInput">1RM Bench:</label>
               <input
                 className="rm-input"
                 onChange={this.onChange}
                 value={userLifts.benchRM || ''}
                 name="benchRM"
-                id="benchRMInput"
                 type="number"
               />
             </div>
-            <div className="weightEntry__input-wrapper weightEntry__ohp-input">
+            <div className="weightEntry__input-wrapper weightEntry__ohp-input" id="ohpRMInput">
               <label htmlFor="ohpRMInput">1RM OHP:</label>
               <input
                 className="rm-input"
                 onChange={this.onChange}
                 value={userLifts.ohpRM || ''}
                 name="ohpRM"
-                id="ohpRMInput"
                 type="number"
               />
             </div>
-            <div className="weightEntry__input-wrapper weightEntry__squat-input">
+            <div className="weightEntry__input-wrapper weightEntry__squat-input" id="squatRMInput">
               <label htmlFor="squatRMInput">1RM Squat:</label>
               <input
                 className="rm-input"
                 onChange={this.onChange}
                 value={userLifts.squatRM || ''}
                 name="squatRM"
-                id="squatRMInput"
                 type="number"
               />
             </div>
-            <div className="weightEntry__input-wrapper weightEntry__deadlift-input">
+            <div
+              className="weightEntry__input-wrapper weightEntry__deadlift-input"
+              id="deadliftRMInput"
+            >
               <label htmlFor="deadliftRMInput">1RM Deadlift:</label>
               <input
                 className="tm-input"
                 onChange={this.onChange}
                 value={userLifts.deadliftRM || ''}
                 name="deadliftRM"
-                id="deadliftRMInput"
                 type="number"
               />
             </div>
-            <div className="weightEntry__input-wrapper weightEntry__bench-input">
+            <div className="weightEntry__input-wrapper weightEntry__bench-input" id="benchTMInput">
               <label htmlFor="benchTMInput">TM Bench:</label>
               <input
                 className="tm-input"
                 onChange={this.onChange}
                 value={userLifts.benchTM || ''}
                 name="benchTM"
-                id="benchTMInput"
                 type="number"
               />
             </div>
-            <div className="weightEntry__input-wrapper weightEntry__ohp-input">
+            <div className="weightEntry__input-wrapper weightEntry__ohp-input" id="ohpTMInput">
               <label htmlFor="ohpTMInput">TM OHP:</label>
               <input
                 className="tm-input"
                 onChange={this.onChange}
                 value={userLifts.ohpTM || ''}
                 name="ohpTM"
-                id="ohpTMInput"
                 type="number"
               />
             </div>
-            <div className="weightEntry__input-wrapper weightEntry__sqaut-input">
+            <div className="weightEntry__input-wrapper weightEntry__sqaut-input" id="squatTMInput">
               <label htmlFor="squatTMInput">TM Squat:</label>
               <input
                 className="tm-input"
                 onChange={this.onChange}
                 value={userLifts.squatTM || ''}
                 name="squatTM"
-                id="squatTMInput"
                 type="number"
               />
             </div>
-            <div className="weightEntry__input-wrapper weightEntry__deadlift-input">
+            <div
+              className="weightEntry__input-wrapper weightEntry__deadlift-input"
+              id="deadliftTMInput"
+            >
               <label htmlFor="deadliftTMInput">TM Deadlift:</label>
               <input
                 className="tm-input"
                 onChange={this.onChange}
                 value={userLifts.deadliftTM || ''}
                 name="deadliftTM"
-                id="deadliftTMInput"
                 type="number"
               />
             </div>

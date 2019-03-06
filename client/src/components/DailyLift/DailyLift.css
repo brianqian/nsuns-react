@@ -3,6 +3,7 @@
   margin: auto;
   display: grid;
   grid-template-columns: 1fr repeat(3, 3fr);
+  max-height: 90vh;
 }
 
 .daily-lift-t1,
@@ -12,6 +13,7 @@
   align-items: center;
   justify-content: center;
   grid-column: 1/5;
+  /* max-height: 100vh; */
 }
 
 /* .daily-lift-t1 > p,
@@ -104,6 +106,7 @@
   }
   .dailyLift__day-title {
     grid-column: 3/5;
+    max-height: 35px;
   }
 
   .daily-lift-t1 > p,
