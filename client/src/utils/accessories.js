@@ -20,18 +20,18 @@ export const getAccessoryPlan = async userId => {
   try {
     let resp = await fetch(`/api/accessory/${userId}`);
     resp = await resp.json();
-
+    const respArray = [];
     if (resp.length) {
       const weekLength = Math.max(...resp.map(accessory => accessory.dayIndex));
-      return [...Array(weekLength + 1).keys()].map(dayIndex =>
-        resp.filter(accessory => accessory.dayIndex === dayIndex)
-      );
-      // for (let i = 0; i <= weekLength; i++) {
-      //   respArray.push(resp.filter(item => item.dayIndex === i));
-      // }
+      // return [...Array(weekLength + 1).keys()].map(dayIndex =>
+      //   resp.filter(accessory => accessory.dayIndex === dayIndex)
+      // );
+      for (let i = 0; i <= weekLength; i++) {
+        respArray.push(resp.filter(item => item.dayIndex === i));
+      }
     }
 
-    // return respArray;
+    return respArray;
   } catch (err) {
     console.error(err);
   }

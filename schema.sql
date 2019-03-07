@@ -15,6 +15,7 @@ CREATE TABLE userInfo (
   ohpRM FLOAT(7,2) DEFAULT 100,
   deadliftRM FLOAT(7,2) DEFAULT 100,
   squatRM FLOAT(7,2) DEFAULT 100,
+  startDate DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id)
 
 );
@@ -31,18 +32,14 @@ CREATE TABLE userSettings(
 );
 CREATE TABLE workouts (
 id INT NOT NULL AUTO_INCREMENT,
-startDate VARCHAR(10),
+currentDate DATETIME DEFAULT CURRENT_TIMESTAMP,
 userId INTEGER(100),
 weekNum VARCHAR(10),
 weeklyBench FLOAT(7,2),
 weeklyDeadlift FLOAT(7,2),
 weeklyOhp FLOAT(7,2),
 weeklySquat FLOAT(7,2),
-benchAmrap INTEGER(10),
-deadliftAmrap INTEGER(10),
-ohpAmrap INTEGER(10),
-squatAmrap INTEGER(10),
-sets INTEGER(20),
+weeklyRow FLOAT(7,2),
 PRIMARY KEY (id)
 
 );

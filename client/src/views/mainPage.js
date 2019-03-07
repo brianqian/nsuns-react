@@ -1,12 +1,12 @@
 import React from 'react';
-import WeightEntry from '../components/WeightEntry/WeightEntry';
+import WeightEntryContainer from '../components/WeightEntryContainer/WeightEntryContainer';
 import DailyLiftWrapper from '../components/DailyLift/DailyLiftWrapper';
 import { connect } from 'react-redux';
 
 function MainPage() {
   return (
     <div>
-      <WeightEntry />
+      <WeightEntryContainer />
       <DailyLiftWrapper />
     </div>
   );

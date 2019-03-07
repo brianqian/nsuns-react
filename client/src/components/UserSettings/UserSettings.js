@@ -1,9 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import LoginSignup from '../LoginSignup/LoginSignup';
-// import AccessorySelector from './AccessorySelector/AccessorySelector';
-// import StandardSelector from './StandardSelector/StandardSelector';
-// import WeightBoxSelector from './WeightBoxSelector/WeightBoxSelector';
 import BasicSelector from './BasicSelector/BasicSelector';
 import './UserSettings.css';
 import * as Action from '../../actions';
@@ -16,7 +13,7 @@ function UserSettings(props) {
     userSettings: { standard, nsunsVariation, timerOption, wbOption, capWeekNum },
   } = props;
 
-  //GENERATE ACCESSORY Options
+  //GENERATE ACCESSORY OPTIONS
   const accOptions = {
     userId,
     action: Action.selectAccessoryPlan,
@@ -35,7 +32,7 @@ function UserSettings(props) {
   };
   if (custom) accOptions.options.push({ value: 'custom', text: 'Custom' });
 
-  //GENERATE STANDARD Options
+  //GENERATE STANDARD OPTIONS
   const standardOptions = {
     userId,
     action: Action.selectStandard,
@@ -52,7 +49,7 @@ function UserSettings(props) {
       },
     ],
   };
-  //GENERATE VARIATION Options
+  //GENERATE VARIATION OPTIONS
   const variationOptions = {
     userId,
     action: Action.selectVariation,
@@ -95,6 +92,7 @@ function UserSettings(props) {
     ],
   };
 
+  //GENERATE WEIGHT BOX OPTIONS
   const weightBoxOptions = {
     userId,
     action: Action.selectWeightBoxOption,

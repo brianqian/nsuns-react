@@ -26,18 +26,18 @@ function DailyLiftWrapper({
     return (
       <DailyLift
         day={day.day}
-        t1Lift={day.lifts[0]}
-        t2Lift={day.lifts[1]}
-        t1Base={day.baseLift[0]}
-        t2Base={day.baseLift[1]}
-        t1Weights={day.t1Weights}
-        t1Reps={day.t1Reps}
-        t2Weights={day.t2Weights}
-        t2Reps={day.t2Reps}
+        t1Lift={day.lifts[0] || ''}
+        t2Lift={day.lifts[1] || ''}
+        t1Base={day.baseLift[0] || ''}
+        t2Base={day.baseLift[1] || ''}
+        t1Weights={day.t1Weights || ''}
+        t1Reps={day.t1Reps || ''}
+        t2Weights={day.t2Weights || ''}
+        t2Reps={day.t2Reps || ''}
         max1={userLifts[base1] || '0'}
         max2={userLifts[base2] || '0'}
         standard={userSettings.standard}
-        key={'dl' + index}
+        key={JSON.stringify(day)}
         dayIndex={index}
       />
     );

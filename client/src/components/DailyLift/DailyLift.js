@@ -38,6 +38,7 @@ const DayTitle = styled.h2`
   font-family: 'Noto Serif', Georgia, 'Times New Roman', Times, serif;
   text-align: center;
   grid-column: 3;
+  grid-row: ${props => props.rest && 2};
   @media (max-width: 800px) {
     grid-column: 3/5;
     max-height: 35px;
@@ -91,6 +92,7 @@ class dailyLift extends Component {
       standard,
       dayIndex,
     } = this.props;
+    const isRestDay = day === '--REST--';
     const { openAccessoryBox } = this.state;
     const t1Workouts = t1Reps.map((rep, i) => {
       return (
@@ -116,7 +118,7 @@ class dailyLift extends Component {
     });
     return (
       <DailyLiftContainer>
-        <DayTitle>{day}</DayTitle>
+        <DayTitle rest={isRestDay}>{day}</DayTitle>
         <DailyLiftRow>
           <LiftTitle>{t1Lift}</LiftTitle>
           {t1Workouts}
@@ -124,16 +126,18 @@ class dailyLift extends Component {
         <DailyLiftRow2>
           <LiftTitle>{t2Lift}</LiftTitle>
           {t2Workouts}
-          <AccessoriesButton onClick={this.handleClick}>
-            Accessories
-            <img
-              onClick={this.toggleExpand}
-              src={openAccessoryBox ? './collapse-button.svg' : './expand-button.svg'}
-              alt=""
-              height="auto"
-              width="10%"
-            />
-          </AccessoriesButton>
+          {!isRestDay && (
+            <AccessoriesButton onClick={this.handleClick}>
+              Accessories
+              <img
+                onClick={this.toggleExpand}
+                src={openAccessoryBox ? './collapse-button.svg' : './expand-button.svg'}
+                alt=""
+                height="auto"
+                width="10%"
+              />
+            </AccessoriesButton>
+          )}
         </DailyLiftRow2>
         {openAccessoryBox && <AccessoryBox dayIndex={dayIndex} />}
       </DailyLiftContainer>
