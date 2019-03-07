@@ -1,5 +1,4 @@
 const accessories = {
-  openAccessoryBox: { 0: false, 1: false, 2: false, 3: false, 4: false },
   accessoryPlan: 'arms',
   arms: [
     [

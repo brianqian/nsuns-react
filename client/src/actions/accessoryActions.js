@@ -34,14 +34,6 @@ export const editAccessorySuccess = basePlan => {
   };
 };
 
-export const openAccessoryBox = (bool, index) => {
-  return {
-    type: 'TOGGLE_ACCESSORY_BOX',
-    bool,
-    index,
-  };
-};
-
 export const clearAccessories = () => {
   return {
     type: 'CLEAR_ACCESSORIES',

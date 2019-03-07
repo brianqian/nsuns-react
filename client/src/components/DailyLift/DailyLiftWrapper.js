@@ -14,13 +14,8 @@ const DailyLiftContainer = styled.div`
 `;
 
 // function DailyLiftWrapper(props) {
-function DailyLiftWrapper({
-  userLifts,
-  dailySplits,
-  userSettings,
-  userSettings: { nsunsVariation },
-}) {
-  const dailyLifts = dailySplits[nsunsVariation].map((day, index) => {
+function DailyLiftWrapper({ userLifts, dailySplits, userSettings, userSettings: { variation } }) {
+  const dailyLifts = dailySplits[variation].map((day, index) => {
     const base1 = day.baseLift[0] + 'TM';
     const base2 = day.baseLift[1] + 'TM';
     return (

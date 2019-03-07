@@ -11,10 +11,12 @@ CREATE TABLE userInfo (
   ohpTM FLOAT(7,2) DEFAULT 90,
   deadliftTM FLOAT(7,2) DEFAULT 90,
   squatTM FLOAT(7,2) DEFAULT 90,
+  rowTM FLOAT(7,2) DEFAULT 90,
   benchRM FLOAT(7,2) DEFAULT 100,
   ohpRM FLOAT(7,2) DEFAULT 100,
   deadliftRM FLOAT(7,2) DEFAULT 100,
   squatRM FLOAT(7,2) DEFAULT 100,
+  rowRM FLOAT(7,2) DEFAULT 100,
   startDate DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id)
 
@@ -26,7 +28,7 @@ CREATE TABLE userSettings(
   standard VARCHAR(5) DEFAULT 'lbs',
   timerOption INTEGER(5) DEFAULT 30,
   wbOption VARCHAR(10) DEFAULT 'mark',
-  nsunsVariation VARCHAR(10) DEFAULT '5day',
+  variation VARCHAR(10) DEFAULT '5day',
   cap3week VARCHAR(5) DEFAULT '1',
   PRIMARY KEY (id)
 );

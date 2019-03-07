@@ -12,9 +12,23 @@ module.exports = {
       ohpTM,
       squatRM,
       squatTM,
+      rowRM,
+      rowTM,
       userId,
     } = req.body;
-    const info = [benchRM, benchTM, deadliftRM, deadliftTM, ohpRM, ohpTM, squatRM, squatTM, userId];
+    const info = [
+      benchRM,
+      benchTM,
+      deadliftRM,
+      deadliftTM,
+      ohpRM,
+      ohpTM,
+      squatRM,
+      squatTM,
+      rowRM,
+      rowTM,
+      userId,
+    ];
     connection.query(
       `UPDATE userInfo SET benchRM = ?,
       benchTM = ?,
@@ -23,7 +37,9 @@ module.exports = {
       ohpRM = ?,
       ohpTM = ?,
       squatRM = ?,
-      squatTM = ?
+      squatTM = ?,
+      rowRM = ?,
+      rowTM = ?
     WHERE id = ?`,
       info,
       (err, data) => {
@@ -72,7 +88,7 @@ module.exports = {
   saveVariation: (req, res) => {
     const { userId, option } = req.body;
     connection.query(
-      'UPDATE userSettings SET nsunsVariation = ? WHERE userId= ?',
+      'UPDATE userSettings SET variation = ? WHERE userId= ?',
       [option, userId],
       (err, data) => {
         if (err) throw err;

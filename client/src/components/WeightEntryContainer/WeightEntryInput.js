@@ -6,9 +6,6 @@ const Wrapper = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: flex-end;
-  @media (max-width: 800px) {
-    grid-row: ${props => props.gridRow};
-  }
   > label {
     @media (max-width: 800px) {
       flex: 2;
@@ -21,11 +18,11 @@ const Wrapper = styled.div`
   }
 `;
 
-function WeightEntryInput(props) {
+function WeightEntryInput({ label, onChange, value, name, className }) {
   return (
-    <Wrapper>
-      <label>{props.label}</label>
-      <input onChange={props.onChange} value={props.value || ''} name={props.name} type="number" />
+    <Wrapper className={className}>
+      <label>{label}</label>
+      <input onChange={onChange} value={value || ''} name={name} type="number" />
     </Wrapper>
   );
 }

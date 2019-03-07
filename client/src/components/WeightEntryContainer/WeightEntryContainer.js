@@ -10,8 +10,8 @@ const Container = styled.div`
 `;
 const FormContainer = styled.form`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 0.25rem 2rem;
+  grid-template-columns: ${props => (props.cap3 ? 'repeat(5, 1fr);' : 'repeat(4, 1fr);')}
+  grid-gap: 0.25rem 1rem;
   justify-content: center;
   @media (max-width: 800px) {
     grid-template-columns: repeat(2, 1fr);
@@ -24,6 +24,14 @@ const Button = styled.button`
     grid-column: 2;
   }
 `;
+
+const StyledWeightInput = styled(WeightEntryInput)`
+  @media (max-width: 800px) {
+    grid-row: ${props => props.gridRow};
+    grid-column: ${props => (props.label[0] === 'T' ? '2;' : '1;')};
+  }
+`;
+
 class WeightEntry extends Component {
   onChange = e => {
     const {
@@ -44,63 +52,87 @@ class WeightEntry extends Component {
   };
 
   render() {
-    const { userLifts, userAuth } = this.props;
+    const { userLifts, userAuth, userSettings } = this.props;
+    const isCap3 = userSettings.variation === 'cap3';
+    console.log(isCap3);
     return (
       <div>
         <Container>
           <FormContainer
+            cap3={isCap3}
             onSubmit={e => {
               this.handleSubmit(e);
             }}
           >
-            <WeightEntryInput
+            <StyledWeightInput
               label="1RM Bench"
               onChange={this.onChange}
               value={userLifts.benchRM || ''}
               name="benchRM"
             />
-            <WeightEntryInput
+            <StyledWeightInput
               label="1RM OHP"
               onChange={this.onChange}
               value={userLifts.ohpRM || ''}
               name="ohpRM"
             />
-            <WeightEntryInput
+            <StyledWeightInput
               label="1RM Squat"
               onChange={this.onChange}
               value={userLifts.squatRM || ''}
               name="squatRM"
             />
-            <WeightEntryInput
+            <StyledWeightInput
               label="1RM Deadlift"
               onChange={this.onChange}
               value={userLifts.deadliftRM || ''}
               name="deadliftRM"
             />
-            <WeightEntryInput
+            {isCap3 && (
+              <StyledWeightInput
+                label="1RM Row"
+                onChange={this.onChange}
+                value={userLifts.rowRM || ''}
+                name="rowRM"
+              />
+            )}
+            <StyledWeightInput
+              gridRow="1"
               label="TM Bench"
               onChange={this.onChange}
               value={userLifts.benchTM || ''}
               name="benchTM"
             />
-            <WeightEntryInput
+            <StyledWeightInput
+              gridRow="2"
               label="TM OHP"
               onChange={this.onChange}
               value={userLifts.ohpTM || ''}
               name="ohpTM"
             />
-            <WeightEntryInput
+            <StyledWeightInput
+              gridRow="3"
               label="TM Squat"
               onChange={this.onChange}
               value={userLifts.squatTM || ''}
               name="squatTM"
             />
-            <WeightEntryInput
+            <StyledWeightInput
+              gridRow="4"
               label="TM Deadlift"
               onChange={this.onChange}
               value={userLifts.deadliftTM || ''}
               name="deadliftTM"
             />
+            {isCap3 && (
+              <StyledWeightInput
+                label="TM Row"
+                onChange={this.onChange}
+                value={userLifts.rowTM || ''}
+                name="rowTM"
+              />
+            )}
+
             {userAuth.loggedIn && <Button type="submit">Save new values</Button>}
           </FormContainer>
         </Container>
@@ -111,6 +143,7 @@ class WeightEntry extends Component {
 const mapStateToProps = state => ({
   userLifts: state.userLifts,
   userAuth: state.userAuth,
+  userSettings: state.userSettings,
 });
 
 export default connect(mapStateToProps)(WeightEntry);

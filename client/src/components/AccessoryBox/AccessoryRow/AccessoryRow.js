@@ -158,7 +158,7 @@ class AccessoryRow extends Component {
         {this.state.currentlyEditing ? (
           <AccessoryItemContent>
             <input
-              autofocus="true"
+              autoFocus="true"
               onChange={this.onChange}
               type="text"
               name={'title'}

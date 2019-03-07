@@ -10,7 +10,7 @@ function UserSettings(props) {
   const {
     userId,
     accessories: { accessoryPlan, custom },
-    userSettings: { standard, nsunsVariation, timerOption, wbOption, capWeekNum },
+    userSettings: { standard, variation, timerOption, wbOption, capWeekNum },
   } = props;
 
   //GENERATE ACCESSORY OPTIONS
@@ -54,7 +54,7 @@ function UserSettings(props) {
     userId,
     action: Action.selectVariation,
     title: 'Variation',
-    defaultValue: nsunsVariation,
+    defaultValue: variation,
     options: [
       {
         value: '5day',
@@ -140,7 +140,7 @@ function UserSettings(props) {
         <BasicSelector {...standardOptions} />
         <BasicSelector {...accOptions} />
         <BasicSelector {...variationOptions} />
-        {nsunsVariation === 'cap3' && <BasicSelector {...currentWeekOptions} />}
+        {variation === 'cap3' && <BasicSelector {...currentWeekOptions} />}
         <BasicSelector {...weightBoxOptions} />
         {wbOption === 'timer' && <BasicSelector {...TimerBoxOptions} />}
       </LoginSignup>

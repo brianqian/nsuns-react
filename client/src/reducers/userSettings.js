@@ -1,7 +1,7 @@
 function userSettings(
   state = {
     settingsOpen: false,
-    nsunsVariation: '5day',
+    variation: '5day',
     standard: 'lbs',
     wbOption: 'mark',
     timerOption: '30',
@@ -16,7 +16,7 @@ function userSettings(
     case 'WEIGHTBOX_SUCCESS':
       return { ...state, wbOption: action.option };
     case 'VARIATION_SUCCESS':
-      return { ...state, nsunsVariation: action.option };
+      return { ...state, variation: action.option };
     case 'CAP_WEEK_SUCCESS':
       return { ...state, capWeekNum: action.option };
     case 'SELECT_STANDARD_SUCCESS':
