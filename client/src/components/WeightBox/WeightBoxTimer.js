@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './WeightBoxTimer.css';
 import { connect } from 'react-redux';
 
 class WeightBoxTimer extends Component {

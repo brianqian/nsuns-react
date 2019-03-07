@@ -17,6 +17,8 @@ function userSettings(
       return { ...state, wbOption: action.option };
     case 'VARIATION_SUCCESS':
       return { ...state, nsunsVariation: action.option };
+    case 'CAP_WEEK_SUCCESS':
+      return { ...state, capWeekNum: action.option };
     case 'SELECT_STANDARD_SUCCESS':
       const { standard } = action;
       return { ...state, standard };

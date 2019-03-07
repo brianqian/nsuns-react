@@ -8,7 +8,7 @@ export const selectStandard = async (standard, userId) => {
   }
 };
 
-export const setTimerOption = async (option, userId) => {
+export const selectTimerOption = async (option, userId) => {
   try {
     return await fetchRequest(`/userInfo/timer`, 'PUT', { option, userId });
   } catch (err) {
@@ -16,16 +16,23 @@ export const setTimerOption = async (option, userId) => {
   }
 };
 
-export const setWeightBoxOption = async (option, userId) => {
+export const selectWeightBoxOption = async (option, userId) => {
   try {
     return await fetchRequest(`/userInfo/weightbox`, 'PUT', { option, userId });
   } catch (err) {
     console.error(err);
   }
 };
-export const setVariation = async (option, userId) => {
+export const selectVariation = async (option, userId) => {
   try {
     return await fetchRequest(`/userInfo/variation`, 'PUT', { option, userId });
+  } catch (err) {
+    console.error(err);
+  }
+};
+export const selectCapWeekNum = async (option, userId) => {
+  try {
+    return await fetchRequest(`/userInfo/capWeek`, 'PUT', { option, userId });
   } catch (err) {
     console.error(err);
   }

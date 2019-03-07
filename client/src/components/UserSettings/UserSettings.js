@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import LoginSignup from '../LoginSignup/LoginSignup';
 // import AccessorySelector from './AccessorySelector/AccessorySelector';
 // import StandardSelector from './StandardSelector/StandardSelector';
-import WeightBoxSelector from './WeightBoxSelector/WeightBoxSelector';
+// import WeightBoxSelector from './WeightBoxSelector/WeightBoxSelector';
 import BasicSelector from './BasicSelector/BasicSelector';
 import './UserSettings.css';
 import * as Action from '../../actions';
@@ -13,7 +13,7 @@ function UserSettings(props) {
   const {
     userId,
     accessories: { accessoryPlan, custom },
-    userSettings: { standard, nsunsVariation, timerOption, wbOption },
+    userSettings: { standard, nsunsVariation, timerOption, wbOption, capWeekNum },
   } = props;
 
   //GENERATE ACCESSORY Options
@@ -74,9 +74,30 @@ function UserSettings(props) {
     ],
   };
 
+  const currentWeekOptions = {
+    userId,
+    action: Action.selectCapWeekNum,
+    title: 'Current Week: ',
+    defaultValue: capWeekNum,
+    options: [
+      {
+        value: '1',
+        text: '1',
+      },
+      {
+        value: '2',
+        text: '2',
+      },
+      {
+        value: '3',
+        text: '3',
+      },
+    ],
+  };
+
   const weightBoxOptions = {
     userId,
-    action: Action.setWeightBoxOption,
+    action: Action.selectWeightBoxOption,
     title: 'Click effect: ',
     defaultValue: wbOption,
     options: [
@@ -93,7 +114,7 @@ function UserSettings(props) {
 
   const TimerBoxOptions = {
     userId,
-    action: Action.setTimerOption,
+    action: Action.selectTimerOption,
     title: 'Rest Time: ',
     defaultValue: timerOption,
     options: [
@@ -121,6 +142,7 @@ function UserSettings(props) {
         <BasicSelector {...standardOptions} />
         <BasicSelector {...accOptions} />
         <BasicSelector {...variationOptions} />
+        {nsunsVariation === 'cap3' && <BasicSelector {...currentWeekOptions} />}
         <BasicSelector {...weightBoxOptions} />
         {wbOption === 'timer' && <BasicSelector {...TimerBoxOptions} />}
       </LoginSignup>

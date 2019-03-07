@@ -41,6 +41,17 @@ export const variationFail = () => {
     type: 'VARIATION_FAIL',
   };
 };
+export const capWeekSuccess = option => {
+  return {
+    type: 'CAP_WEEK_SUCCESS',
+    option,
+  };
+};
+export const capWeekFail = () => {
+  return {
+    type: 'CAP_WEEK_FAIL',
+  };
+};
 export const getUserSettingsSuccess = userSettings => {
   return {
     type: 'GET_USER_SETTINGS_SUCCESS',
@@ -61,16 +72,20 @@ export const selectStandard = (standard, userId) => async dispatch => {
   return resp.ok ? dispatch(selectStandardSuccess(standard)) : dispatch(selectStandardFail());
 };
 
-export const setTimerOption = (option, userId) => async dispatch => {
-  const resp = await Util.setTimerOption(option, userId);
+export const selectTimerOption = (option, userId) => async dispatch => {
+  const resp = await Util.selectTimerOption(option, userId);
   return resp.ok ? dispatch(timerOptionSuccess(option)) : dispatch(timerOptionFail());
 };
-export const setWeightBoxOption = (option, userId) => async dispatch => {
-  const resp = await Util.setWeightBoxOption(option, userId);
+export const selectWeightBoxOption = (option, userId) => async dispatch => {
+  const resp = await Util.selectWeightBoxOption(option, userId);
   return resp.ok ? dispatch(weightBoxSuccess(option)) : dispatch(weightBoxFail());
 };
 export const selectVariation = (option, userId) => async dispatch => {
-  const resp = await Util.setVariation(option, userId);
+  const resp = await Util.selectVariation(option, userId);
+  return resp.ok ? dispatch(variationSuccess(option)) : dispatch(variationFail());
+};
+export const selectCapWeekNum = (option, userId) => async dispatch => {
+  const resp = await Util.selectCapWeekNum(option, userId);
   return resp.ok ? dispatch(variationSuccess(option)) : dispatch(variationFail());
 };
 export const getUserSettings = userId => async dispatch => {

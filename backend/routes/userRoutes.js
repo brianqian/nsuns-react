@@ -8,4 +8,5 @@ router.route('/weightbox').put(userController.saveWeightBoxOption);
 router.route('/variation').put(userController.saveVariation);
 router.route('/:userId').get(userController.getUserSettings);
 router.route('/accessories/seed').post(userController.seedSettings);
+router.route('/capWeek').put(userController.saveCapWeek);
 module.exports = router;

@@ -1,6 +1,17 @@
 import React from 'react';
 import DailyLift from './DailyLift';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
+
+const DailyLiftContainer = styled.div`
+  @media (max-width: 800px) {
+    scroll-snap-type: x mandatory;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    overflow: auto;
+  }
+`;
 
 // function DailyLiftWrapper(props) {
 function DailyLiftWrapper({
@@ -31,7 +42,7 @@ function DailyLiftWrapper({
       />
     );
   });
-  return <div className="daily-lift-wrapper">{dailyLifts}</div>;
+  return <DailyLiftContainer>{dailyLifts}</DailyLiftContainer>;
 }
 
 const mapStateToProps = state => ({

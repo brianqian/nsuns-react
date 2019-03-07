@@ -81,6 +81,18 @@ module.exports = {
       }
     );
   },
+  saveCapWeek: (req, res) => {
+    const { userId, option } = req.body;
+    connection.query(
+      'UPDATE userSettings SET capWeekNum = ? WHERE userId= ?',
+      [option, userId],
+      (err, data) => {
+        if (err) throw err;
+        data.ok = true;
+        res.json(data);
+      }
+    );
+  },
   getUserSettings: (req, res) => {
     console.log(req.params);
     connection.query(
