@@ -69,7 +69,7 @@ export const setWeightBoxOption = (option, userId) => async dispatch => {
   const resp = await Util.setWeightBoxOption(option, userId);
   return resp.ok ? dispatch(weightBoxSuccess(option)) : dispatch(weightBoxFail());
 };
-export const setVariation = (option, userId) => async dispatch => {
+export const selectVariation = (option, userId) => async dispatch => {
   const resp = await Util.setVariation(option, userId);
   return resp.ok ? dispatch(variationSuccess(option)) : dispatch(variationFail());
 };

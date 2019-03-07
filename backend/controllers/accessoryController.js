@@ -4,7 +4,6 @@ module.exports = {
   createAccessoryPlan: (req, res) => {
     const { userId, basePlan } = req.body;
     //Checks for an existing custom plan and doesn't create one if one exists.
-    //Custom plans should only be created once.
     connection.query('SELECT * FROM accessories WHERE userId = ?', [userId], (err, data) => {
       if (!data.length) {
         const values = [];
@@ -28,7 +27,7 @@ module.exports = {
   },
   getAccessoryPlan: (req, res) => {
     connection.query(
-      `SELECT * FROM accessories WHERE userId = ?`,
+      'SELECT * FROM accessories WHERE userId = ?',
       [req.params.userId],
       (err, data) => {
         if (err) throw err;

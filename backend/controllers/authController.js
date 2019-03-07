@@ -8,31 +8,26 @@ module.exports = {
     let { username, password } = req.body;
     password = password.toString();
     username = username.toString();
-    connection.query(
-      `SELECT * FROM userInfo 
-      WHERE username = ?`,
-      [username],
-      async (err, data) => {
-        if (err) throw err;
-        [data] = data;
-        if (!data) {
-          res.json({ ok: false, message: 'Username not found' });
-          return;
-        }
-        //Bcrypt password compare
-        const match = await bcrypt.compare(password, data.password);
-        if (match) {
-          delete data.password;
-          data.ok = true;
-          data.token = jwt.sign({ userId: data.id }, process.env.SECRET_KEY, {
-            expiresIn: '60d',
-          });
-          res.json(data);
-        } else {
-          res.json({ ok: false, message: 'Incorrect password' });
-        }
+    connection.query('SELECT * FROM userInfo WHERE username = ?', [username], async (err, data) => {
+      if (err) throw err;
+      [data] = data;
+      if (!data) {
+        res.json({ ok: false, message: 'Username not found' });
+        return;
       }
-    );
+      //Bcrypt password compare
+      const match = await bcrypt.compare(password, data.password);
+      if (match) {
+        delete data.password;
+        data.ok = true;
+        data.token = jwt.sign({ userId: data.id }, process.env.SECRET_KEY, {
+          expiresIn: '60d',
+        });
+        res.json(data);
+      } else {
+        res.json({ ok: false, message: 'Incorrect password' });
+      }
+    });
   },
   jwtLogin: (req, res) => {
     const { token } = req.body;
