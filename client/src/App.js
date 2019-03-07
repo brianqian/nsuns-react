@@ -3,7 +3,6 @@ import './App.css';
 import UserSettings from './components/UserSettings/UserSettings';
 import { connect } from 'react-redux';
 import { jwtLogin, openSettings } from './actions';
-import MainPage from './views/mainPage';
 
 class App extends Component {
   componentDidMount = () => {

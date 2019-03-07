@@ -7,6 +7,7 @@ function MainPage() {
   return (
     <div>
       <WeightEntry />
+
       <DailyLiftWrapper />
     </div>
   );

@@ -1,7 +1,28 @@
 import React, { Component } from 'react';
-import './AccessoryBox.css';
 import { connect } from 'react-redux';
 import AccessoryRow from './AccessoryRow/AccessoryRow';
+import styled from 'styled-components';
+
+const AccessoryContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr repeat(3, 3fr);
+  font-family: 'Roboto';
+  grid-column: 1/5;
+  @media (max-width: 800px) {
+    grid-column: 1/-1;
+  }
+  > button {
+    grid-column: 3;
+    height: 3rem;
+  }
+`;
+
+const AccessoryContainerTitle = styled.div`
+  grid-column: 1/12;
+  display: grid;
+  grid-template-columns: 1fr repeat(3, 3fr);
+  justify-items: center;
+`;
 
 class AccessoryBox extends Component {
   state = {
@@ -14,36 +35,26 @@ class AccessoryBox extends Component {
   render() {
     const {
       accessories,
-      accessories: { accessoryPlan },
       userAuth,
       dayIndex,
       userSettings,
+      accessories: { accessoryPlan },
     } = this.props;
     const accessoryItems = accessories[accessoryPlan][dayIndex].map((accessory, accIndex) => {
       const { title, sets, reps, weight, id } = accessory;
-      return (
-        <AccessoryRow
-          key={id}
-          title={title}
-          sets={sets}
-          reps={reps}
-          weight={weight}
-          id={id}
-          dayIndex={dayIndex}
-          accIndex={accIndex}
-        />
-      );
+      const props = { id, title, sets, reps, weight, dayIndex, accIndex };
+      return <AccessoryRow {...props} key={id} />;
     });
 
     const { addNewAccessory } = this.state;
     return (
-      <div className="accessory__container">
-        <div className="accessory__container-titles">
+      <AccessoryContainer>
+        <AccessoryContainerTitle>
           <h4 />
           <h4>Title</h4>
           <h4>SetsxReps</h4>
           <h4>Weight({userSettings.standard})</h4>
-        </div>
+        </AccessoryContainerTitle>
         {accessoryItems}
         {addNewAccessory && <AccessoryRow toggleAddBox={this.addAccessory} dayIndex={dayIndex} />}
         {userAuth.loggedIn && (
@@ -51,7 +62,7 @@ class AccessoryBox extends Component {
             {addNewAccessory ? 'Cancel' : 'Add Accessory'}
           </button>
         )}
-      </div>
+      </AccessoryContainer>
     );
   }
 }
