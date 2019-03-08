@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { userLiftOnChange } from '../../actions';
 import { saveUserLifts } from '../../utils/userInfo';
 import WeightEntryInput from './WeightEntryInput';
+import Calculator from './Cap3Calculator';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -19,16 +20,24 @@ const FormContainer = styled.form`
   }
 `;
 const Button = styled.button`
-  grid-column: 4;
+  grid-column: ${props => (props.cap3 ? 5 : 4)};
   @media (max-width: 800px) {
     grid-column: 2;
   }
 `;
 
+//All training maxes are labeled TM <lift> and should be on the right side in mobile view
 const StyledWeightInput = styled(WeightEntryInput)`
   @media (max-width: 800px) {
     grid-row: ${props => props.gridRow};
-    grid-column: ${props => (props.label[0] === 'T' ? '2;' : '1;')};
+    grid-column: ${props => (props.label[0] === 'T' ? '2' : '1')};
+  }
+`;
+
+const StyledCalculator = styled(Calculator)`
+  grid-column: span 3;
+  @media (max-width: 800px) {
+    grid-column: span 2;
   }
 `;
 
@@ -54,7 +63,6 @@ class WeightEntry extends Component {
   render() {
     const { userLifts, userAuth, userSettings } = this.props;
     const isCap3 = userSettings.variation === 'cap3';
-    console.log(isCap3);
     return (
       <div>
         <Container>
@@ -132,8 +140,12 @@ class WeightEntry extends Component {
                 name="rowTM"
               />
             )}
-
-            {userAuth.loggedIn && <Button type="submit">Save new values</Button>}
+            <StyledCalculator />
+            {userAuth.loggedIn && (
+              <Button cap3={isCap3} type="submit">
+                Save new values
+              </Button>
+            )}
           </FormContainer>
         </Container>
       </div>

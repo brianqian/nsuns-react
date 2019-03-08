@@ -69,6 +69,7 @@ export const selectStandardFail = () => {
 };
 export const selectStandard = (standard, userId) => async dispatch => {
   const resp = await Util.selectStandard(standard, userId);
+  if (!userId) dispatch(selectStandardSuccess(standard));
   return resp.ok ? dispatch(selectStandardSuccess(standard)) : dispatch(selectStandardFail());
 };
 
@@ -84,9 +85,9 @@ export const selectVariation = (option, userId) => async dispatch => {
   const resp = await Util.selectVariation(option, userId);
   return resp.ok ? dispatch(variationSuccess(option)) : dispatch(variationFail());
 };
-export const selectCapWeekNum = (option, userId) => async dispatch => {
+export const selectCap3Week = (option, userId) => async dispatch => {
   const resp = await Util.selectCapWeekNum(option, userId);
-  return resp.ok ? dispatch(variationSuccess(option)) : dispatch(variationFail());
+  return resp.ok ? dispatch(capWeekSuccess(option)) : dispatch(capWeekFail());
 };
 export const getUserSettings = userId => async dispatch => {
   const userSettings = await Util.getUserSettings(userId);

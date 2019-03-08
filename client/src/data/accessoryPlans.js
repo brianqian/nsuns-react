@@ -64,6 +64,43 @@ const accessories = {
       { id: 40, title: 'DB Row', sets: 4, reps: 10, weight: 45 },
     ],
   ],
+  cap3: [
+    [
+      { id: 21, title: 'Band Pull-Aparts', sets: 1, reps: 200, weight: 0 },
+      { id: 22, title: 'Banded Shoulder Dislocation ', sets: 1, reps: 100, weight: 0 },
+      { id: 23, title: 'Pullups', sets: 4, reps: 'AMRAP', weight: 0 },
+    ],
+    [
+      { id: 21, title: 'Band Pull-Aparts', sets: 1, reps: 200, weight: 0 },
+      { id: 22, title: 'Banded Shoulder Dislocation ', sets: 1, reps: 100, weight: 0 },
+      { id: 27, title: 'Weighted Pullups', sets: 5, reps: 6, weight: 0 },
+    ],
+    [
+      { id: 21, title: 'Band Pull-Aparts', sets: 1, reps: 200, weight: 0 },
+      { id: 22, title: 'Banded Shoulder Dislocation ', sets: 1, reps: 100, weight: 0 },
+      { id: 31, title: 'Mobility', sets: 0, reps: 0, weight: 0 },
+    ],
+    [
+      { id: 21, title: 'Band Pull-Aparts', sets: 1, reps: 200, weight: 0 },
+      { id: 22, title: 'Banded Shoulder Dislocation ', sets: 1, reps: 100, weight: 0 },
+      { id: 35, title: 'Leg Lifts', sets: 4, reps: 10, weight: 0 },
+    ],
+    [
+      { id: 21, title: 'Band Pull-Aparts', sets: 1, reps: 200, weight: 0 },
+      { id: 22, title: 'Banded Shoulder Dislocation ', sets: 1, reps: 100, weight: 0 },
+      { id: 27, title: 'Weighted Pullups', sets: 3, reps: 6, weight: 0 },
+    ],
+    [
+      { id: 21, title: 'Band Pull-Aparts', sets: 1, reps: 200, weight: 0 },
+      { id: 22, title: 'Banded Shoulder Dislocation ', sets: 1, reps: 100, weight: 0 },
+      { id: 23, title: 'Pullups', sets: 4, reps: 'AMRAP', weight: 0 },
+    ],
+    [
+      { id: 21, title: 'Band Pull-Aparts', sets: 1, reps: 200, weight: 0 },
+      { id: 22, title: 'Banded Shoulder Dislocation ', sets: 1, reps: 100, weight: 0 },
+      { id: 39, title: 'Facepulls', sets: 4, reps: 10, weight: 0 },
+    ],
+  ],
 };
 
 export default accessories;

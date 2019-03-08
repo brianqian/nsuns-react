@@ -37,6 +37,7 @@ const mapStateToProps = state => ({
   userAuth: state.userAuth,
   userSettings: state.userSettings,
   userLifts: state.userLifts,
+  dailySplits: state.dailySplits,
 });
 
 export default connect(mapStateToProps)(App);

@@ -2,15 +2,28 @@ import React from 'react';
 import { connect } from 'react-redux';
 import LoginSignup from '../LoginSignup/LoginSignup';
 import BasicSelector from './BasicSelector/BasicSelector';
-import './UserSettings.css';
 import * as Action from '../../actions';
-// { selectAccessoryPlan, selectStandard, selectVariation, setTimerOption }
+import { openSettings } from '../../actions';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  background-color: #596d83;
+  z-index: 10;
+  position: absolute;
+  transition: transform 0.25s;
+  ${props => (props.open ? '' : 'transform: translate(-200px);')}
+  overflow: hidden;
+`;
 
 function UserSettings(props) {
   const {
     userId,
     accessories: { accessoryPlan, custom },
-    userSettings: { standard, variation, timerOption, wbOption, capWeekNum },
+    userSettings: { standard, variation, timerOption, wbOption, cap3Week },
   } = props;
 
   //GENERATE ACCESSORY OPTIONS
@@ -27,6 +40,10 @@ function UserSettings(props) {
       {
         value: 'legs',
         text: 'Legs',
+      },
+      {
+        value: 'cap3',
+        text: 'CAP3',
       },
     ],
   };
@@ -73,9 +90,9 @@ function UserSettings(props) {
 
   const currentWeekOptions = {
     userId,
-    action: Action.selectCapWeekNum,
+    action: Action.selectCap3Week,
     title: 'Current Week: ',
-    defaultValue: capWeekNum,
+    defaultValue: cap3Week,
     options: [
       {
         value: '1',
@@ -134,17 +151,19 @@ function UserSettings(props) {
       },
     ],
   };
+
   return (
-    <div className={props.settingsOpen ? 'userSettings' : 'userSettings__closed'}>
-      <LoginSignup>
-        <BasicSelector {...standardOptions} />
-        <BasicSelector {...accOptions} />
-        <BasicSelector {...variationOptions} />
-        {variation === 'cap3' && <BasicSelector {...currentWeekOptions} />}
-        <BasicSelector {...weightBoxOptions} />
-        {wbOption === 'timer' && <BasicSelector {...TimerBoxOptions} />}
-      </LoginSignup>
-    </div>
+    <Container open={props.settingsOpen}>
+      <LoginSignup />
+      <BasicSelector {...standardOptions} />
+      <BasicSelector {...accOptions} />
+      <BasicSelector {...variationOptions} />
+      {variation === 'cap3' && <BasicSelector {...currentWeekOptions} />}
+      <BasicSelector {...weightBoxOptions} />
+      {wbOption === 'timer' && <BasicSelector {...TimerBoxOptions} />}
+
+      <button onClick={() => props.dispatch(openSettings(false))}>Close Settings</button>
+    </Container>
   );
 }
 

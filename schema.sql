@@ -29,7 +29,7 @@ CREATE TABLE userSettings(
   timerOption INTEGER(5) DEFAULT 30,
   wbOption VARCHAR(10) DEFAULT 'mark',
   variation VARCHAR(10) DEFAULT '5day',
-  cap3week VARCHAR(5) DEFAULT '1',
+  cap3Week VARCHAR(5) DEFAULT '1',
   PRIMARY KEY (id)
 );
 CREATE TABLE workouts (

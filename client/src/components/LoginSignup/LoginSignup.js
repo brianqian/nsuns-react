@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { userLogin, logOut, createNewUser, openSettings } from '../../actions';
-import './LoginSignup.css';
+import { userLogin, logOut, createNewUser } from '../../actions';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  font-family: 'Noto Serif';
+  color: #0c1821;
+  display: grid;
+  grid-auto-flow: row;
+`;
+const SignUpContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 class Login extends Component {
   state = {
@@ -35,14 +46,10 @@ class Login extends Component {
     localStorage.removeItem('userId');
   };
 
-  closeSettings = () => {
-    this.props.openSettings(false);
-  };
-
   render() {
     const { loggedIn, message, showStatus } = this.props.userAuth;
     return (
-      <div className="loginSignup__container">
+      <Container>
         {!loggedIn && (
           <div className="loginSignup__login-container">
             <form action="">
@@ -74,12 +81,10 @@ class Login extends Component {
         {showStatus && <p>{message}</p>}
 
         {!loggedIn && (
-          <div
-            className="loginSignUp__open-signup"
-            onClick={() => this.setState({ selectSignUp: true })}
-          >
-            Sign up
-          </div>
+          <SignUpContainer onClick={() => this.setState({ selectSignUp: true })}>
+            <h4>Sign up</h4>
+            <img src="./expand-button.svg" width="15px" alt="" />
+          </SignUpContainer>
         )}
 
         {this.state.selectSignUp && !loggedIn && (
@@ -116,8 +121,7 @@ class Login extends Component {
           </button>
         )}
         {this.props.children}
-        <button onClick={this.closeSettings}>Close Settings</button>
-      </div>
+      </Container>
     );
   }
 }
@@ -127,5 +131,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { userLogin, logOut, createNewUser, openSettings }
+  { userLogin, logOut, createNewUser }
 )(Login);

@@ -33,17 +33,24 @@ class AccessoryBox extends Component {
   };
 
   render() {
+    console.log('rerener');
     const {
       accessories,
-      userAuth,
       dayIndex,
-      userSettings,
+      userSettings: { standard },
+      userAuth: { loggedIn },
       accessories: { accessoryPlan },
     } = this.props;
-    const accessoryItems = accessories[accessoryPlan][dayIndex].map((accessory, accIndex) => {
-      const { title, sets, reps, weight, id } = accessory;
-      const props = { id, title, sets, reps, weight, dayIndex, accIndex };
-      return <AccessoryRow {...props} key={id} />;
+
+    const currentPlan = [...accessories[accessoryPlan]];
+    //if # of accessories don't match with week length, insert empty accessory plans
+    if (!currentPlan[dayIndex]) {
+      currentPlan.push(...[[], []]);
+      currentPlan[dayIndex].push([]);
+    }
+    const accessoryItems = currentPlan[dayIndex].map(accessory => {
+      const props = { ...accessory, dayIndex };
+      return <AccessoryRow {...props} key={accessory.id} />;
     });
 
     const { addNewAccessory } = this.state;
@@ -53,11 +60,11 @@ class AccessoryBox extends Component {
           <h4 />
           <h4>Title</h4>
           <h4>SetsxReps</h4>
-          <h4>Weight({userSettings.standard})</h4>
+          <h4>Weight({standard})</h4>
         </AccessoryContainerTitle>
         {accessoryItems}
         {addNewAccessory && <AccessoryRow toggleAddBox={this.addAccessory} dayIndex={dayIndex} />}
-        {userAuth.loggedIn && (
+        {loggedIn && (
           <button onClick={this.addAccessory}>
             {addNewAccessory ? 'Cancel' : 'Add Accessory'}
           </button>

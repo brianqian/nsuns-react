@@ -100,7 +100,7 @@ module.exports = {
   saveCapWeek: (req, res) => {
     const { userId, option } = req.body;
     connection.query(
-      'UPDATE userSettings SET capWeekNum = ? WHERE userId= ?',
+      'UPDATE userSettings SET cap3Week = ? WHERE userId= ?',
       [option, userId],
       (err, data) => {
         if (err) throw err;

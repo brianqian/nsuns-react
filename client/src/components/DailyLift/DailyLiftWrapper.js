@@ -8,13 +8,19 @@ const DailyLiftContainer = styled.div`
     scroll-snap-type: x mandatory;
     width: 100vw;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: ${props => `repeat(${props.days}, 1fr)`};
     overflow: auto;
   }
 `;
 
 // function DailyLiftWrapper(props) {
-function DailyLiftWrapper({ userLifts, dailySplits, userSettings, userSettings: { variation } }) {
+function DailyLiftWrapper({
+  userLifts,
+  dailySplits,
+  userSettings,
+  userSettings: { variation, cap3Week },
+}) {
+  if (variation === 'cap3') variation = variation + cap3Week;
   const dailyLifts = dailySplits[variation].map((day, index) => {
     const base1 = day.baseLift[0] + 'TM';
     const base2 = day.baseLift[1] + 'TM';
@@ -37,7 +43,7 @@ function DailyLiftWrapper({ userLifts, dailySplits, userSettings, userSettings: 
       />
     );
   });
-  return <DailyLiftContainer>{dailyLifts}</DailyLiftContainer>;
+  return <DailyLiftContainer days={dailySplits[variation].length}>{dailyLifts}</DailyLiftContainer>;
 }
 
 const mapStateToProps = state => ({

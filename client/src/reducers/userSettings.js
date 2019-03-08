@@ -5,6 +5,7 @@ function userSettings(
     standard: 'lbs',
     wbOption: 'mark',
     timerOption: '30',
+    cap3Week: '1',
   },
   action
 ) {
@@ -18,7 +19,7 @@ function userSettings(
     case 'VARIATION_SUCCESS':
       return { ...state, variation: action.option };
     case 'CAP_WEEK_SUCCESS':
-      return { ...state, capWeekNum: action.option };
+      return { ...state, cap3Week: action.option };
     case 'SELECT_STANDARD_SUCCESS':
       const { standard } = action;
       return { ...state, standard };
