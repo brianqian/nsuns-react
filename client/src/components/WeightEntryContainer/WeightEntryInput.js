@@ -22,7 +22,7 @@ function WeightEntryInput({ label, onChange, value, name, className }) {
   return (
     <Wrapper className={className}>
       <label>{label}</label>
-      <input onChange={onChange} value={value || ''} name={name} type="number" />
+      <input step="0.5" onChange={onChange} value={value || ''} name={name} type="number" />
     </Wrapper>
   );
 }

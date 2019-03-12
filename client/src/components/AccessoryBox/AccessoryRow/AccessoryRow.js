@@ -141,7 +141,7 @@ class AccessoryRow extends Component {
       accessories: { custom, accessoryPlan },
     } = this.props;
     const { loaded } = this.state;
-    const showButtons = accessoryPlan === 'custom' || !custom;
+    const showButtons = accessoryPlan === 'custom' || !custom || !id;
     return (
       <AccessoryItem>
         {userAuth.loggedIn && showButtons && loaded && (

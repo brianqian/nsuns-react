@@ -18,9 +18,10 @@ const AccessoryContainer = styled.div`
 `;
 
 const AccessoryContainerTitle = styled.div`
-  grid-column: 1/12;
+  grid-column: 2/5;
   display: grid;
-  grid-template-columns: 1fr repeat(3, 3fr);
+  grid-template-columns: repeat(3, 3fr);
+  grid-auto-flow: column;
   justify-items: center;
 `;
 
@@ -33,21 +34,30 @@ class AccessoryBox extends Component {
   };
 
   render() {
-    console.log('rerener');
     const {
       accessories,
       dayIndex,
-      userSettings: { standard },
+      dailySplits,
+      userSettings: { standard, variation, cap3Week },
       userAuth: { loggedIn },
       accessories: { accessoryPlan },
     } = this.props;
 
     const currentPlan = [...accessories[accessoryPlan]];
     //if # of accessories don't match with week length, insert empty accessory plans
-    if (!currentPlan[dayIndex]) {
-      currentPlan.push(...[[], []]);
-      currentPlan[dayIndex].push([]);
+    // if (!currentPlan[dayIndex]) {
+    //   currentPlan.push(...[[[]], [[]]]);
+    // }
+
+    const weekLength = dailySplits[variation + cap3Week].length;
+    const accessoryLength = accessories[accessoryPlan].length;
+    if (weekLength > accessoryLength) {
+      const diff = weekLength - accessoryLength;
+      const filler = Array(diff).fill([]);
+      currentPlan.push(...filler);
+      console.log(filler, currentPlan);
     }
+
     const accessoryItems = currentPlan[dayIndex].map(accessory => {
       const props = { ...accessory, dayIndex };
       return <AccessoryRow {...props} key={accessory.id} />;
@@ -57,7 +67,6 @@ class AccessoryBox extends Component {
     return (
       <AccessoryContainer>
         <AccessoryContainerTitle>
-          <h4 />
           <h4>Title</h4>
           <h4>SetsxReps</h4>
           <h4>Weight({standard})</h4>
@@ -77,6 +86,7 @@ const mapStateToProps = state => ({
   userAuth: state.userAuth,
   accessories: state.accessories,
   userSettings: state.userSettings,
+  dailySplits: state.dailySplits,
 });
 
 export default connect(mapStateToProps)(AccessoryBox);

@@ -140,7 +140,7 @@ class WeightEntry extends Component {
                 name="rowTM"
               />
             )}
-            <StyledCalculator />
+            {isCap3 && <StyledCalculator />}
             {userAuth.loggedIn && (
               <Button cap3={isCap3} type="submit">
                 Save new values

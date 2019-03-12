@@ -26,14 +26,10 @@ const DailyLiftRow = styled.div`
   @media (max-width: 800px) {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(10, 1fr);
-    grid-column: 1/4;
+    grid-column: ${props => props.gridCol800px};
   }
 `;
-const DailyLiftRow2 = styled(DailyLiftRow)`
-  @media (max-width: 800px) {
-    grid-column: 4/7;
-  }
-`;
+
 const DayTitle = styled.h2`
   font-family: 'Noto Serif', Georgia, 'Times New Roman', Times, serif;
   text-align: center;
@@ -119,11 +115,11 @@ class dailyLift extends Component {
     return (
       <DailyLiftContainer>
         <DayTitle rest={isRestDay}>{day}</DayTitle>
-        <DailyLiftRow>
+        <DailyLiftRow gridCol800px="1/4">
           <LiftTitle>{t1Lift}</LiftTitle>
           {t1Workouts}
         </DailyLiftRow>
-        <DailyLiftRow2>
+        <DailyLiftRow gridCol800px="4/7">
           <LiftTitle>{t2Lift}</LiftTitle>
           {t2Workouts}
           {!isRestDay && (
@@ -138,7 +134,7 @@ class dailyLift extends Component {
               />
             </AccessoriesButton>
           )}
-        </DailyLiftRow2>
+        </DailyLiftRow>
         {openAccessoryBox && <AccessoryBox dayIndex={dayIndex} />}
       </DailyLiftContainer>
     );
