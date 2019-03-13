@@ -25,13 +25,16 @@ CREATE TABLE userSettings(
   id INT NOT NULL AUTO_INCREMENT,
   userId INTEGER (100),
   accessoryPlan VARCHAR(15) DEFAULT 'arms',
-  standard VARCHAR(5) DEFAULT 'lbs',
+  standard VARCHAR(10) DEFAULT 'lbs',
+  rounding FLOAT(7, 2) DEFAULT 5,
   timerOption INTEGER(5) DEFAULT 30,
   wbOption VARCHAR(10) DEFAULT 'mark',
   variation VARCHAR(10) DEFAULT '5day',
   cap3Week VARCHAR(5) DEFAULT '1',
   PRIMARY KEY (id)
 );
+
+
 CREATE TABLE workouts (
 id INT NOT NULL AUTO_INCREMENT,
 currentDate DATETIME DEFAULT CURRENT_TIMESTAMP,

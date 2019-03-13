@@ -56,7 +56,6 @@ export const deleteAccessoryFail = error => {
 export const deleteAccessory = (payload, basePlan) => async dispatch => {
   //payload={id, dayIndex, userId}
   const resp = await Util.deleteAccessory(payload);
-
   return resp.ok ? dispatch(deleteAccessorySuccess(basePlan)) : dispatch(deleteAccessoryFail(resp));
 };
 export const selectAccessoryPlan = (plan, userId) => async dispatch => {

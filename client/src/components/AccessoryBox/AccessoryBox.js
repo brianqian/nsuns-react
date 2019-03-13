@@ -44,19 +44,18 @@ class AccessoryBox extends Component {
     } = this.props;
 
     const currentPlan = [...accessories[accessoryPlan]];
-    //if # of accessories don't match with week length, insert empty accessory plans
-    // if (!currentPlan[dayIndex]) {
-    //   currentPlan.push(...[[[]], [[]]]);
-    // }
+    /*TODO: logic needs to be reworked to either disallow 5 day accessory plans
+or put filler in state.
+the accessoryAction reads the index of the item to change based off the store.
 
-    const weekLength = dailySplits[variation + cap3Week].length;
-    const accessoryLength = accessories[accessoryPlan].length;
-    if (weekLength > accessoryLength) {
-      const diff = weekLength - accessoryLength;
-      const filler = Array(diff).fill([]);
-      currentPlan.push(...filler);
-      console.log(filler, currentPlan);
-    }
+*/
+    // const weekLength = dailySplits[variation + cap3Week].length;
+    // const accessoryLength = accessories[accessoryPlan].length;
+    // if (weekLength > accessoryLength) {
+    //   const diff = weekLength - accessoryLength;
+    //   const filler = Array(diff).fill([]);
+    //   currentPlan.push(...filler);
+    // }
 
     const accessoryItems = currentPlan[dayIndex].map(accessory => {
       const props = { ...accessory, dayIndex };

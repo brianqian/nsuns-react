@@ -6,11 +6,11 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('index.js', () => {
   describe('calcDailyLift', () => {
-    it('calculates correctly', () => {
+    test('calculates correctly', () => {
       const answer = Util.calcDailyLift(0.65, 100, 'lbs');
       expect(answer).toBe(65);
     });
-    it('rounds numbers correctly', () => {
+    test('rounds numbers correctly', () => {
       let lbsAnswer = Util.calcDailyLift(0.65, 104, 'lbs');
       expect(lbsAnswer).toBe(70);
       lbsAnswer = Util.calcDailyLift(0.65, 103, 'lbs');
@@ -22,11 +22,11 @@ describe('index.js', () => {
     });
   });
   describe('repMaxToTm', () => {
-    it('calculates correctly', () => {
+    test('calculates correctly', () => {
       const answer = Util.repMaxToTM(100, 'lbs');
       expect(answer).toBe(90);
     });
-    it('rounds numbers correctly', () => {
+    test('rounds numbers correctly', () => {
       let lbsAnswer = Util.repMaxToTM(101, 'lbs');
       expect(lbsAnswer).toBe(95);
       lbsAnswer = Util.repMaxToTM(106, 'lbs');
@@ -36,22 +36,22 @@ describe('index.js', () => {
     });
   });
   describe('trainMaxToRM', () => {
-    it('calculates correctly', () => {
+    test('calculates correctly', () => {
       const answer = Util.trainMaxToRM(100, 'lbs');
       expect(answer).toBe(115);
     });
-    it('rounds correctly', () => {
+    test('rounds correctly', () => {
       const answer = Util.trainMaxToRM(105.25, 'kg');
       // expect(answer).toBe(115);
       console.log(answer);
     });
   });
   describe('swapTmRm', () => {
-    it('returns an object with swapped names', () => {
+    test('returns an object with swapped names', () => {
       const answer = Util.swapTmRm('benchRM', '100', 'lbs');
       expect(answer).toEqual({ benchRM: 100, benchTM: 90 });
     });
-    it('returns numbers and not strings', () => {
+    test('returns numbers and not strings', () => {
       const answer = Util.swapTmRm('benchRM', '100', 'lbs');
       expect(typeof answer.benchRM).toBe('number');
       expect(typeof answer.benchTM).toBe('number');

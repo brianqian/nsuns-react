@@ -8,6 +8,7 @@ const WeightBoxContainer = styled.div`
   grid-column: span 2;
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
   display: flex;
+
   align-items: center;
   justify-content: center;
   min-width: 100%;
@@ -57,7 +58,12 @@ class WeightBox extends Component {
   };
 
   render() {
-    const { reps, weights, max, standard } = this.props;
+    const {
+      reps,
+      weights,
+      max,
+      userSettings: { standard },
+    } = this.props;
     const { inTimerMode } = this.state;
     const weight = calcDailyLift(weights, max, standard);
 

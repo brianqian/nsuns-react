@@ -67,6 +67,8 @@ export const getUserSettingsFail = () => {
 export const selectStandardFail = () => {
   console.error('error');
 };
+
+//TODO: on inserts with no id, database still responds .ok
 export const selectStandard = (standard, userId) => async dispatch => {
   const resp = await Util.selectStandard(standard, userId);
   if (!userId) dispatch(selectStandardSuccess(standard));

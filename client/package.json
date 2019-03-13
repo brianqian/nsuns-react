@@ -32,6 +32,10 @@
   ],
   "devDependencies": {
     "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.9.1"
+    "enzyme-adapter-react-16": "^1.9.1",
+    "fetch-mock": "^7.3.1",
+    "node-fetch": "^2.3.0",
+    "prettier-eslint": "^8.8.2",
+    "redux-mock-store": "^1.5.3"
   }
 }

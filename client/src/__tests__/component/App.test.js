@@ -6,11 +6,11 @@ import Adapter from 'enzyme-adapter-react-16';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('App', () => {
-  it('renders and displays name', () => {
+  test('renders and displays name', () => {
     const props = { userAuth: { username: 'test' } };
     const wrapper = shallow(<App {...props} />);
     expect(wrapper.exists()).toBe(true);
     expect(wrapper.find('WelcomeTag').text()).toBe('Welcome test');
   });
-  it('clicking button executes onClick', () => {});
+  test('clicking button executes onClick', () => {});
 });

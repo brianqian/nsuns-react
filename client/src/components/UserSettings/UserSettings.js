@@ -5,6 +5,7 @@ import BasicSelector from './BasicSelector/BasicSelector';
 import * as Action from '../../actions';
 import { openSettings } from '../../actions';
 import styled from 'styled-components';
+import Input from '../InputNumber/InputNumber';
 
 const Container = styled.div`
   min-height: 100%;
@@ -63,6 +64,10 @@ function UserSettings(props) {
       {
         value: 'kg',
         text: 'Kg',
+      },
+      {
+        value: 'custom',
+        text: 'Custom',
       },
     ],
   };
@@ -152,10 +157,15 @@ function UserSettings(props) {
     ],
   };
 
+  const submitRounding = val => {
+    props.dispatch();
+  };
+
   return (
     <Container open={props.settingsOpen}>
       <LoginSignup />
       <BasicSelector {...standardOptions} />
+      {standard === custom && <Input label="Custom Rounding: " onSubmit={submitRounding} />}
       <BasicSelector {...accOptions} />
       <BasicSelector {...variationOptions} />
       {variation === 'cap3' && <BasicSelector {...currentWeekOptions} />}

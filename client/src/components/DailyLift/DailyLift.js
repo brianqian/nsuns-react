@@ -9,7 +9,6 @@ const DailyLiftContainer = styled.div`
   margin: auto;
   display: grid;
   grid-template-columns: 1fr repeat(3, 3fr);
-  max-height: 90vh;
   @media (max-width: 800px) {
     scroll-snap-align: center;
     min-width: 100vw;
@@ -85,32 +84,15 @@ class dailyLift extends Component {
       t2Weights,
       max1,
       max2,
-      standard,
       dayIndex,
     } = this.props;
     const isRestDay = day === '--REST--';
     const { openAccessoryBox } = this.state;
     const t1Workouts = t1Reps.map((rep, i) => {
-      return (
-        <WeightBox
-          key={'wbt1' + dayIndex + i}
-          reps={rep}
-          weights={t1Weights[i]}
-          max={max1}
-          standard={standard}
-        />
-      );
+      return <WeightBox key={'wbt1' + dayIndex + i} reps={rep} weights={t1Weights[i]} max={max1} />;
     });
     const t2Workouts = t2Reps.map((rep, i) => {
-      return (
-        <WeightBox
-          key={'wbt2' + dayIndex + i}
-          reps={rep}
-          weights={t2Weights[i]}
-          max={max2}
-          standard={standard}
-        />
-      );
+      return <WeightBox key={'wbt2' + dayIndex + i} reps={rep} weights={t2Weights[i]} max={max2} />;
     });
     return (
       <DailyLiftContainer>

@@ -28,6 +28,7 @@ First thing to do is to calculate your 1 Rep Max using something like [this](htt
 
 - Javascript
 - React/Redux
+- Styled Components
 - SQL
 - Node/Express
 - Jest/Enzyme
