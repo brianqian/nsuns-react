@@ -19,7 +19,6 @@ First thing to do is to calculate your 1 Rep Max using something like [this](htt
 - ~~Metric measurements~~
 - Support for different variations of nSuns
 - Additional accessory presets
-- Saving 1+ values on AMRAP sets
 - A stats page that will record progress and visualize it
 - Plate calculator
 - External sources on particular lifts

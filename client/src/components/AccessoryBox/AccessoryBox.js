@@ -28,10 +28,30 @@ const AccessoryContainerTitle = styled.div`
 class AccessoryBox extends Component {
   state = {
     addNewAccessory: false,
+    accessoriesExist: false,
+    accessoryItems: [],
   };
   addAccessory = () => {
     this.setState({ addNewAccessory: this.state.addNewAccessory ? false : true });
   };
+
+  componentDidMount() {
+    const {
+      accessories,
+      dayIndex,
+      accessories: { accessoryPlan },
+    } = this.props;
+    const currentPlan = [...accessories[accessoryPlan]];
+    const accessoriesExist = currentPlan[dayIndex] === undefined ? false : true;
+    if (accessoriesExist) {
+      const accessoryItems = currentPlan[dayIndex].map(accessory => {
+        const props = { ...accessory, dayIndex };
+        return <AccessoryRow {...props} key={accessory.id} />;
+      });
+      this.setState({ accessoryItems });
+    }
+    this.setState({ accessoriesExist });
+  }
 
   render() {
     const {
@@ -43,7 +63,6 @@ class AccessoryBox extends Component {
       accessories: { accessoryPlan },
     } = this.props;
 
-    const currentPlan = [...accessories[accessoryPlan]];
     /*TODO: logic needs to be reworked to either disallow 5 day accessory plans
 or put filler in state.
 the accessoryAction reads the index of the item to change based off the store.
@@ -57,12 +76,7 @@ the accessoryAction reads the index of the item to change based off the store.
     //   currentPlan.push(...filler);
     // }
 
-    const accessoryItems = currentPlan[dayIndex].map(accessory => {
-      const props = { ...accessory, dayIndex };
-      return <AccessoryRow {...props} key={accessory.id} />;
-    });
-
-    const { addNewAccessory } = this.state;
+    const { addNewAccessory, accessoryItems, accessoriesExist } = this.state;
     return (
       <AccessoryContainer>
         <AccessoryContainerTitle>
@@ -70,7 +84,7 @@ the accessoryAction reads the index of the item to change based off the store.
           <h4>SetsxReps</h4>
           <h4>Weight({standard})</h4>
         </AccessoryContainerTitle>
-        {accessoryItems}
+        {accessoriesExist && accessoryItems}
         {addNewAccessory && <AccessoryRow toggleAddBox={this.addAccessory} dayIndex={dayIndex} />}
         {loggedIn && (
           <button onClick={this.addAccessory}>
