@@ -1,31 +1,31 @@
-import { fetchRequest } from './';
+import { fetchRequest } from "./";
 
 export const selectStandard = async (standard, userId) => {
   try {
-    return await fetchRequest(`/userInfo/standard/${standard}`, 'PUT', { userId });
+    return await fetchRequest(`/userInfo/standard/${standard}`, "PUT", { userId });
   } catch (err) {
     console.error(err);
   }
 };
 
-export const setTimerOption = async (option, userId) => {
+export const selectTimerOption = async (option, userId) => {
   try {
-    return await fetchRequest(`/userInfo/timer`, 'PUT', { option, userId });
+    return await fetchRequest(`/userInfo/timer`, "PUT", { option, userId });
   } catch (err) {
     console.error(err);
   }
 };
 
-export const setWeightBoxOption = async (option, userId) => {
+export const selectWeightBoxOption = async (option, userId) => {
   try {
-    return await fetchRequest(`/userInfo/weightbox`, 'PUT', { option, userId });
+    return await fetchRequest(`/userInfo/weightbox`, "PUT", { option, userId });
   } catch (err) {
     console.error(err);
   }
 };
-export const setVariation = async (option, userId) => {
+export const selectVariation = async (option, userId) => {
   try {
-    return await fetchRequest(`/userInfo/variation`, 'PUT', { option, userId });
+    return await fetchRequest(`/userInfo/variation`, "PUT", { option, userId });
   } catch (err) {
     console.error(err);
   }

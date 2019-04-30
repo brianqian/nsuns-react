@@ -1,45 +1,45 @@
-import * as Util from '../utils';
-import { getUserLifts, loadCustomAccessorySuccess, clearAccessories, getUserSettings } from './';
+import * as Util from "../utils";
+import { getUserLifts, loadCustomAccessorySuccess, clearAccessories, getUserSettings } from "./";
 
 export const loginSuccess = (userId, username) => {
   return {
-    type: 'LOGIN_SUCCESS',
+    type: "LOGIN_SUCCESS",
     userId,
     username,
   };
 };
 export const loginFail = message => {
   return {
-    type: 'LOGIN_FAIL',
+    type: "LOGIN_FAIL",
     message,
   };
 };
 export const loginPending = () => {
   return {
-    type: 'LOGIN_PENDING',
+    type: "LOGIN_PENDING",
   };
 };
 
 export const signupSuccess = message => {
   return {
-    type: 'SIGNUP_SUCCESS',
+    type: "SIGNUP_SUCCESS",
     message,
   };
 };
 export const signupFail = message => {
   return {
-    type: 'SIGNUP_FAIL',
+    type: "SIGNUP_FAIL",
     message,
   };
 };
 export const signupPending = () => {
   return {
-    type: 'SIGNUP_PENDING',
+    type: "SIGNUP_PENDING",
   };
 };
 export const logOutAction = () => {
   return {
-    type: 'LOG_OUT',
+    type: "LOG_OUT",
   };
 };
 
@@ -61,7 +61,7 @@ export const userLogin = loginInfo => async (dispatch, getState) => {
     dispatch(loginPending());
     const userInfo = await Util.logIn(loginInfo);
     if (userInfo.ok) {
-      localStorage.setItem('userId', userInfo.token);
+      localStorage.setItem("userId", userInfo.token);
       //check if accessoryplan exists and update state if it does
       dispatch(getAllUserData(userInfo));
     } else {
@@ -69,9 +69,10 @@ export const userLogin = loginInfo => async (dispatch, getState) => {
     }
   }
 };
+
 export const getAllUserData = userInfo => async dispatch => {
   const accessoryData = await Util.getAccessoryPlan(userInfo.id);
-  if (accessoryData.length) dispatch(loadCustomAccessorySuccess(accessoryData));
+  if (accessoryData && accessoryData.length) dispatch(loadCustomAccessorySuccess(accessoryData));
   dispatch(getUserSettings(userInfo.id));
   dispatch(getUserLifts(userInfo));
   return dispatch(loginSuccess(userInfo.id, userInfo.username));
