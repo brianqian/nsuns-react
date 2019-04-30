@@ -60,7 +60,6 @@ export const deleteAccessory = (payload, basePlan) => async dispatch => {
   return resp.ok ? dispatch(deleteAccessorySuccess(basePlan)) : dispatch(deleteAccessoryFail(resp));
 };
 export const selectAccessoryPlan = (plan, userId) => async dispatch => {
-  console.log(plan, userId);
   await Util.saveAccessoryPlan(plan, userId);
   return dispatch(selectAccessoryPlanSuccess(plan));
 };

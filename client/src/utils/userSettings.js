@@ -32,7 +32,6 @@ export const selectVariation = async (option, userId) => {
 };
 export const getUserSettings = async userId => {
   try {
-    console.log(userId);
     let resp = await fetch(`/userInfo/${userId}`);
     resp = await resp.json();
     return resp;

@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import './WeightBoxTimer.css';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class WeightBoxTimer extends Component {
   state = {
@@ -24,7 +23,7 @@ class WeightBoxTimer extends Component {
 
   calculateMinutes = seconds => {
     let displaySec = seconds % 60;
-    const formattedSec = '0' + displaySec;
+    const formattedSec = "0" + displaySec;
     if (formattedSec.length === 2) displaySec = formattedSec;
     const displayMin = Math.floor(seconds / 60);
     this.setState({ displaySec, displayMin });
