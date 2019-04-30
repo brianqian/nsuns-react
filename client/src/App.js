@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import UserSettings from "./components/UserSettings/UserSettings";
 import { connect } from "react-redux";
 import { jwtLogin, openSettings } from "./actions";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
+const GlobalStyle = createGlobalStyle`
+body, html{
+  margin: 0;
+}
+`;
 const Container = styled.div`
   display: grid;
   grid-template-columns: 75px 1fr 75px;
@@ -78,6 +83,7 @@ class App extends Component {
     const { username } = this.props.userAuth;
     return (
       <Container>
+        <GlobalStyle />
         <UserSettings />
         <Header>
           <WelcomeTag>{username && `Welcome ${username}`}</WelcomeTag>
