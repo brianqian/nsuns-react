@@ -7,9 +7,9 @@ function DailyLiftWrapper({
   userLifts,
   dailySplits,
   userSettings,
-  userSettings: { nsunsVariation },
+  userSettings: { variation },
 }) {
-  const dailyLifts = dailySplits[nsunsVariation].map((day, index) => {
+  const dailyLifts = dailySplits[variation].map((day, index) => {
     const base1 = day.baseLift[0] + 'TM';
     const base2 = day.baseLift[1] + 'TM';
     return (

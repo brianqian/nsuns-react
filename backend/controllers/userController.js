@@ -72,7 +72,7 @@ module.exports = {
   saveVariation: (req, res) => {
     const { userId, option } = req.body;
     connection.query(
-      'UPDATE userSettings SET nsunsVariation = ? WHERE userId= ?',
+      'UPDATE userSettings SET variation = ? WHERE userId= ?',
       [option, userId],
       (err, data) => {
         if (err) throw err;

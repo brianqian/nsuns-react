@@ -1,26 +1,26 @@
 function userSettings(
   state = {
     settingsOpen: false,
-    nsunsVariation: '5day',
-    standard: 'lbs',
-    wbOption: 'mark',
-    timerOption: '30',
+    variation: "5day",
+    standard: "lbs",
+    wbOption: "mark",
+    timerOption: "30",
   },
   action
 ) {
   switch (action.type) {
-    case 'OPEN_CLOSE_SETTINGS':
+    case "OPEN_CLOSE_SETTINGS":
       return { ...state, settingsOpen: action.settingsOpenBool };
-    case 'TIMER_OPTION_SUCCESS':
+    case "TIMER_OPTION_SUCCESS":
       return { ...state, timerOption: action.option };
-    case 'WEIGHTBOX_SUCCESS':
+    case "WEIGHTBOX_SUCCESS":
       return { ...state, wbOption: action.option };
-    case 'VARIATION_SUCCESS':
-      return { ...state, nsunsVariation: action.option };
-    case 'SELECT_STANDARD_SUCCESS':
+    case "VARIATION_SUCCESS":
+      return { ...state, variation: action.option };
+    case "SELECT_STANDARD_SUCCESS":
       const { standard } = action;
       return { ...state, standard };
-    case 'GET_USER_SETTINGS_SUCCESS':
+    case "GET_USER_SETTINGS_SUCCESS":
       const { ok, ...userSettings } = action.userSettings;
       return { ...state, ...userSettings };
     default:
