@@ -5,8 +5,14 @@ import { jwtLogin, openSettings } from "./actions";
 import styled, { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-body, html{
+  @import url('https://fonts.googleapis.com/css?family=Noto+Serif|Roboto');
+  body, html{
   margin: 0;
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 }
 `;
 const Container = styled.div`
@@ -25,7 +31,7 @@ const Container = styled.div`
   }
 `;
 
-const Header = styled.div`
+const Header = styled.section`
   display: flex;
   grid-row: 1;
   grid-column: 2;
