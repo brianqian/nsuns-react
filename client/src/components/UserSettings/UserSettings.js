@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import LoginSignup from "../LoginSignup/LoginSignup";
 import BasicSelector from "./BasicSelector/BasicSelector";
-import * as Action from "../../actions";
 import { openSettings } from "../../actions";
 import styled from "styled-components";
+import generateSettings from "./UserSettingsOptions";
 
 const Container = styled.div`
   min-height: 100%;
@@ -26,115 +26,24 @@ function UserSettings(props) {
     userSettings: { standard, variation, timerOption, wbOption },
   } = props;
 
-  //GENERATE ACCESSORY OPTIONS
-  const accOptions = {
+  const settings = generateSettings(
     userId,
-    action: Action.selectAccessoryPlan,
-    title: "Accessory",
-    defaultValue: accessoryPlan,
-    options: [
-      {
-        value: "arms",
-        text: "Arms",
-      },
-      {
-        value: "legs",
-        text: "Legs",
-      },
-    ],
-  };
-  if (custom) accOptions.options.push({ value: "custom", text: "Custom" });
-
-  //GENERATE STANDARD OPTIONS
-  const standardOptions = {
-    userId,
-    action: Action.selectStandard,
-    title: "Standard",
-    defaultValue: standard,
-    options: [
-      {
-        value: "lbs",
-        text: "Lbs",
-      },
-      {
-        value: "kg",
-        text: "Kg",
-      },
-      {
-        value: "custom",
-        text: "Custom",
-      },
-    ],
-  };
-  //GENERATE VARIATION OPTIONS
-  const variationOptions = {
-    userId,
-    action: Action.selectVariation,
-    title: "Variation",
-    defaultValue: variation,
-    options: [
-      {
-        value: "5day",
-        text: "5 day",
-      },
-      {
-        value: "4day",
-        text: "4 day",
-      },
-    ],
-  };
-
-  //GENERATE WEIGHT BOX OPTIONS
-  const weightBoxOptions = {
-    userId,
-    action: Action.selectWeightBoxOption,
-    title: "Click effect: ",
-    defaultValue: wbOption,
-    options: [
-      {
-        value: "mark",
-        text: "Mark (only)",
-      },
-      {
-        value: "timer",
-        text: "Timer",
-      },
-    ],
-  };
-
-  const TimerBoxOptions = {
-    userId,
-    action: Action.selectTimerOption,
-    title: "Rest Time: ",
-    defaultValue: timerOption,
-    options: [
-      {
-        value: "30",
-        text: "0:30",
-      },
-      {
-        value: "60",
-        text: "1:00",
-      },
-      {
-        value: "90",
-        text: "1:30",
-      },
-      {
-        value: "120",
-        text: "2:00",
-      },
-    ],
-  };
+    accessoryPlan,
+    custom,
+    standard,
+    variation,
+    timerOption,
+    wbOption
+  );
 
   return (
     <Container open={props.settingsOpen}>
       <LoginSignup />
-      <BasicSelector {...standardOptions} />
-      <BasicSelector {...accOptions} />
-      <BasicSelector {...variationOptions} />
-      <BasicSelector {...weightBoxOptions} />
-      {wbOption === "timer" && <BasicSelector {...TimerBoxOptions} />}
+      <BasicSelector {...settings.standardOptions} />
+      <BasicSelector {...settings.accOptions} />
+      <BasicSelector {...settings.variationOptions} />
+      <BasicSelector {...settings.weightBoxOptions} />
+      {wbOption === "timer" && <BasicSelector {...settings.timerBoxOptions} />}
       <button onClick={() => props.dispatch(openSettings(false))}>Close Settings</button>
     </Container>
   );
