@@ -1,7 +1,29 @@
-import React, { Component } from 'react';
-import './AccessoryBox.css';
-import { connect } from 'react-redux';
-import AccessoryRow from './AccessoryRow/AccessoryRow';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import AccessoryRow from "./AccessoryRow/AccessoryRow";
+import styled from "styled-components";
+
+const AccessoryContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr repeat(3, 3fr);
+  font-family: "Roboto";
+  grid-column: 1/5;
+  @media (max-width: 800px) {
+    grid-column: 1/-1;
+  }
+  > button {
+    grid-column: 3;
+    height: 3rem;
+  }
+`;
+
+const AccessoryContainerTitle = styled.div`
+  grid-column: 2/5;
+  display: grid;
+  grid-template-columns: repeat(3, 3fr);
+  grid-auto-flow: column;
+  justify-items: center;
+`;
 
 class AccessoryBox extends Component {
   state = {
@@ -37,21 +59,20 @@ class AccessoryBox extends Component {
 
     const { addNewAccessory } = this.state;
     return (
-      <div className="accessory__container">
-        <div className="accessory__container-titles">
-          <h4 />
+      <AccessoryContainer>
+        <AccessoryContainerTitle>
           <h4>Title</h4>
           <h4>SetsxReps</h4>
           <h4>Weight({userSettings.standard})</h4>
-        </div>
+        </AccessoryContainerTitle>
         {accessoryItems}
         {addNewAccessory && <AccessoryRow toggleAddBox={this.addAccessory} dayIndex={dayIndex} />}
         {userAuth.loggedIn && (
           <button onClick={this.addAccessory}>
-            {addNewAccessory ? 'Cancel' : 'Add Accessory'}
+            {addNewAccessory ? "Cancel" : "Add Accessory"}
           </button>
         )}
-      </div>
+      </AccessoryContainer>
     );
   }
 }
