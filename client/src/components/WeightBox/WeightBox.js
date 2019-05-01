@@ -8,16 +8,13 @@ const WeightBoxContainer = styled.div`
   grid-column: span 2;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   display: flex;
-
   align-items: center;
   justify-content: center;
+  border: 0.5px solid gray;
   min-width: 100%;
   height: 100%;
   user-select: none;
-  border: 0.5px solid gray;
-  :hover {
-    font-size: 1.05rem;
-  }
+
   @media (max-width: 800px) {
     max-height: 250px;
     margin: 0;
@@ -33,8 +30,13 @@ const WeightBoxContainer = styled.div`
 `;
 
 const WeightBoxContent = styled.p`
+  width: 100%;
+  height: 100%;
   color: ${props => (props.selected ? "white" : "inherit")};
   background-color: ${props => (props.selected ? "#000" : "inherit")};
+  :hover {
+    background-color: pink;
+  }
 `;
 
 class WeightBox extends Component {

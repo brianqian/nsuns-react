@@ -13,6 +13,9 @@ const GlobalStyle = createGlobalStyle`
   -webkit-appearance: none;
   margin: 0;
 }
+>*{
+  box-sizing: border-box;
+}
 }
 `;
 const Container = styled.div`
@@ -58,7 +61,6 @@ const UserSettingsButton = styled.div`
   user-select: none;
   :hover {
     border: 1.2px #000 solid;
-    box-sizing: border-box;
     cursor: default;
   }
   :active {
