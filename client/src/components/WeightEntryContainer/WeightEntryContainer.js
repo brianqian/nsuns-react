@@ -10,7 +10,7 @@ const Container = styled.div`
 `;
 const FormContainer = styled.form`
   display: grid;
-  grid-template-columns: ${props => (props.cap3 ? "repeat(5, 1fr);" : "repeat(4, 1fr);")};
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 0.25rem 1rem;
   justify-content: center;
   @media (max-width: 800px) {
