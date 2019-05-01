@@ -25,13 +25,22 @@ const AccessoryContainerTitle = styled.div`
   justify-items: center;
 `;
 
-class AccessoryBox extends Component {
+export class AccessoryBox extends Component {
   state = {
     addNewAccessory: false,
   };
   addAccessory = () => {
     this.setState({ addNewAccessory: this.state.addNewAccessory ? false : true });
   };
+  componentDidMount() {
+    const {
+      accessories,
+      accessories: { accessoryPlan },
+      userAuth,
+      dayIndex,
+      userSettings: { standard },
+    } = this.props;
+  }
 
   render() {
     const {
