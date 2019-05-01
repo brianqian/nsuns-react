@@ -34,8 +34,9 @@ const WeightBoxContent = styled.p`
   height: 100%;
   color: ${props => (props.selected ? "white" : "inherit")};
   background-color: ${props => (props.selected ? "#000" : "inherit")};
+  transition: all 0.3s;
   :hover {
-    background-color: pink;
+    font-size: 1.05em;
   }
 `;
 
