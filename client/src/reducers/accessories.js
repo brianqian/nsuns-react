@@ -14,12 +14,6 @@ function accessories(state = {}, action) {
     case 'SELECT_ACCESSORY_PLAN_SUCCESS': {
       return { ...state, accessoryPlan: action.accessoryPlan };
     }
-
-    case 'TOGGLE_ACCESSORY_BOX': {
-      const openAccessoryBox = { ...state.openAccessoryBox };
-      openAccessoryBox[action.index] = action.bool;
-      return { ...state, openAccessoryBox };
-    }
     case 'LOAD_CUSTOM_ACCESSORY_SUCCESS': {
       return { ...state, custom: action.accessoryPlan };
     }

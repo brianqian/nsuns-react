@@ -32,15 +32,6 @@ export class AccessoryBox extends Component {
   addAccessory = () => {
     this.setState({ addNewAccessory: this.state.addNewAccessory ? false : true });
   };
-  componentDidMount() {
-    const {
-      accessories,
-      accessories: { accessoryPlan },
-      userAuth,
-      dayIndex,
-      userSettings: { standard },
-    } = this.props;
-  }
 
   render() {
     const {
