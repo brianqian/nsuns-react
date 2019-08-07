@@ -106,6 +106,7 @@ class AccessoryRow extends Component {
       return;
     }
     if (this.state.currentlyEditing) {
+      console.log('THIS.PROPS IN EDITACC', this.props);
       const {
         dispatch,
         userAuth: { userId },

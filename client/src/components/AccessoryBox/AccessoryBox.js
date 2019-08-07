@@ -42,7 +42,7 @@ export class AccessoryBox extends Component {
       userSettings: { standard },
     } = this.props;
     const accessoryItems = accessories[accessoryPlan][dayIndex].map(accessory => {
-      return <AccessoryRow key={accessory.id} {...accessory} />;
+      return <AccessoryRow key={accessory.id} {...accessory} dayIndex={dayIndex} />;
     });
 
     const { addNewAccessory } = this.state;
