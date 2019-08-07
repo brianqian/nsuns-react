@@ -115,7 +115,7 @@ class AccessoryRow extends Component {
       } = this.props;
       const { title, sets, reps, weight, id } = this.state;
       const payload = { title, sets, reps, weight, id, userId, dayIndex };
-      console.log('DAY INDEX EDIT', dayIndex);
+      console.log('DAY INDEX EDIT', dayIndex, payload.dayIndex);
       await dispatch(updateAccessoryDb(payload, 'edit', accessories[accessoryPlan], accessoryPlan));
       this.setState({ currentlyEditing: false });
     } else {

@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import WeightBox from "../WeightBox/WeightBox";
-import AccessoryBox from "../AccessoryBox/AccessoryBox";
-import { connect } from "react-redux";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import WeightBox from '../WeightBox/WeightBox';
+import AccessoryBox from '../AccessoryBox/AccessoryBox';
+import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 const DailyLiftContainer = styled.div`
   width: 95%;
@@ -30,7 +30,7 @@ const DailyLiftRow = styled.div`
 `;
 
 const DayTitle = styled.h2`
-  font-family: "Noto Serif", Georgia, "Times New Roman", Times, serif;
+  font-family: 'Noto Serif', Georgia, 'Times New Roman', Times, serif;
   text-align: center;
   grid-column: 3;
   grid-row: ${props => props.rest && 2};
@@ -48,7 +48,7 @@ const AccessoriesButton = styled.p`
   border: 0.5px gray solid;
   height: 100%;
   width: 100%;
-  font-family: "Roboto";
+  font-family: 'Roboto';
 `;
 
 const LiftTitle = styled.h3`
@@ -86,13 +86,13 @@ class dailyLift extends Component {
       max2,
       dayIndex,
     } = this.props;
-    const isRestDay = day === "--REST--";
+    const isRestDay = day === '--REST--';
     const { openAccessoryBox } = this.state;
     const t1Workouts = t1Reps.map((rep, i) => {
-      return <WeightBox key={"wbt1" + dayIndex + i} reps={rep} weights={t1Weights[i]} max={max1} />;
+      return <WeightBox key={'wbt1' + dayIndex + i} reps={rep} weights={t1Weights[i]} max={max1} />;
     });
     const t2Workouts = t2Reps.map((rep, i) => {
-      return <WeightBox key={"wbt2" + dayIndex + i} reps={rep} weights={t2Weights[i]} max={max2} />;
+      return <WeightBox key={'wbt2' + dayIndex + i} reps={rep} weights={t2Weights[i]} max={max2} />;
     });
     return (
       <DailyLiftContainer>
@@ -109,7 +109,7 @@ class dailyLift extends Component {
               Accessories
               <img
                 onClick={this.toggleExpand}
-                src={openAccessoryBox ? "./collapse-button.svg" : "./expand-button.svg"}
+                src={openAccessoryBox ? './collapse-button.svg' : './expand-button.svg'}
                 alt=""
                 height="auto"
                 width="10%"

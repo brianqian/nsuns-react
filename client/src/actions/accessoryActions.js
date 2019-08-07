@@ -88,7 +88,7 @@ export const createAccessoryPlan = (userId, basePlan) => async dispatch => {
 
 export const updateAccessoryDb = (payload, type, basePlan, accessoryPlan) => async dispatch => {
   const { title, sets, reps, weight, userId, dayIndex, id } = payload;
-  console.log('BASEPLAN, day index', basePlan, dayIndex);
+  console.log('BASEPLAN, day index', basePlan, payload);
   const currentDay = basePlan[dayIndex];
   const accessoryIndex = currentDay.findIndex(accessory => accessory.id === id);
   const existingPlan = accessoryPlan === 'custom';
