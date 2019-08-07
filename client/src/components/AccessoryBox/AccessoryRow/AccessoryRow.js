@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import AccessoryButtons from "../AccessoryButtons/AccessoryButtons";
-import { updateAccessoryDb } from "../../../actions";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import AccessoryButtons from '../AccessoryButtons/AccessoryButtons';
+import { updateAccessoryDb } from '../../../actions';
+import styled from 'styled-components';
 
 const AccessoryItem = styled.div`
   grid-column: 1/5;
@@ -59,7 +59,7 @@ const AccessorySetRep = styled.div`
 class AccessoryRow extends Component {
   state = {
     id: 0,
-    title: "",
+    title: '',
     sets: 0,
     reps: 0,
     weight: 0,
@@ -84,7 +84,7 @@ class AccessoryRow extends Component {
       accessories: { accessoryPlan },
     } = this.props;
     const payload = { title, sets, reps, weight, userId, dayIndex, id };
-    dispatch(updateAccessoryDb(payload, "add", accessories[accessoryPlan], accessoryPlan));
+    dispatch(updateAccessoryDb(payload, 'add', accessories[accessoryPlan], accessoryPlan));
   };
 
   deleteAcc = () => {
@@ -97,7 +97,7 @@ class AccessoryRow extends Component {
       accessories: { accessoryPlan },
     } = this.props;
     const payload = { userId, id, dayIndex };
-    dispatch(updateAccessoryDb(payload, "delete", accessories[accessoryPlan], accessoryPlan));
+    dispatch(updateAccessoryDb(payload, 'delete', accessories[accessoryPlan], accessoryPlan));
   };
 
   editAcc = async () => {
@@ -115,7 +115,8 @@ class AccessoryRow extends Component {
       } = this.props;
       const { title, sets, reps, weight, id } = this.state;
       const payload = { title, sets, reps, weight, id, userId, dayIndex };
-      await dispatch(updateAccessoryDb(payload, "edit", accessories[accessoryPlan], accessoryPlan));
+      console.log('DAY INDEX EDIT', dayIndex);
+      await dispatch(updateAccessoryDb(payload, 'edit', accessories[accessoryPlan], accessoryPlan));
       this.setState({ currentlyEditing: false });
     } else {
       const { title, sets, reps, weight, id } = this.props;
@@ -139,7 +140,7 @@ class AccessoryRow extends Component {
       accessories: { custom, accessoryPlan },
     } = this.props;
     const { loaded } = this.state;
-    const showButtons = accessoryPlan === "custom" || !custom;
+    const showButtons = accessoryPlan === 'custom' || !custom;
     return (
       <AccessoryItem>
         {userAuth.loggedIn && showButtons && loaded && (
@@ -147,7 +148,6 @@ class AccessoryRow extends Component {
             deleteAcc={this.deleteAcc}
             addAcc={this.addAcc}
             editAcc={this.editAcc}
-            https
             id={id}
             clicked={this.state.currentlyEditing}
             toggleAddBox={this.props.toggleAddBox}
@@ -157,20 +157,20 @@ class AccessoryRow extends Component {
         {this.state.currentlyEditing ? (
           <AccessoryItemContent>
             <input
-              autoFocus="true"
+              autoFocus={true}
               onChange={this.onChange}
               type="text"
-              name={"title"}
+              name={'title'}
               value={this.state.title}
             />
             <AccessorySetRep>
-              <input onChange={this.onChange} type="number" name={"sets"} value={this.state.sets} />
-              <input onChange={this.onChange} type="number" name={"reps"} value={this.state.reps} />
+              <input onChange={this.onChange} type="number" name={'sets'} value={this.state.sets} />
+              <input onChange={this.onChange} type="number" name={'reps'} value={this.state.reps} />
             </AccessorySetRep>
             <input
               onChange={this.onChange}
               type="number"
-              name={"weight"}
+              name={'weight'}
               value={this.state.weight}
             />
           </AccessoryItemContent>

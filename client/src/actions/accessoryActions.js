@@ -1,54 +1,54 @@
-import * as Util from "../utils/accessories";
+import * as Util from '../utils/accessories';
 export const addAccessorySuccess = basePlan => {
   return {
-    type: "ADD_ACCESSORY",
+    type: 'ADD_ACCESSORY',
     basePlan,
   };
 };
 
 export const createAccessoryPlanSuccess = basePlan => {
   return {
-    type: "CREATE_ACCESSORY_PLAN_SUCCESS",
+    type: 'CREATE_ACCESSORY_PLAN_SUCCESS',
     basePlan,
   };
 };
 
 export const loadCustomAccessorySuccess = accessoryPlan => {
   return {
-    type: "LOAD_CUSTOM_ACCESSORY_SUCCESS",
+    type: 'LOAD_CUSTOM_ACCESSORY_SUCCESS',
     accessoryPlan,
   };
 };
 
 export const selectAccessoryPlanSuccess = accessoryPlan => {
   return {
-    type: "SELECT_ACCESSORY_PLAN_SUCCESS",
+    type: 'SELECT_ACCESSORY_PLAN_SUCCESS',
     accessoryPlan,
   };
 };
 
 export const editAccessorySuccess = basePlan => {
   return {
-    type: "EDIT_ACCESSORY_SUCCESS",
+    type: 'EDIT_ACCESSORY_SUCCESS',
     basePlan,
   };
 };
 
 export const clearAccessories = () => {
   return {
-    type: "CLEAR_ACCESSORIES",
+    type: 'CLEAR_ACCESSORIES',
   };
 };
 
 export const deleteAccessorySuccess = basePlan => {
   return {
-    type: "DELETE_ACCESSORY_SUCCESS",
+    type: 'DELETE_ACCESSORY_SUCCESS',
     basePlan,
   };
 };
 export const deleteAccessoryFail = error => {
   return {
-    type: "DELETE_ACCESSORY_FAIL",
+    type: 'DELETE_ACCESSORY_FAIL',
     error,
   };
 };
@@ -88,21 +88,22 @@ export const createAccessoryPlan = (userId, basePlan) => async dispatch => {
 
 export const updateAccessoryDb = (payload, type, basePlan, accessoryPlan) => async dispatch => {
   const { title, sets, reps, weight, userId, dayIndex, id } = payload;
+  console.log('BASEPLAN, day index', basePlan, dayIndex);
   const currentDay = basePlan[dayIndex];
   const accessoryIndex = currentDay.findIndex(accessory => accessory.id === id);
-  const existingPlan = accessoryPlan === "custom";
-  if (type === "delete") {
+  const existingPlan = accessoryPlan === 'custom';
+  if (type === 'delete') {
     currentDay.splice(accessoryIndex, 1);
     if (existingPlan) dispatch(deleteAccessory(payload, basePlan));
-  } else if (type === "add") {
+  } else if (type === 'add') {
     currentDay.push({ title, sets, reps, weight, dayIndex, id, userId });
     payload.accIndex = currentDay.length - 1;
     if (existingPlan) dispatch(addAccessory(payload, basePlan));
-  } else if (type === "edit") {
+  } else if (type === 'edit') {
     currentDay[accessoryIndex] = { title, sets, reps, weight, id, dayIndex, userId };
     if (existingPlan) dispatch(editAccessory(payload, basePlan));
   }
-  if (accessoryPlan !== "custom") {
+  if (accessoryPlan !== 'custom') {
     const newBase = await Util.createAccessoryPlan(userId, basePlan);
     return dispatch(createAccessoryPlanSuccess(newBase));
   }
