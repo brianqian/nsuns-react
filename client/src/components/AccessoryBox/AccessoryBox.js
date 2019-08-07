@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import AccessoryRow from "./AccessoryRow/AccessoryRow";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import AccessoryRow from './AccessoryRow/AccessoryRow';
+import styled from 'styled-components';
 
 const AccessoryContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr repeat(3, 3fr);
-  font-family: "Roboto";
+  font-family: 'Roboto';
   grid-column: 1/5;
   @media (max-width: 800px) {
     grid-column: 1/-1;
@@ -42,7 +42,7 @@ export class AccessoryBox extends Component {
       userSettings: { standard },
     } = this.props;
     const accessoryItems = accessories[accessoryPlan][dayIndex].map(accessory => {
-      return <AccessoryRow key={accessory.id} {...accessory} />;
+      return <AccessoryRow key={accessory.id} {...accessory} dayIndex={dayIndex} />;
     });
 
     const { addNewAccessory } = this.state;
@@ -57,7 +57,7 @@ export class AccessoryBox extends Component {
         {addNewAccessory && <AccessoryRow toggleAddBox={this.addAccessory} dayIndex={dayIndex} />}
         {userAuth.loggedIn && (
           <button onClick={this.addAccessory}>
-            {addNewAccessory ? "Cancel" : "Add Accessory"}
+            {addNewAccessory ? 'Cancel' : 'Add Accessory'}
           </button>
         )}
       </AccessoryContainer>
